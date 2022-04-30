@@ -205,6 +205,9 @@ namespace StonePlanner
             list.Add("EXIT");
             list.Add("SLEEP");
             list.Add("SET");
+            list.Add("SIGN");
+            list.Add("REPEAT");
+            list.Add("END");
             list.Add("ADD");
             return list;
         }

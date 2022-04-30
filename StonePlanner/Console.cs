@@ -17,8 +17,8 @@ namespace StonePlanner
 {
     public partial class Console : Form
     {
-        //INT类型存储器
-        internal int EPH;
+        //INT类型存储器 多步执行布尔存储器
+        internal int EPH,KDP = 0;
         public Console()
         {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace StonePlanner
             list.Add("COMPILE");
             return list;
         }
-
+        protected List<List<string>> rx = new List<List<string>>(); int rw = 0;
         #region 语法解析器
         protected void SyntaxParser(string row,int dwStatus = 0)
         {
@@ -73,7 +73,48 @@ namespace StonePlanner
             }
             //识别
             //方式：顺序识别
-
+            //IDE多步语法解析器
+            #region FOR
+            if (nInput[0] == "END")
+            {
+                rw = 0;
+                for (int i = 0; i < KDP; i++)
+                {
+                    foreach (var item in rx)
+                    {
+                        string tempRow = "";
+                        int j = 0;
+                        foreach (var txt in item)
+                        {
+                            if (j != 0) tempRow += " ";
+                            tempRow += txt;
+                            j++;
+                        }
+                        //提前更新一下吧...
+                        tempRow = tempRow.Replace("[EPH]", EPH.ToString());
+                        SyntaxParser(tempRow, 0);
+                        Thread.Sleep(100);
+                    }
+                   
+                }
+            }
+            if (rw != 0)
+            {
+                rx.Add(nInput);//COMPILE .\A.TXT
+                return;
+            }
+            if (nInput[0] == "REPEAT" && dwStatus == 1)
+            {
+                if (KDP == 0)
+                {
+                    //执行循环
+                    KDP = Convert.ToInt32(nInput[1]);
+                    rw = 1;
+                    return;
+                }
+            }
+            #endregion
+            //IDE普通命令解析器
             try
             {
                 //休眠命令
@@ -170,13 +211,16 @@ namespace StonePlanner
                 {
                     //打开信号接口
                     Main.Sign = 4;
-                    if (nInput[1].Contains("[EPH]"))
+                    if (dwStatus != 1)
                     {
-                        nInput[1] = nInput[1].Replace("[EPH]",EPH.ToString());
-                    }
-                    if (nInput[2].Contains("[EPH]"))
-                    {
-                        nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
+                        if (nInput[1].Contains("[EPH]"))
+                        {
+                            nInput[1] = nInput[1].Replace("[EPH]", EPH.ToString());
+                        }
+                        if (nInput[2].Contains("[EPH]"))
+                        {
+                            nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
+                        }
                     }
                     Main.tName = nInput[1];
                     Main.tTime = Convert.ToInt32(nInput[2]);
@@ -217,7 +261,7 @@ namespace StonePlanner
                         {
                             int signal = Convert.ToInt32(nInput[1]);
                             Main.Sign = signal;
-                            richTextBox_Output.Text += $"\n成功：将{signal}信号发送到主窗口。";
+                            richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                         }
                         catch (Exception ex)
                         {

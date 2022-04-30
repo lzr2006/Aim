@@ -117,7 +117,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(504, 17);
             this.label1.TabIndex = 9;
-            this.label1.Text = "测试内容：StonePlanner.IDE.InnerIDE 版本号：A2022.3.1.429104.4";
+            this.label1.Text = "测试内容：StonePlanner.IDE.InnerIDE 版本号：A2022.3.2.429110.3";
             // 
             // linkLabel1
             // 
