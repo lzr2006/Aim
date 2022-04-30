@@ -62,12 +62,42 @@ namespace StonePlanner
 
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
+            //存储
+            string allTask = "";
+            foreach (var item in recycle_bin)
+            {
+                allTask += item.capital + ";";
+                //allTask += item.dwAim + ";";
+                allTask += item.dwSeconds;
+                allTask += "\n";
+            }
+            using (StreamWriter sw = new StreamWriter(Application.StartupPath + @"\TaskMemory.txt",true))
+            {
+                sw.Write(allTask);
+            }
+            allTask = null;
             Environment.Exit(0);
         }
 
         private void Main_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
+            string allTask;
+            using (StreamReader sr = new StreamReader(Application.StartupPath + @"\TaskMemory.txt"))
+            {
+                allTask = sr.ReadToEnd();
+            }
+            string[] taskListString = allTask.Split('\n');
+            foreach (var item in taskListString)
+            {
+                try
+                {
+                    string[] temp = item.Split(';');
+                    Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]));
+                    recycle_bin.Add(plan);
+                }
+                catch { }
+            }
             //Console.WriteLine(InnerFuncs.GetMD5WithFilePath($"{Application.StartupPath}\\language.mlu"));
             if (oncheck)
             {

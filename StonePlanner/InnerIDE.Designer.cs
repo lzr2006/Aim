@@ -53,25 +53,38 @@
             this.工具TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.DateTimeDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FindFToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.中文插入CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助HToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.内容CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.索引IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.搜索SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.关于AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.调试DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.开始调试SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.停止调试EToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_Top = new System.Windows.Forms.Panel();
             this.label_Catital = new System.Windows.Forms.Label();
             this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
             this.pictureBox_Logo = new System.Windows.Forms.PictureBox();
             this.richTextBox_Main = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.中文插入CToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel_Buttom = new System.Windows.Forms.Panel();
+            this.richTextBox_Output = new System.Windows.Forms.RichTextBox();
+            this.tabControl_Buttom = new System.Windows.Forms.TabControl();
+            this.tabPage_Dubugger = new System.Windows.Forms.TabPage();
+            this.tabPage_Jh = new System.Windows.Forms.TabPage();
+            this.textBox_Pars = new System.Windows.Forms.TextBox();
+            this.richTextBox_Input = new System.Windows.Forms.RichTextBox();
             this.menuStrip_MainTop.SuspendLayout();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).BeginInit();
+            this.tabControl_Buttom.SuspendLayout();
+            this.tabPage_Dubugger.SuspendLayout();
+            this.tabPage_Jh.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip_MainTop
@@ -82,10 +95,11 @@
             this.文件FToolStripMenuItem,
             this.编辑EToolStripMenuItem,
             this.工具TToolStripMenuItem,
-            this.帮助HToolStripMenuItem});
+            this.帮助HToolStripMenuItem,
+            this.调试DToolStripMenuItem});
             this.menuStrip_MainTop.Location = new System.Drawing.Point(31, 5);
             this.menuStrip_MainTop.Name = "menuStrip_MainTop";
-            this.menuStrip_MainTop.Size = new System.Drawing.Size(365, 25);
+            this.menuStrip_MainTop.Size = new System.Drawing.Size(306, 25);
             this.menuStrip_MainTop.TabIndex = 0;
             this.menuStrip_MainTop.Text = "menuStrip1";
             // 
@@ -281,16 +295,35 @@
             // DateTimeDToolStripMenuItem
             // 
             this.DateTimeDToolStripMenuItem.Name = "DateTimeDToolStripMenuItem";
-            this.DateTimeDToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.DateTimeDToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.DateTimeDToolStripMenuItem.Text = "时间/日期(&D)";
             this.DateTimeDToolStripMenuItem.Click += new System.EventHandler(this.DateTimeDToolStripMenuItem_Click);
             // 
             // FindFToolStripMenuItem
             // 
             this.FindFToolStripMenuItem.Name = "FindFToolStripMenuItem";
-            this.FindFToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.FindFToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.FindFToolStripMenuItem.Text = "查找/替换(&F)";
             this.FindFToolStripMenuItem.Click += new System.EventHandler(this.FindFToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(185, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
+            this.toolStripMenuItem1.Text = "语法提示（慎用）(&R)";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
+            // 中文插入CToolStripMenuItem
+            // 
+            this.中文插入CToolStripMenuItem.Name = "中文插入CToolStripMenuItem";
+            this.中文插入CToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.中文插入CToolStripMenuItem.Text = "中文插入(&C)";
+            this.中文插入CToolStripMenuItem.Click += new System.EventHandler(this.中文插入CToolStripMenuItem_Click);
             // 
             // 帮助HToolStripMenuItem
             // 
@@ -338,6 +371,29 @@
             this.关于AToolStripMenuItem.Text = "关于(&A)...";
             this.关于AToolStripMenuItem.Click += new System.EventHandler(this.关于AToolStripMenuItem_Click);
             // 
+            // 调试DToolStripMenuItem
+            // 
+            this.调试DToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.开始调试SToolStripMenuItem,
+            this.停止调试EToolStripMenuItem});
+            this.调试DToolStripMenuItem.Name = "调试DToolStripMenuItem";
+            this.调试DToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
+            this.调试DToolStripMenuItem.Text = "调试(&D)";
+            // 
+            // 开始调试SToolStripMenuItem
+            // 
+            this.开始调试SToolStripMenuItem.Name = "开始调试SToolStripMenuItem";
+            this.开始调试SToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.开始调试SToolStripMenuItem.Text = "开始调试(&S)";
+            this.开始调试SToolStripMenuItem.Click += new System.EventHandler(this.开始调试SToolStripMenuItem_Click);
+            // 
+            // 停止调试EToolStripMenuItem
+            // 
+            this.停止调试EToolStripMenuItem.Name = "停止调试EToolStripMenuItem";
+            this.停止调试EToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.停止调试EToolStripMenuItem.Text = "停止调试(&E)";
+            this.停止调试EToolStripMenuItem.Click += new System.EventHandler(this.停止调试EToolStripMenuItem_Click);
+            // 
             // panel_Top
             // 
             this.panel_Top.BackColor = System.Drawing.SystemColors.Window;
@@ -351,7 +407,6 @@
             this.panel_Top.Name = "panel_Top";
             this.panel_Top.Size = new System.Drawing.Size(667, 34);
             this.panel_Top.TabIndex = 1;
-            this.panel_Top.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Top_Paint);
             this.panel_Top.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseDown);
             // 
             // label_Catital
@@ -359,7 +414,7 @@
             this.label_Catital.AutoSize = true;
             this.label_Catital.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label_Catital.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label_Catital.Location = new System.Drawing.Point(381, 9);
+            this.label_Catital.Location = new System.Drawing.Point(375, 9);
             this.label_Catital.Name = "label_Catital";
             this.label_Catital.Size = new System.Drawing.Size(248, 18);
             this.label_Catital.TabIndex = 3;
@@ -392,7 +447,7 @@
             this.richTextBox_Main.Font = new System.Drawing.Font("Courier New", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox_Main.Location = new System.Drawing.Point(33, 33);
             this.richTextBox_Main.Name = "richTextBox_Main";
-            this.richTextBox_Main.Size = new System.Drawing.Size(634, 343);
+            this.richTextBox_Main.Size = new System.Drawing.Size(634, 312);
             this.richTextBox_Main.TabIndex = 2;
             this.richTextBox_Main.Text = "";
             this.richTextBox_Main.VScroll += new System.EventHandler(this.richTextBox_Main_VScroll);
@@ -408,30 +463,85 @@
             this.panel1.Size = new System.Drawing.Size(31, 343);
             this.panel1.TabIndex = 3;
             // 
-            // toolStripSeparator6
+            // panel_Buttom
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(189, 6);
+            this.panel_Buttom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.panel_Buttom.Location = new System.Drawing.Point(0, 375);
+            this.panel_Buttom.Name = "panel_Buttom";
+            this.panel_Buttom.Size = new System.Drawing.Size(667, 100);
+            this.panel_Buttom.TabIndex = 4;
             // 
-            // toolStripMenuItem1
+            // richTextBox_Output
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(188, 22);
-            this.toolStripMenuItem1.Text = "语法提示（慎用）(&R)";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.richTextBox_Output.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.richTextBox_Output.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox_Output.Font = new System.Drawing.Font("Courier New", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_Output.ForeColor = System.Drawing.SystemColors.Window;
+            this.richTextBox_Output.Location = new System.Drawing.Point(0, 0);
+            this.richTextBox_Output.Name = "richTextBox_Output";
+            this.richTextBox_Output.Size = new System.Drawing.Size(659, 74);
+            this.richTextBox_Output.TabIndex = 5;
+            this.richTextBox_Output.Text = "";
             // 
-            // 中文插入CToolStripMenuItem
+            // tabControl_Buttom
             // 
-            this.中文插入CToolStripMenuItem.Name = "中文插入CToolStripMenuItem";
-            this.中文插入CToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.中文插入CToolStripMenuItem.Text = "中文插入(&C)";
-            this.中文插入CToolStripMenuItem.Click += new System.EventHandler(this.中文插入CToolStripMenuItem_Click);
+            this.tabControl_Buttom.Controls.Add(this.tabPage_Dubugger);
+            this.tabControl_Buttom.Controls.Add(this.tabPage_Jh);
+            this.tabControl_Buttom.Location = new System.Drawing.Point(0, 344);
+            this.tabControl_Buttom.Name = "tabControl_Buttom";
+            this.tabControl_Buttom.SelectedIndex = 0;
+            this.tabControl_Buttom.Size = new System.Drawing.Size(667, 100);
+            this.tabControl_Buttom.TabIndex = 0;
+            // 
+            // tabPage_Dubugger
+            // 
+            this.tabPage_Dubugger.Controls.Add(this.richTextBox_Output);
+            this.tabPage_Dubugger.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Dubugger.Name = "tabPage_Dubugger";
+            this.tabPage_Dubugger.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Dubugger.Size = new System.Drawing.Size(659, 74);
+            this.tabPage_Dubugger.TabIndex = 0;
+            this.tabPage_Dubugger.Text = "调试输出";
+            this.tabPage_Dubugger.UseVisualStyleBackColor = true;
+            // 
+            // tabPage_Jh
+            // 
+            this.tabPage_Jh.Controls.Add(this.richTextBox_Input);
+            this.tabPage_Jh.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Jh.Name = "tabPage_Jh";
+            this.tabPage_Jh.Size = new System.Drawing.Size(659, 74);
+            this.tabPage_Jh.TabIndex = 1;
+            this.tabPage_Jh.Text = "交互窗口";
+            this.tabPage_Jh.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Pars
+            // 
+            this.textBox_Pars.Location = new System.Drawing.Point(405, 146);
+            this.textBox_Pars.Name = "textBox_Pars";
+            this.textBox_Pars.Size = new System.Drawing.Size(8, 21);
+            this.textBox_Pars.TabIndex = 5;
+            // 
+            // richTextBox_Input
+            // 
+            this.richTextBox_Input.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.richTextBox_Input.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox_Input.Font = new System.Drawing.Font("Courier New", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox_Input.ForeColor = System.Drawing.SystemColors.Window;
+            this.richTextBox_Input.Location = new System.Drawing.Point(1, 1);
+            this.richTextBox_Input.Name = "richTextBox_Input";
+            this.richTextBox_Input.Size = new System.Drawing.Size(659, 74);
+            this.richTextBox_Input.TabIndex = 6;
+            this.richTextBox_Input.Text = ">";
+            this.richTextBox_Input.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
             // 
             // InnerIDE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 376);
+            this.ClientSize = new System.Drawing.Size(667, 444);
+            this.Controls.Add(this.textBox_Pars);
+            this.Controls.Add(this.tabControl_Buttom);
+            this.Controls.Add(this.panel_Buttom);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.richTextBox_Main);
             this.Controls.Add(this.panel_Top);
@@ -446,7 +556,11 @@
             this.panel_Top.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).EndInit();
+            this.tabControl_Buttom.ResumeLayout(false);
+            this.tabPage_Dubugger.ResumeLayout(false);
+            this.tabPage_Jh.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -492,5 +606,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 中文插入CToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 调试DToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 开始调试SToolStripMenuItem;
+        private System.Windows.Forms.Panel panel_Buttom;
+        private System.Windows.Forms.RichTextBox richTextBox_Output;
+        private System.Windows.Forms.TabControl tabControl_Buttom;
+        private System.Windows.Forms.TabPage tabPage_Dubugger;
+        private System.Windows.Forms.TextBox textBox_Pars;
+        private System.Windows.Forms.ToolStripMenuItem 停止调试EToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage_Jh;
+        private System.Windows.Forms.RichTextBox richTextBox_Input;
     }
 }

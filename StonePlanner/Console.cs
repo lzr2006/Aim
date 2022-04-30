@@ -363,7 +363,7 @@ namespace StonePlanner
         }
 
         #region 功能函数
-        protected void EXIT()
+        internal void EXIT()
         {
             richTextBox_Output.Text += $"Console@Clear>正在准备退出...";
             for (int i = 0; i < 4; i++)

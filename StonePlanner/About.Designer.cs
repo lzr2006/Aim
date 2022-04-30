@@ -145,7 +145,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(379, 16);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 A.2022.3.Insider.1 （内部版本M004291105KSNM）";
+            this.label4.Text = "版本 A.2022.3.Insider.2 （内部版本M004301109QZQS）";
             // 
             // label5
             // 
@@ -185,7 +185,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(467, 12);
             this.label8.TabIndex = 11;
-            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.4.29 13:00 - 2022.4.30 20:00";
+            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.4.30 13:00 - 2022.4.31 20:00";
             // 
             // panel1
             // 
