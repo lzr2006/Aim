@@ -50,6 +50,7 @@ namespace StonePlanner
             list.Add("SLEEP");
             list.Add("SET");
             list.Add("ADD");
+            list.Add("SIGN");
             list.Add("COMPILE");
             return list;
         }
@@ -152,10 +153,11 @@ namespace StonePlanner
                         catch (Exception ex)
                         {
                             System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
+ 
                             //发送错误报告
                             var properties = new Dictionary<string, string>
                             {
-                                {"code" , $"{richTextBox_Input.Text}" },
+                                {"code" , $"{richTextBox_Output.Text}" },
                                 {"display" , $"SyntaxError：{ex.Message}" }
                             };
                             Crashes.TrackError(ex,properties);
@@ -197,21 +199,37 @@ namespace StonePlanner
                     catch { richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; }
 
                 }
-                else if (nInput[0] == "Signal")
+                else if (nInput[0] == "SIGN")
                 {
                     if (nInput[1] == "HELP")
                     {
-                        richTextBox_Output.Text += "Console@Main>信 号 规 范：";
-                        richTextBox_Output.Text += "|SIGN = 1 => 删除任务";
-                        richTextBox_Output.Text += "|SIGN = 2 => 伸长菜单栏";
-                        richTextBox_Output.Text += "|SIGN = 3 => 缩短菜单栏";
-                        richTextBox_Output.Text += "|SIGN = 4 => 新建待办";
-                        richTextBox_Output.Text += "|SIGN = 5 => 传出自身对象集合";
-                        richTextBox_Output.Text += "请注意：错误的使用信号将导致崩溃";
+                        richTextBox_Output.Text += "\nConsole@Main>信 号 规 范：";
+                        richTextBox_Output.Text += "\n|SIGN = 1 => 删除任务";
+                        richTextBox_Output.Text += "\n|SIGN = 2 => 伸长菜单栏";
+                        richTextBox_Output.Text += "\n|SIGN = 3 => 缩短菜单栏";
+                        richTextBox_Output.Text += "\n|SIGN = 4 => 新建待办";
+                        richTextBox_Output.Text += "\n|SIGN = 5 => 传出自身对象集合";
+                        richTextBox_Output.Text += "\n请注意：错误的使用信号将导致崩溃";
                     }
                     else
                     {
-                        int signal = Convert.ToInt32(nInput[1])
+                        try
+                        {
+                            int signal = Convert.ToInt32(nInput[1]);
+                            Main.Sign = signal;
+                            richTextBox_Output.Text += $"\n成功：将{signal}信号发送到主窗口。";
+                        }
+                        catch (Exception ex)
+                        {
+                            //发送错误报告
+                            var properties = new Dictionary<string, string>
+                            {
+                                {"code" , $"{richTextBox_Output.Text}" },
+                                {"display" , $"SyntaxError：{ex.Message}" }
+                            };
+                            Crashes.TrackError(ex, properties);
+                            richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
+                        }
                     }
                 }
                 else if (nInput[0] == "EXIT")
@@ -226,7 +244,7 @@ namespace StonePlanner
                 //发送错误报告
                 var properties = new Dictionary<string, string>
                 {
-                    {"code" , $"{richTextBox_Input.Text}" },
+                    {"code" , $"{richTextBox_Output.Text}" },
                     {"display" , $"SyntaxError：{ex.Message}" }
                 };
                 Crashes.TrackError(ex, properties);

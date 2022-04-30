@@ -20,7 +20,7 @@ namespace StonePlanner
             //typeof(Analytics), typeof(Crashes));
             AppCenter.Start("c5286b81-ac87-4531-8c6f-32106a9fabc6",
             typeof(Analytics), typeof(Crashes));
-            Application.Run(new InnerIDE());
+            Application.Run(new Main());
         }
     }
 }
