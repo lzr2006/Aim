@@ -26,7 +26,7 @@ namespace StonePlanner
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
-        protected string fileNameString = "",fName = "";
+        protected string fileNameString = "",fName = "",iFileName = "";
         internal ListBox lb;
         protected Boolean stOpenRem = false;
         internal List<string> nInput;
@@ -550,6 +550,8 @@ namespace StonePlanner
                         fileNameString += *temp++;
                     }
                     richTextBox_Main.Text += $"//Filename：{fileNameString}\n";
+                    iFileName = $"{Application.StartupPath}\\coding\\{fileNameString.Trim(new char[] { '\0'})}.mtd";
+                    iFileName.Replace('\0', ' ');
                     input.IN = !input.IN;
                 }
             }
@@ -588,7 +590,7 @@ namespace StonePlanner
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(fName))
+                using (StreamWriter sw = new StreamWriter(iFileName))
                 {
                     sw.Write(richTextBox_Main.Text);
                     MessageBox.Show("保存成功。", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -720,6 +722,20 @@ namespace StonePlanner
                 richTextBox_Input.Text = ">";
                 richTextBox_Input.Select(1, 0);
             }
+        }
+
+        private void 本线程调试ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (StreamWriter sw = new StreamWriter(iFileName))
+            {
+                sw.Write(richTextBox_Main.Text);
+            }
+            tabControl_Buttom.SelectedIndex = 1;
+            tabControl_Buttom.Focus();
+            tabPage_Jh.Focus();
+            richTextBox_Input.Focus();
+            richTextBox_Input.Text = $">COMPILE {iFileName}";
+            richTextBox_Input.Select(richTextBox_Input.TextLength,0);
         }
 
         private void 开始调试SToolStripMenuItem_Click(object sender, EventArgs e)

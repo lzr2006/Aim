@@ -27,6 +27,8 @@ namespace StonePlanner
         internal static int Sign = 0;
         //传出请求删除的请求体对象本身
         internal static Plan plan = null;
+        //自己
+        Main main;
         //语言数组
         internal static List<string> langInfo;
         internal static List<string> sentence = new List<string>();
@@ -38,10 +40,18 @@ namespace StonePlanner
         //总时间
         internal static int nTime;
         //检查语言包
-        bool oncheck = false;
+        bool oncheck = true;
+        //检查线程
+        Thread antiPiracyCheckThread;
+        //控件添加委托
+        delegate void addDelegate();
+        addDelegate d;
         public Main()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
+            d = new addDelegate(FunctionLoader);
+            this.main = this;
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
@@ -101,7 +111,7 @@ namespace StonePlanner
             //Console.WriteLine(InnerFuncs.GetMD5WithFilePath($"{Application.StartupPath}\\language.mlu"));
             if (oncheck)
             {
-                Thread antiPiracyCheckThread = new Thread(() => AntiPiracyCheck());
+                antiPiracyCheckThread = new Thread(() => AntiPiracyCheck());
                 antiPiracyCheckThread.Start();
             }
             //获取格言
@@ -124,7 +134,11 @@ namespace StonePlanner
                 langInfo = new List<string>(langReader.ReadToEnd().Split(';'));
                 label_YoursTasks.Text = langInfo[0];
                 langReader.Close();
-            }catch{ 
+                Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
+                loaderThread.Start();
+            }
+            catch{
+                antiPiracyCheckThread.Abort();
                 DialogResult dialogResult = MessageBox.Show("未寻找到语言信息！\n是否下载由MethodBox(官方)提供的zh-cn语言包？取消将使用内置字符集。",
                     "无语言",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 //下载语言包
@@ -156,6 +170,8 @@ namespace StonePlanner
                         if (errorResult == DialogResult.Cancel) {Environment.Exit(0);}
                         else { MessageBox.Show($"{webEx.ToString()}");return; }
                     }
+                    Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
+                    loaderThread.Start();
                 }
                 else
                 {
@@ -164,37 +180,51 @@ namespace StonePlanner
                     Thread tdHolder = new Thread(() => languageHolder());
                     tdHolder.Start();
                     Thread.Sleep(1000);
+                    Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
+                    tdHolder.Join();
+                    loaderThread.Start();
                 }
             }
             PlanAdder(new Plan(string.Empty,0), "Extent Test",0);
-            //PlanAdder(new Plan(string.Empty), "Extent STRING II");
+        }
+
+        protected void FunctionLoader() 
+        {
             //加载功能 34高
-            Function newTodo = new Function($"{Application.StartupPath}\\hIcon\\new.png", $"{langInfo[2]}", "__New__");
-            newTodo.Top = 0;
-            panel_L.Controls.Add(newTodo);
-            Function export = new Function($"{Application.StartupPath}\\hIcon\\export.png", $"{langInfo[7]}", "__Export__");
-            export.Top = 34;
-            panel_L.Controls.Add(export);
-            Function recycle = new Function($"{Application.StartupPath}\\hIcon\\recycle.png", $"{langInfo[14]}", "__Recycle__");
-            recycle.Top = 68;
-            panel_L.Controls.Add(recycle);
-            Function info = new Function($"{Application.StartupPath}\\hIcon\\info.png", $"{langInfo[15]}", "__Infomation__");
-            info.Top = 102;
-            panel_L.Controls.Add(info);
-            Function console = new Function($"{Application.StartupPath}\\hIcon\\console.png", $"{langInfo[16]}", "__Console__");
-            console.Top = 136;
-            panel_L.Controls.Add(console);
-            Function IDE = new Function($"{Application.StartupPath}\\hIcon\\program.png", $"{langInfo[17]}", "__IDE__");
-            IDE.Top = 170;
-            panel_L.Controls.Add(IDE);
-            //正在休息状态
-            label_Status.Text = langInfo[12];
+            if (main.InvokeRequired)
+            {
+                main.Invoke(d);
+            }
+            else
+            {
+                Function newTodo = new Function($"{Application.StartupPath}\\hIcon\\new.png", $"{langInfo[2]}", "__New__");
+                newTodo.Top = 0;
+                panel_L.Controls.Add(newTodo);
+                Function export = new Function($"{Application.StartupPath}\\hIcon\\export.png", $"{langInfo[7]}", "__Export__");
+                export.Top = 34;
+                panel_L.Controls.Add(export);
+                Function recycle = new Function($"{Application.StartupPath}\\hIcon\\recycle.png", $"{langInfo[14]}", "__Recycle__");
+                recycle.Top = 68;
+                panel_L.Controls.Add(recycle);
+                Function info = new Function($"{Application.StartupPath}\\hIcon\\info.png", $"{langInfo[15]}", "__Infomation__");
+                info.Top = 102;
+                panel_L.Controls.Add(info);
+                Function console = new Function($"{Application.StartupPath}\\hIcon\\console.png", $"{langInfo[16]}", "__Console__");
+                console.Top = 136;
+                panel_L.Controls.Add(console);
+                Function IDE = new Function($"{Application.StartupPath}\\hIcon\\program.png", $"{langInfo[17]}", "__IDE__");
+                IDE.Top = 170;
+                panel_L.Controls.Add(IDE);
+                //正在休息状态
+                label_Status.Text = langInfo[12];
+            }
+            return;
         }
 
         internal void languageHolder() 
         {
             langInfo = new List<string>();
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 30; i++)
             {
                 langInfo.Add(null);
                 for (int j = 0; j < 4; j++)
@@ -222,7 +252,14 @@ namespace StonePlanner
                         File.Delete(Application.StartupPath + "\\");
                         Environment.Exit(1);
                     }
-                    if (Inner.InnerFuncs.GetMD5WithFilePath($"{Application.StartupPath}\\language.mlu") != "8F2FD4DE173190C67AF1A14A3B00CA79")
+                    WebClient MyWebClient = new WebClient();
+                    MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                    Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/language.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
+                    string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
+                    StreamReader sr = new StreamReader($"{Application.StartupPath}\\language.mlu");
+                    string localLanguage = sr.ReadToEnd();
+                    sr.Close();
+                    if (localLanguage != pageHtml)
                     {
                         try
                         {
@@ -236,11 +273,6 @@ namespace StonePlanner
                         {
                             Environment.Exit(1);
                         }
-                        //下载语言包
-                        WebClient MyWebClient = new WebClient();
-                        MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                        Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/language.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
-                        string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                         using (StreamWriter sw = new StreamWriter($"{Application.StartupPath}\\language.mlu"))//将获取的内容写入文本
                         {
                             sw.Write(pageHtml);

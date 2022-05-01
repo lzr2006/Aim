@@ -67,6 +67,25 @@ namespace StonePlanner.Inner
             return str;
         }
 
+
+        /// <summary>
+        /// 获取指定文件的MD5值 
+        /// </summary>
+        /// <param name="sDataIn">字符串</param>
+        /// <returns>该字符串的MD5值</returns>
+        static public string GetMD5WithString(string sDataIn)
+        {
+            string str = "";
+            byte[] data = Encoding.GetEncoding("utf-8").GetBytes(str);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] bytes = md5.ComputeHash(data);
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                str += bytes[i].ToString("x2");
+            }
+            return str;
+        }
+
         /// <summary>
         /// 将秒转换为时分秒
         /// </summary>
