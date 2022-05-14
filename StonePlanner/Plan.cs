@@ -12,12 +12,26 @@ namespace StonePlanner
 {
     public partial class Plan : UserControl
     {
+        /// <summary>
+        /// 任务大标题
+        /// </summary>
         public string capital;
+        /// <summary>
+        /// 任务自动编号值
+        /// </summary>
         public int Lnumber;
+        /// <summary>
+        /// 任务状态
+        /// </summary>
         public string status = "待办";
+        /// <summary>
+        /// 完成任务所需时间
+        /// </summary>
         public int dwSeconds;
+        /// <summary>
+        /// 任务具体介绍
+        /// </summary>
         public string dwIntro = "";
-        public string dwAim = "";
         public Plan(string lpCapital, int dwSeconds)
         {
             InitializeComponent();
@@ -30,6 +44,7 @@ namespace StonePlanner
             label_TaskDes.Text = capital;
             button_Finish.Text = Main.langInfo[1];
             label_Time.Text = dwSeconds.ToString();
+            this.timer1.Enabled = true;
         }
 
         private void panel_Status_Click(object sender, EventArgs e)
@@ -46,7 +61,24 @@ namespace StonePlanner
             }
            
         }
-
+        protected override void CreateHandle()
+        {
+            if (!IsHandleCreated)
+            {
+                try
+                {
+                    base.CreateHandle();
+                }
+                catch { }
+                finally
+                {
+                    if (!IsHandleCreated)
+                    {
+                        base.RecreateHandle();
+                    }
+                }
+            }
+        }
         private void button_Finish_Click(object sender, EventArgs e)
         {
             Main.Sign = 1;
@@ -67,5 +99,21 @@ namespace StonePlanner
             }
             label_Time.Text = dwSeconds.ToString();
         }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (dwSeconds <= 0)
+            {
+                dwSeconds = 0;
+                panel_Status.BackColor = Color.Lime;
+                status = "已办完";
+            }
+            if (panel_Status.BackColor == Color.Red)
+            {
+                dwSeconds -= 1;
+            }
+            label_Time.Text = dwSeconds.ToString();
+        }
     }
+    
 }

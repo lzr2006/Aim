@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -91,6 +92,11 @@ namespace StonePlanner
 
         private void Main_Load(object sender, EventArgs e)
         {
+            TaskDetails td = new TaskDetails();
+            td.Left = 16;
+            td.Top = 20;
+            panel_TaskDetail.Controls.Add(td);
+            td.BringToFront();
             this.TopMost = true;
             string allTask;
             using (StreamReader sr = new StreamReader(Application.StartupPath + @"\TaskMemory.txt"))
@@ -442,13 +448,7 @@ namespace StonePlanner
                 label_Sentence.Text = sentence[rdx.Next(0, sentence.Count - 1)];
             }
         }
-
-        private void panel_Top_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel_M_Paint(object sender, PaintEventArgs e)
+        private void panel_TaskDetail_Paint(object sender, PaintEventArgs e)
         {
 
         }

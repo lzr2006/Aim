@@ -3,13 +3,16 @@ using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace StonePlanner
 {
@@ -23,7 +26,7 @@ namespace StonePlanner
             textBox_Pars.Visible = false;
         }
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
         protected string fileNameString = "",fName = "",iFileName = "";
@@ -32,6 +35,14 @@ namespace StonePlanner
         internal List<string> nInput;
         protected int EPH;
         protected Main main;
+        protected Dictionary<int, float> cpuCount = new Dictionary<int, float>();
+        protected Dictionary<int, float> memCount = new Dictionary<int, float>();
+        protected string pName;
+        internal PerformanceCounter computerCountValue;
+        internal PerformanceCounter ramCountValue;
+        Series memChartSeries = new Series();
+        Series cpuChartSeries = new Series();
+        //internal DataPointCollection tempCollections = null;
         private void panel_Top_MouseDown(object sender, MouseEventArgs e)
         {
             const int WM_NCLBUTTONDOWN = 0x00A1;
@@ -43,10 +54,37 @@ namespace StonePlanner
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);// 拖动窗体  
             }
         }
-      
+        protected override void CreateHandle()
+        {
+            if (!IsHandleCreated)
+            {
+                try
+                {
+                    base.CreateHandle();
+                }
+                catch { }
+                finally
+                {
+                    if (!IsHandleCreated)
+                    {
+                        base.RecreateHandle();
+                    }
+                }
+            }
+        }
+
         private void InnerIDE_Load(object sender, EventArgs e)
         {
-
+            pName = Process.GetCurrentProcess().ProcessName;
+            computerCountValue = new PerformanceCounter("process", "% Processor Time", pName);
+            ramCountValue = new PerformanceCounter("process", "Working Set", pName);
+            memChartSeries.ChartType = SeriesChartType.Line;
+            memChartSeries.LegendText = "内存计数";
+            chart_Mem.Series.Add(memChartSeries);
+            cpuChartSeries.ChartType = SeriesChartType.Line;
+            cpuChartSeries.LegendText = "CPU计数";
+            cpuChartSeries.Color = Color.Green;
+            chart_Mem.Series.Add(cpuChartSeries);
         }
         #endregion
         #region 语法高亮器
@@ -66,13 +104,13 @@ namespace StonePlanner
             int crntLastLine = this.richTextBox_Main.GetLineFromCharIndex(crntLastIndex);
             Point crntLastPos = this.richTextBox_Main.GetPositionFromCharIndex(crntLastIndex);
             //准备画图
-            Graphics g = this.panel1.CreateGraphics();
+            Graphics g = this.panel_Left.CreateGraphics();
             Font font = new Font(this.richTextBox_Main.Font, this.richTextBox_Main.Font.Style);
             SolidBrush brush = new SolidBrush(Color.Green);
             //刷新画布
-            Rectangle rect = this.panel1.ClientRectangle;
-            brush.Color = this.panel1.BackColor;
-            g.FillRectangle(brush, 0, 0, this.panel1.ClientRectangle.Width, this.panel1.ClientRectangle.Height);
+            Rectangle rect = this.panel_Left.ClientRectangle;
+            brush.Color = this.panel_Left.BackColor;
+            g.FillRectangle(brush, 0, 0, this.panel_Left.ClientRectangle.Width, this.panel_Left.ClientRectangle.Height);
             brush.Color = Color.White;//重置画笔颜色
             //绘制行号
             int lineSpace = 0;
@@ -84,7 +122,7 @@ namespace StonePlanner
             {
                 lineSpace = Convert.ToInt32(this.richTextBox_Main.Font.Size);
             }
-            int brushX = this.panel1.ClientRectangle.Width - Convert.ToInt32(font.Size * 3);
+            int brushX = this.panel_Left.ClientRectangle.Width - Convert.ToInt32(font.Size * 3);
             int brushY = (crntLastPos.Y - Convert.ToInt32(font.Size * 0.21f)) + Convert.ToInt32(font.Size * 0.21f);//惊人的算法啊！！
             for (int i = crntLastLine; i >= crntFirstLine; i--)
             {
@@ -487,6 +525,7 @@ namespace StonePlanner
                 Thread.Sleep(1000);
             }
             richTextBox_Output.Text += $"\nConsole@Compiler>编译解析完成。";
+            timer_RunTimeHandler.Enabled = false;
         }
         protected void Compile(string row)
         {
@@ -499,6 +538,7 @@ namespace StonePlanner
                 Thread.Sleep(1000);
             }
             richTextBox_Output.Text += $"\nConsole@Compiler>编译解析完成。";
+            timer_RunTimeHandler.Enabled = false;
         }
         #endregion
         #region 上侧边栏功能
@@ -724,11 +764,85 @@ namespace StonePlanner
             }
         }
 
+        private void timer_BeijingTimeHandler_Tick(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            label_Any_BeijingtimeResult.Text = now.ToString("HH:mm:ss");
+        }
+
+        protected int hh = 0;
+        protected int mm = 0;
+        protected int ss = 0;
+        protected int sc = 0;
+        private void timer_RunTimeHandler_Tick(object sender, EventArgs e)
+        {
+            if (ss < 59)
+            {
+                ss++;
+            }
+            else 
+            {
+                ss = 0;
+                if (mm < 59)
+                {
+                    mm++;
+                }
+                else
+                {
+                    mm = 0;
+                    hh++;
+                }
+            }
+            //优化位数
+            string hhs = hh != 0 ? hh.ToString() : "00";
+            string mms = mm != 0 ? mm.ToString() : "00";
+            string sss = ss != 0 ? ss.ToString() : "00";
+            string hhe = hhs.Length != 2 ? hhe = $"0{hhs}" : hhs;
+            string mme = mms.Length != 2 ? mme = $"0{mms}" : mms;
+            string sse = sss.Length != 2 ? sse = $"0{sss}" : sss;
+            (hhs, mms, sss) = (null, null, null);
+            label_Any_RuntimeResult.Text = $"{hhe}:{mme}:{sse}";
+            sc++;
+            label_Any_cValue.Text = computerCountValue.NextValue().ToString();
+            label_Any_mValue.Text = ChangeDataToD(ramCountValue.NextValue().ToString()).ToString();
+            cpuCount.Add(sc, computerCountValue.NextValue());
+            memCount.Add(sc, ramCountValue.NextValue());
+
+            //memChartSeries
+            chart_Mem.Series["Series1"].Points.AddXY(sc, ramCountValue.NextValue() / 10000000);
+            chart_Mem.Series["Series2"].Points.AddXY(sc, computerCountValue.NextValue() / 50);
+        }
+        protected Decimal ChangeDataToD(string strData)
+        {
+            Decimal dData = 0.0M;
+            if (strData.Contains("E"))
+            {
+                dData = Decimal.Parse(strData, System.Globalization.NumberStyles.Float);
+            }
+            return dData;
+        }
+
         private void 本线程调试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = new StreamWriter(iFileName))
+            chart_Mem.Series["Series1"].Points.Clear();
+            chart_Mem.Series["Series2"].Points.Clear();
+
+            try
             {
-                sw.Write(richTextBox_Main.Text);
+                using (StreamWriter sw = new StreamWriter(iFileName))
+                {
+                    sw.Write(richTextBox_Main.Text);
+                }
+            }
+            catch 
+            {
+                string tempFileName = $"Save_Test_{hh}{mm}{ss}.mtd";
+                iFileName = tempFileName;
+
+                using (StreamWriter sw = new StreamWriter(tempFileName))
+                {
+                    sw.Write(richTextBox_Main.Text);
+                }
             }
             tabControl_Buttom.SelectedIndex = 1;
             tabControl_Buttom.Focus();
@@ -736,6 +850,22 @@ namespace StonePlanner
             richTextBox_Input.Focus();
             richTextBox_Input.Text = $">COMPILE {iFileName}";
             richTextBox_Input.Select(richTextBox_Input.TextLength,0);
+            //SendMessage
+            SendKeys.SendWait("{Enter}");
+            tabControl_Buttom.SelectedIndex = 2;
+            //开始分析
+            (hh, mm, ss, sc) = (0, 0, 0, 0);
+            cpuCount.Clear();
+            memCount.Clear();
+            timer_RunTimeHandler.Enabled = true;
+
+            SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\hIcon\Alert.wav");
+            sp.Play();
+
+            label_Any_BeijingtimeResult.Text = "xx:xx:xx";
+            label_Any_RuntimeResult.Text = "xx:xx:xx";
+            label_Any_cValue.Text = "xxxxx";
+            label_Any_mValue.Text = "xxxxx";
         }
 
         private void 开始调试SToolStripMenuItem_Click(object sender, EventArgs e)
