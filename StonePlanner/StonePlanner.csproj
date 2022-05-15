@@ -133,6 +133,7 @@
     <Compile Include="AddTodo.Designer.cs">
       <DependentUpon>AddTodo.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonSettings.cs" />
     <Compile Include="Console.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +190,12 @@
     <Compile Include="Recycle.Designer.cs">
       <DependentUpon>Recycle.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskDetails.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -244,6 +251,9 @@
     <EmbeddedResource Include="Recycle.resx">
       <DependentUpon>Recycle.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskDetails.resx">
       <DependentUpon>TaskDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +261,9 @@
       <DependentUpon>TestVersion.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

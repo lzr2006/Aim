@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS1690: 访问引用封送类的字段上的成员可能导致运行时异常
+dotnet_diagnostic.CS1690.severity = suggestion

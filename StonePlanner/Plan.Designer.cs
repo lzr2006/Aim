@@ -56,6 +56,7 @@
             this.label_TaskDes.Size = new System.Drawing.Size(97, 15);
             this.label_TaskDes.TabIndex = 1;
             this.label_TaskDes.Text = "这是一个任务";
+            this.label_TaskDes.Click += new System.EventHandler(this.label_TaskDes_Click_1);
             // 
             // button_Finish
             // 
@@ -76,6 +77,7 @@
             this.label_Time.Size = new System.Drawing.Size(15, 15);
             this.label_Time.TabIndex = 3;
             this.label_Time.Text = "0";
+            this.label_Time.Click += new System.EventHandler(this.label_TaskDes_Click_1);
             // 
             // timer1
             // 
@@ -96,6 +98,7 @@
             this.Name = "Plan";
             this.Size = new System.Drawing.Size(238, 36);
             this.Load += new System.EventHandler(this.Plan_Load);
+            this.Click += new System.EventHandler(this.label_TaskDes_Click_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 

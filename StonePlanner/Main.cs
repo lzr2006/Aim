@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -24,6 +25,7 @@ namespace StonePlanner
          * SIGN = 3 => 缩短菜单栏
          * SIGN = 4 => 新建待办
          * SIGN = 5 => 传出自身对象集合
+         * SIGN = 6 => 查看待办信息
          */
         internal static int Sign = 0;
         //传出请求删除的请求体对象本身
@@ -38,6 +40,7 @@ namespace StonePlanner
         //TO-DO名称
         internal static string tName;
         internal static int tTime;
+        internal static string tIntro;
         //总时间
         internal static int nTime;
         //检查语言包
@@ -47,6 +50,8 @@ namespace StonePlanner
         //控件添加委托
         delegate void addDelegate();
         addDelegate d;
+        //全局展示
+        TaskDetails td;
         public Main()
         {
             InitializeComponent();
@@ -92,11 +97,8 @@ namespace StonePlanner
 
         private void Main_Load(object sender, EventArgs e)
         {
-            TaskDetails td = new TaskDetails();
-            td.Left = 16;
-            td.Top = 20;
-            panel_TaskDetail.Controls.Add(td);
-            td.BringToFront();
+            pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
+
             this.TopMost = true;
             string allTask;
             using (StreamReader sr = new StreamReader(Application.StartupPath + @"\TaskMemory.txt"))
@@ -104,15 +106,16 @@ namespace StonePlanner
                 allTask = sr.ReadToEnd();
             }
             string[] taskListString = allTask.Split('\n');
+            taskListString = taskListString.Take(taskListString.Count() - 1).ToArray();
             foreach (var item in taskListString)
             {
                 try
                 {
                     string[] temp = item.Split(';');
-                    Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]));
+                    Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]), "LECRGY");
                     recycle_bin.Add(plan);
                 }
-                catch { }
+                catch(Exception ex) { throw ex; }
             }
             //Console.WriteLine(InnerFuncs.GetMD5WithFilePath($"{Application.StartupPath}\\language.mlu"));
             if (oncheck)
@@ -125,7 +128,7 @@ namespace StonePlanner
             sentenceGetter.Start();
             for (int i = 0; i < 10; i++)
             {
-                Plan p = new Plan("NULL",0);
+                Plan p = new Plan("NULL",0,"NULL");
                 p.Lnumber = -1;
                 TasksDict.Add(i, null);
             }
@@ -191,7 +194,7 @@ namespace StonePlanner
                     loaderThread.Start();
                 }
             }
-            PlanAdder(new Plan(string.Empty,0), "Extent Test",0);
+            PlanAdder(new Plan(string.Empty,0,"TEST 0"), "Extent Test",0);
         }
 
         protected void FunctionLoader() 
@@ -359,15 +362,38 @@ namespace StonePlanner
             }
             else if (Sign == 4)
             {
-                PlanAdder(new Plan(tName, tTime), $"{tName}",tTime);
+                PlanAdder(new Plan(tName, tTime,tIntro), $"{tName}",tTime);
                 tName = string.Empty;
                 Sign = 0;
+            }
+            else if (Sign == 6)
+            {
+                panel_TaskDetail.Controls.Remove(td);
+                td = new TaskDetails();
+                td.Left = 16;
+                td.Top = 20;
+                td.Capital = plan.capital;
+                td.Time = plan.dwSeconds.ToString();
+                td.Intro = plan.dwIntro;
+                td.StatusResult = plan.status;
+                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\hIcon\Click.wav");
+                sp.Play();
+                panel_TaskDetail.Controls.Add(td);
+                td.BringToFront();
+                Sign = 0;
+            }
+            else if (Sign == 7)
+            {
+                panel_TaskDetail.Controls.Remove(td);
+                Sign = 0;
+                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\hIcon\Click.wav");
+                sp.Play();
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PlanAdder(new Plan(string.Empty,0), "Test StringII",0);
+            PlanAdder(new Plan(string.Empty,0,"TESTＩＩ"), "Test StringII",0);
         }
 
         private void timer_PenalLengthController_Tick(object sender, EventArgs e)

@@ -48,6 +48,7 @@
             this.timer_Conv = new System.Windows.Forms.Timer(this.components);
             this.panel_TaskDetail = new System.Windows.Forms.Panel();
             this.pictureBox_Main = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_More)).BeginInit();
@@ -137,7 +138,7 @@
             // label_Sentence
             // 
             this.label_Sentence.AutoSize = true;
-            this.label_Sentence.Font = new System.Drawing.Font("宋体", 10F);
+            this.label_Sentence.Font = new System.Drawing.Font("SimSun", 10F);
             this.label_Sentence.Location = new System.Drawing.Point(39, 8);
             this.label_Sentence.Name = "label_Sentence";
             this.label_Sentence.Size = new System.Drawing.Size(175, 14);
@@ -158,7 +159,7 @@
             // label_Status
             // 
             this.label_Status.BackColor = System.Drawing.Color.Lime;
-            this.label_Status.Font = new System.Drawing.Font("宋体", 15F);
+            this.label_Status.Font = new System.Drawing.Font("SimSun", 15F);
             this.label_Status.Location = new System.Drawing.Point(400, 137);
             this.label_Status.Name = "label_Status";
             this.label_Status.Size = new System.Drawing.Size(89, 29);
@@ -187,7 +188,7 @@
             // label_YoursTasks
             // 
             this.label_YoursTasks.AutoSize = true;
-            this.label_YoursTasks.Font = new System.Drawing.Font("宋体", 14F);
+            this.label_YoursTasks.Font = new System.Drawing.Font("SimSun", 14F);
             this.label_YoursTasks.Location = new System.Drawing.Point(515, 183);
             this.label_YoursTasks.Name = "label_YoursTasks";
             this.label_YoursTasks.Size = new System.Drawing.Size(104, 19);
@@ -214,6 +215,7 @@
             // panel_TaskDetail
             // 
             this.panel_TaskDetail.Controls.Add(this.pictureBox_Main);
+            this.panel_TaskDetail.Controls.Add(this.label2);
             this.panel_TaskDetail.Location = new System.Drawing.Point(236, 30);
             this.panel_TaskDetail.Name = "panel_TaskDetail";
             this.panel_TaskDetail.Size = new System.Drawing.Size(426, 397);
@@ -228,6 +230,15 @@
             this.pictureBox_Main.Size = new System.Drawing.Size(426, 400);
             this.pictureBox_Main.TabIndex = 5;
             this.pictureBox_Main.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(43, 351);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "label2";
             // 
             // Main
             // 
@@ -249,6 +260,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_More)).EndInit();
             this.panel_M.ResumeLayout(false);
             this.panel_TaskDetail.ResumeLayout(false);
+            this.panel_TaskDetail.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -275,6 +287,7 @@
         private System.Windows.Forms.Label label_Anther1;
         private System.Windows.Forms.Panel panel_TaskDetail;
         private System.Windows.Forms.PictureBox pictureBox_Main;
+        private System.Windows.Forms.Label label2;
     }
 }
 

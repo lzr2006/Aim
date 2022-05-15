@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,6 +13,10 @@ namespace StonePlanner
 {
     public partial class AddTodo : Form
     {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool ReleaseCapture();
         public AddTodo()
         {
             InitializeComponent();
@@ -19,12 +24,12 @@ namespace StonePlanner
 
         private void AddTodo_Load(object sender, EventArgs e)
         {
+            this.TopMost = true;
             label_T.Text = Main.langInfo[3];
             label_TodoName.Text = Main.langInfo[4];
             label_Numbered.Text = Main.langInfo[5];
             button_New.Text = Main.langInfo[6];
             textBox_Numbered.ReadOnly = true;
-
         }
 
         private void button_New_Click(object sender, EventArgs e)
@@ -34,12 +39,30 @@ namespace StonePlanner
                 Main.Sign = 4;
                 Main.tName = textBox_Capital.Text;
                 Main.tTime = Convert.ToInt32(textBox_Time.Text);
+                Main.tIntro = textBox_Intro.Text;
                 Close();
             }
             catch(Exception ex) 
             {
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void panel_Top_MouseDown(object sender, MouseEventArgs e)
+        {
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 2;
+
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);// 拖动窗体  
+            }
+        }
+
+        private void panel_Top_DoubleClick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

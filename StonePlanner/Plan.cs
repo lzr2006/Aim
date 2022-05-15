@@ -32,11 +32,12 @@ namespace StonePlanner
         /// 任务具体介绍
         /// </summary>
         public string dwIntro = "";
-        public Plan(string lpCapital, int dwSeconds)
+        public Plan(string lpCapital, int dwSeconds,string dwIntro)
         {
             InitializeComponent();
             capital = lpCapital;
             this.dwSeconds = dwSeconds;
+            this.dwIntro = dwIntro;
         }
 
         private void Plan_Load(object sender, EventArgs e)
@@ -113,6 +114,12 @@ namespace StonePlanner
                 dwSeconds -= 1;
             }
             label_Time.Text = dwSeconds.ToString();
+        }
+
+        private void label_TaskDes_Click_1(object sender, EventArgs e)
+        {
+            Main.Sign = 6;
+            Main.plan = this;
         }
     }
     

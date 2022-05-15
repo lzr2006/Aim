@@ -36,13 +36,15 @@
             this.label_StatusR = new System.Windows.Forms.Label();
             this.label_TimeC = new System.Windows.Forms.Label();
             this.label_TimeR = new System.Windows.Forms.Label();
+            this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Split)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Capital
             // 
             this.label_Capital.AutoSize = true;
-            this.label_Capital.Font = new System.Drawing.Font("黑体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Capital.Font = new System.Drawing.Font("SimHei", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_Capital.Location = new System.Drawing.Point(10, 11);
             this.label_Capital.Name = "label_Capital";
             this.label_Capital.Size = new System.Drawing.Size(93, 20);
@@ -61,7 +63,7 @@
             // label_Intro
             // 
             this.label_Intro.AutoSize = true;
-            this.label_Intro.Font = new System.Drawing.Font("宋体", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Intro.Font = new System.Drawing.Font("SimSun", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_Intro.Location = new System.Drawing.Point(11, 49);
             this.label_Intro.Name = "label_Intro";
             this.label_Intro.Size = new System.Drawing.Size(367, 60);
@@ -72,7 +74,7 @@
             // label_StatusC
             // 
             this.label_StatusC.AutoSize = true;
-            this.label_StatusC.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_StatusC.Font = new System.Drawing.Font("SimSun", 11F);
             this.label_StatusC.Location = new System.Drawing.Point(11, 120);
             this.label_StatusC.Name = "label_StatusC";
             this.label_StatusC.Size = new System.Drawing.Size(82, 15);
@@ -82,7 +84,7 @@
             // label_StatusR
             // 
             this.label_StatusR.AutoSize = true;
-            this.label_StatusR.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_StatusR.Font = new System.Drawing.Font("SimSun", 11F);
             this.label_StatusR.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.label_StatusR.Location = new System.Drawing.Point(99, 120);
             this.label_StatusR.Name = "label_StatusR";
@@ -93,7 +95,7 @@
             // label_TimeC
             // 
             this.label_TimeC.AutoSize = true;
-            this.label_TimeC.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_TimeC.Font = new System.Drawing.Font("SimSun", 11F);
             this.label_TimeC.Location = new System.Drawing.Point(11, 138);
             this.label_TimeC.Name = "label_TimeC";
             this.label_TimeC.Size = new System.Drawing.Size(82, 15);
@@ -103,7 +105,7 @@
             // label_TimeR
             // 
             this.label_TimeR.AutoSize = true;
-            this.label_TimeR.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_TimeR.Font = new System.Drawing.Font("SimSun", 11F);
             this.label_TimeR.ForeColor = System.Drawing.Color.Black;
             this.label_TimeR.Location = new System.Drawing.Point(100, 138);
             this.label_TimeR.Name = "label_TimeR";
@@ -111,11 +113,23 @@
             this.label_TimeR.TabIndex = 6;
             this.label_TimeR.Text = "0s";
             // 
+            // pictureBox_T_Exit
+            // 
+            this.pictureBox_T_Exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Exit.BackgroundImage")));
+            this.pictureBox_T_Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_T_Exit.Location = new System.Drawing.Point(359, 8);
+            this.pictureBox_T_Exit.Name = "pictureBox_T_Exit";
+            this.pictureBox_T_Exit.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox_T_Exit.TabIndex = 7;
+            this.pictureBox_T_Exit.TabStop = false;
+            this.pictureBox_T_Exit.Click += new System.EventHandler(this.pictureBox_T_Exit_Click);
+            // 
             // TaskDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.pictureBox_T_Exit);
             this.Controls.Add(this.label_TimeR);
             this.Controls.Add(this.label_TimeC);
             this.Controls.Add(this.label_StatusR);
@@ -128,6 +142,7 @@
             this.Load += new System.EventHandler(this.TaskDetails_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TaskDetails_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Split)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +157,6 @@
         private System.Windows.Forms.Label label_StatusR;
         private System.Windows.Forms.Label label_TimeC;
         private System.Windows.Forms.Label label_TimeR;
+        private System.Windows.Forms.PictureBox pictureBox_T_Exit;
     }
 }
