@@ -37,6 +37,8 @@
             this.label_TimeC = new System.Windows.Forms.Label();
             this.label_TimeR = new System.Windows.Forms.Label();
             this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
+            this.label_DifficultyC = new System.Windows.Forms.Label();
+            this.label_DifficultyR = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Split)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             this.SuspendLayout();
@@ -75,7 +77,7 @@
             // 
             this.label_StatusC.AutoSize = true;
             this.label_StatusC.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_StatusC.Location = new System.Drawing.Point(11, 120);
+            this.label_StatusC.Location = new System.Drawing.Point(11, 141);
             this.label_StatusC.Name = "label_StatusC";
             this.label_StatusC.Size = new System.Drawing.Size(82, 15);
             this.label_StatusC.TabIndex = 3;
@@ -86,7 +88,7 @@
             this.label_StatusR.AutoSize = true;
             this.label_StatusR.Font = new System.Drawing.Font("SimSun", 11F);
             this.label_StatusR.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label_StatusR.Location = new System.Drawing.Point(99, 120);
+            this.label_StatusR.Location = new System.Drawing.Point(99, 141);
             this.label_StatusR.Name = "label_StatusR";
             this.label_StatusR.Size = new System.Drawing.Size(52, 15);
             this.label_StatusR.TabIndex = 4;
@@ -96,7 +98,7 @@
             // 
             this.label_TimeC.AutoSize = true;
             this.label_TimeC.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_TimeC.Location = new System.Drawing.Point(11, 138);
+            this.label_TimeC.Location = new System.Drawing.Point(12, 159);
             this.label_TimeC.Name = "label_TimeC";
             this.label_TimeC.Size = new System.Drawing.Size(82, 15);
             this.label_TimeC.TabIndex = 5;
@@ -107,7 +109,7 @@
             this.label_TimeR.AutoSize = true;
             this.label_TimeR.Font = new System.Drawing.Font("SimSun", 11F);
             this.label_TimeR.ForeColor = System.Drawing.Color.Black;
-            this.label_TimeR.Location = new System.Drawing.Point(100, 138);
+            this.label_TimeR.Location = new System.Drawing.Point(102, 159);
             this.label_TimeR.Name = "label_TimeR";
             this.label_TimeR.Size = new System.Drawing.Size(23, 15);
             this.label_TimeR.TabIndex = 6;
@@ -124,11 +126,34 @@
             this.pictureBox_T_Exit.TabStop = false;
             this.pictureBox_T_Exit.Click += new System.EventHandler(this.pictureBox_T_Exit_Click);
             // 
+            // label_DifficultyC
+            // 
+            this.label_DifficultyC.AutoSize = true;
+            this.label_DifficultyC.Font = new System.Drawing.Font("SimSun", 11F);
+            this.label_DifficultyC.Location = new System.Drawing.Point(11, 122);
+            this.label_DifficultyC.Name = "label_DifficultyC";
+            this.label_DifficultyC.Size = new System.Drawing.Size(82, 15);
+            this.label_DifficultyC.TabIndex = 8;
+            this.label_DifficultyC.Text = "任务难度：";
+            // 
+            // label_DifficultyR
+            // 
+            this.label_DifficultyR.AutoSize = true;
+            this.label_DifficultyR.Font = new System.Drawing.Font("SimSun", 11F);
+            this.label_DifficultyR.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.label_DifficultyR.Location = new System.Drawing.Point(100, 122);
+            this.label_DifficultyR.Name = "label_DifficultyR";
+            this.label_DifficultyR.Size = new System.Drawing.Size(95, 15);
+            this.label_DifficultyR.TabIndex = 9;
+            this.label_DifficultyR.Text = "Unknown 0.0";
+            // 
             // TaskDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.label_DifficultyR);
+            this.Controls.Add(this.label_DifficultyC);
             this.Controls.Add(this.pictureBox_T_Exit);
             this.Controls.Add(this.label_TimeR);
             this.Controls.Add(this.label_TimeC);
@@ -138,7 +163,7 @@
             this.Controls.Add(this.pictureBox_Split);
             this.Controls.Add(this.label_Capital);
             this.Name = "TaskDetails";
-            this.Size = new System.Drawing.Size(392, 161);
+            this.Size = new System.Drawing.Size(392, 181);
             this.Load += new System.EventHandler(this.TaskDetails_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TaskDetails_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Split)).EndInit();
@@ -158,5 +183,7 @@
         private System.Windows.Forms.Label label_TimeC;
         private System.Windows.Forms.Label label_TimeR;
         private System.Windows.Forms.PictureBox pictureBox_T_Exit;
+        private System.Windows.Forms.Label label_DifficultyC;
+        private System.Windows.Forms.Label label_DifficultyR;
     }
 }

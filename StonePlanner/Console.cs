@@ -253,7 +253,9 @@ namespace StonePlanner
                         richTextBox_Output.Text += "\n|SIGN = 3 => 缩短菜单栏";
                         richTextBox_Output.Text += "\n|SIGN = 4 => 新建待办";
                         richTextBox_Output.Text += "\n|SIGN = 5 => 传出自身对象集合";
-                        richTextBox_Output.Text += "\n请注意：错误的使用信号将导致崩溃";
+                        richTextBox_Output.Text += "\n|SIGN = 6 => 查看待办信息";
+                        richTextBox_Output.Text += "\n|SIGN = 7 => 关闭待办详情";
+                        richTextBox_Output.Text += "\nConsole@Main>请注意：错误的使用信号将导致崩溃";
                     }
                     else
                     {

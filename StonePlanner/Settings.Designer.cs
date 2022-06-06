@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.panel_Main = new System.Windows.Forms.Panel();
-            this.vScrollBar_Control = new System.Windows.Forms.VScrollBar();
+            this.button_Save = new System.Windows.Forms.Button();
             this.groupBox_switchSwttings = new System.Windows.Forms.GroupBox();
-            this.checkBox_PictureSwitch = new System.Windows.Forms.CheckBox();
-            this.label_PictureSwitchTime_C = new System.Windows.Forms.Label();
-            this.textBox_PictureSwitchTime_R = new System.Windows.Forms.TextBox();
-            this.label_PictureSwitchTime_F = new System.Windows.Forms.Label();
             this.label_SentenceSwitchTime_F = new System.Windows.Forms.Label();
             this.textBox_SentenceSwitchTime_R = new System.Windows.Forms.TextBox();
             this.label_SentenceSwitchTime_C = new System.Windows.Forms.Label();
             this.checkBox_SentenceSwitch = new System.Windows.Forms.CheckBox();
-            this.button_Save = new System.Windows.Forms.Button();
+            this.label_PictureSwitchTime_F = new System.Windows.Forms.Label();
+            this.textBox_PictureSwitchTime_R = new System.Windows.Forms.TextBox();
+            this.label_PictureSwitchTime_C = new System.Windows.Forms.Label();
+            this.checkBox_PictureSwitch = new System.Windows.Forms.CheckBox();
+            this.vScrollBar_Control = new System.Windows.Forms.VScrollBar();
             this.panel_Main.SuspendLayout();
             this.groupBox_switchSwttings.SuspendLayout();
             this.SuspendLayout();
@@ -53,14 +53,16 @@
             this.panel_Main.Size = new System.Drawing.Size(336, 562);
             this.panel_Main.TabIndex = 0;
             // 
-            // vScrollBar_Control
+            // button_Save
             // 
-            this.vScrollBar_Control.Location = new System.Drawing.Point(338, 0);
-            this.vScrollBar_Control.Maximum = 200;
-            this.vScrollBar_Control.Name = "vScrollBar_Control";
-            this.vScrollBar_Control.Size = new System.Drawing.Size(23, 391);
-            this.vScrollBar_Control.TabIndex = 1;
-            this.vScrollBar_Control.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
+            this.button_Save.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.button_Save.Location = new System.Drawing.Point(0, 535);
+            this.button_Save.Name = "button_Save";
+            this.button_Save.Size = new System.Drawing.Size(336, 27);
+            this.button_Save.TabIndex = 1;
+            this.button_Save.Text = "保存";
+            this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
             // 
             // groupBox_switchSwttings
             // 
@@ -72,50 +74,13 @@
             this.groupBox_switchSwttings.Controls.Add(this.textBox_PictureSwitchTime_R);
             this.groupBox_switchSwttings.Controls.Add(this.label_PictureSwitchTime_C);
             this.groupBox_switchSwttings.Controls.Add(this.checkBox_PictureSwitch);
-            this.groupBox_switchSwttings.Font = new System.Drawing.Font("SimSun", 10.5F);
+            this.groupBox_switchSwttings.Font = new System.Drawing.Font("宋体", 10.5F);
             this.groupBox_switchSwttings.Location = new System.Drawing.Point(3, 4);
             this.groupBox_switchSwttings.Name = "groupBox_switchSwttings";
             this.groupBox_switchSwttings.Size = new System.Drawing.Size(330, 123);
             this.groupBox_switchSwttings.TabIndex = 0;
             this.groupBox_switchSwttings.TabStop = false;
             this.groupBox_switchSwttings.Text = "切换设置";
-            // 
-            // checkBox_PictureSwitch
-            // 
-            this.checkBox_PictureSwitch.AutoSize = true;
-            this.checkBox_PictureSwitch.Location = new System.Drawing.Point(11, 24);
-            this.checkBox_PictureSwitch.Name = "checkBox_PictureSwitch";
-            this.checkBox_PictureSwitch.Size = new System.Drawing.Size(124, 18);
-            this.checkBox_PictureSwitch.TabIndex = 0;
-            this.checkBox_PictureSwitch.Text = "首页风景图切换";
-            this.checkBox_PictureSwitch.UseVisualStyleBackColor = true;
-            // 
-            // label_PictureSwitchTime_C
-            // 
-            this.label_PictureSwitchTime_C.AutoSize = true;
-            this.label_PictureSwitchTime_C.Location = new System.Drawing.Point(8, 47);
-            this.label_PictureSwitchTime_C.Name = "label_PictureSwitchTime_C";
-            this.label_PictureSwitchTime_C.Size = new System.Drawing.Size(147, 14);
-            this.label_PictureSwitchTime_C.TabIndex = 1;
-            this.label_PictureSwitchTime_C.Text = "首页风景图切换时间：";
-            // 
-            // textBox_PictureSwitchTime_R
-            // 
-            this.textBox_PictureSwitchTime_R.Font = new System.Drawing.Font("Courier New", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_PictureSwitchTime_R.Location = new System.Drawing.Point(151, 44);
-            this.textBox_PictureSwitchTime_R.Name = "textBox_PictureSwitchTime_R";
-            this.textBox_PictureSwitchTime_R.Size = new System.Drawing.Size(118, 23);
-            this.textBox_PictureSwitchTime_R.TabIndex = 2;
-            this.textBox_PictureSwitchTime_R.Text = "3000";
-            // 
-            // label_PictureSwitchTime_F
-            // 
-            this.label_PictureSwitchTime_F.AutoSize = true;
-            this.label_PictureSwitchTime_F.Location = new System.Drawing.Point(271, 49);
-            this.label_PictureSwitchTime_F.Name = "label_PictureSwitchTime_F";
-            this.label_PictureSwitchTime_F.Size = new System.Drawing.Size(35, 14);
-            this.label_PictureSwitchTime_F.TabIndex = 3;
-            this.label_PictureSwitchTime_F.Text = "毫秒";
             // 
             // label_SentenceSwitchTime_F
             // 
@@ -154,16 +119,51 @@
             this.checkBox_SentenceSwitch.Text = "首页句子切换";
             this.checkBox_SentenceSwitch.UseVisualStyleBackColor = true;
             // 
-            // button_Save
+            // label_PictureSwitchTime_F
             // 
-            this.button_Save.Font = new System.Drawing.Font("SimSun", 10.5F);
-            this.button_Save.Location = new System.Drawing.Point(0, 535);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(336, 27);
-            this.button_Save.TabIndex = 1;
-            this.button_Save.Text = "保存";
-            this.button_Save.UseVisualStyleBackColor = true;
-            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
+            this.label_PictureSwitchTime_F.AutoSize = true;
+            this.label_PictureSwitchTime_F.Location = new System.Drawing.Point(271, 49);
+            this.label_PictureSwitchTime_F.Name = "label_PictureSwitchTime_F";
+            this.label_PictureSwitchTime_F.Size = new System.Drawing.Size(35, 14);
+            this.label_PictureSwitchTime_F.TabIndex = 3;
+            this.label_PictureSwitchTime_F.Text = "毫秒";
+            // 
+            // textBox_PictureSwitchTime_R
+            // 
+            this.textBox_PictureSwitchTime_R.Font = new System.Drawing.Font("Courier New", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_PictureSwitchTime_R.Location = new System.Drawing.Point(151, 44);
+            this.textBox_PictureSwitchTime_R.Name = "textBox_PictureSwitchTime_R";
+            this.textBox_PictureSwitchTime_R.Size = new System.Drawing.Size(118, 23);
+            this.textBox_PictureSwitchTime_R.TabIndex = 2;
+            this.textBox_PictureSwitchTime_R.Text = "3000";
+            // 
+            // label_PictureSwitchTime_C
+            // 
+            this.label_PictureSwitchTime_C.AutoSize = true;
+            this.label_PictureSwitchTime_C.Location = new System.Drawing.Point(8, 47);
+            this.label_PictureSwitchTime_C.Name = "label_PictureSwitchTime_C";
+            this.label_PictureSwitchTime_C.Size = new System.Drawing.Size(147, 14);
+            this.label_PictureSwitchTime_C.TabIndex = 1;
+            this.label_PictureSwitchTime_C.Text = "首页风景图切换时间：";
+            // 
+            // checkBox_PictureSwitch
+            // 
+            this.checkBox_PictureSwitch.AutoSize = true;
+            this.checkBox_PictureSwitch.Location = new System.Drawing.Point(11, 24);
+            this.checkBox_PictureSwitch.Name = "checkBox_PictureSwitch";
+            this.checkBox_PictureSwitch.Size = new System.Drawing.Size(124, 18);
+            this.checkBox_PictureSwitch.TabIndex = 0;
+            this.checkBox_PictureSwitch.Text = "首页风景图切换";
+            this.checkBox_PictureSwitch.UseVisualStyleBackColor = true;
+            // 
+            // vScrollBar_Control
+            // 
+            this.vScrollBar_Control.Location = new System.Drawing.Point(338, 0);
+            this.vScrollBar_Control.Maximum = 200;
+            this.vScrollBar_Control.Name = "vScrollBar_Control";
+            this.vScrollBar_Control.Size = new System.Drawing.Size(23, 391);
+            this.vScrollBar_Control.TabIndex = 1;
+            this.vScrollBar_Control.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // Settings
             // 
@@ -174,6 +174,7 @@
             this.Controls.Add(this.panel_Main);
             this.Name = "Settings";
             this.Text = "设置项";
+            this.Load += new System.EventHandler(this.Settings_Load);
             this.panel_Main.ResumeLayout(false);
             this.groupBox_switchSwttings.ResumeLayout(false);
             this.groupBox_switchSwttings.PerformLayout();

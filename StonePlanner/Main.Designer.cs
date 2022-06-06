@@ -49,6 +49,7 @@
             this.panel_TaskDetail = new System.Windows.Forms.Panel();
             this.pictureBox_Main = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.timer_Ponv = new System.Windows.Forms.Timer(this.components);
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_More)).BeginInit();
@@ -138,7 +139,7 @@
             // label_Sentence
             // 
             this.label_Sentence.AutoSize = true;
-            this.label_Sentence.Font = new System.Drawing.Font("SimSun", 10F);
+            this.label_Sentence.Font = new System.Drawing.Font("宋体", 10F);
             this.label_Sentence.Location = new System.Drawing.Point(39, 8);
             this.label_Sentence.Name = "label_Sentence";
             this.label_Sentence.Size = new System.Drawing.Size(175, 14);
@@ -159,7 +160,7 @@
             // label_Status
             // 
             this.label_Status.BackColor = System.Drawing.Color.Lime;
-            this.label_Status.Font = new System.Drawing.Font("SimSun", 15F);
+            this.label_Status.Font = new System.Drawing.Font("宋体", 15F);
             this.label_Status.Location = new System.Drawing.Point(400, 137);
             this.label_Status.Name = "label_Status";
             this.label_Status.Size = new System.Drawing.Size(89, 29);
@@ -188,7 +189,7 @@
             // label_YoursTasks
             // 
             this.label_YoursTasks.AutoSize = true;
-            this.label_YoursTasks.Font = new System.Drawing.Font("SimSun", 14F);
+            this.label_YoursTasks.Font = new System.Drawing.Font("宋体", 14F);
             this.label_YoursTasks.Location = new System.Drawing.Point(515, 183);
             this.label_YoursTasks.Name = "label_YoursTasks";
             this.label_YoursTasks.Size = new System.Drawing.Size(104, 19);
@@ -240,6 +241,12 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "label2";
             // 
+            // timer_Ponv
+            // 
+            this.timer_Ponv.Enabled = true;
+            this.timer_Ponv.Interval = 30000;
+            this.timer_Ponv.Tick += new System.EventHandler(this.timer_Ponv_Tick);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -288,6 +295,7 @@
         private System.Windows.Forms.Panel panel_TaskDetail;
         private System.Windows.Forms.PictureBox pictureBox_Main;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Timer timer_Ponv;
     }
 }
 

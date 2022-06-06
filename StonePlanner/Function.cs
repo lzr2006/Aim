@@ -75,6 +75,11 @@ namespace StonePlanner
                 //InnerIDE ide = new InnerIDE();
                 //ide.Show();
             }
+            else if (__Name__ == "__Settings__")
+            {
+                Settings st = new Settings();
+                st.Show();
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -9,7 +8,6 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StonePlanner
@@ -26,6 +24,7 @@ namespace StonePlanner
          * SIGN = 4 => 新建待办
          * SIGN = 5 => 传出自身对象集合
          * SIGN = 6 => 查看待办信息
+         * SIGN = 7 => 关闭待办详情
          */
         internal static int Sign = 0;
         //传出请求删除的请求体对象本身
@@ -35,29 +34,34 @@ namespace StonePlanner
         //语言数组
         internal static List<string> langInfo;
         internal static List<string> sentence = new List<string>();
+        internal static List<string> pictures = new List<string>();
+        internal static List<string> packedSetting = new List<string>();
         //废弃任务数组
         public static List<Plan> recycle_bin = new List<Plan>();
         //TO-DO名称
         internal static string tName;
         internal static int tTime;
         internal static string tIntro;
+        internal static double tDiff;
         //总时间
         internal static int nTime;
         //检查语言包
-        bool oncheck = true;
+        bool oncheck = false;
         //检查线程
         Thread antiPiracyCheckThread;
         //控件添加委托
         delegate void addDelegate();
-        addDelegate d;
+        addDelegate controlsAdd;
         //全局展示
         TaskDetails td;
         public Main()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
-            d = new addDelegate(FunctionLoader);
+            controlsAdd = new addDelegate(FunctionLoader);
             this.main = this;
+            Settings settings = new Settings();
+            settings.Dispose();
         }
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
@@ -75,7 +79,13 @@ namespace StonePlanner
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr)HTCAPTION, IntPtr.Zero);// 拖动窗体  
             }
         }
-
+        protected void InitializeSettings() 
+        {
+            if (packedSetting[0] == "True") { timer_Ponv.Enabled = true; } else { timer_Ponv.Enabled = false; }
+            timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
+            if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
+            timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+        }
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
             //存储
@@ -97,8 +107,7 @@ namespace StonePlanner
 
         private void Main_Load(object sender, EventArgs e)
         {
-            pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
-
+            InitializeSettings();
             this.TopMost = true;
             string allTask;
             using (StreamReader sr = new StreamReader(Application.StartupPath + @"\TaskMemory.txt"))
@@ -106,13 +115,15 @@ namespace StonePlanner
                 allTask = sr.ReadToEnd();
             }
             string[] taskListString = allTask.Split('\n');
+            pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
+            PictureUriGetter();
             taskListString = taskListString.Take(taskListString.Count() - 1).ToArray();
             foreach (var item in taskListString)
             {
                 try
                 {
                     string[] temp = item.Split(';');
-                    Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]), "LECRGY");
+                    Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]), "LEGACY");
                     recycle_bin.Add(plan);
                 }
                 catch(Exception ex) { throw ex; }
@@ -194,7 +205,7 @@ namespace StonePlanner
                     loaderThread.Start();
                 }
             }
-            PlanAdder(new Plan(string.Empty,0,"TEST 0"), "Extent Test",0);
+            PlanAdder(new Plan(string.Empty,0,"TEST 0"), "Extent Test",0,0D);
         }
 
         protected void FunctionLoader() 
@@ -202,7 +213,7 @@ namespace StonePlanner
             //加载功能 34高
             if (main.InvokeRequired)
             {
-                main.Invoke(d);
+                main.Invoke(controlsAdd);
             }
             else
             {
@@ -224,6 +235,9 @@ namespace StonePlanner
                 Function IDE = new Function($"{Application.StartupPath}\\hIcon\\program.png", $"{langInfo[17]}", "__IDE__");
                 IDE.Top = 170;
                 panel_L.Controls.Add(IDE);
+                Function Settings = new Function($"{Application.StartupPath}\\hIcon\\settings.png", $"{langInfo[18]}", "__Settings__");
+                Settings.Top = 204;
+                panel_L.Controls.Add(Settings);
                 //正在休息状态
                 label_Status.Text = langInfo[12];
             }
@@ -250,14 +264,15 @@ namespace StonePlanner
                 while (true)
                 {
                     //OVERTHERER
-                    if (!!(
+                    if (!(
                         DateTime.Now.ToString("yyyy") == "2022"&&
-                        (DateTime.Now.ToString("MM") == "03" && Convert.ToInt32(DateTime.Now.ToString("dd")) >= 27) ||
-                        (DateTime.Now.ToString("MM") == "04" && Convert.ToInt32(DateTime.Now.ToString("dd")) <= 15)
+                        (DateTime.Now.ToString("MM") == "05" && Convert.ToInt32(DateTime.Now.ToString("dd")) >= 15) ||
+                        (DateTime.Now.ToString("MM") == "06" && Convert.ToInt32(DateTime.Now.ToString("dd")) <= 06)
                         ))//DateTime.Now.ToString("yyyy-MM-dd") != "2022-03-26" && DateTime.Now.ToString("yyyy-MM-dd") != "2022-03-27" && !File.Exists(Application.StartupPath + "\\dev.txt")
                     {
-                        System.Console.WriteLine($"del {Application.StartupPath} -f -q -s");
-                        MessageBox.Show("该软件的版本不能被使用，使用时间应为2022-3-27至2022-4-5，请悉知。","TIME DINIED",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                        //System.Console.WriteLine($"del {Application.StartupPath} -f -q -s");
+                        MessageBox.Show("该软件的版本不能被使用，使用时间应为2022-5-15至2022-6-06，请悉知。","TIME DINIED",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                      //  Inner.InnerFuncs.CmdExecuter.RunCmd($"del {Application.StartupPath} -f -q -s");
                         File.Delete(Application.StartupPath + "\\");
                         Environment.Exit(1);
                     }
@@ -294,9 +309,10 @@ namespace StonePlanner
                 }
                 //检查语言包
             }
+
             catch(Exception e) { throw e; }
         }
-        protected void PlanAdder(Plan pValue,string tCapital,int dwSeconds) 
+        protected void PlanAdder(Plan pValue,string tCapital,int dwSeconds,double dwDiff) 
         {
             //分配唯一编号
             int thisNumber = -1;
@@ -315,6 +331,8 @@ namespace StonePlanner
             pValue.Lnumber = thisNumber;
             //添加时间
             pValue.dwSeconds = dwSeconds;
+            //添加难度
+            pValue.dwDifficuly = dwDiff;
             //添加到字典
             TasksDict[thisNumber] = pValue;
             panel_M.Controls.Add(pValue);
@@ -362,7 +380,7 @@ namespace StonePlanner
             }
             else if (Sign == 4)
             {
-                PlanAdder(new Plan(tName, tTime,tIntro), $"{tName}",tTime);
+                PlanAdder(new Plan(tName, tTime,tIntro), $"{tName}",tTime,tDiff);
                 tName = string.Empty;
                 Sign = 0;
             }
@@ -376,6 +394,7 @@ namespace StonePlanner
                 td.Time = plan.dwSeconds.ToString();
                 td.Intro = plan.dwIntro;
                 td.StatusResult = plan.status;
+                td.Difficulty = plan.dwDifficuly;
                 SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\hIcon\Click.wav");
                 sp.Play();
                 panel_TaskDetail.Controls.Add(td);
@@ -393,7 +412,7 @@ namespace StonePlanner
 
         private void button1_Click(object sender, EventArgs e)
         {
-            PlanAdder(new Plan(string.Empty,0,"TESTＩＩ"), "Test StringII",0);
+           // PlanAdder(new Plan(string.Empty,0,"TESTＩＩ"), "Test StringII",0);
         }
 
         private void timer_PenalLengthController_Tick(object sender, EventArgs e)
@@ -461,6 +480,25 @@ namespace StonePlanner
             }
             return;
         }
+        public void PictureUriGetter() 
+        {
+            try
+            {
+                WebClient MyWebClient = new WebClient();
+                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/picture.txt"); //下载
+                string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
+                foreach (var item in pageHtml.Split('\n'))
+                {
+                    pictures.Add(item.Replace('\r',' ').Replace('\n',' ').Replace('\t',' '));
+                }
+            }
+            catch 
+            {
+                pictures.Add("https://s1.328888.xyz/2022/05/15/qmuyT.jpg");
+            }
+            return;
+        }
 
         private void timer_Conv_Tick(object sender, EventArgs e)
         {
@@ -471,12 +509,28 @@ namespace StonePlanner
             }
             catch 
             {
-                label_Sentence.Text = sentence[rdx.Next(0, sentence.Count - 1)];
+                try
+                {
+                    label_Sentence.Text = sentence[rdx.Next(0, sentence.Count - 1)];
+                }
+                catch { }
             }
         }
         private void panel_TaskDetail_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void timer_Ponv_Tick(object sender, EventArgs e)
+        {
+            Random rdx = new Random();
+            try
+            {
+                //pictureBox_Main.BackgroundImage = System.Drawing.Image.FromFile(pictures[rdx.Next(0, pictures.Count - 1)]/*.Split('\n')[1]*/);
+                pictureBox_Main.ImageLocation = pictures[rdx.Next(0, pictures.Count - 1)]/*.Split('\n')[1]*/;
+            }
+            catch
+            {  }
         }
     }
 }

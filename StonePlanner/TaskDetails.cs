@@ -37,6 +37,7 @@ namespace StonePlanner
             {
                 label_StatusR.Text = "暂无简介";
             }
+            //txtc();
         }
         private void Type(Control sender, int p_1, double p_2)
         {
@@ -66,10 +67,63 @@ namespace StonePlanner
         public string Intro { get => label_Intro.Text; set => label_Intro.Text = value; }
         public string StatusResult { get => label_StatusR.Text; set => label_StatusR.Text = value; }
         public string Time { get => label_TimeR.Text; set => label_TimeR.Text = $"{value}s"; }
-        
+        public double Difficulty { set => txtc(value); }
+
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
             Main.Sign = 7;
         }
+
+        //private void label_DifficultyR_TextChanged(object sender, EventArgs e)
+        //{
+        //    txtc();
+        //}
+
+        protected void txtc(double Difficulty)
+        {
+            try {
+                //难度
+                double dif = Difficulty;
+                //染色+难度评定
+                if (dif < 2)
+                {
+                    label_DifficultyR.Text = $"EASY {dif.ToString()}";
+                    label_DifficultyR.ForeColor = Color.Green;
+                    return;
+                }
+                if (4 > dif)
+                {
+                    label_DifficultyR.Text = $"MIDI {dif.ToString()}";
+                    label_DifficultyR.ForeColor = Color.DeepSkyBlue;
+                    return;
+                }
+                if (6 > dif)
+                {
+                    label_DifficultyR.Text = $"HARD {dif.ToString()}";
+                    label_DifficultyR.ForeColor = Color.Gold;
+                    return;
+                }
+                if (8 > dif)
+                {
+                    label_DifficultyR.Text = $"DESP {dif.ToString()}";
+                    label_DifficultyR.ForeColor = Color.Orange;
+                    return;
+                }
+                if (9 > dif)
+                {
+                    label_DifficultyR.Text = $"BEYD {dif.ToString()}";
+                    label_DifficultyR.ForeColor = Color.Red;
+                    return;
+                }
+                else
+                {
+                    label_DifficultyR.Text = $"UNKW {dif.ToString()}";
+                    label_DifficultyR.ForeColor = Color.Black;
+                    return; 
+                }
+
+            }catch { }
+        }
+        
     }
 }

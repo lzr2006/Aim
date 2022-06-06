@@ -30,6 +30,28 @@ namespace StonePlanner
             label_Numbered.Text = Main.langInfo[5];
             button_New.Text = Main.langInfo[6];
             textBox_Numbered.ReadOnly = true;
+
+            //难度添加
+            for (double i = 0.1; i < 2.0; i+=0.1)
+            {
+                domainUpDown_Difficulty.Items.Add($"EASY {i}");
+            }
+            for (double i = 2.1; i < 4.0; i += 0.1)
+            {
+                domainUpDown_Difficulty.Items.Add($"MIDDLE {i}");
+            }
+            for(double i = 4.1; i < 6.0; i += 0.1)
+            {
+                domainUpDown_Difficulty.Items.Add($"HARD {i}");
+            }
+            for (double i = 6.1; i < 9.0; i += 0.1)
+            {
+                domainUpDown_Difficulty.Items.Add($"DESPAIR {i}");
+            }
+            for (double i = 9.1; i < 10.0; i += 0.1)
+            {
+                domainUpDown_Difficulty.Items.Add($"BEYOND {i}");
+            }
         }
 
         private void button_New_Click(object sender, EventArgs e)
@@ -40,6 +62,8 @@ namespace StonePlanner
                 Main.tName = textBox_Capital.Text;
                 Main.tTime = Convert.ToInt32(textBox_Time.Text);
                 Main.tIntro = textBox_Intro.Text;
+                double diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]),1);
+                Main.tDiff = diff;
                 Close();
             }
             catch(Exception ex) 

@@ -133,9 +133,9 @@
             this.label3.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
             this.label3.Location = new System.Drawing.Point(12, 170);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(297, 16);
+            this.label3.Size = new System.Drawing.Size(385, 16);
             this.label3.TabIndex = 6;
-            this.label3.Text = "MethodBox Stone TO-DO（Insider Version）";
+            this.label3.Text = "MethodBox Stone TO-DO（Insider Version && TEST BETA）";
             // 
             // label4
             // 
@@ -143,9 +143,9 @@
             this.label4.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
             this.label4.Location = new System.Drawing.Point(12, 189);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(379, 16);
+            this.label4.Size = new System.Drawing.Size(372, 16);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 A.2022.3.Insider.2 （内部版本M004301109QZQS）";
+            this.label4.Text = "版本 B.2022.2.Insider.1（内部版本M006061643KKXX）";
             // 
             // label5
             // 
@@ -185,7 +185,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(467, 12);
             this.label8.TabIndex = 11;
-            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.4.30 13:00 - 2022.4.31 20:00";
+            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.6.06 17:20 - 2022.6.07 17:20";
             // 
             // panel1
             // 

@@ -32,6 +32,11 @@ namespace StonePlanner
         /// 任务具体介绍
         /// </summary>
         public string dwIntro = "";
+        /// <summary>
+        /// 任务难度
+        /// </summary>
+        public double dwDifficuly = 0.0D;
+
         public Plan(string lpCapital, int dwSeconds,string dwIntro)
         {
             InitializeComponent();
