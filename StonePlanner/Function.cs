@@ -70,15 +70,20 @@ namespace StonePlanner
             else if (__Name__ == "__IDE__")
             {
                 //内测
-                TestVersion tv = new TestVersion();
-                tv.Show();
-                //InnerIDE ide = new InnerIDE();
-                //ide.Show();
+                //TestVersion tv = new TestVersion();
+                //tv.Show();
+                InnerIDE ide = new InnerIDE();
+                ide.Show();
             }
             else if (__Name__ == "__Settings__")
             {
                 Settings st = new Settings();
                 st.Show();
+            }
+            else if (__Name__ == "__Shop__")
+            {
+                Shop so = new Shop();
+                so.Show();
             }
         }
     }

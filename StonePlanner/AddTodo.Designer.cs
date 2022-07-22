@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddTodo));
             this.panel_Top = new System.Windows.Forms.Panel();
             this.label_T = new System.Windows.Forms.Label();
             this.label_TodoName = new System.Windows.Forms.Label();
@@ -41,12 +42,21 @@
             this.textBox_Intro = new System.Windows.Forms.TextBox();
             this.label_Difficulty = new System.Windows.Forms.Label();
             this.domainUpDown_Difficulty = new System.Windows.Forms.DomainUpDown();
+            this.label_Lasting = new System.Windows.Forms.Label();
+            this.textBox_Lasting = new System.Windows.Forms.TextBox();
+            this.textBox_Explosive = new System.Windows.Forms.TextBox();
+            this.label_Explosive = new System.Windows.Forms.Label();
+            this.textBox_Wisdom = new System.Windows.Forms.TextBox();
+            this.label_Wisdom = new System.Windows.Forms.Label();
+            this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
             this.panel_Top.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Top
             // 
             this.panel_Top.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel_Top.Controls.Add(this.pictureBox_T_Exit);
             this.panel_Top.Controls.Add(this.label_T);
             this.panel_Top.Location = new System.Drawing.Point(0, 0);
             this.panel_Top.Name = "panel_Top";
@@ -86,7 +96,7 @@
             // 
             this.label_Numbered.AutoSize = true;
             this.label_Numbered.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_Numbered.Location = new System.Drawing.Point(10, 174);
+            this.label_Numbered.Location = new System.Drawing.Point(11, 259);
             this.label_Numbered.Name = "label_Numbered";
             this.label_Numbered.Size = new System.Drawing.Size(84, 15);
             this.label_Numbered.TabIndex = 4;
@@ -95,7 +105,7 @@
             // textBox_Numbered
             // 
             this.textBox_Numbered.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Numbered.Location = new System.Drawing.Point(88, 172);
+            this.textBox_Numbered.Location = new System.Drawing.Point(88, 257);
             this.textBox_Numbered.Name = "textBox_Numbered";
             this.textBox_Numbered.Size = new System.Drawing.Size(135, 21);
             this.textBox_Numbered.TabIndex = 3;
@@ -103,7 +113,7 @@
             // 
             // button_New
             // 
-            this.button_New.Location = new System.Drawing.Point(13, 196);
+            this.button_New.Location = new System.Drawing.Point(13, 281);
             this.button_New.Name = "button_New";
             this.button_New.Size = new System.Drawing.Size(210, 23);
             this.button_New.TabIndex = 4;
@@ -164,11 +174,82 @@
             this.domainUpDown_Difficulty.TabIndex = 11;
             this.domainUpDown_Difficulty.Text = "UNKNOWN 0.0";
             // 
+            // label_Lasting
+            // 
+            this.label_Lasting.AutoSize = true;
+            this.label_Lasting.Font = new System.Drawing.Font("SimSun", 11F);
+            this.label_Lasting.Location = new System.Drawing.Point(11, 179);
+            this.label_Lasting.Name = "label_Lasting";
+            this.label_Lasting.Size = new System.Drawing.Size(84, 15);
+            this.label_Lasting.TabIndex = 12;
+            this.label_Lasting.Text = "耐 力(&L)：";
+            // 
+            // textBox_Lasting
+            // 
+            this.textBox_Lasting.Location = new System.Drawing.Point(88, 178);
+            this.textBox_Lasting.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Lasting.Name = "textBox_Lasting";
+            this.textBox_Lasting.Size = new System.Drawing.Size(135, 21);
+            this.textBox_Lasting.TabIndex = 13;
+            // 
+            // textBox_Explosive
+            // 
+            this.textBox_Explosive.Location = new System.Drawing.Point(88, 204);
+            this.textBox_Explosive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Explosive.Name = "textBox_Explosive";
+            this.textBox_Explosive.Size = new System.Drawing.Size(135, 21);
+            this.textBox_Explosive.TabIndex = 15;
+            // 
+            // label_Explosive
+            // 
+            this.label_Explosive.AutoSize = true;
+            this.label_Explosive.Font = new System.Drawing.Font("SimSun", 11F);
+            this.label_Explosive.Location = new System.Drawing.Point(11, 206);
+            this.label_Explosive.Name = "label_Explosive";
+            this.label_Explosive.Size = new System.Drawing.Size(84, 15);
+            this.label_Explosive.TabIndex = 14;
+            this.label_Explosive.Text = "爆 发(&E)：";
+            // 
+            // textBox_Wisdom
+            // 
+            this.textBox_Wisdom.Location = new System.Drawing.Point(88, 231);
+            this.textBox_Wisdom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox_Wisdom.Name = "textBox_Wisdom";
+            this.textBox_Wisdom.Size = new System.Drawing.Size(135, 21);
+            this.textBox_Wisdom.TabIndex = 17;
+            // 
+            // label_Wisdom
+            // 
+            this.label_Wisdom.AutoSize = true;
+            this.label_Wisdom.Font = new System.Drawing.Font("SimSun", 11F);
+            this.label_Wisdom.Location = new System.Drawing.Point(11, 233);
+            this.label_Wisdom.Name = "label_Wisdom";
+            this.label_Wisdom.Size = new System.Drawing.Size(84, 15);
+            this.label_Wisdom.TabIndex = 16;
+            this.label_Wisdom.Text = "智 慧(&W)：";
+            // 
+            // pictureBox_T_Exit
+            // 
+            this.pictureBox_T_Exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Exit.BackgroundImage")));
+            this.pictureBox_T_Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_T_Exit.Location = new System.Drawing.Point(207, 3);
+            this.pictureBox_T_Exit.Name = "pictureBox_T_Exit";
+            this.pictureBox_T_Exit.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox_T_Exit.TabIndex = 18;
+            this.pictureBox_T_Exit.TabStop = false;
+            this.pictureBox_T_Exit.Click += new System.EventHandler(this.pictureBox_T_Exit_Click);
+            // 
             // AddTodo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 225);
+            this.ClientSize = new System.Drawing.Size(235, 310);
+            this.Controls.Add(this.textBox_Wisdom);
+            this.Controls.Add(this.label_Wisdom);
+            this.Controls.Add(this.textBox_Explosive);
+            this.Controls.Add(this.label_Explosive);
+            this.Controls.Add(this.textBox_Lasting);
+            this.Controls.Add(this.label_Lasting);
             this.Controls.Add(this.domainUpDown_Difficulty);
             this.Controls.Add(this.label_Difficulty);
             this.Controls.Add(this.textBox_Intro);
@@ -187,6 +268,7 @@
             this.Load += new System.EventHandler(this.AddTodo_Load);
             this.panel_Top.ResumeLayout(false);
             this.panel_Top.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,5 +289,12 @@
         private System.Windows.Forms.TextBox textBox_Intro;
         private System.Windows.Forms.Label label_Difficulty;
         private System.Windows.Forms.DomainUpDown domainUpDown_Difficulty;
+        private System.Windows.Forms.Label label_Lasting;
+        private System.Windows.Forms.TextBox textBox_Lasting;
+        private System.Windows.Forms.TextBox textBox_Explosive;
+        private System.Windows.Forms.Label label_Explosive;
+        private System.Windows.Forms.TextBox textBox_Wisdom;
+        private System.Windows.Forms.Label label_Wisdom;
+        private System.Windows.Forms.PictureBox pictureBox_T_Exit;
     }
 }

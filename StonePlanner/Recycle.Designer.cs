@@ -29,42 +29,17 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.TaskName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaskTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TaskStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.TaskName,
-            this.TaskTime,
-            this.TaskStatus});
             this.dataGridView1.Location = new System.Drawing.Point(1, 1);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(343, 162);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // TaskName
-            // 
-            this.TaskName.HeaderText = "任务名称";
-            this.TaskName.Name = "TaskName";
-            this.TaskName.ReadOnly = true;
-            // 
-            // TaskTime
-            // 
-            this.TaskTime.HeaderText = "时间";
-            this.TaskTime.Name = "TaskTime";
-            this.TaskTime.ReadOnly = true;
-            // 
-            // TaskStatus
-            // 
-            this.TaskStatus.HeaderText = "状态";
-            this.TaskStatus.Name = "TaskStatus";
-            this.TaskStatus.ReadOnly = true;
             // 
             // Recycle
             // 
@@ -82,9 +57,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaskName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaskTime;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TaskStatus;
+        public System.Windows.Forms.DataGridView dataGridView1;
     }
 }

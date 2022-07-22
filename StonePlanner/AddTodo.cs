@@ -62,12 +62,19 @@ namespace StonePlanner
                 Main.tName = textBox_Capital.Text;
                 Main.tTime = Convert.ToInt32(textBox_Time.Text);
                 Main.tIntro = textBox_Intro.Text;
-                double diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]),1);
+                Main.tLasting = Convert.ToInt32(textBox_Lasting.Text);
+                Main.tExplosive = Convert.ToInt32(textBox_Explosive.Text);
+                Main.tWisdom = Convert.ToInt32(textBox_Wisdom.Text);
+                double diff = 0D;
+                try{
+                    diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]), 1);
+                }catch { diff = 0D; }
                 Main.tDiff = diff;
                 Close();
             }
             catch(Exception ex) 
             {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                 MessageBox.Show(ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -85,6 +92,11 @@ namespace StonePlanner
         }
 
         private void panel_Top_DoubleClick(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
             Close();
         }

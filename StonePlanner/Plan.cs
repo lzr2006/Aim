@@ -12,6 +12,7 @@ namespace StonePlanner
 {
     public partial class Plan : UserControl
     {
+        //编写+重构
         /// <summary>
         /// 任务大标题
         /// </summary>
@@ -35,14 +36,60 @@ namespace StonePlanner
         /// <summary>
         /// 任务难度
         /// </summary>
-        public double dwDifficuly = 0.0D;
+        public double dwDifficulty = 0.0D;
+        //第三次重构
+        /// <summary>
+        /// 任务持久力<code>MA_LASTING值</code>
+        /// </summary>
+        public int dwLasting;
+        /// <summary>
+        /// 任务爆发力<code>MA_EXPLOSIVE值</code>
+        /// </summary>
+        public int dwExplosive;
+        /// <summary>
+        /// 任务智慧值<code>MA_WISDOM值</code>
+        /// </summary>
+        public int dwWisdom;
+        //第四次重构
+        /// <summary>
+        /// 任务唯一标识符 
+        /// </summary>
+        /* 
+         * 我人麻了 真不知道你是怎么想的
+         * 任务状态这种无用东西加上 ID不要了
+         * 或许你刚开始确实没想到要做大 但是你之前有三次重构
+         * 什么都加了 就是ID没加
+         * 脑子被驴踢了是吧
+         * 记住 写代码要用脑子写 而不是寄吧
+         * 导致现在一个什么问题 用所谓UDID标识 而不是ID
+         * 那ID的用途是什么 占用空间吗
+         */
+        public int UDID;
 
-        public Plan(string lpCapital, int dwSeconds,string dwIntro)
+        public Plan(string lpCapital, int dwSeconds,string dwIntro,double dwDifficulty,int dwLasting = 0,int dwExplosive = 0,int dwWisdom = 0)
         {
             InitializeComponent();
             capital = lpCapital;
             this.dwSeconds = dwSeconds;
             this.dwIntro = dwIntro;
+            this.dwDifficulty = dwDifficulty;
+            this.dwLasting = dwLasting;
+            this.dwExplosive = dwExplosive;
+            this.dwWisdom = dwWisdom;
+            this.UDID = new Random().Next(100000000, 999999999);
+        }
+
+        public Plan(string lpCapital, int dwSeconds, string dwIntro, double dwDifficulty,int UUID, int dwLasting = 0, int dwExplosive = 0, int dwWisdom = 0)
+        {
+            InitializeComponent();
+            capital = lpCapital;
+            this.dwSeconds = dwSeconds;
+            this.dwIntro = dwIntro;
+            this.dwDifficulty = dwDifficulty;
+            this.dwLasting = dwLasting;
+            this.dwExplosive = dwExplosive;
+            this.dwWisdom = dwWisdom;
+            this.UDID = UUID;
         }
 
         private void Plan_Load(object sender, EventArgs e)
@@ -75,7 +122,7 @@ namespace StonePlanner
                 {
                     base.CreateHandle();
                 }
-                catch { }
+                catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
                 finally
                 {
                     if (!IsHandleCreated)
@@ -87,8 +134,12 @@ namespace StonePlanner
         }
         private void button_Finish_Click(object sender, EventArgs e)
         {
+            //更新金钱
+            Main.MoneyUpdate(+(int) this.dwDifficulty * 10);
+            //更新属性
+            Main.ValuesUpdate(+dwLasting, +dwExplosive, +dwWisdom);
             Main.Sign = 1;
-            Main.plan = this;
+            Main.plan = this;           
         }
 
         private void timer1_Tick(object sender, EventArgs e)

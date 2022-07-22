@@ -22,25 +22,29 @@ namespace StonePlanner
 
         private void ExportTodo_Load(object sender, EventArgs e)
         {
-            label_T.Text = Main.langInfo[8];
-            richTextBox_M.Text +=
-                 $"{Main.langInfo[9]}    {Main.langInfo[10]}                {Main.langInfo[11]}\n";
-            List<string> planCapital = new List<string>();
-            List<string> planStatus = new List<string>();
-            int i = 0;
-            planCollcetion.RemoveAt(0);
-            planCollcetion.RemoveAt(0);
-            foreach (Plan item in planCollcetion)
+            try
             {
-                if (item.GetType() is null){continue;}
+                label_T.Text = Main.langInfo[7];
                 richTextBox_M.Text +=
-                    $"{i}    {item.capital}          {item.status}\n";
-                planCapital.Add(item.capital);
-                planStatus.Add(item.status);
-                i++;
+                     $"{Main.langInfo[8]}    {Main.langInfo[9]}                {Main.langInfo[10]}\n";
+                List<string> planCapital = new List<string>();
+                List<string> planStatus = new List<string>();
+                int i = 0;
+                planCollcetion.RemoveAt(0);
+                planCollcetion.RemoveAt(0);
+                foreach (Plan item in planCollcetion)
+                {
+                    if (item.GetType() is null) { continue; }
+                    richTextBox_M.Text +=
+                        $"{i}    {item.capital}          {item.status}\n";
+                    planCapital.Add(item.capital);
+                    planStatus.Add(item.status);
+                    i++;
+                }
+                //释放
+                i = 0;
             }
-            //释放
-            i = 0;
+            catch { MessageBox.Show("请先添加待办！");}
         }
 
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)

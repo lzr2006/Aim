@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InnerIDE));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.menuStrip_MainTop = new System.Windows.Forms.MenuStrip();
             this.文件FToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新建NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -398,25 +398,26 @@
             this.调试DToolStripMenuItem.Name = "调试DToolStripMenuItem";
             this.调试DToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
             this.调试DToolStripMenuItem.Text = "调试(&D)";
+            this.调试DToolStripMenuItem.Click += new System.EventHandler(this.调试DToolStripMenuItem_Click);
             // 
             // 本线程调试ToolStripMenuItem
             // 
             this.本线程调试ToolStripMenuItem.Name = "本线程调试ToolStripMenuItem";
-            this.本线程调试ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.本线程调试ToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.本线程调试ToolStripMenuItem.Text = "本线程调试(&M)";
             this.本线程调试ToolStripMenuItem.Click += new System.EventHandler(this.本线程调试ToolStripMenuItem_Click);
             // 
             // 开始调试SToolStripMenuItem
             // 
             this.开始调试SToolStripMenuItem.Name = "开始调试SToolStripMenuItem";
-            this.开始调试SToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.开始调试SToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.开始调试SToolStripMenuItem.Text = "新线程调试(&N)";
             this.开始调试SToolStripMenuItem.Click += new System.EventHandler(this.开始调试SToolStripMenuItem_Click);
             // 
             // 停止调试EToolStripMenuItem
             // 
             this.停止调试EToolStripMenuItem.Name = "停止调试EToolStripMenuItem";
-            this.停止调试EToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.停止调试EToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.停止调试EToolStripMenuItem.Text = "停止调试(&E)";
             this.停止调试EToolStripMenuItem.Click += new System.EventHandler(this.停止调试EToolStripMenuItem_Click);
             // 
@@ -575,10 +576,10 @@
             // 
             // chart_Mem
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart_Mem.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart_Mem.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            this.chart_Mem.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart_Mem.Legends.Add(legend1);
             this.chart_Mem.Location = new System.Drawing.Point(326, -1);
             this.chart_Mem.Name = "chart_Mem";
             this.chart_Mem.Size = new System.Drawing.Size(356, 78);

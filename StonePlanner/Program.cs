@@ -18,10 +18,10 @@ namespace StonePlanner
             Application.SetCompatibleTextRenderingDefault(false);
             //AppCenter.Start("47eacc02-c48d-43a7-9295-aded8581daba",
             //typeof(Analytics), typeof(Crashes));
-            AppCenter.Start("c5286b81-ac87-4531-8c6f-32106a9fabc6",
+            AppCenter.Start("f60d699f-aa39-4089-aae5-5c3c76218ebb",
             typeof(Analytics), typeof(Crashes));
-            Application.Run(new Main());
-            Application.Run(new Settings());
+            //Application.Run(new Main());
+            Application.Run(new Login());
         }
     }
 }

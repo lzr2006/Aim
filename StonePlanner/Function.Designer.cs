@@ -35,30 +35,35 @@
             // 
             // pictureBox_M
             // 
-            this.pictureBox_M.Location = new System.Drawing.Point(3, 7);
+            this.pictureBox_M.Location = new System.Drawing.Point(4, 9);
+            this.pictureBox_M.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox_M.Name = "pictureBox_M";
-            this.pictureBox_M.Size = new System.Drawing.Size(25, 21);
+            this.pictureBox_M.Size = new System.Drawing.Size(33, 26);
             this.pictureBox_M.TabIndex = 0;
             this.pictureBox_M.TabStop = false;
+            this.pictureBox_M.Click += new System.EventHandler(this.Function_Click);
             // 
             // label_M
             // 
             this.label_M.AutoSize = true;
             this.label_M.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_M.Location = new System.Drawing.Point(34, 10);
+            this.label_M.Location = new System.Drawing.Point(45, 12);
+            this.label_M.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_M.Name = "label_M";
-            this.label_M.Size = new System.Drawing.Size(39, 16);
+            this.label_M.Size = new System.Drawing.Size(49, 20);
             this.label_M.TabIndex = 1;
             this.label_M.Text = "新建";
+            this.label_M.Click += new System.EventHandler(this.Function_Click);
             // 
             // Function
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.label_M);
             this.Controls.Add(this.pictureBox_M);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Function";
-            this.Size = new System.Drawing.Size(120, 34);
+            this.Size = new System.Drawing.Size(160, 42);
             this.Load += new System.EventHandler(this.Function_Load);
             this.Click += new System.EventHandler(this.Function_Click);
             this.MouseEnter += new System.EventHandler(this.Function_MouseEnter);

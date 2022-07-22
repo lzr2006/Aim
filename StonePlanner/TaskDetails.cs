@@ -41,6 +41,7 @@ namespace StonePlanner
         }
         private void Type(Control sender, int p_1, double p_2)
         {
+            //圆 角
             GraphicsPath oPath = new GraphicsPath();
             oPath.AddClosedCurve(
             new Point[] {
@@ -68,6 +69,9 @@ namespace StonePlanner
         public string StatusResult { get => label_StatusR.Text; set => label_StatusR.Text = value; }
         public string Time { get => label_TimeR.Text; set => label_TimeR.Text = $"{value}s"; }
         public double Difficulty { set => txtc(value); }
+        public string Lasting { get => label_LastingR.Text; set => label_LastingR.Text = value; }
+        public string Explosive { get => label_ExplosiveR.Text; set => label_ExplosiveR.Text = value; }
+        public string Wisdom { get => label_WisdomR.Text; set => label_WisdomR.Text = value; }
 
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {

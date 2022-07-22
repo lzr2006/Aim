@@ -62,7 +62,7 @@ namespace StonePlanner
                 {
                     base.CreateHandle();
                 }
-                catch { }
+                catch (Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
                 finally
                 {
                     if (!IsHandleCreated)
@@ -155,6 +155,9 @@ namespace StonePlanner
             list.Add("REPEAT");
             list.Add("END");
             list.Add("ADD");
+            list.Add("MSGBOX");
+            list.Add("MADD");
+            list.Add("RESET");
             return list;
         }
 
@@ -170,7 +173,7 @@ namespace StonePlanner
                 tb.SelectionFont = new Font(" Courier New ", 10.5f, (FontStyle.Regular));
                 tb.SelectionColor = Color.Black;
             }
-            catch { }
+            catch (Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex); }
         }
 
         //返回搜索字符
@@ -257,7 +260,7 @@ namespace StonePlanner
         #region 语法解析器
         protected int KDP = 0, rw = 0;
         protected List<List<string>> rx = new List<List<string>>();
-        protected void SyntaxParser(string row, int dwStatus = 0)
+        internal void SyntaxParser(string row, int dwStatus = 0)
         {
             try {
                 nInput = new List<string>();
@@ -351,6 +354,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
                                 //发送错误报告
                                 var properties = new Dictionary<string, string>
@@ -394,6 +398,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Information", ex);
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
 
                                 //发送错误报告
@@ -441,7 +446,8 @@ namespace StonePlanner
                             Thread threadCompile = new Thread(new ThreadStart(Compile));
                             threadCompile.Start();
                         }
-                        catch { richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; }
+                        catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                            richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; }
 
                     }
                     else if (nInput[0] == "SIGN")
@@ -466,6 +472,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
                                 //发送错误报告
                                 var properties = new Dictionary<string, string>
                             {
@@ -477,6 +484,75 @@ namespace StonePlanner
                             }
                         }
                     }
+                    else if(nInput[0] == "MSGBOX")
+                    {
+                        MessageBox.Show(nInput[1],nInput[2],MessageBoxButtons.OK,icon:MessageBoxIcon.Information);
+                    }
+                    else if (nInput[0] == "MADD")
+                    {
+                        Main.money += Convert.ToInt32(nInput[1]);
+                    }
+                    else if (nInput[0] == "RESET")
+                    {
+                        if (Login.UserType != 2)
+                        {
+                            MessageBox.Show("该功能及其危险，已被默认禁用，如确需启用，请联系作者。","用户系统（测试）",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                            return;
+                        }
+                        //错误表
+                        SQLConnect.SQLCommandExecution("DROP     TABLE Errors");
+                        SQLConnect.SQLCommandExecution(
+                            "CREATE TABLE Errors" +
+                            "(ID INTEGER IDENTITY," +
+                            "ErrTime TEXT," +
+                            "ErrLevel TEXT," +
+                            "ErrMessage TEXT)");
+                        SQLConnect.SQLCommandExecution(
+                            "CREATE INDEX ID " +
+                            "ON Errors (ID ASC) " +
+                            "WITH PRIMARY");
+                        //任务表
+                        SQLConnect.SQLCommandExecution("DROP TABLE Tasks");
+                        SQLConnect.SQLCommandExecution(
+                            "CREATE TABLE Tasks" +
+                            "(ID INTEGER IDENTITY," +
+                            "TaskName TEXT," +
+                            "TaskIntro TEXT," +
+                            "TaskStatus TEXT," +
+                            "TaskDiff INTEGER," +
+                            "TaskTime INTEGER," +
+                            "TaskLasting INTEGER," +
+                            "TaskExplosive INTEGER," +
+                            "TaskWisdom INTEGER)");
+                        SQLConnect.SQLCommandExecution(
+                            "CREATE INDEX ID " +
+                            "ON Tasks (ID ASC) " +
+                            "WITH PRIMARY");
+                        //商品表
+                        SQLConnect.SQLCommandExecution("DROP TABLE Goods");
+                        SQLConnect.SQLCommandExecution(
+                            "CREATE TABLE Goods" +
+                            "(ID INTEGER IDENTITY," +
+                            "GoodPrice INTEGER," +
+                            "GoodName TEXT," +
+                            "GoodPicture TEXT," +
+                            "GoodIntro TEXT," +
+                            "UseCode TEXT)");
+                        SQLConnect.SQLCommandExecution(
+                            "CREATE INDEX ID " +
+                            "ON Goods (ID ASC) " +
+                            "WITH PRIMARY");
+                        //仓库
+                        SQLConnect.SQLCommandExecution("DROP TABLE Depot");
+                        SQLConnect.SQLCommandExecution(
+                           "CREATE TABLE Depot" +
+                           "(ID INTEGER IDENTITY," +
+                           "GoodID INTEGER)");
+                        SQLConnect.SQLCommandExecution(
+                           "CREATE INDEX ID " +
+                           "ON Depot (ID ASC) " +
+                           "WITH PRIMARY");
+                    }
                     else if (nInput[0] == "EXIT")
                     {
                         richTextBox_Output.Text = "";
@@ -485,6 +561,7 @@ namespace StonePlanner
                 }
                 catch (Exception ex)
                 {
+                    ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                     //发送错误报告
                     var properties = new Dictionary<string, string>
                 {
@@ -498,6 +575,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                 //发送错误报告
                 var properties = new Dictionary<string, string>
                 {
@@ -548,8 +626,7 @@ namespace StonePlanner
         }
 
         private unsafe void 中文插入CToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //char szBufferSize;
+        {            //char szBufferSize;
             //char* chineseText = &szBufferSize;
             //InputBoxStruct IBS = new InputBoxStruct();
             //IBS.lpText = "请输入您想插入的中文";
@@ -638,6 +715,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
                 DialogResult dr =
                 MessageBox.Show($"保存失败，原因是{ex.Message}。\n是否向MethodBox报告该错误（自动报告）？", "失败",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -751,13 +829,18 @@ namespace StonePlanner
                 main.Hide();
                 main = null;
             }
-            catch { }
+            catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
         }
 
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == 13)
             {
+                if (Login.UserType == 1)
+                {
+                    MessageBox.Show("语法解析运行时权限拒绝：非管理员用户无权运行命令。", "用户系统（测试）", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 SyntaxParser(richTextBox_Input.Text.Substring(1));
                 richTextBox_Input.Text = ">";
                 richTextBox_Input.Select(1, 0);
@@ -822,6 +905,11 @@ namespace StonePlanner
             return dData;
         }
 
+        private void 调试DToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void 本线程调试ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             chart_Mem.Series["Series1"].Points.Clear();
@@ -834,8 +922,9 @@ namespace StonePlanner
                     sw.Write(richTextBox_Main.Text);
                 }
             }
-            catch 
+            catch (Exception ex)
             {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                 string tempFileName = $"Save_Test_{hh}{mm}{ss}.mtd";
                 iFileName = tempFileName;
 
@@ -901,6 +990,296 @@ namespace StonePlanner
                     sw.Write(richTextBox_Main.Text);
                     MessageBox.Show("保存成功。", "保存成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+        }
+        #endregion
+        #region 外部语法解析接口
+        internal static string SyntaxParser_Outer(string row, int dwStatus = 0)
+        {
+            List<List<string>> rx = new List<List<string>>();
+            List<string> nInput = new List<string>();
+            int EPH = 0, rw = 0, KDP = 0;
+            try
+            {
+                nInput = new List<string>();
+                //语法解析
+                Regex parser = new Regex(@"\S+[a-z]+\S*|[a-z]+\S*|\S+[a-z]*");
+                MatchCollection result = parser.Matches(row);
+                foreach (var item in result)
+                {
+                    nInput.Add(item.ToString());
+                }
+                //识别
+                //方式：顺序识别
+                //IDE多步语法解析器
+                #region FOR
+                if (nInput[0] == "END")
+                {
+                    rw = 0;
+                    for (int i = 0; i < KDP; i++)
+                    {
+                        foreach (var item in rx)
+                        {
+                            string tempRow = "";
+                            int j = 0;
+                            foreach (var txt in item)
+                            {
+                                if (j != 0) tempRow += " ";
+                                tempRow += txt;
+                                j++;
+                            }
+                            //提前更新一下吧...
+                            tempRow = tempRow.Replace("[EPH]", EPH.ToString());
+                            SyntaxParser_Outer(tempRow, 0);
+                            Thread.Sleep(100);
+                        }
+
+                    }
+                }
+                if (rw != 0)
+                {
+                    rx.Add(nInput);//COMPILE .\A.TXT
+                    return "";
+                }
+                if (nInput[0] == "REPEAT" && dwStatus == 1)
+                {
+                    if (KDP == 0)
+                    {
+                        //执行循环
+                        KDP = Convert.ToInt32(nInput[1]);
+                        rw = 1;
+                        return "";
+                    }
+                }
+                #endregion
+                //IDE普通命令解析器
+                try
+                {
+                    //休眠命令
+                    if (nInput[0] == "SLEEP")
+                    {
+                        if (nInput[1] != "EPH")
+                        {
+                            Thread.Sleep(Convert.ToInt32(nInput[1]));
+                            return $"\nConsole@Enviroment>休眠{nInput[1]}毫秒。";
+                        }
+                        else
+                        {
+                            Thread.Sleep(EPH);
+                            return $"\nConsole@Enviroment>休眠{EPH}毫秒。";
+                        }
+                    }
+                    else if (nInput[0] == "SET")
+                    {
+                        ArrayList arraySet = new ArrayList();
+                        arraySet.AddRange(nInput);
+                        if (arraySet[1].ToString() == "EPH")
+                        {
+                            //整数型赋值
+                            EPH = Convert.ToInt32(arraySet[2]);
+                            return $"\nConsole@Memory>将{arraySet[2]}设置到整数存储器。";
+                        }
+                        else
+                        {
+                            return $"\nMemoryNotExistException：未找到该存储器";
+                        }
+                    }
+                    else if (nInput[0].StartsWith("EPH"))
+                    {
+                        //存储器操作
+                        if (nInput[0] == "EPH+")
+                        {
+                            EPH += Convert.ToInt32(nInput[1]);
+                        }
+                        else if (nInput[0] == "EPH-")
+                        {
+                            EPH -= Convert.ToInt32(nInput[1]);
+                        }
+                        else if (nInput[0] == "EPH*")
+                        {
+                            EPH *= Convert.ToInt32(nInput[1]);
+                        }
+                        else if (nInput[0] == "EPH/")
+                        {
+                            EPH /= Convert.ToInt32(nInput[1]);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                throw new Exceptions.MethodNotExistException("MethodNotExistError：存储器EPH不存在该操作。");
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Information", ex);
+                                System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
+                                return $"\nSyntaxError：{ex.Message}";
+                            }
+                        }
+                        return $"\nConsole@Memory>EPH：{EPH.ToString()}";
+                    }
+                    else if (nInput[0] == "ADD")
+                    {
+                        //打开信号接口
+                        Main.Sign = 4;
+                        if (dwStatus != 1)
+                        {
+                            if (nInput[1].Contains("[EPH]"))
+                            {
+                                nInput[1] = nInput[1].Replace("[EPH]", EPH.ToString());
+                            }
+                            if (nInput[2].Contains("[EPH]"))
+                            {
+                                nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
+                            }
+                        }
+                        Main.tName = nInput[1];
+                        Main.tTime = Convert.ToInt32(nInput[2]);
+                        return $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
+                    }
+                    else if (nInput[0] == "WRITE")
+                    {
+                        using (StreamWriter sw = new StreamWriter(nInput[1]))
+                        {
+                            sw.Write(nInput[2]);
+                        }
+                    }
+                    else if (nInput[0] == "READ")
+                    {
+                        StreamReader sr = new StreamReader(nInput[1]);
+                        EPH = Convert.ToInt32(sr.ReadToEnd());
+
+                    }
+                    else if (nInput[0] == "COMPILE")
+                    {
+                        nInput[1] = nInput[1].Replace(@".\", Application.StartupPath + @"\");
+                        try
+                        {
+                            using (StreamReader sr = new StreamReader(nInput[1]))
+                            {
+                                parserX = sr.ReadToEnd().Trim();
+                            }
+                            //开新线程解析语法
+                            Thread threadCompile = new Thread(new ThreadStart(Compile_Outer));
+                            threadCompile.Start();
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                            return $"\nFileNotExistError：指定文件不存在。";
+                        }
+
+                    }
+                    else if (nInput[0] == "SIGN")
+                    {
+                        if (nInput[1] == "HELP")
+                        {
+                            return "\nConsole@Main>信 号 规 范：" +
+                             "\n|SIGN = 1 => 删除任务" +
+                             "\n|SIGN = 2 => 伸长菜单栏" +
+                             "\n|SIGN = 3 => 缩短菜单栏" +
+                             "\n|SIGN = 4 => 新建待办" +
+                             "\n|SIGN = 5 => 传出自身对象集合" +
+                             "\n请注意：错误的使用信号将导致崩溃";
+                        }
+                        else
+                        {
+                            try
+                            {
+                                int signal = Convert.ToInt32(nInput[1]);
+                                Main.Sign = signal;
+                                return $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+                                return $"\nSyntaxError：{ex.Message}";
+                            }
+                        }
+                    }
+                    else if (nInput[0] == "MSGBOX")
+                    {
+                        MessageBox.Show(nInput[1], nInput[2], MessageBoxButtons.OK, icon: MessageBoxIcon.Information);
+                    }
+                    //问我为什么没有减少？其实你可以用负数啊
+                    else if (nInput[0] == "MADD")
+                    {
+                        if (nInput[1] == "RANDRX")
+                        {
+                            int lv = new Random().Next(Convert.ToInt32(nInput[2]), Convert.ToInt32(nInput[3]));
+                            Main.MoneyUpdate(lv);
+                            return $"您获得了{lv}个金币";
+                        }
+                        else
+                        {
+                            Main.MoneyUpdate(Convert.ToInt32(nInput[1]));
+                            return $"您获得了{nInput[1]}个金币";
+                        }
+
+                    }
+                    else if (nInput[0] == "VADD")
+                    {
+                        if (nInput[2] == "RANDRX")
+                        {
+                            nInput[2] = $"{new Random().Next(Convert.ToInt32(nInput[2]), Convert.ToInt32(nInput[3]))}";
+                        }
+                        if (nInput[1] == "L")
+                        {
+                            Main.ValuesUpdate(1, Convert.ToInt32(nInput[2]));
+                        }
+                        else if (nInput[1] == "E")
+                        {
+                            Main.ValuesUpdate(2, Convert.ToInt32(nInput[2]));
+                        }
+                        else
+                        {
+                            Main.ValuesUpdate(3, Convert.ToInt32(nInput[2]));
+                        }
+                    }
+                    else if (nInput[0] == "RESET")
+                    {
+                        if (Login.UserType != 2)
+                        {
+                            MessageBox.Show("该功能及其危险，已被默认禁用，如确需启用，请联系作者。", "用户系统（测试）", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return "";
+                        }
+                        //诶，功能我在这里不写
+                    }
+                    else if (nInput[0] == "EXIT")
+                    {
+                        Environment.Exit(0);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                    return $"\nSyntaxError：{ex.Message}";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                string rew = "";
+                foreach (var item in nInput)
+                {
+                    rew += item + " ";
+                }
+                return $"\nSyntaxError：{ex.Message}，In：{rew}.";
+            }
+            return "功能执行完毕。";
+        }
+        protected static string parserX;
+        protected static string parserString;
+
+        protected static void Compile_Outer()
+        {
+            //修改代码，外部解析还要什么文件（恼
+            string[] command = parserX.Trim().Split('\n');
+            foreach (var item in command)
+            {
+                SyntaxParser_Outer(item, 1);
+                Thread.Sleep(100);
             }
         }
         #endregion
