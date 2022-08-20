@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>9.0</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{893EBE35-01F4-48C7-92C5-061EC32FDB1C}</ProjectGuid>
@@ -46,7 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IPHandler.cs" />
+    <Compile Include="ByteConvert.cs" />
+    <Compile Include="ControlButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlButton.Designer.cs">
+      <DependentUpon>ControlButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +62,36 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerInfo.Designer.cs">
+      <DependentUpon>ServerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ServerSettings.Designer.cs">
+      <DependentUpon>ServerSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Signals.cs" />
+    <Compile Include="SQLConnect.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="TaskSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TaskSettings.Designer.cs">
+      <DependentUpon>TaskSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInfo.Designer.cs">
+      <DependentUpon>UserInfo.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ControlButton.resx">
+      <DependentUpon>ControlButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -68,6 +105,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ServerInfo.resx">
+      <DependentUpon>ServerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerSettings.resx">
+      <DependentUpon>ServerSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TaskSettings.resx">
+      <DependentUpon>TaskSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInfo.resx">
+      <DependentUpon>UserInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

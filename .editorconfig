@@ -64,6 +64,18 @@ csharp_space_around_binary_operators = before_and_after
 csharp_indent_labels = no_change
 csharp_space_after_cast = true
 
+# IDE0090: 使用 "new(...)"
+dotnet_diagnostic.IDE0090.severity = silent
+
+# IDE1006: 命名样式
+dotnet_diagnostic.IDE1006.severity = silent
+
+# CS0649: 从未对字段“Structs.UserStruct.userName”赋值，字段将一直保持其默认值 null
+dotnet_diagnostic.CS0649.severity = silent
+
+# CS0169: 从不使用字段“PluginStruct.Plugin.sAuthorName”
+dotnet_diagnostic.CS0169.severity = silent
+
 [*.vb]
 #### 命名样式 ####
 

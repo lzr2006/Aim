@@ -39,7 +39,7 @@ namespace StonePlanner
             }
             //txtc();
         }
-        private void Type(Control sender, int p_1, double p_2)
+        internal static void Type(Control sender, int p_1, double p_2)
         {
             //圆 角
             GraphicsPath oPath = new GraphicsPath();
@@ -75,7 +75,7 @@ namespace StonePlanner
 
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
-            Main.Sign = 7;
+            Main.AddSign(7);
         }
 
         //private void label_DifficultyR_TextChanged(object sender, EventArgs e)

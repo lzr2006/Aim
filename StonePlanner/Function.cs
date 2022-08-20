@@ -23,10 +23,30 @@ namespace StonePlanner
             this.caplital = lpCapital;
             this.__Name__ = szFunctionName;
         }
+        public Function(string lpCapital, string szListName,int nLineParents)
+        {
+            InitializeComponent();
+
+            this.imageAddress = "";
+            this.caplital = lpCapital;
+            this.__Name__ = szListName;
+
+            if (nLineParents == 1)
+            {
+                label_M.Left = 10;
+            }
+            else
+            {
+                label_M.Left = 20;
+            }
+        }
 
         private void Function_Load(object sender, EventArgs e)
         {
-            pictureBox_M.BackgroundImage = Image.FromFile(imageAddress);
+            if (imageAddress != "")
+            {
+                pictureBox_M.BackgroundImage = Image.FromFile(imageAddress);
+            }
             pictureBox_M.BackgroundImageLayout = ImageLayout.Stretch;
             label_M.Text = caplital;
         }
@@ -43,47 +63,63 @@ namespace StonePlanner
 
         private void Function_Click(object sender, EventArgs e)
         {
-            if (__Name__ == "__New__")
+            if (__Name__[0] == '_')
             {
-                AddTodo at = new AddTodo();
-                at.Show();
+                if (__Name__ == "__New__")
+                {
+                    AddTodo at = new AddTodo();
+                    at.Show();
+                }
+                else if (__Name__ == "__Export__")
+                {
+                    Main.AddSign(5);
+                }
+                else if (__Name__ == "__Recycle__")
+                {
+                    Recycle rc = new Recycle();
+                    rc.Show();
+                }
+                else if (__Name__ == "__Infomation__")
+                {
+                    About ab = new About();
+                    ab.Show();
+                }
+                else if (__Name__ == "__Console__")
+                {
+                    Console cs = new Console();
+                    cs.Show();
+                }
+                else if (__Name__ == "__IDE__")
+                {
+                    //内测
+                    //TestVersion tv = new TestVersion();
+                    //tv.Show();
+                    InnerIDE ide = new InnerIDE();
+                    ide.Show();
+                }
+                else if (__Name__ == "__Settings__")
+                {
+                    Settings st = new Settings();
+                    st.Show();
+                }
+                else if (__Name__ == "__Shop__")
+                {
+                    Shop so = new Shop();
+                    so.Show();
+                }
+                else if (__Name__ == "__Online__")                
+                {
+                    WebService ws = new WebService();
+                    ws.Show();
+                }
+                else if (__Name__ == "__Debugger__")
+                {
+                    TestTools tt = new TestTools();
+                    tt.Show();
+                }
             }
-            else if (__Name__ == "__Export__") 
+            else
             {
-                Main.Sign = 5;
-            }
-            else if (__Name__ == "__Recycle__")
-            {
-                Recycle rc = new Recycle();
-                rc.Show();
-            }
-            else if (__Name__ == "__Infomation__")
-            {
-                About ab = new About();
-                ab.Show();
-            }
-            else if (__Name__ == "__Console__")
-            {
-                Console cs = new Console();
-                cs.Show();
-            }
-            else if (__Name__ == "__IDE__")
-            {
-                //内测
-                //TestVersion tv = new TestVersion();
-                //tv.Show();
-                InnerIDE ide = new InnerIDE();
-                ide.Show();
-            }
-            else if (__Name__ == "__Settings__")
-            {
-                Settings st = new Settings();
-                st.Show();
-            }
-            else if (__Name__ == "__Shop__")
-            {
-                Shop so = new Shop();
-                so.Show();
             }
         }
     }

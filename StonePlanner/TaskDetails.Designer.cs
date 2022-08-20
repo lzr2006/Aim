@@ -77,16 +77,15 @@
             this.label_Intro.Location = new System.Drawing.Point(15, 61);
             this.label_Intro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Intro.Name = "label_Intro";
-            this.label_Intro.Size = new System.Drawing.Size(465, 76);
+            this.label_Intro.Size = new System.Drawing.Size(465, 57);
             this.label_Intro.TabIndex = 2;
-            this.label_Intro.Text = "任务简介任务简介任务简介任务简介任务简介任务简介\r\n任务简介任务简介任务简介任务简介任务简介任务简介\r\n任务简介任务简介任务简介任务简介任务简介任务简介\r\n任务简" +
-    "介任务简介任务简介任务简介任务简介任务简介";
+            this.label_Intro.Text = "任务简介任务简介任务简介任务简介任务简介任务简介\r\n任务简介任务简介任务简介任务简介任务简介任务简介\r\n任务简介任务简介任务简介任务简介任务简介任务简介\r\n";
             // 
             // label_StatusC
             // 
             this.label_StatusC.AutoSize = true;
             this.label_StatusC.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_StatusC.Location = new System.Drawing.Point(15, 176);
+            this.label_StatusC.Location = new System.Drawing.Point(15, 153);
             this.label_StatusC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_StatusC.Name = "label_StatusC";
             this.label_StatusC.Size = new System.Drawing.Size(104, 19);
@@ -98,7 +97,7 @@
             this.label_StatusR.AutoSize = true;
             this.label_StatusR.Font = new System.Drawing.Font("宋体", 11F);
             this.label_StatusR.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label_StatusR.Location = new System.Drawing.Point(132, 176);
+            this.label_StatusR.Location = new System.Drawing.Point(132, 153);
             this.label_StatusR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_StatusR.Name = "label_StatusR";
             this.label_StatusR.Size = new System.Drawing.Size(66, 19);
@@ -109,7 +108,7 @@
             // 
             this.label_TimeC.AutoSize = true;
             this.label_TimeC.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_TimeC.Location = new System.Drawing.Point(16, 199);
+            this.label_TimeC.Location = new System.Drawing.Point(16, 176);
             this.label_TimeC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_TimeC.Name = "label_TimeC";
             this.label_TimeC.Size = new System.Drawing.Size(104, 19);
@@ -121,7 +120,7 @@
             this.label_TimeR.AutoSize = true;
             this.label_TimeR.Font = new System.Drawing.Font("宋体", 11F);
             this.label_TimeR.ForeColor = System.Drawing.Color.Black;
-            this.label_TimeR.Location = new System.Drawing.Point(136, 199);
+            this.label_TimeR.Location = new System.Drawing.Point(136, 176);
             this.label_TimeR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_TimeR.Name = "label_TimeR";
             this.label_TimeR.Size = new System.Drawing.Size(29, 19);
@@ -144,7 +143,7 @@
             // 
             this.label_DifficultyC.AutoSize = true;
             this.label_DifficultyC.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_DifficultyC.Location = new System.Drawing.Point(15, 152);
+            this.label_DifficultyC.Location = new System.Drawing.Point(15, 129);
             this.label_DifficultyC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_DifficultyC.Name = "label_DifficultyC";
             this.label_DifficultyC.Size = new System.Drawing.Size(104, 19);
@@ -156,7 +155,7 @@
             this.label_DifficultyR.AutoSize = true;
             this.label_DifficultyR.Font = new System.Drawing.Font("宋体", 11F);
             this.label_DifficultyR.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.label_DifficultyR.Location = new System.Drawing.Point(133, 152);
+            this.label_DifficultyR.Location = new System.Drawing.Point(133, 129);
             this.label_DifficultyR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_DifficultyR.Name = "label_DifficultyR";
             this.label_DifficultyR.Size = new System.Drawing.Size(119, 19);
@@ -167,7 +166,7 @@
             // 
             this.label_lastingC.AutoSize = true;
             this.label_lastingC.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_lastingC.Location = new System.Drawing.Point(16, 228);
+            this.label_lastingC.Location = new System.Drawing.Point(16, 205);
             this.label_lastingC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_lastingC.Name = "label_lastingC";
             this.label_lastingC.Size = new System.Drawing.Size(85, 19);
@@ -179,7 +178,7 @@
             this.label_LastingR.AutoSize = true;
             this.label_LastingR.Font = new System.Drawing.Font("宋体", 11F);
             this.label_LastingR.ForeColor = System.Drawing.Color.Green;
-            this.label_LastingR.Location = new System.Drawing.Point(94, 229);
+            this.label_LastingR.Location = new System.Drawing.Point(94, 206);
             this.label_LastingR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_LastingR.Name = "label_LastingR";
             this.label_LastingR.Size = new System.Drawing.Size(39, 19);
@@ -191,7 +190,7 @@
             this.label_ExplosiveR.AutoSize = true;
             this.label_ExplosiveR.Font = new System.Drawing.Font("宋体", 11F);
             this.label_ExplosiveR.ForeColor = System.Drawing.Color.RosyBrown;
-            this.label_ExplosiveR.Location = new System.Drawing.Point(259, 229);
+            this.label_ExplosiveR.Location = new System.Drawing.Point(259, 206);
             this.label_ExplosiveR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_ExplosiveR.Name = "label_ExplosiveR";
             this.label_ExplosiveR.Size = new System.Drawing.Size(39, 19);
@@ -202,7 +201,7 @@
             // 
             this.label_ExplosiveC.AutoSize = true;
             this.label_ExplosiveC.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_ExplosiveC.Location = new System.Drawing.Point(181, 228);
+            this.label_ExplosiveC.Location = new System.Drawing.Point(181, 205);
             this.label_ExplosiveC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_ExplosiveC.Name = "label_ExplosiveC";
             this.label_ExplosiveC.Size = new System.Drawing.Size(85, 19);
@@ -214,7 +213,7 @@
             this.label_WisdomR.AutoSize = true;
             this.label_WisdomR.Font = new System.Drawing.Font("宋体", 11F);
             this.label_WisdomR.ForeColor = System.Drawing.Color.Blue;
-            this.label_WisdomR.Location = new System.Drawing.Point(419, 229);
+            this.label_WisdomR.Location = new System.Drawing.Point(419, 206);
             this.label_WisdomR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_WisdomR.Name = "label_WisdomR";
             this.label_WisdomR.Size = new System.Drawing.Size(39, 19);
@@ -225,7 +224,7 @@
             // 
             this.label_WisdomC.AutoSize = true;
             this.label_WisdomC.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_WisdomC.Location = new System.Drawing.Point(341, 228);
+            this.label_WisdomC.Location = new System.Drawing.Point(341, 205);
             this.label_WisdomC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_WisdomC.Name = "label_WisdomC";
             this.label_WisdomC.Size = new System.Drawing.Size(85, 19);
@@ -255,7 +254,7 @@
             this.Controls.Add(this.label_Capital);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TaskDetails";
-            this.Size = new System.Drawing.Size(523, 258);
+            this.Size = new System.Drawing.Size(523, 233);
             this.Load += new System.EventHandler(this.TaskDetails_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.TaskDetails_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Split)).EndInit();

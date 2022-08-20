@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static StonePlanner.Structs;
 
 namespace StonePlanner
 {
@@ -112,9 +113,10 @@ namespace StonePlanner
                 {
                     string[] temp = item.Split(';');
                     double provider = double.Parse(temp[2], System.Globalization.NumberStyles.Float);
-                    Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]), "LEGACY", provider);
-                    GGS += provider;
-                    recycle_bin.Add(plan);
+                    //挺怀念的，之前的方式
+                    //Plan plan = new Plan(temp[0], Convert.ToInt32(temp[1]), "LEGACY", provider,"");
+                    //GGS += provider;
+                    //recycle_bin.Add(plan);
                 }
                 catch (Exception ex) { throw ex; }
             }
@@ -131,19 +133,46 @@ namespace StonePlanner
             Recycle recy_bin = new Recycle();
             for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
             {
-                Plan plan = new Plan
-                    (
-                    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                    recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                    Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value)
-                    );
-                GGS += plan.dwDifficulty;
-                plan = null;
+                //你干嘛要重新建立Plan捏
+                //Plan plan = new Plan
+                //    (
+                //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
+                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
+                //    recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                //    Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
+                //    ""
+                //    );
+                GGS += (double)Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value);
+                // plan = null;
             }
             return GGS / recy_bin.dataGridView1.Rows.Count;
         }
         #endregion
+
+        /// <summary>
+        /// 原外部评分函数
+        /// </summary>
+        [Obsolete("该代码获取数据方式及其奇怪，不应被使用")]
+        
+        internal static void GetPoint() 
+        {
+            //人类迷惑行为 获取数据
+            Recycle recy_bin = new Recycle();
+            int GGS = 0;
+            for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
+            {
+                //Plan plan = new Plan
+                //    (
+                //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
+                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
+                //    recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                //    Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
+                //    ""
+                //    );
+                GGS += (int)Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[5].Value);
+                // plan = null;
+            }
+        }
         #region 编辑器【InnerIDE】废弃代码
         #endregion
     }

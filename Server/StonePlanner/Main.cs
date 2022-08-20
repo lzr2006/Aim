@@ -1,35 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Net;
-using System.Net.Sockets;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
     public partial class Main : Form
     {
-        public static string Version = "V2.3.3";
-        private string _ip = string.Empty;
-        private int _port = 0;
-        private int _maxconn = 1;
-        protected string reply = string.Empty;
-        private Socket _socket = null;
-        private byte[] buffer = new byte[1024 * 1024 * 2];
-        protected Socket clientSocket;
+        internal static int T = 0;
+        internal static string Version = "V B_6.0.0";
+        internal static ServerSettings ssMain = new ServerSettings();
+        internal static ServerInfo siMain = new ServerInfo();
+        internal static TaskSettings tsMain = new TaskSettings();
+
+        static Queue<int> signQueue = new Queue<int>();
 
         public Main()
         {
             InitializeComponent();
         }
-
         private void Main_Load(object sender, EventArgs e)
         {
+            Console.WriteLine(ServerInfo.ConvertT(1));
             CheckForIllegalCrossThreadCalls = false;
-            this.Text = $"MethodBox·Aim Server ({Version})";
+            this.Text = $"MethodBox·Aim Server DashBoard  ({Version}) ";
             label_Capital.Text = Text;
             //圆角
             if (this.WindowState == FormWindowState.Normal)
@@ -40,18 +36,38 @@ namespace StonePlanner
             {
                 this.Region = null;
             }
-            richTextBox_Main.Text += $@"【{DateTime.Now.ToString("HH:mm:ss")}】欢迎使用MAS，有意见记得反馈哦。";
+            FunctionLoader();
         }
 
-        protected void InfoAdd(string info) 
+        internal static bool AddSignal(int nSign) 
         {
-            richTextBox_Main.Text += $"\n【{DateTime.Now.ToString("HH:mm:ss")}】{info}";
+            if (signQueue.Count <= 16)
+            {
+                signQueue.Enqueue(nSign);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        protected void FunctionLoader() 
+        {
+            panel_RightAll.Controls.Add(new ControlButton("服务设置", Image.FromFile($@"{Application.StartupPath}\icon\server.png"), 1));
+            panel_RightAll.Controls.Add(new ControlButton("服务信息", Image.FromFile($@"{Application.StartupPath}\icon\info.png"), 2));
+            panel_RightAll.Controls.Add(new ControlButton("任务设置", Image.FromFile($@"{Application.StartupPath}\icon\settings.png"), 3));
+            panel_RightAll.Controls.Add(new ControlButton("关于我们", Image.FromFile($@"{Application.StartupPath}\icon\about.png"), 4));
+            panel_RightAll.Controls.Add(new ControlButton("更多事物", Image.FromFile($@"{Application.StartupPath}\icon\more.png"), 5));
+            panel_Main.Controls.Add(ssMain);
+            return;
+        }
+
         #region 窗体圆角
         public void SetWindowRegion()
         {
             System.Drawing.Drawing2D.GraphicsPath FormPath;
-            FormPath = new System.Drawing.Drawing2D.GraphicsPath();
+            FormPath = new GraphicsPath();
             Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
             FormPath = GetRoundedRectPath(rect, 10);
             this.Region = new Region(FormPath);
@@ -83,86 +99,7 @@ namespace StonePlanner
             return path;
         }
         #endregion
-        public void StartListen()
-        {
-            try
-            {
-                //1.0 实例化套接字(IP4寻找协议,流式协议,TCP协议)
-                _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                //2.0 创建IP对象
-                IPAddress address = IPAddress.Parse(_ip);
-                //3.0 创建网络端口,包括ip和端口
-                IPEndPoint endPoint = new IPEndPoint(address, _port);
-                //4.0 绑定套接字
-                _socket.Bind(endPoint);
-                //5.0 设置最大连接数
-                _socket.Listen(_maxconn);
-                InfoAdd($"监听{_socket.LocalEndPoint.ToString()}消息成功");
-                //6.0 开始监听
-                Thread thread = new Thread(ListenClientConnect);
-                thread.Start();
-
-            }
-            catch (Exception ex)
-            {
-            }
-        }
-        /// <summary>
-        /// 监听客户端连接
-        /// </summary>
-        private void ListenClientConnect()
-        {
-            try
-            {
-                while (true)
-                {
-                    clientSocket = _socket.Accept();
-                    clientSocket.Send(Encoding.UTF8.GetBytes(reply));
-                    Thread thread = new Thread(ReceiveMessage);
-                    thread.Start(clientSocket);
-                }
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        /// <summary>
-        /// 接收客户端消息
-        /// </summary>
-        /// <param name="socket">来自客户端的socket</param>
-        private void ReceiveMessage(object socket)
-        {
-            Socket clientSocket = (Socket) socket;
-            while (true)
-            {
-                try
-                {
-                    //获取从客户端发来的数据
-                    int length = clientSocket.Receive(buffer);
-                    var message = Encoding.UTF8.GetString(buffer, 0, length);
-                    InfoAdd($"客户端：{clientSocket.RemoteEndPoint.ToString()}，消息：{message}。");
-                    EventHandler(message);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    clientSocket.Shutdown(SocketShutdown.Both);
-                    clientSocket.Close();
-                    break;
-                }
-            }
-        }
-
-        protected void EventHandler(string message) 
-        {
-            if (message == "LogInfo")
-            {
-                reply = textBox_Servername.Text;
-                clientSocket.Send(Encoding.UTF8.GetBytes(textBox_Servername.Text));
-            }
-        }
-
+      
         private void pictureBox_Exit_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
@@ -184,13 +121,56 @@ namespace StonePlanner
             }
         }
 
-        private void button_Submit_Click(object sender, EventArgs e)
+        int I = 0;
+        private void timer_SignalHandler_Tick(object sender, EventArgs e)
         {
-            _ip = textBox_IP.Text;
-            _port = Convert.ToInt32(textBox_Port.Text);
-            _maxconn = Convert.ToInt32(textBox_Connect.Text);
+            if (I % 10 == 0)
+            {
+                T++;
+            }
+            I++;
+            //信号解码处理
+            if (signQueue.Count == 0) { return; }
+            int v = signQueue.Dequeue();
+            if ((Signals.Signal)v == Signals.Signal.SN_CLEAR)
+            {
+              
+            }
+            else if ((Signals.Signal)v == Signals.Signal.SN_ADDSERVERINFO)
+            {
+                panel_Main.Controls.Add(siMain);
+                siMain.BringToFront();
+            }
+            else if ((Signals.Signal) v == Signals.Signal.SN_REMOVESERVERINFO)
+            {
+                panel_Main.Controls.Remove(siMain);
+            }
 
-            StartListen();
+            else if ((Signals.Signal) v == Signals.Signal.SN_ADDSERVERSETTINGS)
+            {
+                ssMain.Show();
+                ssMain.Visible = true;
+                ssMain.BringToFront();
+            }
+            else if ((Signals.Signal) v == Signals.Signal.SN_REMOVESERVERSETTINGS)
+            {
+                ssMain.Hide();
+                ssMain.Visible = false;
+            }
+            else if ((Signals.Signal) v == Signals.Signal.SN_ADDTASKSETTINGS)
+            {
+                panel_Main.Controls.Add(tsMain);
+                tsMain.BringToFront();
+            }
+            else if ((Signals.Signal) v == Signals.Signal.SN_REMOVETASKSETTINGS)
+            {
+                panel_Main.Controls.Remove(tsMain);
+            }
+        }
+
+        private void panel_Main_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

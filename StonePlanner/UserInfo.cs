@@ -19,6 +19,16 @@ namespace StonePlanner
 
         private void UserInfo_Load(object sender, EventArgs e)
         {
+            if (!Main.activation)
+            {
+                new Activation().Show();
+                label_Username.Text = $"用 户 名：需激活";
+                label_Money.Text = $"金 币 数 量：需激活";
+                label_LastingC.Text = $"耐力值：需激活";
+                label_ExplosiveC.Text = $"爆发值：需激活";
+                label_WisdomC.Text = $"智慧值：需激活";
+                return;
+            }
             //用户基本信息
             label_Username.Text = $"用 户 名：{Login.UserName}";
             label_Money.Text = $"金 币 数 量：{Main.money}";
@@ -29,7 +39,7 @@ namespace StonePlanner
             //耐力值进度
             int delta = Convert.ToInt32(label_Lastingright.Text) - Convert.ToInt32(label_Lastingleft.Text);
             int lasting = Main.lasting;
-            panel_Lasting.Width = (int) (((double) (lasting  - Convert.ToInt32(label_Lastingleft.Text))/ (double) delta) * 184);
+            panel_Lasting.Width = (int) (((double) (lasting - Convert.ToInt32(label_Lastingleft.Text)) / (double) delta) * 184);
             //爆发值信息
             label_ExplosiveC.Text = $"爆发值：{Main.explosive}                 Lv.{LevelGetter(Main.explosive)[0]}";
             label_Explosiveleft.Text = LevelGetter(Main.explosive)[1].ToString();

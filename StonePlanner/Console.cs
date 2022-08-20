@@ -212,7 +212,7 @@ namespace StonePlanner
                     else if (nInput[0] == "ADD")
                     {
                         //打开信号接口
-                        Main.Sign = 4;
+                        Main.AddSign(4);
                         if (dwStatus != 1)
                         {
                             if (nInput[1].Contains("[EPH]"))
@@ -224,8 +224,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         }
-                        Main.tName = nInput[1];
-                        Main.tTime = Convert.ToInt32(nInput[2]);
+                        Main.planner.lpCapital = nInput[1];
+                        Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "COMPILE")
@@ -264,7 +264,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                Main.Sign = signal;
+                                Main.AddSign(signal);
                                 richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Management;
 using System.Net;
 using System.Net.Security;
 using System.Runtime.InteropServices;
@@ -341,5 +342,82 @@ namespace StonePlanner.Inner
         {
             return Write(section, key, null, filePath);
         }
+    }
+
+    internal class FileHelper 
+    {
+        public static void Director(string dir, ref List<string> list)
+        {
+            DirectoryInfo d = new DirectoryInfo(dir);
+            FileInfo[] files = d.GetFiles();//文件
+            DirectoryInfo[] directs = d.GetDirectories();//文件夹
+            foreach (FileInfo f in files)
+            {
+                list.Add(f.Name);//添加文件名到列表中  
+            }
+            //获取子文件夹内的文件列表，递归遍历  
+            foreach (DirectoryInfo dd in directs)
+            {
+                try
+                {
+                    Director(dd.FullName, ref list);
+                }
+                catch { continue; }
+            }
+        }
+
+        internal static List<string> GetRemovableDeviceID()
+        {
+            List<string> deviceIDs = new List<string>();
+            ManagementObjectSearcher query = new ManagementObjectSearcher("SELECT  *  From  Win32_LogicalDisk ");
+            ManagementObjectCollection queryCollection = query.Get();
+            foreach (ManagementObject mo in queryCollection)
+            {
+
+                switch (int.Parse(mo["DriveType"].ToString()))
+                {
+                    case (int) DriveType.Removable:   //可以移动磁盘     
+                        {
+                            //MessageBox.Show("可以移动磁盘");
+                            deviceIDs.Add(mo["DeviceID"].ToString());
+                            break;
+                        }
+                    case (int) DriveType.Fixed:   //本地磁盘     
+                        {
+                            //MessageBox.Show("本地磁盘");
+                            deviceIDs.Add(mo["DeviceID"].ToString());
+                            break;
+                        }
+                    case (int) DriveType.CDRom:   //CD   rom   drives     
+                        {
+                            //MessageBox.Show("CD   rom   drives ");
+                            break;
+                        }
+                    case (int) DriveType.Network:   //网络驱动   
+                        {
+                            //MessageBox.Show("网络驱动器 ");
+                            break;
+                        }
+                    case (int) DriveType.Ram:
+                        {
+                            //MessageBox.Show("驱动器是一个 RAM 磁盘 ");
+                            break;
+                        }
+                    case (int) DriveType.NoRootDirectory:
+                        {
+                            //MessageBox.Show("驱动器没有根目录 ");
+                            break;
+                        }
+                    default:   //defalut   to   folder     
+                        {
+                            //MessageBox.Show("驱动器类型未知 ");
+                            break;
+                        }
+                }
+
+            }
+            return deviceIDs;
+        }
+
     }
 }

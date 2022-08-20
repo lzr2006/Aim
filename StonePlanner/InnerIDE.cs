@@ -416,7 +416,7 @@ namespace StonePlanner
                     else if (nInput[0] == "ADD")
                     {
                         //打开信号接口
-                        Main.Sign = 4;
+                        Main.AddSign(4);
                         if (dwStatus != 1)
                         {
                             if (nInput[1].Contains("[EPH]"))
@@ -428,8 +428,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         }
-                        Main.tName = nInput[1];
-                        Main.tTime = Convert.ToInt32(nInput[2]);
+                        Main.planner.lpCapital = nInput[1];
+                        Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "COMPILE")
@@ -467,7 +467,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                Main.Sign = signal;
+                                Main.AddSign(signal);
                                 richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)
@@ -500,19 +500,19 @@ namespace StonePlanner
                             return;
                         }
                         //错误表
-                        SQLConnect.SQLCommandExecution("DROP     TABLE Errors");
+                        SQLConnect.SQLCommandExecution("DROP     TABLE Errors", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                             "CREATE TABLE Errors" +
                             "(ID INTEGER IDENTITY," +
                             "ErrTime TEXT," +
                             "ErrLevel TEXT," +
-                            "ErrMessage TEXT)");
+                            "ErrMessage TEXT)", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                             "CREATE INDEX ID " +
                             "ON Errors (ID ASC) " +
-                            "WITH PRIMARY");
+                            "WITH PRIMARY", ref Main.odcConnection);
                         //任务表
-                        SQLConnect.SQLCommandExecution("DROP TABLE Tasks");
+                        SQLConnect.SQLCommandExecution("DROP TABLE Tasks", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                             "CREATE TABLE Tasks" +
                             "(ID INTEGER IDENTITY," +
@@ -523,13 +523,13 @@ namespace StonePlanner
                             "TaskTime INTEGER," +
                             "TaskLasting INTEGER," +
                             "TaskExplosive INTEGER," +
-                            "TaskWisdom INTEGER)");
+                            "TaskWisdom INTEGER)", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                             "CREATE INDEX ID " +
                             "ON Tasks (ID ASC) " +
-                            "WITH PRIMARY");
+                            "WITH PRIMARY", ref Main.odcConnection);
                         //商品表
-                        SQLConnect.SQLCommandExecution("DROP TABLE Goods");
+                        SQLConnect.SQLCommandExecution("DROP TABLE Goods", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                             "CREATE TABLE Goods" +
                             "(ID INTEGER IDENTITY," +
@@ -537,21 +537,21 @@ namespace StonePlanner
                             "GoodName TEXT," +
                             "GoodPicture TEXT," +
                             "GoodIntro TEXT," +
-                            "UseCode TEXT)");
+                            "UseCode TEXT)", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                             "CREATE INDEX ID " +
                             "ON Goods (ID ASC) " +
-                            "WITH PRIMARY");
+                            "WITH PRIMARY", ref Main.odcConnection);
                         //仓库
-                        SQLConnect.SQLCommandExecution("DROP TABLE Depot");
+                        SQLConnect.SQLCommandExecution("DROP TABLE Depot", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                            "CREATE TABLE Depot" +
                            "(ID INTEGER IDENTITY," +
-                           "GoodID INTEGER)");
+                           "GoodID INTEGER)", ref Main.odcConnection);
                         SQLConnect.SQLCommandExecution(
                            "CREATE INDEX ID " +
                            "ON Depot (ID ASC) " +
-                           "WITH PRIMARY");
+                           "WITH PRIMARY", ref Main.odcConnection);
                     }
                     else if (nInput[0] == "EXIT")
                     {
@@ -730,12 +730,16 @@ namespace StonePlanner
         }
         private void 打印PToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string path = $@"{Application.StartupPath}\temp\pFile{new Random().Next(100000, 999999)}.txt";
-            File.Create(path).Close();
-            StreamWriter sw = new StreamWriter(path);
-            sw.Write(richTextBox_Main.Text);
-            sw.Close();
-            Inner.InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
+            try
+            {
+                string path = $@"{Application.StartupPath}\temp\pFile{new Random().Next(100000, 999999)}.txt";
+                File.Create(path).Close();
+                StreamWriter sw = new StreamWriter(path);
+                sw.Write(richTextBox_Main.Text);
+                sw.Close();
+                Inner.InnerFuncs.CmdExecuter.RunCmd($"notepad {path}");
+            }
+            catch { }
         }
 
         private void 打印预览VToolStripMenuItem_Click(object sender, EventArgs e)
@@ -948,7 +952,7 @@ namespace StonePlanner
             memCount.Clear();
             timer_RunTimeHandler.Enabled = true;
 
-            SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\hIcon\Alert.wav");
+            SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Alert.wav");
             sp.Play();
 
             label_Any_BeijingtimeResult.Text = "xx:xx:xx";
@@ -1121,7 +1125,7 @@ namespace StonePlanner
                     else if (nInput[0] == "ADD")
                     {
                         //打开信号接口
-                        Main.Sign = 4;
+                        Main.AddSign(4);
                         if (dwStatus != 1)
                         {
                             if (nInput[1].Contains("[EPH]"))
@@ -1133,8 +1137,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         }
-                        Main.tName = nInput[1];
-                        Main.tTime = Convert.ToInt32(nInput[2]);
+                        Main.planner.lpCapital = nInput[1];
+                        Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
                         return $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "WRITE")
@@ -1187,7 +1191,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                Main.Sign = signal;
+                                Main.AddSign(signal);
                                 return $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)

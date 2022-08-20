@@ -34,7 +34,7 @@ namespace StonePlanner
                 Charsarr[j] = characters[random.Next(characters.Length)];
             }
             var resultString = new String(Charsarr);
-            SQLConnect.SQLCommandExecution($" INSERT INTO Users (Username , Cmoney , Type , Pwd , Rkey) VALUES ('{textBox_M_Name.Text}' , 0 , {i} , '{textBox_M_Pwd.Text}','{resultString}')"/*cmd*/);
+            SQLConnect.SQLCommandExecution($" INSERT INTO Users (Username , Cmoney , Type , Pwd , Rkey) VALUES ('{textBox_M_Name.Text}' , 0 , {i} , '{textBox_M_Pwd.Text}','{resultString}')"/*cmd*/, ref Main.odcConnection);
             MessageBox.Show($"以下是您的用户恢复密钥：\n{resultString}\n请妥善保管该密钥，您将不会再次看到它了。按确定键复制到剪贴板。");
             Clipboard.SetText(resultString);
             Close();
