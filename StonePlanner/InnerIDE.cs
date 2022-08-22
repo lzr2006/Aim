@@ -7,12 +7,14 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Media;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static StonePlanner.Structs;
 
 namespace StonePlanner
 {
@@ -260,7 +262,7 @@ namespace StonePlanner
         #region 语法解析器
         protected int KDP = 0, rw = 0;
         protected List<List<string>> rx = new List<List<string>>();
-        internal void SyntaxParser(string row, int dwStatus = 0)
+        internal unsafe void SyntaxParser(string row, int dwStatus = 0)
         {
             try {
                 nInput = new List<string>();
@@ -998,7 +1000,7 @@ namespace StonePlanner
         }
         #endregion
         #region 外部语法解析接口
-        internal static string SyntaxParser_Outer(string row, int dwStatus = 0)
+        internal unsafe static string SyntaxParser_Outer(string row, int dwStatus = 0)
         {
             List<List<string>> rx = new List<List<string>>();
             List<string> nInput = new List<string>();
@@ -1275,6 +1277,7 @@ namespace StonePlanner
         }
         protected static string parserX;
         protected static string parserString;
+        private static IntPtr planner;
 
         protected static void Compile_Outer()
         {

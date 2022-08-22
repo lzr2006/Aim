@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -147,7 +148,7 @@ namespace StonePlanner
             }
         }
 
-        private void button_New_Click(object sender, EventArgs e)
+        private unsafe void button_New_Click(object sender, EventArgs e)
         {
             try
             {
@@ -168,7 +169,7 @@ namespace StonePlanner
                     Convert.ToInt32(textBox_mm.Text),
                     0
                     );
-                psc.UDID = new Random().Next(10000000, 99999999);
+                psc.UDID = new Random().Next(100000000, 999999999);
                 psc.dwStart = _.ToBinary();
                 double diff = 0D;
                 try
@@ -177,6 +178,7 @@ namespace StonePlanner
                 }
                 catch { diff = 0D; }
                 psc.dwDifficulty = diff;
+                //封送结构体
                 Main.planner = psc;
                 Main.AddSign(4);
                 Close();

@@ -33,6 +33,8 @@ namespace StonePlanner
             string myip = IpEntry.AddressList[0].ToString();
             label_Ban.Text = $"您（{myip}）已被MBOX封禁";
             label_C.Text = $"MBAN:{new Random().Next(1000, 9999)}-{new Random().Next(10, 99)}-{new Random().Next(1000, 9999)}-{new Random().Next(100, 999)}";
+            //注销许可证
+
         }
 
         private void panel_Capital_MouseDown(object sender, MouseEventArgs e)
