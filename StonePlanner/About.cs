@@ -21,5 +21,11 @@ namespace StonePlanner
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Thanks t = new Thanks();
+            t.Show();
+        }
     }
 }

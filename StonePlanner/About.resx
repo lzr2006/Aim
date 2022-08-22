@@ -200,27 +200,68 @@
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA0AAAEdCAIAAABYKHoEAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vgAADr4B6kKxwAAAAFVJREFUaEPtyiEBACAABDGaf3UKTCARN72zNz3rWc961rOe9axnPetZz3rWs571
+        vAAADrwBlbxySQAAAFVJREFUaEPtyiEBACAABDGaf3UKTCARN72zNz3rWc961rOe9axnPetZz3rWs571
         rGc961nPetaznvWsZz3rWc961rOe9axnPetZz3rWs571rGd/v+0Cw4qLUQqCKacAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="label9.Text" xml:space="preserve">
     <value>亲爱的用户，
-  您好。 
+  您好。
+ 
   当看到这些文字时，有可能这个
 软件发布已经几个月了。
-  我想说的是，感谢你们。作为一个
-由学生创立的公益组织，事实上生存
-是十分困难的。我们不向用户收取
-任何费用，并且没有广告，所以收益
-完全是零。
-  所以，如果有一天我们突然消失不
-见了，也请不要惊慌。我们希望看到
-的是这个软件由大家共同开发，帮
-助更多的人，而不是一家独大，垄断
-需求。
+
+  我想说的是，感谢你们。感谢你们
+给予了我们继续开发的希望。
+作为一个由学生创立的公益组织，
+事实上生存是十分困难的。我们不
+向用户收取任何费用，并且没有广告，
+所以收益完全是零。支持我们开发
+的唯一动力就是用户的认可与支持。
+
   作为理科生，我没有什么优美的语言
 表达我的感受。海内存知己，天涯若比
 邻。与君共勉。</value>
+  </data>
+  <data name="pictureBox2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        s3XuojGHAAAAAElFTkSuQmCC
+</value>
   </data>
 </root>

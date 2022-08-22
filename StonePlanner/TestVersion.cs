@@ -29,9 +29,9 @@ namespace StonePlanner
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ////测试代码
-            //Main maiAn = new Main();
-            //maiAn.Show();
+            //测试代码
+            //InnerIDE ide0 = new InnerIDE();
+            //ide0.Show();
             //Hide();
             //return;
             //END OF TEST　CODE

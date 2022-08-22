@@ -31,38 +31,59 @@ namespace MDI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            RichTextBox rbox = mainfrom1.rtbMain;
-            string str = this.textBox1.Text;
-            if (this.checkBox1.Checked)//是否开启区分大小写功能
+            try
             {
-                this.FindDownM(rbox, str);//向下查找
-            }
-            else
-            {
-                if (this.radioButton2.Checked)
+                RichTextBox rbox = mainfrom1.rtbMain;
+                string str = this.textBox1.Text;
+                if (this.checkBox1.Checked)//是否开启区分大小写功能
                 {
-                    this.FindDown(rbox, str);
+                    this.FindDownM(rbox, str);//向下查找
                 }
                 else
                 {
-                    this.FindUp(rbox, str);//向上查找
+                    if (this.radioButton2.Checked)
+                    {
+                        this.FindDown(rbox, str);
+                    }
+                    else
+                    {
+                        this.FindUp(rbox, str);//向上查找
+                    }
                 }
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.Message,"出现错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
         //替换textBox1中的文本为textBox2中的文本
         private void button2_Click(object sender, EventArgs e)
         {
-            string str0 = this.textBox1.Text, str1 = this.textBox2.Text;
-            this.replace(str0, str1);
+            try
+            {
+                string str0 = this.textBox1.Text, str1 = this.textBox2.Text;
+                this.replace(str0, str1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         //全部替换
         private void button3_Click(object sender, EventArgs e)
         {
-            RichTextBox rbox = mainfrom1.rtbMain;
-            string str0 = this.textBox1.Text, str1 = this.textBox2.Text;
-            this.ReplaceAll(rbox, str0, str1);
+            try
+            {
+                RichTextBox rbox = mainfrom1.rtbMain;
+                string str0 = this.textBox1.Text, str1 = this.textBox2.Text;
+                this.ReplaceAll(rbox, str0, str1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -72,32 +93,54 @@ namespace MDI
         //向上查找函数
         private void FindUp(RichTextBox rbox, string str)
         {
-            int rbox1 = rbox.SelectionStart;
-            int index = rbox.Find(str, 0, rbox1, RichTextBoxFinds.Reverse);
-            if (index > -1)
+            try
             {
-                rbox.SelectionStart = index;
-                rbox.SelectionLength = str.Length;
-                sun++;
-                rbox.Focus();
+                int rbox1 = rbox.SelectionStart;
+                int index = rbox.Find(str, 0, rbox1, RichTextBoxFinds.Reverse);
+                if (index > -1)
+                {
+                    rbox.SelectionStart = index;
+                    rbox.SelectionLength = str.Length;
+                    sun++;
+                    rbox.Focus();
+                }
+                else if (index < 0)
+                {
+                    seeks(str);
+                    sun = 0;
+                    // rbox.SelectionStart = rbox.Text.Length;
+                }
             }
-            else if (index < 0)
+            catch (Exception ex)
             {
-                seeks(str);
-                sun = 0;
-                // rbox.SelectionStart = rbox.Text.Length;
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void FindDown(RichTextBox rbox, string str)
         {
-            int rbox1 = rbox.Text.Length;
-            if (start < rbox1)
+            try
             {
-                start = rbox.Find(str, start, RichTextBoxFinds.None);
-                int los = rbox.SelectionStart + str.Length;
-                if ((start < 0) || (start > rbox1))
+                int rbox1 = rbox.Text.Length;
+                if (start < rbox1)
                 {
-                    if (count == 0)
+                    start = rbox.Find(str, start, RichTextBoxFinds.None);
+                    int los = rbox.SelectionStart + str.Length;
+                    if ((start < 0) || (start > rbox1))
+                    {
+                        if (count == 0)
+                        {
+                            this.seeks(str);
+                            start = los;
+                            sun = 0;
+                        }
+                        else
+                        {
+                            this.seeks(str);
+                            start = los;
+                            sun = 0;
+                        }
+                    }
+                    else if (start == rbox1 || start < 0)
                     {
                         this.seeks(str);
                         start = los;
@@ -105,49 +148,56 @@ namespace MDI
                     }
                     else
                     {
-                        this.seeks(str);
+                        sun++;
                         start = los;
-                        sun = 0;
+                        rbox.Focus();
                     }
                 }
                 else if (start == rbox1 || start < 0)
                 {
+                    int los = rbox.SelectionStart + str.Length;
                     this.seeks(str);
                     start = los;
                     sun = 0;
                 }
                 else
                 {
-                    sun++;
+                    int los = rbox.SelectionStart + str.Length;
+                    this.seeks(str);
                     start = los;
-                    rbox.Focus();
+                    sun = 0;
                 }
             }
-            else if (start == rbox1 || start < 0)
+            catch (Exception ex)
             {
-                int los = rbox.SelectionStart + str.Length;
-                this.seeks(str);
-                start = los;
-                sun = 0;
-            }
-            else
-            {
-                int los = rbox.SelectionStart + str.Length;
-                this.seeks(str);
-                start = los;
-                sun = 0;
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void FindDownM(RichTextBox rbox, string str)
         {
-            int rbox1 = rbox.Text.Length;
-            if (start < rbox1)
+            try
             {
-                start = rbox.Find(str, start, RichTextBoxFinds.MatchCase);
-                int los = rbox.SelectionStart + str.Length;
-                if ((start < 0) || (start > rbox1))
+                int rbox1 = rbox.Text.Length;
+                if (start < rbox1)
                 {
-                    if (count == 0)
+                    start = rbox.Find(str, start, RichTextBoxFinds.MatchCase);
+                    int los = rbox.SelectionStart + str.Length;
+                    if ((start < 0) || (start > rbox1))
+                    {
+                        if (count == 0)
+                        {
+                            this.seeks(str);
+                            start = los;
+                            sun = 0;
+                        }
+                        else
+                        {
+                            this.seeks(str);
+                            start = los;
+                            sun = 0;
+                        }
+                    }
+                    else if (start == rbox1 || start < 0)
                     {
                         this.seeks(str);
                         start = los;
@@ -155,37 +205,29 @@ namespace MDI
                     }
                     else
                     {
-                        this.seeks(str);
+                        sun++;
                         start = los;
-                        sun = 0;
+                        rbox.Focus();
                     }
                 }
                 else if (start == rbox1 || start < 0)
                 {
+                    int los = rbox.SelectionStart + str.Length;
                     this.seeks(str);
                     start = los;
                     sun = 0;
                 }
                 else
                 {
-                    sun++;
+                    int los = rbox.SelectionStart + str.Length;
+                    this.seeks(str);
                     start = los;
-                    rbox.Focus();
+                    sun = 0;
                 }
             }
-            else if (start == rbox1 || start < 0)
+            catch (Exception ex)
             {
-                int los = rbox.SelectionStart + str.Length;
-                this.seeks(str);
-                start = los;
-                sun = 0;
-            }
-            else
-            {
-                int los = rbox.SelectionStart + str.Length;
-                this.seeks(str);
-                start = los;
-                sun = 0;
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         //查找完毕后的弹窗
@@ -203,13 +245,27 @@ namespace MDI
         //替换全部的函数
         private void ReplaceAll(RichTextBox rbox, string str0, string str1)
         {
-            rbox.Text = rbox.Text.Replace(str0, str1);
+            try
+            {
+                rbox.Text = rbox.Text.Replace(str0, str1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void replace(string str0, string str1)
         {
-            RichTextBox rbox = mainfrom1.rtbMain;
-            rbox.SelectionLength = str0.Length;
-            rbox.SelectedText = str1;
+            try
+            {
+                RichTextBox rbox = mainfrom1.rtbMain;
+                rbox.SelectionLength = str0.Length;
+                rbox.SelectedText = str1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "出现错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
