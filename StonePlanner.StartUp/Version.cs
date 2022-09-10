@@ -12,20 +12,27 @@ namespace StonePlanner.StartUp
 {
     public partial class Version : UserControl
     {
-        string name, text;
+        string name;
+        Image img;
         bool download;
-        public Version(string szName,string szText,bool bDownloaded)
+        public Version(string szName, Image lpImg,bool bDownloaded)
         {
             InitializeComponent();
 
             name = szName;
-            text = szText;
+            img = lpImg;
             download = bDownloaded;
         }
 
         private void Version_Load(object sender, EventArgs e)
         {
             label_Main.Text = name;
+            pictureBox_Icon.BackgroundImage = img;
+            button_Download.Text = download switch
+            {
+                true => "启动",
+                false => "加载"
+            };
         }
     }
 }

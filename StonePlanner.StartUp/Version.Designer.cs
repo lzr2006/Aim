@@ -30,7 +30,7 @@
         {
             this.pictureBox_Icon = new System.Windows.Forms.PictureBox();
             this.label_Main = new System.Windows.Forms.Label();
-            this.button_DownLoad = new System.Windows.Forms.Button();
+            this.button_Download = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Icon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,25 +52,25 @@
             this.label_Main.TabIndex = 1;
             this.label_Main.Text = "Aim Epsilon 1.0";
             // 
-            // button_DownLoad
+            // button_Download
             // 
-            this.button_DownLoad.Font = new System.Drawing.Font("黑体", 11.4514F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button_DownLoad.Location = new System.Drawing.Point(559, 5);
-            this.button_DownLoad.Name = "button_DownLoad";
-            this.button_DownLoad.Size = new System.Drawing.Size(75, 36);
-            this.button_DownLoad.TabIndex = 2;
-            this.button_DownLoad.Text = "下载";
-            this.button_DownLoad.UseVisualStyleBackColor = true;
+            this.button_Download.Font = new System.Drawing.Font("黑体", 11.4514F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button_Download.Location = new System.Drawing.Point(559, 5);
+            this.button_Download.Name = "button_Download";
+            this.button_Download.Size = new System.Drawing.Size(75, 36);
+            this.button_Download.TabIndex = 2;
+            this.button_Download.Text = "下载";
+            this.button_Download.UseVisualStyleBackColor = true;
             // 
             // Version
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.button_DownLoad);
+            this.Controls.Add(this.button_Download);
             this.Controls.Add(this.label_Main);
             this.Controls.Add(this.pictureBox_Icon);
             this.Name = "Version";
-            this.Size = new System.Drawing.Size(642, 46);
+            this.Size = new System.Drawing.Size(642, 45);
             this.Load += new System.EventHandler(this.Version_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Icon)).EndInit();
             this.ResumeLayout(false);
@@ -82,6 +82,6 @@
 
         private PictureBox pictureBox_Icon;
         private Label label_Main;
-        private Button button_DownLoad;
+        private Button button_Download;
     }
 }

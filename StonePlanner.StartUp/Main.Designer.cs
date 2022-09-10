@@ -40,15 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel_Start = new System.Windows.Forms.Panel();
-            this.panel_DownLoad = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel_L.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Top
@@ -70,6 +67,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(30, 28);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label_L1
             // 
@@ -108,7 +106,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(72, 7);
+            this.label4.Location = new System.Drawing.Point(76, 7);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(89, 20);
             this.label4.TabIndex = 8;
@@ -127,7 +125,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("黑体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(72, 6);
+            this.label3.Location = new System.Drawing.Point(76, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(89, 20);
             this.label3.TabIndex = 7;
@@ -155,29 +153,15 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(87, 72);
+            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Location = new System.Drawing.Point(88, 59);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 87);
+            this.panel1.Size = new System.Drawing.Size(107, 98);
             this.panel1.TabIndex = 3;
-            // 
-            // panel_Start
-            // 
-            this.panel_Start.Location = new System.Drawing.Point(318, 18);
-            this.panel_Start.Name = "panel_Start";
-            this.panel_Start.Size = new System.Drawing.Size(83, 30);
-            this.panel_Start.TabIndex = 1;
-            // 
-            // panel_DownLoad
-            // 
-            this.panel_DownLoad.Location = new System.Drawing.Point(220, 18);
-            this.panel_DownLoad.Name = "panel_DownLoad";
-            this.panel_DownLoad.Size = new System.Drawing.Size(83, 30);
-            this.panel_DownLoad.TabIndex = 0;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.panel_DownLoad);
-            this.panel4.Controls.Add(this.panel_Start);
             this.panel4.Location = new System.Drawing.Point(293, 35);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(642, 461);
@@ -204,7 +188,6 @@
             this.panel3.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -214,8 +197,6 @@
         private Panel panel_Top;
         private Label label_L1;
         private Panel panel_L;
-        private Panel panel_Start;
-        private Panel panel_DownLoad;
         private Label label2;
         private Label label1;
         private Panel panel1;
