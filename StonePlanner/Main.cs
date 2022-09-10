@@ -183,6 +183,7 @@ namespace StonePlanner
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
             }
         }
+        //string message = string.Format("收到自己消息的参数:{0},{1}", m.WParam, m.LParam);
         /// <summary>
         /// 该函数用于加载基本的设置项。
         /// </summary>
@@ -192,6 +193,28 @@ namespace StonePlanner
             timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
             if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
             timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+            MessageBox.Show(Handle.ToString());
+        }
+
+        /// <summary>
+        /// 覆写窗体的消息处理函数
+        /// </summary>
+        /// <param name="m">消息</param>
+        protected override void DefWndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case Develop.AM_EXIT:
+                    Environment.Exit(0);
+                    break;
+                case Develop.AM_ADDMONEY:
+                    MoneyUpdate(m.WParam.ToInt32());
+                    break;
+                //调用基类函数，以便系统处理其它消息。
+                default:
+                    base.DefWndProc(ref m);
+                    break;
+            }
         }
         /// <summary>
         /// 该函数处理用户退出事件，存入新的还未存储的数据。
@@ -1270,7 +1293,7 @@ namespace StonePlanner
 
         private void timer_Anti_Tick(object sender, EventArgs e)
         {
-            if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "devenv.exe")
+            if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "msvsmon")
             {
                 string p = "";
                 try
