@@ -15,7 +15,7 @@ namespace StonePlanner.StartUp
         string name;
         Image img;
         bool download;
-        public Version(string szName, Image lpImg,bool bDownloaded)
+        public Version(string szName, Image lpImg,bool bDownloaded,string lpszDownloadAddress)
         {
             InitializeComponent();
 

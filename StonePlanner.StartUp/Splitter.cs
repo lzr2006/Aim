@@ -12,9 +12,23 @@ namespace StonePlanner.StartUp
 {
     public partial class Splitter : UserControl
     {
-        public Splitter()
+        string version;
+        public Splitter(string lpVersion)
         {
             InitializeComponent();
+
+            version = lpVersion;
+            label_Version.Text = version;
+        }
+
+        private void Splitter_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel_R_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
