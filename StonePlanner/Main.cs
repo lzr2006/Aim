@@ -1402,5 +1402,10 @@ namespace StonePlanner
         {
           // panel_M.Top = vScrollBar_Main.Value;
         }
+
+        private void panel_Top_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

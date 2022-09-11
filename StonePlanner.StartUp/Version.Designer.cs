@@ -61,6 +61,7 @@
             this.button_Download.TabIndex = 2;
             this.button_Download.Text = "下载";
             this.button_Download.UseVisualStyleBackColor = true;
+            this.button_Download.Click += new System.EventHandler(this.button_Download_Click);
             // 
             // Version
             // 

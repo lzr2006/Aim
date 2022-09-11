@@ -49,6 +49,7 @@
             this.timer_PenalLengthController = new System.Windows.Forms.Timer(this.components);
             this.timer_Conv = new System.Windows.Forms.Timer(this.components);
             this.panel_TaskDetail = new System.Windows.Forms.Panel();
+            this.label_XHDL = new System.Windows.Forms.Label();
             this.pictureBox_Tip = new System.Windows.Forms.PictureBox();
             this.pictureBox_Main = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.timer_Ponv = new System.Windows.Forms.Timer(this.components);
             this.timer_Tip = new System.Windows.Forms.Timer(this.components);
             this.timer_Anti = new System.Windows.Forms.Timer(this.components);
-            this.label_XHDL = new System.Windows.Forms.Label();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.User_Piicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
@@ -81,6 +81,7 @@
             this.panel_Top.Name = "panel_Top";
             this.panel_Top.Size = new System.Drawing.Size(900, 38);
             this.panel_Top.TabIndex = 0;
+            this.panel_Top.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Top_Paint);
             this.panel_Top.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseDown);
             // 
             // label_GGS
@@ -274,6 +275,15 @@
             this.panel_TaskDetail.Size = new System.Drawing.Size(563, 496);
             this.panel_TaskDetail.TabIndex = 5;
             // 
+            // label_XHDL
+            // 
+            this.label_XHDL.AutoSize = true;
+            this.label_XHDL.Location = new System.Drawing.Point(565, 481);
+            this.label_XHDL.Name = "label_XHDL";
+            this.label_XHDL.Size = new System.Drawing.Size(15, 15);
+            this.label_XHDL.TabIndex = 10;
+            this.label_XHDL.Text = "0";
+            // 
             // pictureBox_Tip
             // 
             this.pictureBox_Tip.BackColor = System.Drawing.Color.Transparent;
@@ -334,15 +344,6 @@
             this.timer_Anti.Enabled = true;
             this.timer_Anti.Interval = 10000;
             this.timer_Anti.Tick += new System.EventHandler(this.timer_Anti_Tick);
-            // 
-            // label_XHDL
-            // 
-            this.label_XHDL.AutoSize = true;
-            this.label_XHDL.Location = new System.Drawing.Point(565, 481);
-            this.label_XHDL.Name = "label_XHDL";
-            this.label_XHDL.Size = new System.Drawing.Size(15, 15);
-            this.label_XHDL.TabIndex = 10;
-            this.label_XHDL.Text = "0";
             // 
             // Main
             // 
