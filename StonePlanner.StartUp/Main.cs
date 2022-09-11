@@ -1,9 +1,16 @@
 using System.Net;
+using System.Runtime.InteropServices;
 
 namespace StonePlanner.StartUp
 {
     public partial class Main : Form
     {
+        const int WM_NCLBUTTONDOWN = 0x00A1;
+        const int HTCAPTION = 0x0002;
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool ReleaseCapture();
         public Main()
         {
             InitializeComponent();
@@ -19,28 +26,36 @@ namespace StonePlanner.StartUp
             WebClient wc = new WebClient();
             string res = await wc.DownloadStringTaskAsync(new Uri("https://lzr2006.github.io/wkgd/Aim/source.txt"));
             while (res == null) { }
-            ReLoad(res);
+            MainLoader(res);
         }
-
-        protected void ReLoad(string res) 
+        protected void MainLoader(string res) 
         {
             List<string> versionList = new List<string>(res.Split(','));
             foreach (var item in versionList)
             {
                 List<string> inVersion = new List<string>(item.Split('\n'));
-                for (int i = 0; i < inVersion.Count; i++)
+                int j = inVersion.Count;
+                for (int i = 0; i < j; i++)
                 {
-                    if (inVersion[i] == "")
+                    inVersion[i] = inVersion[i].Replace('\r', ' ');
+                    if (inVersion[i] == "" || inVersion[i] == string.Empty)
                     {
                         continue;
                     }
-                    inVersion[i] = inVersion[i].Replace('\r', ' ');
                     if (i == 0)
                     {
+                        if (inVersion[i] == "" || inVersion[i] == " ")
+                        {
+                            inVersion.RemoveAt(i);
+                            i--;
+                            j--;
+                            continue;
+                        }
                         string vName = inVersion[i].Split(':')[0] + "版本";
                         Splitter spirt = new Splitter(vName);
                         spirt.Top = top;
                         panel_Main.Controls.Add(spirt);
+                        panel_Main.Height += 20;
                         top += 20;
                         continue;
                     }
@@ -52,6 +67,7 @@ namespace StonePlanner.StartUp
                         ver.Top = top;
                         ver.Left = -30;
                         panel_Main.Controls.Add(ver);
+                        panel_Main.Height += 48;
                         top += 48;
                     }
                     catch
@@ -74,8 +90,16 @@ namespace StonePlanner.StartUp
 
         private void vScrollBar_Main_Scroll(object sender, ScrollEventArgs e)
         {
-            panel_Main.Top = -top / 100 * vScrollBar_Main.Value;
-            ReLoad(res);
+            panel_Main.Top = -top / 100 * vScrollBar_Main.Value + 42;
+        }
+
+        private void panel_Top_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
+            }
         }
     }
 }
