@@ -60,7 +60,7 @@
             this.panel_R.Location = new System.Drawing.Point(224, 6);
             this.panel_R.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel_R.Name = "panel_R";
-            this.panel_R.Size = new System.Drawing.Size(269, 9);
+            this.panel_R.Size = new System.Drawing.Size(259, 10);
             this.panel_R.TabIndex = 2;
             this.panel_R.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_R_Paint);
             // 
@@ -73,7 +73,7 @@
             this.Controls.Add(this.panel_L);
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Splitter";
-            this.Size = new System.Drawing.Size(499, 21);
+            this.Size = new System.Drawing.Size(490, 21);
             this.Load += new System.EventHandler(this.Splitter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

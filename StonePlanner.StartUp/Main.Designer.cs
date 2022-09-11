@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel_Main = new System.Windows.Forms.Panel();
+            this.vScrollBar_Main = new System.Windows.Forms.VScrollBar();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel_L.SuspendLayout();
@@ -56,14 +57,14 @@
             this.panel_Top.Location = new System.Drawing.Point(-1, -2);
             this.panel_Top.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel_Top.Name = "panel_Top";
-            this.panel_Top.Size = new System.Drawing.Size(730, 32);
+            this.panel_Top.Size = new System.Drawing.Size(743, 32);
             this.panel_Top.TabIndex = 0;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(695, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(718, 5);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(23, 24);
@@ -173,17 +174,26 @@
             // 
             // panel_Main
             // 
-            this.panel_Main.Location = new System.Drawing.Point(232, 36);
+            this.panel_Main.Location = new System.Drawing.Point(230, 36);
             this.panel_Main.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel_Main.Name = "panel_Main";
-            this.panel_Main.Size = new System.Drawing.Size(485, 379);
+            this.panel_Main.Size = new System.Drawing.Size(478, 379);
             this.panel_Main.TabIndex = 7;
+            // 
+            // vScrollBar_Main
+            // 
+            this.vScrollBar_Main.Location = new System.Drawing.Point(711, 36);
+            this.vScrollBar_Main.Name = "vScrollBar_Main";
+            this.vScrollBar_Main.Size = new System.Drawing.Size(28, 379);
+            this.vScrollBar_Main.TabIndex = 0;
+            this.vScrollBar_Main.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Main_Scroll);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 419);
+            this.ClientSize = new System.Drawing.Size(741, 419);
+            this.Controls.Add(this.vScrollBar_Main);
             this.Controls.Add(this.panel_Main);
             this.Controls.Add(this.panel_L);
             this.Controls.Add(this.panel_Top);
@@ -219,5 +229,6 @@
         private Label label3;
         private Panel panel_Main;
         private PictureBox pictureBox1;
+        private VScrollBar vScrollBar_Main;
     }
 }
