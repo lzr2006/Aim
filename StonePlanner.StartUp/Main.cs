@@ -1,3 +1,4 @@
+using StonePlanner.StartUp.Models;
 using System.Net;
 
 namespace StonePlanner.StartUp
@@ -24,6 +25,15 @@ namespace StonePlanner.StartUp
         protected void ReLoad(string versionInfo) 
         {
             // TODO 读取标准csv的信息然后封装一个数据类
+            var testVersionData = new VersionData
+            {
+                VersionName = "Beta 114514",
+                DownloadUri = new Uri("https://114514.1919810.cs"),
+                VersionType = VersionType.Beta
+            };
+            MessageBox.Show($"VerisonName: {testVersionData.VersionName}\n" +
+                $"DownloadUri: {testVersionData.DownloadUri}\n" +
+                $"VersionType: {testVersionData.VersionType}");
         }
 
         private void panel_L_Paint(object sender, PaintEventArgs e)
