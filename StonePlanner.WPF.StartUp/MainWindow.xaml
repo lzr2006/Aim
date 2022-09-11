@@ -1,0 +1,65 @@
+﻿<Window x:Class="StonePlanner.WPF.StartUp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StonePlanner.WPF.StartUp"
+        xmlns:models="clr-namespace:StonePlanner.WPF.StartUp.Models"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25*" />
+                    <RowDefinition Height="154*" />
+                    <RowDefinition Height="256*" />
+                </Grid.RowDefinitions>
+                <Image Grid.Row="1"
+                       Source="/StonePlanner.WPF.StartUp;component/Resources/Logo.png"
+                       />
+                <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="5" Orientation="Vertical">
+                    <TextBlock Text="软件版本: 114514" FontSize="18" />
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Border Grid.Column="1">
+            <Grid>
+                <ListView x:Name="listViewVersions" Loaded="listViewVersions_Loaded">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:VersionData}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock TextWrapping="Wrap">
+                                    <Run Text="VersionName: " />
+                                    <Run Text="{Binding VersionName}" />
+                                    <Run Text=" "/>
+                                </TextBlock>
+                                <TextBlock Grid.Column="1" TextWrapping="Wrap">
+                                    <Run Text="DownloadUri: " />
+                                    <Run Text="{Binding DownloadUri}" />
+                                    <Run Text=" " />
+                                </TextBlock>
+                                <TextBlock Grid.Column="2" TextWrapping="Wrap">
+                                    <Run Text="VersionType: " />
+                                    <Run Text="{Binding VersionType}" />
+                                    <Run Text=" " />
+                                </TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
