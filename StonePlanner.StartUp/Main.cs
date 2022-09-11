@@ -23,42 +23,7 @@ namespace StonePlanner.StartUp
 
         protected void ReLoad(string versionInfo) 
         {
-            List<string> versionList = new List<string>(versionInfo.Split(','));
-            foreach (var item in versionList)
-            {
-                List<string> inVersion = new List<string>(item.Split('\n'));
-                for (int i = 0; i < inVersion.Count; i++)
-                {
-                    if (inVersion[i] == "")
-                    {
-                        continue;
-                    }
-                    inVersion[i] = inVersion[i].Replace('\r', ' ');
-                    if (i == 0)
-                    {
-                        string vName = inVersion[i].Split(':')[0] + "版本";
-                        Splitter spirt = new Splitter(vName);
-                        spirt.Top = top;
-                        panel_Main.Controls.Add(spirt);
-                        top += 20;
-                        continue;
-                    }
-                    try
-                    {
-                        Version ver = new Version($"{inVersion[i].Split('-')[0]}",
-                            Image.FromFile($"{Application.StartupPath}\\res\\aim.png"), false,
-                            $"{inVersion[i].Split('-')[1]}");
-                        ver.Top = top;
-                        ver.Left = -30;
-                        panel_Main.Controls.Add(ver);
-                        top += 48;
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                }
-            }
+            // TODO 读取标准csv的信息然后封装一个数据类
         }
 
         private void panel_L_Paint(object sender, PaintEventArgs e)
