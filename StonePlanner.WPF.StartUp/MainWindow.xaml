@@ -22,16 +22,22 @@
                     <RowDefinition Height="256*" />
                 </Grid.RowDefinitions>
                 <Image Grid.Row="1"
-                       Source="/StonePlanner.WPF.StartUp;component/Resources/Logo.png"
-                       />
-                <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="5" Orientation="Vertical">
-                    <TextBlock Text="软件版本: 114514" FontSize="18" />
+                       Source="/StonePlanner.WPF.StartUp;component/Resources/Logo.png" />
+                <StackPanel Grid.Row="2"
+                            HorizontalAlignment="Center"
+                            Margin="5"
+                            Orientation="Vertical">
+                    <TextBlock FontSize="18">
+                        <Run Text="软件版本: " />
+                        <Run Text="{Binding ElementName=listViewVersions, Path=SelectedItem.VersionName}" />
+                    </TextBlock>
                 </StackPanel>
             </Grid>
         </Border>
         <Border Grid.Column="1">
             <Grid>
-                <ListView x:Name="listViewVersions" Loaded="listViewVersions_Loaded">
+                <ListView x:Name="listViewVersions"
+                          Loaded="listViewVersions_Loaded">
                     <ListView.ItemTemplate>
                         <DataTemplate DataType="{x:Type models:VersionData}">
                             <Grid>
@@ -43,14 +49,16 @@
                                 <TextBlock TextWrapping="Wrap">
                                     <Run Text="VersionName: " />
                                     <Run Text="{Binding VersionName}" />
-                                    <Run Text=" "/>
+                                    <Run Text=" " />
                                 </TextBlock>
-                                <TextBlock Grid.Column="1" TextWrapping="Wrap">
+                                <TextBlock Grid.Column="1"
+                                           TextWrapping="Wrap">
                                     <Run Text="DownloadUri: " />
                                     <Run Text="{Binding DownloadUri}" />
                                     <Run Text=" " />
                                 </TextBlock>
-                                <TextBlock Grid.Column="2" TextWrapping="Wrap">
+                                <TextBlock Grid.Column="2"
+                                           TextWrapping="Wrap">
                                     <Run Text="VersionType: " />
                                     <Run Text="{Binding VersionType}" />
                                     <Run Text=" " />
