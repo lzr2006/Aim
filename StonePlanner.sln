@@ -14,7 +14,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StonePlanner_Server", "Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StonePlanner_PlugTemplate", "PlugTemplate\StonePlanner_PlugTemplate.csproj", "{9C9BD0B8-AB61-4930-B442-C1A62C763AF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StonePlanner_License", "StonePlanner_License\StonePlanner_License.csproj", "{2C88977E-2339-4256-9854-7439EE302D73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StonePlanner.StartUp", "StonePlanner.StartUp\StonePlanner.StartUp.csproj", "{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StonePlanner.WPF.StartUp", "StonePlanner.WPF.StartUp\StonePlanner.WPF.StartUp.csproj", "{7AE1565C-F792-47B8-BDC9-7816999FB89A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +36,14 @@ Global
 		{9C9BD0B8-AB61-4930-B442-C1A62C763AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C9BD0B8-AB61-4930-B442-C1A62C763AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C9BD0B8-AB61-4930-B442-C1A62C763AF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2C88977E-2339-4256-9854-7439EE302D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2C88977E-2339-4256-9854-7439EE302D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2C88977E-2339-4256-9854-7439EE302D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2C88977E-2339-4256-9854-7439EE302D73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A5EAA0-4469-4CFB-8989-70B4AF1238A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AE1565C-F792-47B8-BDC9-7816999FB89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AE1565C-F792-47B8-BDC9-7816999FB89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AE1565C-F792-47B8-BDC9-7816999FB89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AE1565C-F792-47B8-BDC9-7816999FB89A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

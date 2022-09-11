@@ -322,6 +322,7 @@
       <DependentUpon>Console.cs</DependentUpon>
     </Compile>
     <Compile Include="DailyDateTime.cs" />
+    <Compile Include="Develop.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="ErrorCenter.cs">
       <SubType>Form</SubType>

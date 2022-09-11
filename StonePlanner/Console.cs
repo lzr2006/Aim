@@ -7,11 +7,13 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static StonePlanner.Structs;
 
 namespace StonePlanner
 {
@@ -56,7 +58,7 @@ namespace StonePlanner
         }
         protected List<List<string>> rx = new List<List<string>>(); int rw = 0;
         #region 语法解析器
-        protected void SyntaxParser(string row,int dwStatus = 0)
+        protected unsafe void SyntaxParser(string row,int dwStatus = 0)
         {
             try
             {
@@ -212,7 +214,6 @@ namespace StonePlanner
                     else if (nInput[0] == "ADD")
                     {
                         //打开信号接口
-                        Main.AddSign(4);
                         if (dwStatus != 1)
                         {
                             if (nInput[1].Contains("[EPH]"))
@@ -223,9 +224,10 @@ namespace StonePlanner
                             {
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
-                        }
+                        } 
                         Main.planner.lpCapital = nInput[1];
                         Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
+                        Main.AddSign(4);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "COMPILE")

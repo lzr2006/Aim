@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,57 +34,43 @@ namespace StonePlanner
         }
 
         [Serializable]
-        public class PlanClassA
+        [ComVisible(true)]
+        [StructLayout(LayoutKind.Auto)]
+        public abstract partial class PlanBase
         {
             internal string lpCapital;
             internal int iSeconds;
-            internal string dwIntro;
             internal double dwDifficulty;
-            internal string lpParent;
-            internal long dwStart;
             internal int iLasting;
             internal int iExplosive;
             internal int iWisdom;
+            internal long dwStart;
         }
 
         [Serializable]
-        public class PlanClassB
+        public class PlanClassA : PlanBase
         {
-            internal string lpCapital;
-            internal int iSeconds;
             internal string dwIntro;
-            internal double dwDifficulty;
-            internal int UDID;
-            internal long dwStart;
-            internal int iLasting;
-            internal int iExplosive;
-            internal int iWisdom;
+            internal string lpParent;
         }
 
         [Serializable]
-        public class PlanClassC
+        public class PlanClassB : PlanBase
         {
-            internal string lpCapital;
-            internal int iSeconds;
             internal string dwIntro;
-            internal double dwDifficulty;
             internal int UDID;
-            internal long dwStart;
+        }
+
+        [Serializable]
+        [ComVisible(true)]
+        [StructLayout(LayoutKind.Auto)]
+        public class PlanClassC : PlanBase
+        {
+            internal string dwIntro;
+            internal int UDID;
             internal string lpParent;
-            internal int iLasting;
-            internal int iExplosive;
-            internal int iWisdom;
         }
         
-        public class PlanClassD
-        {
-            internal string lpCapital;
-            internal int iSeconds;
-            internal double dwDifficulty;
-            internal long dwStart;
-            internal int iLasting;
-            internal int iExplosive;
-            internal int iWisdom;
-        }
+        public class PlanClassD : PlanBase{}
     }
 }

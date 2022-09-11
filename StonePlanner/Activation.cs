@@ -19,7 +19,11 @@ namespace StonePlanner
 
         private void Activation_Load(object sender, EventArgs e)
         {
-
+            if (Main.banned)
+            {
+                label_Tip.Text = "此时无法激活MethodBox·Aim";
+                button_Submit.Enabled = false;
+            }
         }
 
         private void linkLabel_D2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -34,6 +38,11 @@ namespace StonePlanner
 
         private void button_Submit_Click(object sender, EventArgs e)
         {
+            if (Main.banned)
+            {
+                label_Tip.Text = "Aim出现了一个未知错误（Ban）";
+                return;
+            }
             if (License.Code.codes.Contains(textBox_Code.Text))
             {
                 MessageBox.Show("激活成功，感谢您对MethodBox的支持。\n请重启软件。","激活成功",MessageBoxButtons.OK,MessageBoxIcon.Information);

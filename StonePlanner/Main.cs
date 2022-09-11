@@ -96,7 +96,7 @@ namespace StonePlanner
         //internal static int tWisdom;
         //internal static string tParent;
         //TO-DO
-        internal static PlanClassC planner;
+        internal static PlanClassC planner; //It is a void*
         //总时间
         internal static int nTime;
         //金钱
@@ -109,6 +109,7 @@ namespace StonePlanner
         //检查语言包
         bool oncheck = false;
         internal static bool activation = false;
+        internal static bool banned = false;
         //检查线程
         Thread antiPiracyCheckThread;
         //控件添加委托
@@ -143,6 +144,10 @@ namespace StonePlanner
             var hresult = SQLConnect.SQLCommandQuery($"SELECT * FROM Users WHERE Username = 'mactivation'");
             hresult.Read();
             string code = hresult[4] as string;
+            if (code == "Banned")
+            {
+                banned = true;
+            }
             if (StonePlanner.License.Code.codes.Contains(code))
             {
                 activation = true;
@@ -178,6 +183,7 @@ namespace StonePlanner
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
             }
         }
+        //string message = string.Format("收到自己消息的参数:{0},{1}", m.WParam, m.LParam);
         /// <summary>
         /// 该函数用于加载基本的设置项。
         /// </summary>
@@ -187,6 +193,28 @@ namespace StonePlanner
             timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
             if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
             timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+            MessageBox.Show(Handle.ToString());
+        }
+
+        /// <summary>
+        /// 覆写窗体的消息处理函数
+        /// </summary>
+        /// <param name="m">消息</param>
+        protected override void DefWndProc(ref Message m)
+        {
+            switch (m.Msg)
+            {
+                case Develop.AM_EXIT:
+                    Environment.Exit(0);
+                    break;
+                case Develop.AM_ADDMONEY:
+                    MoneyUpdate(m.WParam.ToInt32());
+                    break;
+                //调用基类函数，以便系统处理其它消息。
+                default:
+                    base.DefWndProc(ref m);
+                    break;
+            }
         }
         /// <summary>
         /// 该函数处理用户退出事件，存入新的还未存储的数据。
@@ -203,7 +231,7 @@ namespace StonePlanner
                     var sqlResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE UDID = {plan.Value.UDID}",ref Main.odcConnection);
                     if (sqlResult.HasRows) continue;
                     //脑子是个好东西 下次带上
-                    string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , UDID , TaskParent , StartTime) VALUES ( ";
+                    string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , UDID , TaskParent , StartTime) VALUES ( ";
                     strInsert += "'" + plan.Value.capital + "', '";
                     strInsert += plan.Value.dwIntro + "', '";
                     strInsert += plan.Value.status + "', ";
@@ -214,7 +242,7 @@ namespace StonePlanner
                     strInsert += plan.Value.dwWisdom + ",";
                     strInsert += plan.Value.UDID + ",";
                     strInsert += "'" + plan.Value.lpParent + "',";
-                    strInsert += plan.Value.dtStartTime.ToBinary() + ")";
+                    strInsert += "'" + plan.Value.dtStartTime.ToBinary() + "')";
                     //执行插入
                     SQLConnect.SQLCommandExecution(strInsert,ref Main.odcConnection);
                     recycle_bin.Add(plan.Value);
@@ -379,11 +407,12 @@ namespace StonePlanner
                 psb.lpCapital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString();
                 psb.dwIntro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString();
                 psb.iSeconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value);
-                psb.dwDifficulty = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[4].Value);
+                psb.dwDifficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value);
                 psb.UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[9].Value);
                 psb.iLasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value);
                 psb.iExplosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value);
                 psb.iWisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value);
+                psb.dwStart = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[11].Value);
                 //Plan plan = new Plan
                 //    (
                 //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
@@ -440,6 +469,13 @@ namespace StonePlanner
                 timer_Ponv.Enabled = false;
                 timer_Conv.Enabled = false;
                 label_Sentence.Text = "MethodBox Aim（评估副本）";
+            }
+            if (banned)
+            {
+                timer_Ponv.Enabled = false;
+                timer_Conv.Enabled = false;
+                timer_EventHandler.Enabled = false;
+                label_Sentence.Text = "MethodBox Aim（限制副本）";
             }
             #endregion
         }
@@ -776,7 +812,7 @@ namespace StonePlanner
             panel_M.Controls.Add(pValue);
         }
 
-        private void timer_EventHandler_Tick(object sender, EventArgs e)
+        private unsafe void timer_EventHandler_Tick(object sender, EventArgs e)
         {
             //傻逼东西 开发者倒拔几把插在代码里
             //查找进程
@@ -883,7 +919,6 @@ namespace StonePlanner
                 //PlanAdder(new Plan(tName, tTime, tIntro, tDiff, tParent, tLasting, tExplosive, tWisdom), $"{tName}", tTime, tDiff, tLasting, tExplosive, tWisdom);
                 //tName = string.Empty;
                 PlanAdder(new Plan(planner));
-                planner = null;
                 //添加并排序
                 //if (InvokeRequired)
                 //{
@@ -1258,7 +1293,7 @@ namespace StonePlanner
 
         private void timer_Anti_Tick(object sender, EventArgs e)
         {
-            if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "devenv.exe")
+            if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "msvsmon")
             {
                 string p = "";
                 try
@@ -1269,8 +1304,18 @@ namespace StonePlanner
                 {
                     p = Process.GetCurrentProcess().Parent().ProcessName;
                 }
-                //MessageBox.Show($"您可能试图尝试在其它框架下运行Aim，例如{p}。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                //timer_Anti.Enabled = false;
+                if (p == "explorer") return;
+                MessageBox.Show($"您可能试图尝试在其它框架下运行Aim，例如{p}。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
+                //反手关闭各线程
+                label_Sentence.Text = "A Fetal Error Occured";
+                timer_Conv.Enabled = false;
+                timer_EventHandler.Enabled = false;
+                timer_PenalLengthController.Enabled = false;
+                timer_Ponv.Enabled = false;
+                timer_Tip.Enabled = false;
+                timer_Anti.Enabled = false;
+                return;
             }
             nownn.Clear();
             string[] files;
@@ -1288,24 +1333,32 @@ namespace StonePlanner
             catch 
             {
                 MessageBox.Show("您可能试图尝试在其它框架下运行Aim，例如BepInEx。请注意，这样的做法不是正确的。","Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
+                //反手关闭各线程
+                label_Sentence.Text = "A Fetal Error Occured";
+                timer_Conv.Enabled = false;
+                timer_EventHandler.Enabled = false;
+                timer_PenalLengthController.Enabled = false;
+                timer_Ponv.Enabled = false;
+                timer_Tip.Enabled = false;
                 return;
             }
             if (files.Length != 0)
             {
                 SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
                 //反手关闭各线程
-                label_Sentence.Text = "Banned From MethodBox Std.";
+                label_Sentence.Text = "A Fetal Error Occured";
                 timer_Conv.Enabled = false;
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
                 timer_Tip.Enabled = false;
-                int isCritical = 1;  // we want this to be a Critical Process
-                int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
-                Process.EnterDebugMode();  //acquire Debug Privileges
-                // setting the BreakOnTermination = 1 for the current process
-                NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-                //for (int i = 0; ; i++) { System.Console.WriteLine(i); }
+                //int isCritical = 1;  // we want this to be a Critical Process
+                //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
+                //Process.EnterDebugMode();  //acquire Debug Privileges
+                //// setting the BreakOnTermination = 1 for the current process
+                //NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
+                ////for (int i = 0; ; i++) { System.Console.WriteLine(i); }
             }
             try
             {
@@ -1348,6 +1401,11 @@ namespace StonePlanner
         private void vScrollBar_Main_Scroll(object sender, ScrollEventArgs e)
         {
           // panel_M.Top = vScrollBar_Main.Value;
+        }
+
+        private void panel_Top_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
