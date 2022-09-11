@@ -10,21 +10,20 @@ namespace StonePlanner.StartUp
             CheckForIllegalCrossThreadCalls = false;
         }
         protected static int top;
-        protected string res;
+        protected string versionInfo;
         private async void Main_Load(object sender, EventArgs e)
         {
             top = 0;
             panel_Top.BringToFront();
             panel_Main.SendToBack();
-            WebClient wc = new WebClient();
-            string res = await wc.DownloadStringTaskAsync(new Uri("https://lzr2006.github.io/wkgd/Aim/source.txt"));
-            while (res == null) { }
-            ReLoad(res);
+            var httpClient = new HttpClient();
+            string versionInfo = await httpClient.GetStringAsync(new Uri("https://lzr2006.github.io/wkgd/Aim/source.txt"));
+            ReLoad(versionInfo);
         }
 
-        protected void ReLoad(string res) 
+        protected void ReLoad(string versionInfo) 
         {
-            List<string> versionList = new List<string>(res.Split(','));
+            List<string> versionList = new List<string>(versionInfo.Split(','));
             foreach (var item in versionList)
             {
                 List<string> inVersion = new List<string>(item.Split('\n'));
@@ -75,7 +74,7 @@ namespace StonePlanner.StartUp
         private void vScrollBar_Main_Scroll(object sender, ScrollEventArgs e)
         {
             panel_Main.Top = -top / 100 * vScrollBar_Main.Value;
-            ReLoad(res);
+            ReLoad(versionInfo);
         }
     }
 }
