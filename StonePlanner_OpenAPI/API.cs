@@ -17,7 +17,7 @@ namespace StonePlanner
             internal const int AM_ADDMONEY = 0x2cbc;
         }
     }
-    public class HWND 
+    public class HWND
     {
         int ihWnd;
         public HWND(int hWnd)
@@ -27,12 +27,12 @@ namespace StonePlanner
         public int hWnd { get => ihWnd; set => ihWnd = value; }
     }
 
-    public class AimInstance 
+    public class AimInstance
     {
-       public HWND hWndInstance;
+        public HWND hWndInstance;
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
         private extern static IntPtr FindWindow(string lpClassName, string lpWindowName);
-        public static AimInstance AutoCreate() 
+        public static AimInstance AutoCreate()
         {
             //测试警告框
             IntPtr maindHwnd = FindWindow(null, "AimPlanner");//主窗口标题
@@ -51,11 +51,11 @@ namespace StonePlanner
     {
         [DllImport("User32.dll")]
         private static extern int SendMessage(int hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-        public static void Exit(AimInstance hInstance) 
+        public static void Exit(AimInstance hInstance)
         {
             SendMessage(hInstance.hWndInstance.hWnd, Develop.Sign.AM_EXIT, new IntPtr(0), new IntPtr(0));
         }
-        public static void AddMoney(AimInstance hInstance,int money) 
+        public static void AddMoney(AimInstance hInstance, int money)
         {
             IntPtr ptr = new IntPtr(money);
             SendMessage(hInstance.hWndInstance.hWnd, 11452, ptr, new IntPtr(0));
