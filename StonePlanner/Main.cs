@@ -15,7 +15,6 @@ using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static StonePlanner.Structs;
-using static StonePlanner.Develop.Sign;
 
 /*
  * **************************************************************************
@@ -195,8 +194,6 @@ namespace StonePlanner
             if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
             timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
             MessageBox.Show(Handle.ToString());
-            //窗口标题
-            Text = "AimPlanner";
         }
 
         /// <summary>
@@ -207,10 +204,10 @@ namespace StonePlanner
         {
             switch (m.Msg)
             {
-                case AM_EXIT:
+                case Develop.AM_EXIT:
                     Environment.Exit(0);
                     break;
-                case AM_ADDMONEY:
+                case Develop.AM_ADDMONEY:
                     MoneyUpdate(m.WParam.ToInt32());
                     break;
                 //调用基类函数，以便系统处理其它消息。
