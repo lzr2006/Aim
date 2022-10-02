@@ -4,17 +4,16 @@ using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Media;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static StonePlanner.Structs;
+using static StonePlanner.Develop.Sign;
 
 /*
  * **************************************************************************
@@ -204,10 +203,10 @@ namespace StonePlanner
         {
             switch (m.Msg)
             {
-                case Develop.AM_EXIT:
+                case AM_EXIT:
                     Environment.Exit(0);
                     break;
-                case Develop.AM_ADDMONEY:
+                case AM_ADDMONEY:
                     MoneyUpdate(m.WParam.ToInt32());
                     break;
                 //调用基类函数，以便系统处理其它消息。
