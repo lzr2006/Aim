@@ -4,17 +4,16 @@ using System.Data.OleDb;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Media;
 using System.Net;
 using System.Net.Http;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static StonePlanner.Structs;
+using static StonePlanner.Develop.Sign;
 
 /*
  * **************************************************************************
@@ -193,9 +192,7 @@ namespace StonePlanner
             timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
             if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
             timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
-            MessageBox.Show(Handle.ToString());
         }
-
         /// <summary>
         /// 覆写窗体的消息处理函数
         /// </summary>
@@ -204,10 +201,10 @@ namespace StonePlanner
         {
             switch (m.Msg)
             {
-                case Develop.AM_EXIT:
+                case AM_EXIT:
                     Environment.Exit(0);
                     break;
-                case Develop.AM_ADDMONEY:
+                case AM_ADDMONEY:
                     MoneyUpdate(m.WParam.ToInt32());
                     break;
                 //调用基类函数，以便系统处理其它消息。
@@ -215,6 +212,35 @@ namespace StonePlanner
                     base.DefWndProc(ref m);
                     break;
             }
+        }
+        protected void TaskTimeScan() 
+        {
+            List<string> _tasks = new List<string>();
+            foreach (var item in panel_M.Controls)
+            {
+                Plan temp;
+                if (item is not Plan)
+                {
+                    continue;
+                }
+                else
+                {
+                    temp = item as Plan;
+                }
+                if (temp.status != "正在办")
+                {
+                    if (DateTime.Now >= temp.dtStartTime)
+                    {
+                        _tasks.Add(temp.capital);
+                    }
+                }
+            }
+            if (_tasks.Count != 0)
+            {
+                new Alert(_tasks).ShowDialog();
+            }
+            _tasks.Clear();
+            Thread.Sleep(60000);
         }
         /// <summary>
         /// 该函数处理用户退出事件，存入新的还未存储的数据。
@@ -478,6 +504,8 @@ namespace StonePlanner
                 label_Sentence.Text = "MethodBox Aim（限制副本）";
             }
             #endregion
+            Thread scanner = new Thread(new ThreadStart(TaskTimeScan));
+            scanner.Start();
         }
 
         internal static void AddSign(int sign)
@@ -719,7 +747,33 @@ namespace StonePlanner
             //回调基类原函数 添加控件
             base.OnControlAdded(e);
         }
-
+        internal void GetSchedule() 
+        {
+            Dictionary<DateTime, string> returns = new Dictionary<DateTime, string>();
+            //内置
+            foreach (var item in panel_M.Controls)
+            {
+                if (item is Plan)
+                {
+                    DateTime d = (item as Plan).dtStartTime;
+                    if (returns.ContainsKey(d))
+                    {
+                        //频率统计
+                        continue;
+                    }
+                    else
+                    {
+                        string sch = ((item as Plan).dtStartTime.Hour) switch
+                        {
+                            >6 and <15 => "白班",
+                            _ => "夜班",
+                        };
+                        returns.Add(d, sch);
+                    }
+                }
+                SchedulingCalendar calendar = new SchedulingCalendar();
+            }
+        }
         /// <summary>
         /// 判断是否包含此字串的进程   模糊
         /// </summary>

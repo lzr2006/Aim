@@ -14,15 +14,21 @@ namespace StonePlanner
     //                     ——MethodBox
     public partial class SchedulingCalendar : Form
     {
-        public SchedulingCalendar()
+        Dictionary<DateTime, string> schd;
+        public SchedulingCalendar(Dictionary<DateTime, string> schd)
         {
             InitializeComponent();
+
+            this.schd = schd;
         }
 
         private void SchedulingCalendar_Load(object sender, EventArgs e)
         {
             Add();
             label_Now.Text = $"{DateTime.Now.Year}年{DateTime.Now.Month}月";
+            int year = Convert.ToInt32(label_Now.Text.Split('年')[0]);
+            int month = Convert.ToInt32(label_Now.Text.Split('年')[1].Split('月')[0]);
+            //扫描主窗口内容
         }
 
         protected void DayAddedHandler(object sender, ControlEventArgs e)
@@ -60,10 +66,6 @@ namespace StonePlanner
             }
             uint wkday = (uint) (int) ZellerCalculation(dt);
             ////画矩阵！
-            //List<List<SchedulingCalendarDay>> sdaylist = new List<List<SchedulingCalendarDay>>();
-            ////请严格使用该二维列表
-            //sdaylist.Add(new List<SchedulingCalendarDay>());
-            //sdaylist.Add(new List<SchedulingCalendarDay>());
             SchedulingCalendarDay[,] dayarr;
             //五行七列式
             //INT[第几个周，这周的第几天]
@@ -113,7 +115,7 @@ namespace StonePlanner
                     position -= 7;
                 }
                 int x = position;
-                //Result-oriented programming
+                //Result-Oriented Programming
                 dayarr[y,x-1].BackColor = Color.White;
             }
         }
