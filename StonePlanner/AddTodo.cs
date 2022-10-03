@@ -129,17 +129,17 @@ namespace StonePlanner
             //加载TIPS
             try
             {
-                WFJsonStructure.DataItem weather;
-                Main.wf.GetWInfo(out weather);
-                if (Convert.ToInt32(weather.air) >= 180)
-                {
-                    //TIPS：今天天气状态良好，可以做想做的事情。
-                    label_Tips.Text = $"TIPS:空气较差（{weather.air}），不建议在外活动。";
-                }
-                else if (Convert.ToInt32(weather.uvIndex) > 6)
-                {
-                    label_Tips.Text = $"TIPS:今日紫外线较强（{weather.uvIndex}），请做好防护。";
-                }
+                //WFJsonStructure.DataItem weather;
+                //Main.wf.GetWInfo(out weather);
+                //if (Convert.ToInt32(weather.air) >= 180)
+                //{
+                //    //TIPS：今天天气状态良好，可以做想做的事情。
+                //    label_Tips.Text = $"TIPS:空气较差（{weather.air}），不建议在外活动。";
+                //}
+                //else if (Convert.ToInt32(weather.uvIndex) > 6)
+                //{
+                //    label_Tips.Text = $"TIPS:今日紫外线较强（{weather.uvIndex}），请做好防护。";
+                //}
             }
             catch
             {

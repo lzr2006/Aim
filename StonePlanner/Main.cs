@@ -117,7 +117,7 @@ namespace StonePlanner
         //全局展示
         TaskDetails td;
         //天气预报
-        internal static WeatherForecast wf = new WeatherForecast();
+        //internal static WeatherForecast wf = new WeatherForecast();
         //数据库查询
         internal static OleDbConnection odcConnection = new OleDbConnection();
         #endregion
@@ -456,14 +456,6 @@ namespace StonePlanner
             #endregion
             //Thread testThread = new Thread(new ThreadStart(Test.Add10Plan));
             //testThread.Start();
-            #region 天气预报
-            //狗狗
-            pictureBox_Tip.Parent = pictureBox_Main;
-            wf.Top = 218;
-            wf.Left = 600;
-            panel_TaskDetail.Controls.Add(wf);
-            wf.BringToFront();
-            #endregion
             #region 热点爬取器
             //https://v.api.aa1.cn/api/topbaidu/index.php
             //请求新闻API
@@ -1030,7 +1022,6 @@ namespace StonePlanner
             }
             else if (Sign == 9)
             {
-                timer_Tip.Enabled = false;
                 pictureBox_Tip.Visible = false;
                 signQueue.Dequeue();
             }
@@ -1330,20 +1321,6 @@ namespace StonePlanner
             panel_L.Top = vScrollBar_Main.Value;
         }
 
-        private void timer_Tip_Tick(object sender, EventArgs e)
-        {
-            pictureBox_Tip.Left--;
-            wf.Left--;
-            if (wf.Left == 420)
-            {
-                new SoundPlayer($@"{Application.StartupPath}\icon\Tip.wav").Play();
-            }
-            if (wf.Left <= 16)
-            {
-                pictureBox_Tip.Visible = false;
-                timer_Tip.Enabled = false;
-            }
-        }
 
         private void timer_Anti_Tick(object sender, EventArgs e)
         {
@@ -1367,7 +1344,6 @@ namespace StonePlanner
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
-                timer_Tip.Enabled = false;
                 timer_Anti.Enabled = false;
                 return;
             }
@@ -1394,7 +1370,6 @@ namespace StonePlanner
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
-                timer_Tip.Enabled = false;
                 return;
             }
             if (files.Length != 0)
@@ -1406,7 +1381,6 @@ namespace StonePlanner
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
-                timer_Tip.Enabled = false;
                 //int isCritical = 1;  // we want this to be a Critical Process
                 //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
                 //Process.EnterDebugMode();  //acquire Debug Privileges

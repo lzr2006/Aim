@@ -6243,9 +6243,6 @@
   <metadata name="timer_Ponv.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>517, 17</value>
   </metadata>
-  <metadata name="timer_Tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>975, 24</value>
-  </metadata>
   <metadata name="timer_Anti.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1120, 24</value>
   </metadata>

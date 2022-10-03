@@ -55,7 +55,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.vScrollBar_Main = new System.Windows.Forms.VScrollBar();
             this.timer_Ponv = new System.Windows.Forms.Timer(this.components);
-            this.timer_Tip = new System.Windows.Forms.Timer(this.components);
             this.timer_Anti = new System.Windows.Forms.Timer(this.components);
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.User_Piicture)).BeginInit();
@@ -334,12 +333,6 @@
             this.timer_Ponv.Interval = 30000;
             this.timer_Ponv.Tick += new System.EventHandler(this.timer_Ponv_Tick);
             // 
-            // timer_Tip
-            // 
-            this.timer_Tip.Enabled = true;
-            this.timer_Tip.Interval = 6;
-            this.timer_Tip.Tick += new System.EventHandler(this.timer_Tip_Tick);
-            // 
             // timer_Anti
             // 
             this.timer_Anti.Enabled = true;
@@ -403,7 +396,6 @@
         private System.Windows.Forms.Label label_GGS;
         private System.Windows.Forms.VScrollBar vScrollBar_Main;
         private System.Windows.Forms.PictureBox pictureBox_Tip;
-        private System.Windows.Forms.Timer timer_Tip;
         private System.Windows.Forms.Timer timer_Anti;
         private System.Windows.Forms.Label label_XHDL;
     }
