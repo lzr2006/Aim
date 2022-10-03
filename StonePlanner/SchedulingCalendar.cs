@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,12 +15,47 @@ namespace StonePlanner
     //                     ——MethodBox
     public partial class SchedulingCalendar : Form
     {
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool ReleaseCapture();
         Dictionary<DateTime, string> schd;
+        SchedulingCalendarDay[,] dayarr;
         public SchedulingCalendar(Dictionary<DateTime, string> schd)
         {
             InitializeComponent();
 
             this.schd = schd;
+        }
+
+        protected void ReLoad() 
+        {
+            foreach (var item in schd)
+            {
+                foreach (var d in dayarr)
+                {
+                    if (d is not SchedulingCalendarDay)
+                    {
+                        continue;
+                    }
+                    try { int.Parse(d.label_Day.Text); } catch { continue; }
+                    if (int.Parse(d.label_Day.Text) == item.Key.Day 
+                        && item.Key.Month == Convert.ToInt32(label_Now.Text.Split('年')[1].Split('月')[0])
+                        && item.Key.Year == Convert.ToInt32(label_Now.Text.Split('年')[0]))
+                    {
+                        d.label_D.Text = item.Value;
+                        if (item.Value == " 白班")
+                        {
+                            d.label_D.BackColor = Color.Orange;
+                        }
+                        else if (item.Value == " 夜班")
+                        {
+                            d.label_D.BackColor = Color.Blue;
+                            d.label_D.ForeColor = Color.White;
+                        }
+                    }
+                }
+            }
         }
 
         private void SchedulingCalendar_Load(object sender, EventArgs e)
@@ -29,6 +65,7 @@ namespace StonePlanner
             int year = Convert.ToInt32(label_Now.Text.Split('年')[0]);
             int month = Convert.ToInt32(label_Now.Text.Split('年')[1].Split('月')[0]);
             //扫描主窗口内容
+            ReLoad();
         }
 
         protected void DayAddedHandler(object sender, ControlEventArgs e)
@@ -65,8 +102,7 @@ namespace StonePlanner
                     );
             }
             uint wkday = (uint) (int) ZellerCalculation(dt);
-            ////画矩阵！
-            SchedulingCalendarDay[,] dayarr;
+            //画矩阵！
             //五行七列式
             //INT[第几个周，这周的第几天]
             dayarr = new SchedulingCalendarDay[6, 7];
@@ -179,6 +215,7 @@ namespace StonePlanner
             else { month = 12; year -= 1; }
             label_Now.Text = $"{year}年{month}月";
             Add(month, year);
+            ReLoad();
         }
 
         private void button_Right_Click(object sender, EventArgs e)
@@ -189,6 +226,18 @@ namespace StonePlanner
             else { month = 1; year += 1; }
             label_Now.Text = $"{year}年{month}月";
             Add(month, year);
+            ReLoad();
+        }
+
+        private void panel_Top_MouseDown(object sender, MouseEventArgs e)
+        {
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 0x0002;
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
+            }
         }
     }
 }

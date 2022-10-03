@@ -175,7 +175,6 @@ namespace StonePlanner
         {
             const int WM_NCLBUTTONDOWN = 0x00A1;
             const int HTCAPTION = 0x0002;
-
             if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
             {
                 ReleaseCapture();
@@ -765,14 +764,15 @@ namespace StonePlanner
                     {
                         string sch = ((item as Plan).dtStartTime.Hour) switch
                         {
-                            >6 and <15 => "白班",
-                            _ => "夜班",
+                            >6 and <15 => " 白班",
+                            _ => " 夜班",
                         };
                         returns.Add(d, sch);
                     }
                 }
-                SchedulingCalendar calendar = new SchedulingCalendar();
             }
+            SchedulingCalendar calendar = new SchedulingCalendar(returns);
+            calendar.Show();
         }
         /// <summary>
         /// 判断是否包含此字串的进程   模糊
@@ -1460,6 +1460,11 @@ namespace StonePlanner
         private void panel_Top_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void label_Sentence_Click(object sender, EventArgs e)
+        {
+            GetSchedule();
         }
     }
 }

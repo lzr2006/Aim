@@ -142,6 +142,7 @@
             this.label_Sentence.Size = new System.Drawing.Size(212, 17);
             this.label_Sentence.TabIndex = 3;
             this.label_Sentence.Text = "人生如逆旅，我亦是行人。";
+            this.label_Sentence.Click += new System.EventHandler(this.label_Sentence_Click);
             // 
             // pictureBox_T_More
             // 

@@ -144,7 +144,7 @@ namespace StonePlanner
             catch
             {
                 //天气预报 not loaded (x)
-                //developer should be fucked (√)
+                //developer should be fucked (√)夜班c
             }
         }
 
