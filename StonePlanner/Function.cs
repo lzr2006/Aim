@@ -117,6 +117,10 @@ namespace StonePlanner
                     TestTools tt = new TestTools();
                     tt.Show();
                 }
+                else if (__Name__ == "__Schedule__")
+                {
+                    Main.AddSign(10);
+                }
             }
             else
             {

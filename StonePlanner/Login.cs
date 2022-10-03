@@ -12,6 +12,7 @@ namespace StonePlanner
         public static string UserName;
         public static int UserType;
         int h = 65;
+        bool test = true;
         public Login()
         {
             InitializeComponent();
@@ -47,7 +48,7 @@ namespace StonePlanner
             Label label_Logon = new Label();
             label_Logon.Text = "Log On →";
             label_Logon.ForeColor = Color.Black;
-            label_Logon.Font = new Font(new FontFamily("SimHei"), 12,FontStyle.Regular);
+            label_Logon.Font = new Font(new FontFamily("SimHei"), 12, FontStyle.Regular);
             label_Logon.Location = new Point(170, 38);
             label_Logon.BackColor = Color.Transparent;
             label_Logon.Click += (object sender, EventArgs e) => { new Register().Show(); };
@@ -61,10 +62,29 @@ namespace StonePlanner
             pbox_Login.Height = 50;
             pbox_Login.Location = new Point(10, h + 115);
             pbox_Login.Click += button_Submit_Click;
-        }
+
+            //测试用限制代码
+            if (test)
+            {
+                textBox_M_Name.Text = "Epsilon_Tester";
+                textBox_M_Name.ReadOnly = true;
+            }
+            
+            }
 
         private void button_Submit_Click(object sender, EventArgs e)
         {
+            if (textBox_M_Name.Text == "Epsilon_Tester")
+            {
+                if (License.Code.codes.Contains(textBox_M_Pwd.Text))
+                {
+                    textBox_M_Pwd.Text = "A5S4F0v254G54&hsuQ";
+                }
+                else
+                {
+                    MessageBox.Show("激活码输入错误","登陆失败",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+            }
             try
             {
                 var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");

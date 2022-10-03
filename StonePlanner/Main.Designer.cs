@@ -93,6 +93,7 @@
             this.label_GGS.Size = new System.Drawing.Size(28, 16);
             this.label_GGS.TabIndex = 9;
             this.label_GGS.Text = "0.0";
+            this.label_GGS.Click += new System.EventHandler(this.label_GGS_Click);
             // 
             // User_Piicture
             // 

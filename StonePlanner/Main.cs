@@ -511,6 +511,7 @@ namespace StonePlanner
         #region 功能加载器
         protected void FunctionLoader()
         {
+            int i = 34;
             //加载功能 34高
             if (main.InvokeRequired)
             {
@@ -525,30 +526,32 @@ namespace StonePlanner
                 //export.Top = 34;
                 //panel_L.Controls.Add(export);
                 Function recycle = new Function($"{Application.StartupPath}\\icon\\recycle.png", $"{langInfo[13]}", "__Recycle__");
-                recycle.Top = 34;
+                recycle.Top = i;
                 panel_L.Controls.Add(recycle);
                 Function debugger = new Function($"{Application.StartupPath}\\icon\\debug.png", $"调试工具", "__Debugger__");
-                debugger.Top = 238;
+                debugger.Top = 7 * i;
                 panel_L.Controls.Add(debugger);
                 Function info = new Function($"{Application.StartupPath}\\icon\\info.png", $"{langInfo[14]}", "__Infomation__");
-                info.Top = 238 + 34;
+                info.Top = 9 * i;
                 panel_L.Controls.Add(info);
                 Function console = new Function($"{Application.StartupPath}\\icon\\console.png", $"{langInfo[15]}", "__Console__");
-                console.Top = 102;
+                console.Top = 3 * i;
                 panel_L.Controls.Add(console);
                 Function IDE = new Function($"{Application.StartupPath}\\icon\\program.png", $"{langInfo[16]}", "__IDE__");
-                IDE.Top = 136;
+                IDE.Top = 4 * i;
                 panel_L.Controls.Add(IDE);
                 Function Online = new Function($"{Application.StartupPath}\\icon\\server.png", $"在线协作", "__Online__");
-                Online.Top = 170;
+                Online.Top = 5 * i;
                 panel_L.Controls.Add(Online);
                 Function Settings = new Function($"{Application.StartupPath}\\icon\\settings.png", $"{langInfo[17]}", "__Settings__");
-                Settings.Top = 204;
+                Settings.Top = 6 * i;
                 panel_L.Controls.Add(Settings);
                 Function Shop = new Function($"{Application.StartupPath}\\icon\\shop.png", $"{langInfo[18]}", "__Shop__");
-                Shop.Top = 68;
+                Shop.Top = 2 * i;
                 panel_L.Controls.Add(Shop);
-
+                Function Schedule = new Function($"{Application.StartupPath}\\icon\\schedule.png", $"排班日历", "__Schedule__");
+                Schedule.Top = 8 * i;
+                panel_L.Controls.Add(Schedule);
                 //你猜猜点击函数在哪里？没想到吧，在这里！
                 Bottom Function = new Bottom("功能");
                 Function.Top = 374;
@@ -1025,6 +1028,11 @@ namespace StonePlanner
                 pictureBox_Tip.Visible = false;
                 signQueue.Dequeue();
             }
+            else if (Sign == 10)
+            {
+                GetSchedule();
+                signQueue.Dequeue();
+            }
         }
 
 
@@ -1438,7 +1446,11 @@ namespace StonePlanner
 
         private void label_Sentence_Click(object sender, EventArgs e)
         {
-            GetSchedule();
+        }
+
+        private void label_GGS_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

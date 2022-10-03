@@ -76,7 +76,7 @@
             this.pictureBox_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Logo.BackgroundImage")));
             this.pictureBox_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Logo.Location = new System.Drawing.Point(109, 16);
-            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Logo.Name = "pictureBox_Logo";
             this.pictureBox_Logo.Size = new System.Drawing.Size(93, 82);
             this.pictureBox_Logo.TabIndex = 0;
@@ -108,7 +108,7 @@
             // 
             this.pictureBox_Line.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Line.Image")));
             this.pictureBox_Line.Location = new System.Drawing.Point(0, 119);
-            this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Line.Name = "pictureBox_Line";
             this.pictureBox_Line.Size = new System.Drawing.Size(727, 12);
             this.pictureBox_Line.TabIndex = 3;
@@ -226,7 +226,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Location = new System.Drawing.Point(0, 139);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(736, 406);
             this.panel1.TabIndex = 12;
@@ -234,7 +234,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(380, 255);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(319, 35);
             this.button1.TabIndex = 25;
@@ -290,12 +290,12 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Courier New", 10.75F);
-            this.label27.Location = new System.Drawing.Point(376, 291);
+            this.label27.Location = new System.Drawing.Point(382, 293);
             this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(273, 20);
+            this.label27.Size = new System.Drawing.Size(218, 20);
             this.label27.TabIndex = 20;
-            this.label27.Text = "版本：B.2022.6.Insider.0\r\n";
+            this.label27.Text = "版本：Epsilon 1.0.0\r\n";
             // 
             // label26
             // 
@@ -444,7 +444,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(357, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(3, 335);
             this.pictureBox1.TabIndex = 1;
@@ -466,7 +466,7 @@
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(11, 16);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(93, 82);
             this.pictureBox2.TabIndex = 13;
@@ -491,7 +491,7 @@
             this.Controls.Add(this.label_T);
             this.Controls.Add(this.label_TT);
             this.Controls.Add(this.pictureBox_Logo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "About";
             this.Load += new System.EventHandler(this.About_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).EndInit();
