@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SchedulingCalendar));
             this.panel_Top = new System.Windows.Forms.Panel();
             this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
@@ -37,6 +38,7 @@
             this.button_Left = new System.Windows.Forms.Button();
             this.button_Right = new System.Windows.Forms.Button();
             this.pictureBox_Settings = new System.Windows.Forms.PictureBox();
+            this.notifyIconinfo = new System.Windows.Forms.NotifyIcon(this.components);
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Settings)).BeginInit();
@@ -48,7 +50,7 @@
             this.panel_Top.Controls.Add(this.pictureBox_T_Exit);
             this.panel_Top.Controls.Add(this.label_T);
             this.panel_Top.Location = new System.Drawing.Point(0, 0);
-            this.panel_Top.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_Top.Margin = new System.Windows.Forms.Padding(4);
             this.panel_Top.Name = "panel_Top";
             this.panel_Top.Size = new System.Drawing.Size(666, 38);
             this.panel_Top.TabIndex = 2;
@@ -59,7 +61,7 @@
             this.pictureBox_T_Exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Exit.BackgroundImage")));
             this.pictureBox_T_Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_T_Exit.Location = new System.Drawing.Point(625, 3);
-            this.pictureBox_T_Exit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_T_Exit.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_T_Exit.Name = "pictureBox_T_Exit";
             this.pictureBox_T_Exit.Size = new System.Drawing.Size(33, 31);
             this.pictureBox_T_Exit.TabIndex = 18;
@@ -122,11 +124,17 @@
             this.pictureBox_Settings.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Settings.BackgroundImage")));
             this.pictureBox_Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Settings.Location = new System.Drawing.Point(4, 42);
-            this.pictureBox_Settings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Settings.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Settings.Name = "pictureBox_Settings";
             this.pictureBox_Settings.Size = new System.Drawing.Size(47, 41);
             this.pictureBox_Settings.TabIndex = 7;
             this.pictureBox_Settings.TabStop = false;
+            // 
+            // notifyIconinfo
+            // 
+            this.notifyIconinfo.Text = "notifyIcon_Info";
+            this.notifyIconinfo.Visible = true;
+            this.notifyIconinfo.Click += new System.EventHandler(this.notifyIconinfo_Click);
             // 
             // SchedulingCalendar
             // 
@@ -163,5 +171,6 @@
         private System.Windows.Forms.Button button_Left;
         private System.Windows.Forms.Button button_Right;
         private System.Windows.Forms.PictureBox pictureBox_Settings;
+        private System.Windows.Forms.NotifyIcon notifyIconinfo;
     }
 }

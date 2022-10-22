@@ -30,7 +30,6 @@
         {
             this.label_Top_1 = new System.Windows.Forms.Label();
             this.panel_Top = new System.Windows.Forms.Panel();
-            this.label_Top_3 = new System.Windows.Forms.Label();
             this.label_Top_2 = new System.Windows.Forms.Label();
             this.linkLabel_GetPassword = new System.Windows.Forms.LinkLabel();
             this.linkLabel_Register = new System.Windows.Forms.LinkLabel();
@@ -56,14 +55,13 @@
             this.label_Top_1.Location = new System.Drawing.Point(3, 8);
             this.label_Top_1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Top_1.Name = "label_Top_1";
-            this.label_Top_1.Size = new System.Drawing.Size(196, 32);
+            this.label_Top_1.Size = new System.Drawing.Size(294, 32);
             this.label_Top_1.TabIndex = 1;
-            this.label_Top_1.Text = "MethodBox·Aim";
+            this.label_Top_1.Text = "MethodBox·AimPlanner";
             // 
             // panel_Top
             // 
             this.panel_Top.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel_Top.Controls.Add(this.label_Top_3);
             this.panel_Top.Controls.Add(this.label_Top_2);
             this.panel_Top.Controls.Add(this.label_Top_1);
             this.panel_Top.Location = new System.Drawing.Point(0, 0);
@@ -71,18 +69,6 @@
             this.panel_Top.Name = "panel_Top";
             this.panel_Top.Size = new System.Drawing.Size(391, 99);
             this.panel_Top.TabIndex = 19;
-            // 
-            // label_Top_3
-            // 
-            this.label_Top_3.AutoSize = true;
-            this.label_Top_3.Font = new System.Drawing.Font("Cascadia Mono Light", 6F);
-            this.label_Top_3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label_Top_3.Location = new System.Drawing.Point(251, 85);
-            this.label_Top_3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_Top_3.Name = "label_Top_3";
-            this.label_Top_3.Size = new System.Drawing.Size(115, 13);
-            this.label_Top_3.TabIndex = 3;
-            this.label_Top_3.Text = "Use TCP connection";
             // 
             // label_Top_2
             // 
@@ -92,9 +78,9 @@
             this.label_Top_2.Location = new System.Drawing.Point(4, 59);
             this.label_Top_2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Top_2.Name = "label_Top_2";
-            this.label_Top_2.Size = new System.Drawing.Size(178, 24);
+            this.label_Top_2.Size = new System.Drawing.Size(202, 24);
             this.label_Top_2.TabIndex = 2;
-            this.label_Top_2.Text = "登录到网络账户";
+            this.label_Top_2.Text = "登录到网络服务器";
             // 
             // linkLabel_GetPassword
             // 
@@ -270,6 +256,5 @@
         private System.Windows.Forms.TextBox textBox_M_Address;
         private System.Windows.Forms.Label label_M_Port;
         private System.Windows.Forms.TextBox textBox_M_Port;
-        private System.Windows.Forms.Label label_Top_3;
     }
 }

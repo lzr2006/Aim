@@ -121,9 +121,9 @@
             this.label1.Location = new System.Drawing.Point(15, 145);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(478, 21);
+            this.label1.Size = new System.Drawing.Size(467, 21);
             this.label1.TabIndex = 4;
-            this.label1.Text = "开发者：Zongzi（MethodBox a.k.a. ZongZi COOP. I）";
+            this.label1.Text = "开发者：Zongzi（Zongzi Feat MethodBox as \"Arq\"）";
             // 
             // label2
             // 
@@ -132,9 +132,9 @@
             this.label2.Location = new System.Drawing.Point(15, 172);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(330, 21);
+            this.label2.Size = new System.Drawing.Size(293, 21);
             this.label2.TabIndex = 5;
-            this.label2.Text = "联系方式：methodbox@outlook.com";
+            this.label2.Text = "联系方式：MethodBox@163.com";
             // 
             // label3
             // 
@@ -143,9 +143,9 @@
             this.label3.Location = new System.Drawing.Point(16, 212);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(522, 21);
+            this.label3.Size = new System.Drawing.Size(541, 21);
             this.label3.TabIndex = 6;
-            this.label3.Text = "MethodBox Stone TO-DO（Insider Version && TEST BETA）";
+            this.label3.Text = "MethodBox AimPlanner（Insider Version && TEST EPSILON）";
             // 
             // label4
             // 
@@ -154,9 +154,9 @@
             this.label4.Location = new System.Drawing.Point(16, 236);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(481, 21);
+            this.label4.Size = new System.Drawing.Size(485, 21);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 B.2022.3.Insider.1（内部版本M007171311FJHY）";
+            this.label4.Text = "版本 E.2022.1.Insider.1（内部版本M010221259CHZL）";
             // 
             // label5
             // 
@@ -195,12 +195,12 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 406);
+            this.label8.Location = new System.Drawing.Point(7, 409);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(606, 15);
+            this.label8.Size = new System.Drawing.Size(622, 15);
             this.label8.TabIndex = 11;
-            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.7.17 14:00 - 2022.7.27 05:00";
+            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.10.22 14:00 - 2022.11.05 05:00";
             // 
             // panel1
             // 
@@ -228,7 +228,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 139);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(736, 406);
+            this.panel1.Size = new System.Drawing.Size(10, 406);
             this.panel1.TabIndex = 12;
             // 
             // button1
@@ -476,7 +476,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 472);
+            this.ClientSize = new System.Drawing.Size(723, 435);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label8);

@@ -49,6 +49,7 @@
             this.timer_PenalLengthController = new System.Windows.Forms.Timer(this.components);
             this.timer_Conv = new System.Windows.Forms.Timer(this.components);
             this.panel_TaskDetail = new System.Windows.Forms.Panel();
+            this.pictureBox_Small = new System.Windows.Forms.PictureBox();
             this.label_XHDL = new System.Windows.Forms.Label();
             this.pictureBox_Tip = new System.Windows.Forms.PictureBox();
             this.pictureBox_Main = new System.Windows.Forms.PictureBox();
@@ -56,19 +57,23 @@
             this.vScrollBar_Main = new System.Windows.Forms.VScrollBar();
             this.timer_Ponv = new System.Windows.Forms.Timer(this.components);
             this.timer_Anti = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_T_Float = new System.Windows.Forms.PictureBox();
             this.panel_Top.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.User_Piicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_More)).BeginInit();
             this.panel_M.SuspendLayout();
             this.panel_TaskDetail.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Small)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Tip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Float)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Top
             // 
             this.panel_Top.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel_Top.Controls.Add(this.pictureBox_T_Float);
             this.panel_Top.Controls.Add(this.label_GGS);
             this.panel_Top.Controls.Add(this.User_Piicture);
             this.panel_Top.Controls.Add(this.label_NeedTime);
@@ -80,26 +85,24 @@
             this.panel_Top.Name = "panel_Top";
             this.panel_Top.Size = new System.Drawing.Size(900, 38);
             this.panel_Top.TabIndex = 0;
-            this.panel_Top.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Top_Paint);
             this.panel_Top.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseDown);
             // 
             // label_GGS
             // 
             this.label_GGS.AutoSize = true;
             this.label_GGS.Font = new System.Drawing.Font("Cascadia Code", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_GGS.Location = new System.Drawing.Point(481, 20);
+            this.label_GGS.Location = new System.Drawing.Point(464, 20);
             this.label_GGS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_GGS.Name = "label_GGS";
             this.label_GGS.Size = new System.Drawing.Size(28, 16);
             this.label_GGS.TabIndex = 9;
             this.label_GGS.Text = "0.0";
-            this.label_GGS.Click += new System.EventHandler(this.label_GGS_Click);
             // 
             // User_Piicture
             // 
             this.User_Piicture.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("User_Piicture.BackgroundImage")));
             this.User_Piicture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.User_Piicture.Location = new System.Drawing.Point(439, 2);
+            this.User_Piicture.Location = new System.Drawing.Point(422, 2);
             this.User_Piicture.Margin = new System.Windows.Forms.Padding(4);
             this.User_Piicture.Name = "User_Piicture";
             this.User_Piicture.Size = new System.Drawing.Size(43, 34);
@@ -112,7 +115,7 @@
             // 
             this.label_NeedTime.AutoSize = true;
             this.label_NeedTime.Font = new System.Drawing.Font("Cambria", 10F);
-            this.label_NeedTime.Location = new System.Drawing.Point(657, 10);
+            this.label_NeedTime.Location = new System.Drawing.Point(620, 10);
             this.label_NeedTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_NeedTime.Name = "label_NeedTime";
             this.label_NeedTime.Size = new System.Drawing.Size(147, 20);
@@ -142,7 +145,8 @@
             this.label_Sentence.Size = new System.Drawing.Size(212, 17);
             this.label_Sentence.TabIndex = 3;
             this.label_Sentence.Text = "人生如逆旅，我亦是行人。";
-            this.label_Sentence.Click += new System.EventHandler(this.label_Sentence_Click);
+            this.label_Sentence.TextChanged += new System.EventHandler(this.label_Sentence_TextChanged);
+            this.label_Sentence.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label_Sentence_MouseDown);
             // 
             // pictureBox_T_More
             // 
@@ -262,6 +266,7 @@
             // 
             // panel_TaskDetail
             // 
+            this.panel_TaskDetail.Controls.Add(this.pictureBox_Small);
             this.panel_TaskDetail.Controls.Add(this.label_XHDL);
             this.panel_TaskDetail.Controls.Add(this.pictureBox_Tip);
             this.panel_TaskDetail.Controls.Add(this.pictureBox_Main);
@@ -275,6 +280,18 @@
             this.panel_TaskDetail.Name = "panel_TaskDetail";
             this.panel_TaskDetail.Size = new System.Drawing.Size(563, 496);
             this.panel_TaskDetail.TabIndex = 5;
+            // 
+            // pictureBox_Small
+            // 
+            this.pictureBox_Small.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox_Small.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Small.BackgroundImage")));
+            this.pictureBox_Small.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_Small.Location = new System.Drawing.Point(4, 231);
+            this.pictureBox_Small.Name = "pictureBox_Small";
+            this.pictureBox_Small.Size = new System.Drawing.Size(30, 50);
+            this.pictureBox_Small.TabIndex = 11;
+            this.pictureBox_Small.TabStop = false;
+            this.pictureBox_Small.Click += new System.EventHandler(this.pictureBox_Small_Click);
             // 
             // label_XHDL
             // 
@@ -326,7 +343,6 @@
             this.vScrollBar_Main.Name = "vScrollBar_Main";
             this.vScrollBar_Main.Size = new System.Drawing.Size(19, 496);
             this.vScrollBar_Main.TabIndex = 0;
-            this.vScrollBar_Main.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar_Main_Scroll);
             // 
             // timer_Ponv
             // 
@@ -339,6 +355,17 @@
             this.timer_Anti.Enabled = true;
             this.timer_Anti.Interval = 10000;
             this.timer_Anti.Tick += new System.EventHandler(this.timer_Anti_Tick);
+            // 
+            // pictureBox_T_Float
+            // 
+            this.pictureBox_T_Float.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Float.BackgroundImage")));
+            this.pictureBox_T_Float.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_T_Float.Location = new System.Drawing.Point(818, 2);
+            this.pictureBox_T_Float.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox_T_Float.Name = "pictureBox_T_Float";
+            this.pictureBox_T_Float.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox_T_Float.TabIndex = 10;
+            this.pictureBox_T_Float.TabStop = false;
             // 
             // Main
             // 
@@ -364,8 +391,10 @@
             this.panel_M.ResumeLayout(false);
             this.panel_TaskDetail.ResumeLayout(false);
             this.panel_TaskDetail.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Small)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Tip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Float)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -399,6 +428,8 @@
         private System.Windows.Forms.PictureBox pictureBox_Tip;
         private System.Windows.Forms.Timer timer_Anti;
         private System.Windows.Forms.Label label_XHDL;
+        private System.Windows.Forms.PictureBox pictureBox_Small;
+        private System.Windows.Forms.PictureBox pictureBox_T_Float;
     }
 }
 

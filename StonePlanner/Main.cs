@@ -497,6 +497,7 @@ namespace StonePlanner
             #endregion
             Thread scanner = new Thread(new ThreadStart(TaskTimeScan));
             scanner.Start();
+            GetSchedule(true);
         }
 
         internal static void AddSign(int sign)
@@ -741,7 +742,7 @@ namespace StonePlanner
             //回调基类原函数 添加控件
             base.OnControlAdded(e);
         }
-        internal void GetSchedule() 
+        internal void GetSchedule(bool @out = false) 
         {
             Dictionary<DateTime, string> returns = new Dictionary<DateTime, string>();
             //内置
@@ -766,7 +767,7 @@ namespace StonePlanner
                     }
                 }
             }
-            SchedulingCalendar calendar = new SchedulingCalendar(returns);
+            SchedulingCalendar calendar = new SchedulingCalendar(returns,@out);
             calendar.Show();
         }
         /// <summary>
@@ -1079,6 +1080,26 @@ namespace StonePlanner
                 ExportTodo et = new ExportTodo(panel_M.Controls);
                 et.Show();
                 signQueue.Dequeue();
+            }
+            else if (Sign == 12)
+            {
+                signQueue.Dequeue();
+                if (Width >= 256)
+                {
+                    Width -= 2;
+                    pictureBox_T_Exit.Left -= 2;
+                    AddSign(12);
+                }
+            }
+            else if (Sign == 13)
+            {
+                signQueue.Dequeue();
+                if (Width <= 666)
+                {
+                    Width += 2;
+                    pictureBox_T_Exit.Left += 2;
+                    AddSign(13);
+                }
             }
         }
 
@@ -1434,23 +1455,26 @@ namespace StonePlanner
             tt.Show();
         }
 
-        private void vScrollBar_Main_Scroll(object sender, ScrollEventArgs e)
+        private void pictureBox_Small_Click(object sender, EventArgs e)
         {
-          // panel_M.Top = vScrollBar_Main.Value;
+            AddSign(12);
+           
         }
 
-        private void panel_Top_Paint(object sender, PaintEventArgs e)
+        private void label_Sentence_MouseDown(object sender, MouseEventArgs e)
         {
-
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 0x0002;
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
+            }
         }
 
-        private void label_Sentence_Click(object sender, EventArgs e)
+        private void label_Sentence_TextChanged(object sender, EventArgs e)
         {
-        }
-
-        private void label_GGS_Click(object sender, EventArgs e)
-        {
-
+            label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
         }
     }
 }
