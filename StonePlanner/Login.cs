@@ -62,6 +62,7 @@ namespace StonePlanner
             pbox_Login.Height = 50;
             pbox_Login.Location = new Point(10, h + 115);
             pbox_Login.Click += button_Submit_Click;
+            LinkLabel label_NoLogin = new LinkLabel();
             //测试用限制代码
             if (test)
             {
@@ -140,6 +141,16 @@ namespace StonePlanner
                             ti.Show();
                             new ErrorCenter().Show();
                         }
+                        if (textBox_M_Name.Text == "HK_ME")
+                        {
+                            Hide();
+                            UserName = textBox_M_Name.Text;
+                            Main mm = new Main();
+                            mm.Show();
+                            textBox_M_Name.Text = "";
+                            textBox_M_Pwd.Text = "";
+                            return;
+                        }
                         MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Hide();
                         UserName = textBox_M_Name.Text;
@@ -177,6 +188,13 @@ namespace StonePlanner
         private void linkLabel_Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             new Register().Show();
+        }
+
+        private void linkLabel_Nll_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            textBox_M_Name.Text = "HK_ME";
+            textBox_M_Pwd.Text = "HK_PassWord";
+            button_Submit_Click(null, null);
         }
     }
 }

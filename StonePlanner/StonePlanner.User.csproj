@@ -565,6 +565,9 @@
     <EmbeddedResource Include="Finder.resx">
       <DependentUpon>Finder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FloatWindow.resx">
+      <DependentUpon>FloatWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Function.resx">
       <DependentUpon>Function.cs</DependentUpon>
     </EmbeddedResource>

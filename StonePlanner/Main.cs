@@ -1476,5 +1476,10 @@ namespace StonePlanner
         {
             label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
         }
+
+        private void pictureBox_T_Float_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

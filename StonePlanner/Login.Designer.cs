@@ -34,6 +34,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.pictureBox_Bg = new System.Windows.Forms.PictureBox();
             this.label_Login = new System.Windows.Forms.Label();
+            this.linkLabel_Nll = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Bg)).BeginInit();
             this.SuspendLayout();
@@ -89,11 +90,24 @@
             this.label_Login.TabIndex = 19;
             this.label_Login.Text = "Login In";
             // 
+            // linkLabel_Nll
+            // 
+            this.linkLabel_Nll.AutoSize = true;
+            this.linkLabel_Nll.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.linkLabel_Nll.Location = new System.Drawing.Point(85, 257);
+            this.linkLabel_Nll.Name = "linkLabel_Nll";
+            this.linkLabel_Nll.Size = new System.Drawing.Size(143, 18);
+            this.linkLabel_Nll.TabIndex = 20;
+            this.linkLabel_Nll.TabStop = true;
+            this.linkLabel_Nll.Text = "无需用户开始(&C)";
+            this.linkLabel_Nll.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Nll_LinkClicked);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(329, 278);
+            this.Controls.Add(this.linkLabel_Nll);
             this.Controls.Add(this.label_Login);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox_M_Pwd);
@@ -116,5 +130,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.PictureBox pictureBox_Bg;
         private System.Windows.Forms.Label label_Login;
+        private System.Windows.Forms.LinkLabel linkLabel_Nll;
     }
 }

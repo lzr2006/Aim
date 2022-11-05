@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.panel_Top = new System.Windows.Forms.Panel();
+            this.pictureBox_T_Float = new System.Windows.Forms.PictureBox();
             this.label_GGS = new System.Windows.Forms.Label();
             this.User_Piicture = new System.Windows.Forms.PictureBox();
             this.label_NeedTime = new System.Windows.Forms.Label();
@@ -57,8 +58,8 @@
             this.vScrollBar_Main = new System.Windows.Forms.VScrollBar();
             this.timer_Ponv = new System.Windows.Forms.Timer(this.components);
             this.timer_Anti = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_T_Float = new System.Windows.Forms.PictureBox();
             this.panel_Top.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Float)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.User_Piicture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_More)).BeginInit();
@@ -67,7 +68,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Small)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Tip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Float)).BeginInit();
             this.SuspendLayout();
             // 
             // panel_Top
@@ -86,6 +86,18 @@
             this.panel_Top.Size = new System.Drawing.Size(900, 38);
             this.panel_Top.TabIndex = 0;
             this.panel_Top.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseDown);
+            // 
+            // pictureBox_T_Float
+            // 
+            this.pictureBox_T_Float.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Float.BackgroundImage")));
+            this.pictureBox_T_Float.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_T_Float.Location = new System.Drawing.Point(818, 2);
+            this.pictureBox_T_Float.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureBox_T_Float.Name = "pictureBox_T_Float";
+            this.pictureBox_T_Float.Size = new System.Drawing.Size(33, 31);
+            this.pictureBox_T_Float.TabIndex = 10;
+            this.pictureBox_T_Float.TabStop = false;
+            this.pictureBox_T_Float.Click += new System.EventHandler(this.pictureBox_T_Float_Click);
             // 
             // label_GGS
             // 
@@ -352,20 +364,8 @@
             // 
             // timer_Anti
             // 
-            this.timer_Anti.Enabled = true;
             this.timer_Anti.Interval = 10000;
             this.timer_Anti.Tick += new System.EventHandler(this.timer_Anti_Tick);
-            // 
-            // pictureBox_T_Float
-            // 
-            this.pictureBox_T_Float.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Float.BackgroundImage")));
-            this.pictureBox_T_Float.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_T_Float.Location = new System.Drawing.Point(818, 2);
-            this.pictureBox_T_Float.Margin = new System.Windows.Forms.Padding(4);
-            this.pictureBox_T_Float.Name = "pictureBox_T_Float";
-            this.pictureBox_T_Float.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox_T_Float.TabIndex = 10;
-            this.pictureBox_T_Float.TabStop = false;
             // 
             // Main
             // 
@@ -385,6 +385,7 @@
             this.Load += new System.EventHandler(this.Main_Load);
             this.panel_Top.ResumeLayout(false);
             this.panel_Top.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Float)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.User_Piicture)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_More)).EndInit();
@@ -394,7 +395,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Small)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Tip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Float)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
