@@ -1,4 +1,5 @@
-﻿namespace StonePlanner
+﻿using MetroFramework.Controls;
+namespace StonePlanner
 {
     partial class AddTodo
     {
@@ -28,388 +29,595 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddTodo));
-            this.panel_Top = new System.Windows.Forms.Panel();
-            this.pictureBox_T_Exit = new System.Windows.Forms.PictureBox();
-            this.label_T = new System.Windows.Forms.Label();
             this.label_TodoName = new System.Windows.Forms.Label();
-            this.textBox_Capital = new System.Windows.Forms.TextBox();
+            this.textBox_Capital = new MetroFramework.Controls.MetroTextBox();
             this.label_Numbered = new System.Windows.Forms.Label();
-            this.textBox_Numbered = new System.Windows.Forms.TextBox();
-            this.button_New = new System.Windows.Forms.Button();
-            this.textBox_Time = new System.Windows.Forms.TextBox();
+            this.textBox_Numbered = new MetroFramework.Controls.MetroTextBox();
+            this.textBox_Time = new MetroFramework.Controls.MetroTextBox();
             this.label_ToDoTime = new System.Windows.Forms.Label();
             this.label_ToDoIntro = new System.Windows.Forms.Label();
-            this.textBox_Intro = new System.Windows.Forms.TextBox();
+            this.textBox_Intro = new MetroFramework.Controls.MetroTextBox();
             this.label_Difficulty = new System.Windows.Forms.Label();
             this.domainUpDown_Difficulty = new System.Windows.Forms.DomainUpDown();
             this.label_Lasting = new System.Windows.Forms.Label();
-            this.textBox_Lasting = new System.Windows.Forms.TextBox();
-            this.textBox_Explosive = new System.Windows.Forms.TextBox();
+            this.textBox_Lasting = new MetroFramework.Controls.MetroTextBox();
+            this.textBox_Explosive = new MetroFramework.Controls.MetroTextBox();
             this.label_Explosive = new System.Windows.Forms.Label();
-            this.textBox_Wisdom = new System.Windows.Forms.TextBox();
+            this.textBox_Wisdom = new MetroFramework.Controls.MetroTextBox();
             this.label_Wisdom = new System.Windows.Forms.Label();
             this.label_List = new System.Windows.Forms.Label();
             this.comboBox_List = new System.Windows.Forms.ComboBox();
-            this.label_Tips = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker_Now = new System.Windows.Forms.DateTimePicker();
-            this.textBox_hh = new System.Windows.Forms.TextBox();
+            this.textBox_hh = new MetroFramework.Controls.MetroTextBox();
             this.label_Spliter = new System.Windows.Forms.Label();
-            this.textBox_mm = new System.Windows.Forms.TextBox();
-            this.panel_Top.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).BeginInit();
+            this.textBox_mm = new MetroFramework.Controls.MetroTextBox();
+            this.groupBox_Area1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_Area2 = new System.Windows.Forms.GroupBox();
+            this.label_T = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.metroButton_Submit = new MetroFramework.Controls.MetroButton();
+            this.groupBox_Area1.SuspendLayout();
+            this.groupBox_Area2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // panel_Top
-            // 
-            this.panel_Top.BackColor = System.Drawing.Color.DeepSkyBlue;
-            this.panel_Top.Controls.Add(this.pictureBox_T_Exit);
-            this.panel_Top.Controls.Add(this.label_T);
-            this.panel_Top.Location = new System.Drawing.Point(0, 0);
-            this.panel_Top.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panel_Top.Name = "panel_Top";
-            this.panel_Top.Size = new System.Drawing.Size(315, 38);
-            this.panel_Top.TabIndex = 1;
-            this.panel_Top.DoubleClick += new System.EventHandler(this.panel_Top_DoubleClick);
-            this.panel_Top.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Top_MouseDown);
-            // 
-            // pictureBox_T_Exit
-            // 
-            this.pictureBox_T_Exit.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_T_Exit.BackgroundImage")));
-            this.pictureBox_T_Exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_T_Exit.Location = new System.Drawing.Point(276, 4);
-            this.pictureBox_T_Exit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pictureBox_T_Exit.Name = "pictureBox_T_Exit";
-            this.pictureBox_T_Exit.Size = new System.Drawing.Size(33, 31);
-            this.pictureBox_T_Exit.TabIndex = 18;
-            this.pictureBox_T_Exit.TabStop = false;
-            this.pictureBox_T_Exit.Click += new System.EventHandler(this.pictureBox_T_Exit_Click);
-            // 
-            // label_T
-            // 
-            this.label_T.AutoSize = true;
-            this.label_T.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_T.Location = new System.Drawing.Point(67, 8);
-            this.label_T.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label_T.Name = "label_T";
-            this.label_T.Size = new System.Drawing.Size(154, 24);
-            this.label_T.TabIndex = 2;
-            this.label_T.Text = "新建一个待办";
             // 
             // label_TodoName
             // 
             this.label_TodoName.AutoSize = true;
-            this.label_TodoName.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_TodoName.Location = new System.Drawing.Point(13, 52);
+            this.label_TodoName.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_TodoName.Location = new System.Drawing.Point(7, 45);
             this.label_TodoName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_TodoName.Name = "label_TodoName";
-            this.label_TodoName.Size = new System.Drawing.Size(106, 19);
+            this.label_TodoName.Size = new System.Drawing.Size(74, 25);
             this.label_TodoName.TabIndex = 2;
-            this.label_TodoName.Text = "标 题(&T)：";
+            this.label_TodoName.Text = "标 题：";
             // 
             // textBox_Capital
             // 
-            this.textBox_Capital.Location = new System.Drawing.Point(117, 49);
-            this.textBox_Capital.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            // 
+            // 
+            // 
+            this.textBox_Capital.CustomButton.Image = null;
+            this.textBox_Capital.CustomButton.Location = new System.Drawing.Point(162, 2);
+            this.textBox_Capital.CustomButton.Name = "";
+            this.textBox_Capital.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_Capital.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Capital.CustomButton.TabIndex = 1;
+            this.textBox_Capital.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Capital.CustomButton.UseSelectable = true;
+            this.textBox_Capital.CustomButton.Visible = false;
+            this.textBox_Capital.Lines = new string[0];
+            this.textBox_Capital.Location = new System.Drawing.Point(84, 42);
+            this.textBox_Capital.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_Capital.MaxLength = 32767;
             this.textBox_Capital.Name = "textBox_Capital";
-            this.textBox_Capital.Size = new System.Drawing.Size(179, 25);
+            this.textBox_Capital.PasswordChar = '\0';
+            this.textBox_Capital.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Capital.SelectedText = "";
+            this.textBox_Capital.SelectionLength = 0;
+            this.textBox_Capital.SelectionStart = 0;
+            this.textBox_Capital.ShortcutsEnabled = true;
+            this.textBox_Capital.Size = new System.Drawing.Size(190, 30);
             this.textBox_Capital.TabIndex = 1;
+            this.textBox_Capital.UseSelectable = true;
+            this.textBox_Capital.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Capital.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label_Numbered
             // 
             this.label_Numbered.AutoSize = true;
-            this.label_Numbered.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_Numbered.Location = new System.Drawing.Point(15, 430);
+            this.label_Numbered.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Numbered.Location = new System.Drawing.Point(4, 162);
             this.label_Numbered.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Numbered.Name = "label_Numbered";
-            this.label_Numbered.Size = new System.Drawing.Size(106, 19);
+            this.label_Numbered.Size = new System.Drawing.Size(74, 25);
             this.label_Numbered.TabIndex = 4;
-            this.label_Numbered.Text = "编 号(&N)：";
+            this.label_Numbered.Text = "编 号：";
             // 
             // textBox_Numbered
             // 
-            this.textBox_Numbered.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Numbered.Location = new System.Drawing.Point(117, 424);
-            this.textBox_Numbered.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            // 
+            // 
+            // 
+            this.textBox_Numbered.CustomButton.Image = null;
+            this.textBox_Numbered.CustomButton.Location = new System.Drawing.Point(157, 2);
+            this.textBox_Numbered.CustomButton.Name = "";
+            this.textBox_Numbered.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.textBox_Numbered.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Numbered.CustomButton.TabIndex = 1;
+            this.textBox_Numbered.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Numbered.CustomButton.UseSelectable = true;
+            this.textBox_Numbered.CustomButton.Visible = false;
+            this.textBox_Numbered.Lines = new string[] {
+        "MANIS自动分配编号"};
+            this.textBox_Numbered.Location = new System.Drawing.Point(78, 164);
+            this.textBox_Numbered.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_Numbered.MaxLength = 32767;
             this.textBox_Numbered.Name = "textBox_Numbered";
+            this.textBox_Numbered.PasswordChar = '\0';
+            this.textBox_Numbered.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Numbered.SelectedText = "";
+            this.textBox_Numbered.SelectionLength = 0;
+            this.textBox_Numbered.SelectionStart = 0;
+            this.textBox_Numbered.ShortcutsEnabled = true;
             this.textBox_Numbered.Size = new System.Drawing.Size(179, 24);
             this.textBox_Numbered.TabIndex = 3;
             this.textBox_Numbered.Text = "MANIS自动分配编号";
-            // 
-            // button_New
-            // 
-            this.button_New.Location = new System.Drawing.Point(17, 456);
-            this.button_New.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.button_New.Name = "button_New";
-            this.button_New.Size = new System.Drawing.Size(280, 29);
-            this.button_New.TabIndex = 4;
-            this.button_New.Text = "新建待办(&D)";
-            this.button_New.UseVisualStyleBackColor = true;
-            this.button_New.Click += new System.EventHandler(this.button_New_Click);
+            this.textBox_Numbered.UseSelectable = true;
+            this.textBox_Numbered.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Numbered.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // textBox_Time
             // 
-            this.textBox_Time.Location = new System.Drawing.Point(117, 147);
-            this.textBox_Time.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            // 
+            // 
+            // 
+            this.textBox_Time.CustomButton.Image = null;
+            this.textBox_Time.CustomButton.Location = new System.Drawing.Point(162, 2);
+            this.textBox_Time.CustomButton.Name = "";
+            this.textBox_Time.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_Time.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Time.CustomButton.TabIndex = 1;
+            this.textBox_Time.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Time.CustomButton.UseSelectable = true;
+            this.textBox_Time.CustomButton.Visible = false;
+            this.textBox_Time.Lines = new string[0];
+            this.textBox_Time.Location = new System.Drawing.Point(84, 164);
+            this.textBox_Time.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_Time.MaxLength = 32767;
             this.textBox_Time.Name = "textBox_Time";
-            this.textBox_Time.Size = new System.Drawing.Size(179, 25);
+            this.textBox_Time.PasswordChar = '\0';
+            this.textBox_Time.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Time.SelectedText = "";
+            this.textBox_Time.SelectionLength = 0;
+            this.textBox_Time.SelectionStart = 0;
+            this.textBox_Time.ShortcutsEnabled = true;
+            this.textBox_Time.Size = new System.Drawing.Size(190, 30);
             this.textBox_Time.TabIndex = 2;
+            this.textBox_Time.UseSelectable = true;
+            this.textBox_Time.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Time.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label_ToDoTime
             // 
             this.label_ToDoTime.AutoSize = true;
-            this.label_ToDoTime.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_ToDoTime.Location = new System.Drawing.Point(15, 151);
+            this.label_ToDoTime.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_ToDoTime.Location = new System.Drawing.Point(9, 166);
             this.label_ToDoTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_ToDoTime.Name = "label_ToDoTime";
-            this.label_ToDoTime.Size = new System.Drawing.Size(106, 19);
+            this.label_ToDoTime.Size = new System.Drawing.Size(74, 25);
             this.label_ToDoTime.TabIndex = 7;
-            this.label_ToDoTime.Text = "时 间(&S)：";
+            this.label_ToDoTime.Text = "时 间：";
             // 
             // label_ToDoIntro
             // 
             this.label_ToDoIntro.AutoSize = true;
-            this.label_ToDoIntro.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_ToDoIntro.Location = new System.Drawing.Point(13, 212);
+            this.label_ToDoIntro.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_ToDoIntro.Location = new System.Drawing.Point(4, 35);
             this.label_ToDoIntro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_ToDoIntro.Name = "label_ToDoIntro";
-            this.label_ToDoIntro.Size = new System.Drawing.Size(106, 19);
+            this.label_ToDoIntro.Size = new System.Drawing.Size(74, 25);
             this.label_ToDoIntro.TabIndex = 8;
-            this.label_ToDoIntro.Text = "介 绍(&I)：";
+            this.label_ToDoIntro.Text = "介 绍：";
             // 
             // textBox_Intro
             // 
-            this.textBox_Intro.Location = new System.Drawing.Point(117, 208);
-            this.textBox_Intro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            // 
+            // 
+            // 
+            this.textBox_Intro.CustomButton.Image = null;
+            this.textBox_Intro.CustomButton.Location = new System.Drawing.Point(107, 1);
+            this.textBox_Intro.CustomButton.Name = "";
+            this.textBox_Intro.CustomButton.Size = new System.Drawing.Size(71, 71);
+            this.textBox_Intro.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Intro.CustomButton.TabIndex = 1;
+            this.textBox_Intro.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Intro.CustomButton.UseSelectable = true;
+            this.textBox_Intro.CustomButton.Visible = false;
+            this.textBox_Intro.Lines = new string[0];
+            this.textBox_Intro.Location = new System.Drawing.Point(78, 31);
+            this.textBox_Intro.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_Intro.MaxLength = 32767;
             this.textBox_Intro.Multiline = true;
             this.textBox_Intro.Name = "textBox_Intro";
+            this.textBox_Intro.PasswordChar = '\0';
+            this.textBox_Intro.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Intro.SelectedText = "";
+            this.textBox_Intro.SelectionLength = 0;
+            this.textBox_Intro.SelectionStart = 0;
+            this.textBox_Intro.ShortcutsEnabled = true;
             this.textBox_Intro.Size = new System.Drawing.Size(179, 73);
             this.textBox_Intro.TabIndex = 9;
+            this.textBox_Intro.UseSelectable = true;
+            this.textBox_Intro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Intro.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label_Difficulty
             // 
             this.label_Difficulty.AutoSize = true;
-            this.label_Difficulty.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_Difficulty.Location = new System.Drawing.Point(15, 180);
+            this.label_Difficulty.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Difficulty.Location = new System.Drawing.Point(7, 42);
             this.label_Difficulty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Difficulty.Name = "label_Difficulty";
-            this.label_Difficulty.Size = new System.Drawing.Size(106, 19);
+            this.label_Difficulty.Size = new System.Drawing.Size(74, 25);
             this.label_Difficulty.TabIndex = 10;
-            this.label_Difficulty.Text = "难 度(&D)：";
+            this.label_Difficulty.Text = "难 度：";
             // 
             // domainUpDown_Difficulty
             // 
-            this.domainUpDown_Difficulty.Location = new System.Drawing.Point(119, 178);
-            this.domainUpDown_Difficulty.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.domainUpDown_Difficulty.Location = new System.Drawing.Point(85, 40);
+            this.domainUpDown_Difficulty.Margin = new System.Windows.Forms.Padding(4);
             this.domainUpDown_Difficulty.Name = "domainUpDown_Difficulty";
-            this.domainUpDown_Difficulty.Size = new System.Drawing.Size(179, 25);
+            this.domainUpDown_Difficulty.Size = new System.Drawing.Size(179, 31);
             this.domainUpDown_Difficulty.TabIndex = 11;
             this.domainUpDown_Difficulty.Text = "UNKNOWN 0.0";
             // 
             // label_Lasting
             // 
             this.label_Lasting.AutoSize = true;
-            this.label_Lasting.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_Lasting.Location = new System.Drawing.Point(15, 294);
+            this.label_Lasting.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Lasting.Location = new System.Drawing.Point(7, 83);
             this.label_Lasting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Lasting.Name = "label_Lasting";
-            this.label_Lasting.Size = new System.Drawing.Size(106, 19);
+            this.label_Lasting.Size = new System.Drawing.Size(74, 25);
             this.label_Lasting.TabIndex = 12;
-            this.label_Lasting.Text = "耐 力(&L)：";
+            this.label_Lasting.Text = "耐 力：";
             // 
             // textBox_Lasting
             // 
-            this.textBox_Lasting.Location = new System.Drawing.Point(117, 292);
+            // 
+            // 
+            // 
+            this.textBox_Lasting.CustomButton.Image = null;
+            this.textBox_Lasting.CustomButton.Location = new System.Drawing.Point(155, 1);
+            this.textBox_Lasting.CustomButton.Name = "";
+            this.textBox_Lasting.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_Lasting.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Lasting.CustomButton.TabIndex = 1;
+            this.textBox_Lasting.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Lasting.CustomButton.UseSelectable = true;
+            this.textBox_Lasting.CustomButton.Visible = false;
+            this.textBox_Lasting.Lines = new string[0];
+            this.textBox_Lasting.Location = new System.Drawing.Point(85, 82);
             this.textBox_Lasting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Lasting.MaxLength = 32767;
             this.textBox_Lasting.Name = "textBox_Lasting";
+            this.textBox_Lasting.PasswordChar = '\0';
+            this.textBox_Lasting.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Lasting.SelectedText = "";
+            this.textBox_Lasting.SelectionLength = 0;
+            this.textBox_Lasting.SelectionStart = 0;
+            this.textBox_Lasting.ShortcutsEnabled = true;
             this.textBox_Lasting.Size = new System.Drawing.Size(179, 25);
             this.textBox_Lasting.TabIndex = 13;
+            this.textBox_Lasting.UseSelectable = true;
+            this.textBox_Lasting.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Lasting.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // textBox_Explosive
             // 
-            this.textBox_Explosive.Location = new System.Drawing.Point(117, 324);
+            // 
+            // 
+            // 
+            this.textBox_Explosive.CustomButton.Image = null;
+            this.textBox_Explosive.CustomButton.Location = new System.Drawing.Point(155, 1);
+            this.textBox_Explosive.CustomButton.Name = "";
+            this.textBox_Explosive.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_Explosive.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Explosive.CustomButton.TabIndex = 1;
+            this.textBox_Explosive.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Explosive.CustomButton.UseSelectable = true;
+            this.textBox_Explosive.CustomButton.Visible = false;
+            this.textBox_Explosive.Lines = new string[0];
+            this.textBox_Explosive.Location = new System.Drawing.Point(85, 121);
             this.textBox_Explosive.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Explosive.MaxLength = 32767;
             this.textBox_Explosive.Name = "textBox_Explosive";
+            this.textBox_Explosive.PasswordChar = '\0';
+            this.textBox_Explosive.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Explosive.SelectedText = "";
+            this.textBox_Explosive.SelectionLength = 0;
+            this.textBox_Explosive.SelectionStart = 0;
+            this.textBox_Explosive.ShortcutsEnabled = true;
             this.textBox_Explosive.Size = new System.Drawing.Size(179, 25);
             this.textBox_Explosive.TabIndex = 15;
+            this.textBox_Explosive.UseSelectable = true;
+            this.textBox_Explosive.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Explosive.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label_Explosive
             // 
             this.label_Explosive.AutoSize = true;
-            this.label_Explosive.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_Explosive.Location = new System.Drawing.Point(15, 328);
+            this.label_Explosive.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Explosive.Location = new System.Drawing.Point(7, 121);
             this.label_Explosive.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Explosive.Name = "label_Explosive";
-            this.label_Explosive.Size = new System.Drawing.Size(106, 19);
+            this.label_Explosive.Size = new System.Drawing.Size(74, 25);
             this.label_Explosive.TabIndex = 14;
-            this.label_Explosive.Text = "爆 发(&E)：";
+            this.label_Explosive.Text = "爆 发：";
             // 
             // textBox_Wisdom
             // 
-            this.textBox_Wisdom.Location = new System.Drawing.Point(117, 358);
+            // 
+            // 
+            // 
+            this.textBox_Wisdom.CustomButton.Image = null;
+            this.textBox_Wisdom.CustomButton.Location = new System.Drawing.Point(155, 1);
+            this.textBox_Wisdom.CustomButton.Name = "";
+            this.textBox_Wisdom.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_Wisdom.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Wisdom.CustomButton.TabIndex = 1;
+            this.textBox_Wisdom.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Wisdom.CustomButton.UseSelectable = true;
+            this.textBox_Wisdom.CustomButton.Visible = false;
+            this.textBox_Wisdom.Lines = new string[0];
+            this.textBox_Wisdom.Location = new System.Drawing.Point(85, 161);
             this.textBox_Wisdom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Wisdom.MaxLength = 32767;
             this.textBox_Wisdom.Name = "textBox_Wisdom";
+            this.textBox_Wisdom.PasswordChar = '\0';
+            this.textBox_Wisdom.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Wisdom.SelectedText = "";
+            this.textBox_Wisdom.SelectionLength = 0;
+            this.textBox_Wisdom.SelectionStart = 0;
+            this.textBox_Wisdom.ShortcutsEnabled = true;
             this.textBox_Wisdom.Size = new System.Drawing.Size(179, 25);
             this.textBox_Wisdom.TabIndex = 17;
+            this.textBox_Wisdom.UseSelectable = true;
+            this.textBox_Wisdom.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Wisdom.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label_Wisdom
             // 
             this.label_Wisdom.AutoSize = true;
-            this.label_Wisdom.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_Wisdom.Location = new System.Drawing.Point(15, 362);
+            this.label_Wisdom.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Wisdom.Location = new System.Drawing.Point(7, 161);
             this.label_Wisdom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Wisdom.Name = "label_Wisdom";
-            this.label_Wisdom.Size = new System.Drawing.Size(106, 19);
+            this.label_Wisdom.Size = new System.Drawing.Size(74, 25);
             this.label_Wisdom.TabIndex = 16;
-            this.label_Wisdom.Text = "智 慧(&W)：";
+            this.label_Wisdom.Text = "智 慧：";
             // 
             // label_List
             // 
             this.label_List.AutoSize = true;
-            this.label_List.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_List.Location = new System.Drawing.Point(15, 396);
+            this.label_List.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_List.Location = new System.Drawing.Point(4, 119);
             this.label_List.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_List.Name = "label_List";
-            this.label_List.Size = new System.Drawing.Size(106, 19);
+            this.label_List.Size = new System.Drawing.Size(74, 25);
             this.label_List.TabIndex = 18;
-            this.label_List.Text = "清 单(&M)：";
+            this.label_List.Text = "清 单：";
             // 
             // comboBox_List
             // 
             this.comboBox_List.FormattingEnabled = true;
-            this.comboBox_List.Location = new System.Drawing.Point(119, 393);
-            this.comboBox_List.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox_List.Location = new System.Drawing.Point(78, 116);
+            this.comboBox_List.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox_List.Name = "comboBox_List";
-            this.comboBox_List.Size = new System.Drawing.Size(177, 23);
+            this.comboBox_List.Size = new System.Drawing.Size(179, 33);
             this.comboBox_List.TabIndex = 19;
-            // 
-            // label_Tips
-            // 
-            this.label_Tips.AutoSize = true;
-            this.label_Tips.Location = new System.Drawing.Point(0, 492);
-            this.label_Tips.Name = "label_Tips";
-            this.label_Tips.Size = new System.Drawing.Size(324, 15);
-            this.label_Tips.TabIndex = 20;
-            this.label_Tips.Text = "TIPS：今天天气状态良好，可以做想做的事情。";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 11F);
-            this.label1.Location = new System.Drawing.Point(15, 86);
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(9, 87);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 19);
+            this.label1.Size = new System.Drawing.Size(74, 25);
             this.label1.TabIndex = 22;
-            this.label1.Text = "开 始(&F)：";
+            this.label1.Text = "开 始：";
             // 
             // dateTimePicker_Now
             // 
-            this.dateTimePicker_Now.Location = new System.Drawing.Point(117, 82);
-            this.dateTimePicker_Now.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dateTimePicker_Now.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dateTimePicker_Now.Location = new System.Drawing.Point(84, 83);
+            this.dateTimePicker_Now.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimePicker_Now.Name = "dateTimePicker_Now";
-            this.dateTimePicker_Now.Size = new System.Drawing.Size(179, 25);
+            this.dateTimePicker_Now.Size = new System.Drawing.Size(190, 30);
             this.dateTimePicker_Now.TabIndex = 23;
             // 
             // textBox_hh
             // 
-            this.textBox_hh.Location = new System.Drawing.Point(117, 114);
+            // 
+            // 
+            // 
+            this.textBox_hh.CustomButton.Image = null;
+            this.textBox_hh.CustomButton.Location = new System.Drawing.Point(56, 2);
+            this.textBox_hh.CustomButton.Name = "";
+            this.textBox_hh.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_hh.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_hh.CustomButton.TabIndex = 1;
+            this.textBox_hh.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_hh.CustomButton.UseSelectable = true;
+            this.textBox_hh.CustomButton.Visible = false;
+            this.textBox_hh.Lines = new string[0];
+            this.textBox_hh.Location = new System.Drawing.Point(85, 122);
             this.textBox_hh.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_hh.MaxLength = 32767;
             this.textBox_hh.Name = "textBox_hh";
-            this.textBox_hh.Size = new System.Drawing.Size(73, 25);
+            this.textBox_hh.PasswordChar = '\0';
+            this.textBox_hh.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_hh.SelectedText = "";
+            this.textBox_hh.SelectionLength = 0;
+            this.textBox_hh.SelectionStart = 0;
+            this.textBox_hh.ShortcutsEnabled = true;
+            this.textBox_hh.Size = new System.Drawing.Size(84, 30);
             this.textBox_hh.TabIndex = 24;
+            this.textBox_hh.UseSelectable = true;
+            this.textBox_hh.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_hh.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
             // label_Spliter
             // 
             this.label_Spliter.AutoSize = true;
-            this.label_Spliter.Location = new System.Drawing.Point(198, 119);
+            this.label_Spliter.Location = new System.Drawing.Point(168, 124);
             this.label_Spliter.Name = "label_Spliter";
-            this.label_Spliter.Size = new System.Drawing.Size(22, 15);
+            this.label_Spliter.Size = new System.Drawing.Size(31, 25);
             this.label_Spliter.TabIndex = 25;
             this.label_Spliter.Text = "：";
             // 
             // textBox_mm
             // 
-            this.textBox_mm.Location = new System.Drawing.Point(223, 114);
+            // 
+            // 
+            // 
+            this.textBox_mm.CustomButton.Image = null;
+            this.textBox_mm.CustomButton.Location = new System.Drawing.Point(56, 2);
+            this.textBox_mm.CustomButton.Name = "";
+            this.textBox_mm.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_mm.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_mm.CustomButton.TabIndex = 1;
+            this.textBox_mm.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_mm.CustomButton.UseSelectable = true;
+            this.textBox_mm.CustomButton.Visible = false;
+            this.textBox_mm.Lines = new string[0];
+            this.textBox_mm.Location = new System.Drawing.Point(190, 122);
             this.textBox_mm.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_mm.MaxLength = 32767;
             this.textBox_mm.Name = "textBox_mm";
-            this.textBox_mm.Size = new System.Drawing.Size(73, 25);
+            this.textBox_mm.PasswordChar = '\0';
+            this.textBox_mm.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_mm.SelectedText = "";
+            this.textBox_mm.SelectionLength = 0;
+            this.textBox_mm.SelectionStart = 0;
+            this.textBox_mm.ShortcutsEnabled = true;
+            this.textBox_mm.Size = new System.Drawing.Size(84, 30);
             this.textBox_mm.TabIndex = 26;
+            this.textBox_mm.UseSelectable = true;
+            this.textBox_mm.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_mm.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // groupBox_Area1
+            // 
+            this.groupBox_Area1.Controls.Add(this.textBox_mm);
+            this.groupBox_Area1.Controls.Add(this.label_TodoName);
+            this.groupBox_Area1.Controls.Add(this.label_Spliter);
+            this.groupBox_Area1.Controls.Add(this.textBox_Capital);
+            this.groupBox_Area1.Controls.Add(this.textBox_hh);
+            this.groupBox_Area1.Controls.Add(this.label_ToDoTime);
+            this.groupBox_Area1.Controls.Add(this.dateTimePicker_Now);
+            this.groupBox_Area1.Controls.Add(this.textBox_Time);
+            this.groupBox_Area1.Controls.Add(this.label1);
+            this.groupBox_Area1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox_Area1.Location = new System.Drawing.Point(52, 81);
+            this.groupBox_Area1.Name = "groupBox_Area1";
+            this.groupBox_Area1.Size = new System.Drawing.Size(288, 211);
+            this.groupBox_Area1.TabIndex = 28;
+            this.groupBox_Area1.TabStop = false;
+            this.groupBox_Area1.Text = "基本信息";
+            this.groupBox_Area1.Enter += new System.EventHandler(this.groupBox_Area1_Enter);
+            // 
+            // groupBox_Area2
+            // 
+            this.groupBox_Area2.Controls.Add(this.label_Difficulty);
+            this.groupBox_Area2.Controls.Add(this.textBox_Wisdom);
+            this.groupBox_Area2.Controls.Add(this.domainUpDown_Difficulty);
+            this.groupBox_Area2.Controls.Add(this.label_Wisdom);
+            this.groupBox_Area2.Controls.Add(this.label_Lasting);
+            this.groupBox_Area2.Controls.Add(this.textBox_Explosive);
+            this.groupBox_Area2.Controls.Add(this.textBox_Lasting);
+            this.groupBox_Area2.Controls.Add(this.label_Explosive);
+            this.groupBox_Area2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox_Area2.Location = new System.Drawing.Point(386, 81);
+            this.groupBox_Area2.Name = "groupBox_Area2";
+            this.groupBox_Area2.Size = new System.Drawing.Size(288, 211);
+            this.groupBox_Area2.TabIndex = 29;
+            this.groupBox_Area2.TabStop = false;
+            this.groupBox_Area2.Text = "养成信息";
+            // 
+            // label_T
+            // 
+            this.label_T.AutoSize = true;
+            this.label_T.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_T.Location = new System.Drawing.Point(813, 401);
+            this.label_T.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_T.Name = "label_T";
+            this.label_T.Size = new System.Drawing.Size(74, 25);
+            this.label_T.TabIndex = 30;
+            this.label_T.Text = "介 绍：";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBox_Intro);
+            this.groupBox1.Controls.Add(this.comboBox_List);
+            this.groupBox1.Controls.Add(this.label_ToDoIntro);
+            this.groupBox1.Controls.Add(this.label_List);
+            this.groupBox1.Controls.Add(this.label_Numbered);
+            this.groupBox1.Controls.Add(this.textBox_Numbered);
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(720, 81);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(288, 211);
+            this.groupBox1.TabIndex = 30;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "其它信息";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // metroButton_Submit
+            // 
+            this.metroButton_Submit.Location = new System.Drawing.Point(52, 301);
+            this.metroButton_Submit.Name = "metroButton_Submit";
+            this.metroButton_Submit.Size = new System.Drawing.Size(956, 28);
+            this.metroButton_Submit.TabIndex = 31;
+            this.metroButton_Submit.Text = "新建任务";
+            this.metroButton_Submit.UseSelectable = true;
             // 
             // AddTodo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 522);
-            this.Controls.Add(this.textBox_mm);
-            this.Controls.Add(this.label_Spliter);
-            this.Controls.Add(this.textBox_hh);
-            this.Controls.Add(this.dateTimePicker_Now);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label_Tips);
-            this.Controls.Add(this.comboBox_List);
-            this.Controls.Add(this.label_List);
-            this.Controls.Add(this.textBox_Wisdom);
-            this.Controls.Add(this.label_Wisdom);
-            this.Controls.Add(this.textBox_Explosive);
-            this.Controls.Add(this.label_Explosive);
-            this.Controls.Add(this.textBox_Lasting);
-            this.Controls.Add(this.label_Lasting);
-            this.Controls.Add(this.domainUpDown_Difficulty);
-            this.Controls.Add(this.label_Difficulty);
-            this.Controls.Add(this.textBox_Intro);
-            this.Controls.Add(this.label_ToDoIntro);
-            this.Controls.Add(this.textBox_Time);
-            this.Controls.Add(this.label_ToDoTime);
-            this.Controls.Add(this.button_New);
-            this.Controls.Add(this.textBox_Numbered);
-            this.Controls.Add(this.label_Numbered);
-            this.Controls.Add(this.textBox_Capital);
-            this.Controls.Add(this.label_TodoName);
-            this.Controls.Add(this.panel_Top);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ClientSize = new System.Drawing.Size(1055, 354);
+            this.Controls.Add(this.metroButton_Submit);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label_T);
+            this.Controls.Add(this.groupBox_Area2);
+            this.Controls.Add(this.groupBox_Area1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddTodo";
-            this.Text = "AddTodo";
+            this.Text = "新建一个任务";
             this.Load += new System.EventHandler(this.AddTodo_Load);
-            this.panel_Top.ResumeLayout(false);
-            this.panel_Top.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_T_Exit)).EndInit();
+            this.groupBox_Area1.ResumeLayout(false);
+            this.groupBox_Area1.PerformLayout();
+            this.groupBox_Area2.ResumeLayout(false);
+            this.groupBox_Area2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel panel_Top;
         private System.Windows.Forms.Label label_TodoName;
-        private System.Windows.Forms.TextBox textBox_Capital;
+        private MetroFramework.Controls.MetroTextBox textBox_Capital;
         private System.Windows.Forms.Label label_Numbered;
-        private System.Windows.Forms.TextBox textBox_Numbered;
-        private System.Windows.Forms.Button button_New;
-        private System.Windows.Forms.Label label_T;
-        private System.Windows.Forms.TextBox textBox_Time;
+        private MetroFramework.Controls.MetroTextBox textBox_Numbered;
+        private MetroFramework.Controls.MetroTextBox textBox_Time;
         private System.Windows.Forms.Label label_ToDoTime;
         private System.Windows.Forms.Label label_ToDoIntro;
-        private System.Windows.Forms.TextBox textBox_Intro;
+        private MetroFramework.Controls.MetroTextBox textBox_Intro;
         private System.Windows.Forms.Label label_Difficulty;
         private System.Windows.Forms.DomainUpDown domainUpDown_Difficulty;
         private System.Windows.Forms.Label label_Lasting;
-        private System.Windows.Forms.TextBox textBox_Lasting;
-        private System.Windows.Forms.TextBox textBox_Explosive;
+        private MetroFramework.Controls.MetroTextBox textBox_Lasting;
+        private MetroFramework.Controls.MetroTextBox textBox_Explosive;
         private System.Windows.Forms.Label label_Explosive;
-        private System.Windows.Forms.TextBox textBox_Wisdom;
+        private MetroFramework.Controls.MetroTextBox textBox_Wisdom;
         private System.Windows.Forms.Label label_Wisdom;
-        private System.Windows.Forms.PictureBox pictureBox_T_Exit;
         private System.Windows.Forms.Label label_List;
         private System.Windows.Forms.ComboBox comboBox_List;
-        private System.Windows.Forms.Label label_Tips;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker_Now;
-        private System.Windows.Forms.TextBox textBox_hh;
+        private MetroFramework.Controls.MetroTextBox textBox_hh;
         private System.Windows.Forms.Label label_Spliter;
-        private System.Windows.Forms.TextBox textBox_mm;
+        private MetroFramework.Controls.MetroTextBox textBox_mm;
+        private System.Windows.Forms.GroupBox groupBox_Area1;
+        private System.Windows.Forms.GroupBox groupBox_Area2;
+        private System.Windows.Forms.Label label_T;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private MetroButton metroButton_Submit;
     }
 }

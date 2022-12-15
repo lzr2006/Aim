@@ -154,9 +154,9 @@
             this.label4.Location = new System.Drawing.Point(16, 236);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(485, 21);
+            this.label4.Size = new System.Drawing.Size(484, 21);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 E.2022.1.Insider.1（内部版本M010221259CHZL）";
+            this.label4.Text = "版本 E.2022.2.Insider.0（内部版本M011051645FCTK）";
             // 
             // label5
             // 
@@ -198,9 +198,9 @@
             this.label8.Location = new System.Drawing.Point(7, 409);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(622, 15);
+            this.label8.Size = new System.Drawing.Size(700, 15);
             this.label8.TabIndex = 11;
-            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.10.22 14:00 - 2022.11.05 05:00";
+            this.label8.Text = "哦，上帝啊，我都不敢相信这他妈是个自由版本！ 使用时间：2022.11.05 18:00 - 2022.11.18 05:00";
             // 
             // panel1
             // 
