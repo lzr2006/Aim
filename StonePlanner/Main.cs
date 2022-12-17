@@ -187,10 +187,18 @@ namespace StonePlanner
         /// </summary>
         protected void InitializeSettings()
         {
-            if (packedSetting[0] == "True") { timer_Ponv.Enabled = true; } else { timer_Ponv.Enabled = false; }
-            timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
-            if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
-            timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+            try
+            {
+                if (packedSetting[0] == "True") { timer_Ponv.Enabled = true; } else { timer_Ponv.Enabled = false; }
+                timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
+                if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
+                timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+            }
+            catch 
+            {
+                timer_Ponv.Enabled = true;
+                timer_Conv.Enabled = true;
+            }
         }
         /// <summary>
         /// 覆写窗体的消息处理函数

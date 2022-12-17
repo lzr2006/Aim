@@ -82,8 +82,6 @@ namespace StonePlanner
         {
             this.TopMost = true;
             label_T.Text = Main.langInfo[3];
-            label_TodoName.Text = Main.langInfo[4];
-            label_Numbered.Text = Main.langInfo[5];
             metroButton_Submit.Text = Main.langInfo[6];
             textBox_Numbered.ReadOnly = true;
             //Default HH and mm
