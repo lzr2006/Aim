@@ -9,23 +9,24 @@ namespace StonePlanner
 {
     internal static class Program
     {
-        static readonly bool EnableProgramTrusteeship = true;
+        static bool EnableProgramTrusteeship = true;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
+            try 
+            {
+                if (args[0] == "-itst")
+                {
+                    EnableProgramTrusteeship = false;
+                }
+            } 
+            catch { }
             Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //AppCenter.Start("47eacc02-c48d-43a7-9295-aded8581daba",
-            //typeof(Analytics), typeof(Crashes));
             AppCenter.Start("f60d699f-aa39-4089-aae5-5c3c76218ebb",
             typeof(Analytics), typeof(Crashes));
-            //Application.Run(new Main());
-            //先检查封禁
-            //才怪
-            //args[]参数功能
 
             try
             {

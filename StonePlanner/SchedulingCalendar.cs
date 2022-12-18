@@ -60,8 +60,6 @@ namespace StonePlanner
         {
             Add();
             label_Now.Text = $"{DateTime.Now.Year}年{DateTime.Now.Month}月";
-            int year = Convert.ToInt32(label_Now.Text.Split('年')[0]);
-            int month = Convert.ToInt32(label_Now.Text.Split('年')[1].Split('月')[0]);
             //扫描主窗口内容
             ReLoad();
             //判断是否发送排班提示

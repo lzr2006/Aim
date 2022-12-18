@@ -21,5 +21,10 @@ namespace StonePlanner
             Thanks t = new Thanks();
             t.Show();
         }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace StonePlanner
 
         private void label_E_Click(object sender, EventArgs e)
         {
+            MCIPlayer.StopMusic($"{Application.StartupPath}\\icon\\hlwav.mp3");
             DestroyHandle();
         }
     }

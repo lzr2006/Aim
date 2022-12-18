@@ -147,9 +147,9 @@
             this.label4.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
             this.label4.Location = new System.Drawing.Point(22, 241);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(376, 16);
+            this.label4.Size = new System.Drawing.Size(350, 16);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 E.2022.2.Insider.0（内部版本M012180822WKTD）";
+            this.label4.Text = "版本 Epsilon V2.2.X（内部版本M012180822WKTD）";
             // 
             // label5
             // 
@@ -214,7 +214,7 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(-1, 209);
+            this.panel1.Location = new System.Drawing.Point(562, 384);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(10, 325);
             this.panel1.TabIndex = 12;
@@ -422,11 +422,12 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label9.Location = new System.Drawing.Point(7, 1);
+            this.label9.Location = new System.Drawing.Point(3, 1);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(263, 255);
             this.label9.TabIndex = 0;
             this.label9.Text = resources.GetString("label9.Text");
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // pictureBox2
             // 
