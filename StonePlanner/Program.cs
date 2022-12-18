@@ -9,23 +9,24 @@ namespace StonePlanner
 {
     internal static class Program
     {
-
+        static bool EnableProgramTrusteeship = true;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
+            try 
+            {
+                if (args[0] == "-itst")
+                {
+                    EnableProgramTrusteeship = false;
+                }
+            } 
+            catch { }
             Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //AppCenter.Start("47eacc02-c48d-43a7-9295-aded8581daba",
-            //typeof(Analytics), typeof(Crashes));
             AppCenter.Start("f60d699f-aa39-4089-aae5-5c3c76218ebb",
             typeof(Analytics), typeof(Crashes));
-            //Application.Run(new Main());
-            //先检查封禁
-            //才怪
-            //args[]参数功能
 
             try
             {
@@ -39,9 +40,9 @@ namespace StonePlanner
             }
             catch {  }
             //处理UI线程异常
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            if (EnableProgramTrusteeship) Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             //处理非UI线程异常
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            if (EnableProgramTrusteeship) AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             /*!!!!!*/Application.Run(new Login());//!!!!!!
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -52,11 +53,13 @@ namespace StonePlanner
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+           ErrorCenter.AddError(DateTime.Now.ToString(), "Error", (Exception) e.ExceptionObject);
            new BugReporter(e.ExceptionObject.ToString()).Show();
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
+            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", e.Exception);
             new BugReporter(e.Exception.ToString()).Show();
         }
     }

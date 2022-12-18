@@ -28,59 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_Listname = new System.Windows.Forms.Label();
-            this.textBox_Listname = new System.Windows.Forms.TextBox();
-            this.button_Submit = new System.Windows.Forms.Button();
+            this.metroLabel_Name = new MetroFramework.Controls.MetroLabel();
+            this.textBox_Listname = new MetroFramework.Controls.MetroTextBox();
+            this.metroButton_Submit = new MetroFramework.Controls.MetroButton();
             this.SuspendLayout();
             // 
-            // label_Listname
+            // metroLabel_Name
             // 
-            this.label_Listname.AutoSize = true;
-            this.label_Listname.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_Listname.Location = new System.Drawing.Point(5, 9);
-            this.label_Listname.Name = "label_Listname";
-            this.label_Listname.Size = new System.Drawing.Size(98, 15);
-            this.label_Listname.TabIndex = 0;
-            this.label_Listname.Text = "清单名（&N）:";
+            this.metroLabel_Name.AutoSize = true;
+            this.metroLabel_Name.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.metroLabel_Name.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.metroLabel_Name.Location = new System.Drawing.Point(23, 64);
+            this.metroLabel_Name.Name = "metroLabel_Name";
+            this.metroLabel_Name.Size = new System.Drawing.Size(73, 25);
+            this.metroLabel_Name.TabIndex = 3;
+            this.metroLabel_Name.Text = "清单名:";
             // 
             // textBox_Listname
             // 
-            this.textBox_Listname.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Listname.Location = new System.Drawing.Point(8, 34);
+            // 
+            // 
+            // 
+            this.textBox_Listname.CustomButton.Image = null;
+            this.textBox_Listname.CustomButton.Location = new System.Drawing.Point(304, 1);
+            this.textBox_Listname.CustomButton.Name = "";
+            this.textBox_Listname.CustomButton.Size = new System.Drawing.Size(33, 33);
+            this.textBox_Listname.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_Listname.CustomButton.TabIndex = 1;
+            this.textBox_Listname.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_Listname.CustomButton.UseSelectable = true;
+            this.textBox_Listname.CustomButton.Visible = false;
+            this.textBox_Listname.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.textBox_Listname.Lines = new string[0];
+            this.textBox_Listname.Location = new System.Drawing.Point(28, 97);
+            this.textBox_Listname.MaxLength = 32767;
             this.textBox_Listname.Name = "textBox_Listname";
-            this.textBox_Listname.Size = new System.Drawing.Size(218, 22);
-            this.textBox_Listname.TabIndex = 1;
+            this.textBox_Listname.PasswordChar = '\0';
+            this.textBox_Listname.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_Listname.SelectedText = "";
+            this.textBox_Listname.SelectionLength = 0;
+            this.textBox_Listname.SelectionStart = 0;
+            this.textBox_Listname.ShortcutsEnabled = true;
+            this.textBox_Listname.Size = new System.Drawing.Size(338, 35);
+            this.textBox_Listname.TabIndex = 4;
+            this.textBox_Listname.UseSelectable = true;
+            this.textBox_Listname.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_Listname.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // button_Submit
+            // metroButton_Submit
             // 
-            this.button_Submit.Font = new System.Drawing.Font("SimSun", 10F);
-            this.button_Submit.Location = new System.Drawing.Point(-7, 77);
-            this.button_Submit.Name = "button_Submit";
-            this.button_Submit.Size = new System.Drawing.Size(259, 34);
-            this.button_Submit.TabIndex = 2;
-            this.button_Submit.Text = "提交(&S)";
-            this.button_Submit.UseVisualStyleBackColor = true;
-            this.button_Submit.Click += new System.EventHandler(this.button_Submit_Click);
+            this.metroButton_Submit.Location = new System.Drawing.Point(28, 146);
+            this.metroButton_Submit.Name = "metroButton_Submit";
+            this.metroButton_Submit.Size = new System.Drawing.Size(338, 34);
+            this.metroButton_Submit.TabIndex = 5;
+            this.metroButton_Submit.Text = "添加";
+            this.metroButton_Submit.UseSelectable = true;
+            this.metroButton_Submit.Click += new System.EventHandler(this.button_Submit_Click);
             // 
             // AddList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 104);
-            this.Controls.Add(this.button_Submit);
+            this.ClientSize = new System.Drawing.Size(397, 191);
+            this.Controls.Add(this.metroButton_Submit);
             this.Controls.Add(this.textBox_Listname);
-            this.Controls.Add(this.label_Listname);
+            this.Controls.Add(this.metroLabel_Name);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "AddList";
             this.Text = "新建清单";
+            this.Load += new System.EventHandler(this.AddList_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_Listname;
-        private System.Windows.Forms.TextBox textBox_Listname;
-        private System.Windows.Forms.Button button_Submit;
+        private MetroFramework.Controls.MetroLabel metroLabel_Name;
+        private MetroFramework.Controls.MetroTextBox textBox_Listname;
+        private MetroFramework.Controls.MetroButton metroButton_Submit;
     }
 }

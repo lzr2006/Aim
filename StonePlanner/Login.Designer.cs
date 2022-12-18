@@ -28,152 +28,149 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label_Top_1 = new System.Windows.Forms.Label();
-            this.panel_Top = new System.Windows.Forms.Panel();
-            this.label_Top_2 = new System.Windows.Forms.Label();
-            this.button_Submit = new System.Windows.Forms.Button();
-            this.textBox_M_Pwd = new System.Windows.Forms.TextBox();
-            this.label_M_Pwd = new System.Windows.Forms.Label();
-            this.textBox_M_Name = new System.Windows.Forms.TextBox();
-            this.label_M_Name = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
+            this.pictureBox_Main = new System.Windows.Forms.PictureBox();
+            this.l_Username = new MetroFramework.Controls.MetroLabel();
+            this.textBox_M_Name = new MetroFramework.Controls.MetroTextBox();
+            this.textBox_M_Pwd = new MetroFramework.Controls.MetroTextBox();
+            this.l_Password = new MetroFramework.Controls.MetroLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.linkLabel_Register = new System.Windows.Forms.LinkLabel();
-            this.linkLabel_GetPassword = new System.Windows.Forms.LinkLabel();
-            this.panel_Top.SuspendLayout();
+            this.button_Submit = new MetroFramework.Controls.MetroButton();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label_Top_1
+            // pictureBox_Main
             // 
-            this.label_Top_1.AutoSize = true;
-            this.label_Top_1.Font = new System.Drawing.Font("Cascadia Mono Light", 14F);
-            this.label_Top_1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label_Top_1.Location = new System.Drawing.Point(2, 6);
-            this.label_Top_1.Name = "label_Top_1";
-            this.label_Top_1.Size = new System.Drawing.Size(155, 25);
-            this.label_Top_1.TabIndex = 1;
-            this.label_Top_1.Text = "MethodBox·Aim";
+            this.pictureBox_Main.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Main.BackgroundImage")));
+            this.pictureBox_Main.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox_Main.Location = new System.Drawing.Point(112, 90);
+            this.pictureBox_Main.Name = "pictureBox_Main";
+            this.pictureBox_Main.Size = new System.Drawing.Size(95, 95);
+            this.pictureBox_Main.TabIndex = 19;
+            this.pictureBox_Main.TabStop = false;
             // 
-            // panel_Top
+            // l_Username
             // 
-            this.panel_Top.BackColor = System.Drawing.Color.RoyalBlue;
-            this.panel_Top.Controls.Add(this.label_Top_2);
-            this.panel_Top.Controls.Add(this.label_Top_1);
-            this.panel_Top.Location = new System.Drawing.Point(-1, -1);
-            this.panel_Top.Name = "panel_Top";
-            this.panel_Top.Size = new System.Drawing.Size(293, 79);
-            this.panel_Top.TabIndex = 8;
-            // 
-            // label_Top_2
-            // 
-            this.label_Top_2.AutoSize = true;
-            this.label_Top_2.Font = new System.Drawing.Font("黑体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Top_2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label_Top_2.Location = new System.Drawing.Point(3, 47);
-            this.label_Top_2.Name = "label_Top_2";
-            this.label_Top_2.Size = new System.Drawing.Size(149, 19);
-            this.label_Top_2.TabIndex = 2;
-            this.label_Top_2.Text = "登录到本地账户";
-            // 
-            // button_Submit
-            // 
-            this.button_Submit.Font = new System.Drawing.Font("宋体", 11F);
-            this.button_Submit.Location = new System.Drawing.Point(-8, 172);
-            this.button_Submit.Name = "button_Submit";
-            this.button_Submit.Size = new System.Drawing.Size(311, 33);
-            this.button_Submit.TabIndex = 15;
-            this.button_Submit.Text = "登录";
-            this.button_Submit.UseVisualStyleBackColor = true;
-            this.button_Submit.Click += new System.EventHandler(this.button_Submit_Click);
-            // 
-            // textBox_M_Pwd
-            // 
-            this.textBox_M_Pwd.Font = new System.Drawing.Font("Cascadia Code Light", 11F);
-            this.textBox_M_Pwd.Location = new System.Drawing.Point(90, 120);
-            this.textBox_M_Pwd.Name = "textBox_M_Pwd";
-            this.textBox_M_Pwd.Size = new System.Drawing.Size(177, 25);
-            this.textBox_M_Pwd.TabIndex = 12;
-            // 
-            // label_M_Pwd
-            // 
-            this.label_M_Pwd.AutoSize = true;
-            this.label_M_Pwd.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_M_Pwd.Location = new System.Drawing.Point(3, 126);
-            this.label_M_Pwd.Name = "label_M_Pwd";
-            this.label_M_Pwd.Size = new System.Drawing.Size(92, 15);
-            this.label_M_Pwd.TabIndex = 11;
-            this.label_M_Pwd.Text = "密  码(&P)：";
+            this.l_Username.AutoSize = true;
+            this.l_Username.Location = new System.Drawing.Point(30, 213);
+            this.l_Username.Name = "l_Username";
+            this.l_Username.Size = new System.Drawing.Size(114, 20);
+            this.l_Username.TabIndex = 20;
+            this.l_Username.Text = "请输入用户名：";
             // 
             // textBox_M_Name
             // 
-            this.textBox_M_Name.Font = new System.Drawing.Font("Cascadia Code Light", 11F);
-            this.textBox_M_Name.Location = new System.Drawing.Point(90, 85);
+            // 
+            // 
+            // 
+            this.textBox_M_Name.CustomButton.Image = null;
+            this.textBox_M_Name.CustomButton.Location = new System.Drawing.Point(242, 2);
+            this.textBox_M_Name.CustomButton.Name = "";
+            this.textBox_M_Name.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_M_Name.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_M_Name.CustomButton.TabIndex = 1;
+            this.textBox_M_Name.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_M_Name.CustomButton.UseSelectable = true;
+            this.textBox_M_Name.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.textBox_M_Name.Lines = new string[0];
+            this.textBox_M_Name.Location = new System.Drawing.Point(34, 240);
+            this.textBox_M_Name.MaxLength = 32767;
             this.textBox_M_Name.Name = "textBox_M_Name";
-            this.textBox_M_Name.Size = new System.Drawing.Size(177, 25);
-            this.textBox_M_Name.TabIndex = 10;
+            this.textBox_M_Name.PasswordChar = '\0';
+            this.textBox_M_Name.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_M_Name.SelectedText = "";
+            this.textBox_M_Name.SelectionLength = 0;
+            this.textBox_M_Name.SelectionStart = 0;
+            this.textBox_M_Name.ShortcutsEnabled = true;
+            this.textBox_M_Name.ShowButton = true;
+            this.textBox_M_Name.ShowClearButton = true;
+            this.textBox_M_Name.Size = new System.Drawing.Size(270, 30);
+            this.textBox_M_Name.TabIndex = 21;
+            this.textBox_M_Name.UseSelectable = true;
+            this.textBox_M_Name.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_M_Name.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // label_M_Name
+            // textBox_M_Pwd
             // 
-            this.label_M_Name.AutoSize = true;
-            this.label_M_Name.Font = new System.Drawing.Font("宋体", 11F);
-            this.label_M_Name.Location = new System.Drawing.Point(3, 91);
-            this.label_M_Name.Name = "label_M_Name";
-            this.label_M_Name.Size = new System.Drawing.Size(91, 15);
-            this.label_M_Name.TabIndex = 9;
-            this.label_M_Name.Text = "用户名(&M)：";
+            // 
+            // 
+            // 
+            this.textBox_M_Pwd.CustomButton.Image = null;
+            this.textBox_M_Pwd.CustomButton.Location = new System.Drawing.Point(242, 2);
+            this.textBox_M_Pwd.CustomButton.Name = "";
+            this.textBox_M_Pwd.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_M_Pwd.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.textBox_M_Pwd.CustomButton.TabIndex = 1;
+            this.textBox_M_Pwd.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.textBox_M_Pwd.CustomButton.UseSelectable = true;
+            this.textBox_M_Pwd.FontSize = MetroFramework.MetroTextBoxSize.Medium;
+            this.textBox_M_Pwd.Lines = new string[0];
+            this.textBox_M_Pwd.Location = new System.Drawing.Point(34, 313);
+            this.textBox_M_Pwd.MaxLength = 32767;
+            this.textBox_M_Pwd.Name = "textBox_M_Pwd";
+            this.textBox_M_Pwd.PasswordChar = '\0';
+            this.textBox_M_Pwd.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.textBox_M_Pwd.SelectedText = "";
+            this.textBox_M_Pwd.SelectionLength = 0;
+            this.textBox_M_Pwd.SelectionStart = 0;
+            this.textBox_M_Pwd.ShortcutsEnabled = true;
+            this.textBox_M_Pwd.ShowButton = true;
+            this.textBox_M_Pwd.ShowClearButton = true;
+            this.textBox_M_Pwd.Size = new System.Drawing.Size(270, 30);
+            this.textBox_M_Pwd.TabIndex = 23;
+            this.textBox_M_Pwd.UseSelectable = true;
+            this.textBox_M_Pwd.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.textBox_M_Pwd.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // l_Password
+            // 
+            this.l_Password.AutoSize = true;
+            this.l_Password.Location = new System.Drawing.Point(30, 286);
+            this.l_Password.Name = "l_Password";
+            this.l_Password.Size = new System.Drawing.Size(99, 20);
+            this.l_Password.TabIndex = 22;
+            this.l_Password.Text = "请输入密码：";
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(282, 265);
+            this.dataGridView1.Location = new System.Drawing.Point(311, 382);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(10, 10);
+            this.dataGridView1.Size = new System.Drawing.Size(13, 12);
             this.dataGridView1.TabIndex = 3;
             // 
-            // linkLabel_Register
+            // button_Submit
             // 
-            this.linkLabel_Register.AutoSize = true;
-            this.linkLabel_Register.Font = new System.Drawing.Font("宋体", 10F);
-            this.linkLabel_Register.Location = new System.Drawing.Point(4, 154);
-            this.linkLabel_Register.Name = "linkLabel_Register";
-            this.linkLabel_Register.Size = new System.Drawing.Size(77, 14);
-            this.linkLabel_Register.TabIndex = 16;
-            this.linkLabel_Register.TabStop = true;
-            this.linkLabel_Register.Text = "注册新用户";
-            this.linkLabel_Register.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Register_LinkClicked);
-            // 
-            // linkLabel_GetPassword
-            // 
-            this.linkLabel_GetPassword.AutoSize = true;
-            this.linkLabel_GetPassword.Font = new System.Drawing.Font("宋体", 10F);
-            this.linkLabel_GetPassword.Location = new System.Drawing.Point(205, 155);
-            this.linkLabel_GetPassword.Name = "linkLabel_GetPassword";
-            this.linkLabel_GetPassword.Size = new System.Drawing.Size(63, 14);
-            this.linkLabel_GetPassword.TabIndex = 17;
-            this.linkLabel_GetPassword.TabStop = true;
-            this.linkLabel_GetPassword.Text = "找回密码";
-            this.linkLabel_GetPassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_GetPassword_LinkClicked);
+            this.button_Submit.Location = new System.Drawing.Point(34, 361);
+            this.button_Submit.Name = "button_Submit";
+            this.button_Submit.Size = new System.Drawing.Size(270, 31);
+            this.button_Submit.TabIndex = 24;
+            this.button_Submit.Text = "登录";
+            this.button_Submit.UseSelectable = true;
+            this.button_Submit.Click += new System.EventHandler(this.button_Submit_Click);
             // 
             // Login
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 201);
-            this.Controls.Add(this.linkLabel_GetPassword);
-            this.Controls.Add(this.linkLabel_Register);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.panel_Top);
+            this.ClientSize = new System.Drawing.Size(337, 403);
             this.Controls.Add(this.button_Submit);
             this.Controls.Add(this.textBox_M_Pwd);
-            this.Controls.Add(this.label_M_Pwd);
+            this.Controls.Add(this.l_Password);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.textBox_M_Name);
-            this.Controls.Add(this.label_M_Name);
+            this.Controls.Add(this.l_Username);
+            this.Controls.Add(this.pictureBox_Main);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Login";
-            this.Text = "登录";
+            this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
+            this.Text = "AimPlanner";
             this.Load += new System.EventHandler(this.Login_Load);
-            this.panel_Top.ResumeLayout(false);
-            this.panel_Top.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -181,17 +178,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_Top_1;
-        private System.Windows.Forms.Panel panel_Top;
-        private System.Windows.Forms.Label label_Top_2;
-        private System.Windows.Forms.Button button_Submit;
-        private System.Windows.Forms.TextBox textBox_M_Pwd;
-        private System.Windows.Forms.Label label_M_Pwd;
-        private System.Windows.Forms.TextBox textBox_M_Name;
-        private System.Windows.Forms.Label label_M_Name;
+        private System.Windows.Forms.PictureBox pictureBox_Main;
+        private MetroFramework.Controls.MetroLabel l_Username;
+        private MetroFramework.Controls.MetroTextBox textBox_M_Name;
+        private MetroFramework.Controls.MetroTextBox textBox_M_Pwd;
+        private MetroFramework.Controls.MetroLabel l_Password;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.LinkLabel linkLabel_Register;
-        private System.Windows.Forms.LinkLabel linkLabel_GetPassword;
+        private MetroFramework.Controls.MetroButton button_Submit;
     }
 }

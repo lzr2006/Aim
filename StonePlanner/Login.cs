@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
+using MetroFramework.Forms;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    public partial class Login : Form
+    public partial class Login : MetroForm
     {
         public static string UserName;
         public static int UserType;
@@ -16,10 +17,11 @@ namespace StonePlanner
 
         private void Login_Load(object sender, EventArgs e)
         {
+            dataGridView1.Visible = false;  
             textBox_M_Pwd.UseSystemPasswordChar = true;
            // MessageBox.Show("This program is protected by unregistered ASProtect.","ASProtect",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
-
+        
         private void button_Submit_Click(object sender, EventArgs e)
         {
             try

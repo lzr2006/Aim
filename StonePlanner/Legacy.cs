@@ -75,7 +75,9 @@ namespace StonePlanner
         {
             List<Plan> recycle_bin = new List<Plan>();
             string allTask;
+#pragma warning disable CS0219 // The variable 'GGS' is assigned but its value is never used
             double GGS = 0D;
+#pragma warning restore CS0219 // The variable 'GGS' is assigned but its value is never used
             using (StreamReader sr = new StreamReader(Application.StartupPath + @"\TaskMemory.txt"))
             {
                 allTask = sr.ReadToEnd();

@@ -10,7 +10,7 @@ namespace StonePlanner
     public partial class Main : Form
     {
         internal static int T = 0;
-        internal static string Version = "V B_6.0.0";
+        internal static string Version = "Epsilon 1.0";
         internal static ServerSettings ssMain = new ServerSettings();
         internal static ServerInfo siMain = new ServerInfo();
         internal static TaskSettings tsMain = new TaskSettings();

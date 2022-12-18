@@ -1,6 +1,6 @@
 ﻿namespace StonePlanner
 {
-    partial class WebUser
+    partial class FloatWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel_Only = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // WebUser
+            // panel_Only
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.panel_Only.Location = new System.Drawing.Point(1, -1);
+            this.panel_Only.Name = "panel_Only";
+            this.panel_Only.Size = new System.Drawing.Size(238, 37);
+            this.panel_Only.TabIndex = 0;
+            // 
+            // FloatWindow
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "WebUser";
-            this.Text = "WebUser";
-            this.Load += new System.EventHandler(this.WebUser_Load);
+            this.ClientSize = new System.Drawing.Size(240, 34);
+            this.Controls.Add(this.panel_Only);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "FloatWindow";
+            this.Text = "FloatWindow";
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel panel_Only;
     }
 }

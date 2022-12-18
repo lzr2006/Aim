@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class WebService : Form
+    public partial class WebService : MetroForm
     {
         protected static Socket cilent;
         public WebService()
@@ -21,7 +17,7 @@ namespace StonePlanner
             InitializeComponent();
         }
 
-        private void linkLabel_Register_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabel_Register_LinkClicked(object sender, EventArgs e)
         {
             MessageBox.Show("请联系您的网络管理员操作", "提醒", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

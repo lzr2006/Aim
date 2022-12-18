@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static StonePlanner.Structs;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class AddTodo : Form
+    public partial class AddTodo : MetroForm
     {
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
@@ -89,9 +82,7 @@ namespace StonePlanner
         {
             this.TopMost = true;
             label_T.Text = Main.langInfo[3];
-            label_TodoName.Text = Main.langInfo[4];
-            label_Numbered.Text = Main.langInfo[5];
-            button_New.Text = Main.langInfo[6];
+            metroButton_Submit.Text = Main.langInfo[6];
             textBox_Numbered.ReadOnly = true;
             //Default HH and mm
             //Default MotherFucker
@@ -129,22 +120,22 @@ namespace StonePlanner
             //加载TIPS
             try
             {
-                WFJsonStructure.DataItem weather;
-                Main.wf.GetWInfo(out weather);
-                if (Convert.ToInt32(weather.air) >= 180)
-                {
-                    //TIPS：今天天气状态良好，可以做想做的事情。
-                    label_Tips.Text = $"TIPS:空气较差（{weather.air}），不建议在外活动。";
-                }
-                else if (Convert.ToInt32(weather.uvIndex) > 6)
-                {
-                    label_Tips.Text = $"TIPS:今日紫外线较强（{weather.uvIndex}），请做好防护。";
-                }
+                //WFJsonStructure.DataItem weather;
+                //Main.wf.GetWInfo(out weather);
+                //if (Convert.ToInt32(weather.air) >= 180)
+                //{
+                //    //TIPS：今天天气状态良好，可以做想做的事情。
+                //    label_Tips.Text = $"TIPS:空气较差（{weather.air}），不建议在外活动。";
+                //}
+                //else if (Convert.ToInt32(weather.uvIndex) > 6)
+                //{
+                //    label_Tips.Text = $"TIPS:今日紫外线较强（{weather.uvIndex}），请做好防护。";
+                //}
             }
             catch
             {
                 //天气预报 not loaded (x)
-                //developer should be fucked (√)
+                //developer should be fucked (√)夜班c
             }
         }
 
@@ -211,6 +202,16 @@ namespace StonePlanner
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void groupBox_Area1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

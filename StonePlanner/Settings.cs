@@ -1,16 +1,12 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class Settings : Form
+    public partial class Settings : MetroForm
     {
         internal List<string> packedSettings = new List<string>();
         public Settings()
@@ -37,6 +33,25 @@ namespace StonePlanner
             string SwitchSentencesYesNo = checkBox_PictureSwitch.Checked ? "True" : "False";
             Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", SwitchSentencesYesNo, path);
             Inner.INIHolder.Write("SwitchSettings", "SentenceSwitchTime", textBox_SentenceSwitchTime_R.Text, path);
+            //2、自提示相关
+            if (checkBox_StartSwitch.Checked)
+            {
+                RegistryKey R_local = Registry.CurrentUser;//RegistryKey R_local = Registry.CurrentUser;
+                RegistryKey R_run = R_local.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                R_run.SetValue("AimPlanner", Application.ExecutablePath);
+                R_run.Close();
+                R_local.Close();
+            }
+            else
+            {
+                RegistryKey R_local = Registry.CurrentUser;//RegistryKey R_local = Registry.CurrentUser;
+                RegistryKey R_run = R_local.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                R_run.DeleteValue("AimPlanner", false);
+                R_run.Close();
+                R_local.Close();
+            }
+            string AutoLoginYesNo = checkBox_LoginSwitch.Checked ? "True" : "False";
+            Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", AutoLoginYesNo, path);
         }
 
         private void Settings_Load(object sender, EventArgs e)

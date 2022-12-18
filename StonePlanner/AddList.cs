@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class AddList : Form
+    public partial class AddList : MetroForm
     {
         public AddList()
         {
@@ -29,6 +23,11 @@ namespace StonePlanner
                 ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                 MessageBox.Show($"添加失败，原因是{ex.Message}。","失败",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
+        }
+
+        private void AddList_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
