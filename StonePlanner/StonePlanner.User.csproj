@@ -226,12 +226,6 @@
     <Compile Include="InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="MoodDiary.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MoodDiary.Designer.cs">
-      <DependentUpon>MoodDiary.cs</DependentUpon>
-    </Compile>
     <Compile Include="PlanStructC.cs" />
     <Compile Include="PluginStruct.cs" />
     <Compile Include="ProcessExtends.cs" />

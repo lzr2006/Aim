@@ -32,7 +32,7 @@ namespace StonePlanner
             {
                 foreach (var d in dayarr)
                 {
-                    if (d is not SchedulingCalendarDay)
+                    if (d is null)
                     {
                         continue;
                     }
@@ -71,7 +71,6 @@ namespace StonePlanner
                 Opacity = 0;
                 //获得今天的排班
                 string status = "";
-                notifyIconinfo.Visible = true;
                 //托盘气泡提示
                 foreach (var item in dayarr)
                 {
@@ -87,7 +86,6 @@ namespace StonePlanner
                         }
                     }
                 }
-                int tipShowMilliseconds = 1000;
                 string tipTitle = "排班日历";
                 string tipContent;
                 if (status == "" || status == " 班次")
@@ -98,8 +96,6 @@ namespace StonePlanner
                 {
                     tipContent = $"您今天的班次为{status}";
                 }
-                ToolTipIcon tipType = ToolTipIcon.Info;
-                notifyIconinfo.ShowBalloonTip(tipShowMilliseconds, tipTitle, tipContent, tipType);
                 MessageBox.Show(tipContent,tipTitle,MessageBoxButtons.OK,MessageBoxIcon.Information);
                 Close();
                 return;
@@ -123,7 +119,9 @@ namespace StonePlanner
             }
             if (month is null)month = DateTime.Now.Month;
             if (year is null)year = DateTime.Now.Year;
-            var mday = GetDay((Enums.MonthInt) month);
+            var mday = 1;
+            try { mday = GetDay((Enums.MonthInt) month); }
+            catch (NotImplementedException) { month += 1; }
             if (month == 2 && (year) % 4 == 0)
             {
                 mday++;
@@ -168,9 +166,11 @@ namespace StonePlanner
                         break;
                     }
                     //如果还有呢？
-                    SchedulingCalendarDay day = new SchedulingCalendarDay(k);
-                    day.Left = j * 73;
-                    day.Top = i * 66;
+                    SchedulingCalendarDay day = new(k)
+                    {
+                        Left = j * 73,
+                        Top = i * 66
+                    };
                     panel_CM.Controls.Add(day);
                     //数组会不会越界？我不知道，全凭运气
                     dayarr[i, j] = day;

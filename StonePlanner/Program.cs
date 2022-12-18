@@ -9,7 +9,7 @@ namespace StonePlanner
 {
     internal static class Program
     {
-
+        static readonly bool EnableProgramTrusteeship = true;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -39,9 +39,9 @@ namespace StonePlanner
             }
             catch {  }
             //处理UI线程异常
-            Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
+            if (EnableProgramTrusteeship) Application.ThreadException += new System.Threading.ThreadExceptionEventHandler(Application_ThreadException);
             //处理非UI线程异常
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            if (EnableProgramTrusteeship) AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             /*!!!!!*/Application.Run(new Login());//!!!!!!
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -52,11 +52,13 @@ namespace StonePlanner
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
+           ErrorCenter.AddError(DateTime.Now.ToString(), "Error", (Exception) e.ExceptionObject);
            new BugReporter(e.ExceptionObject.ToString()).Show();
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
+            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", e.Exception);
             new BugReporter(e.Exception.ToString()).Show();
         }
     }

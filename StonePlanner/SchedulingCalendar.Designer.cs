@@ -28,12 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.panel_CM = new System.Windows.Forms.Panel();
             this.label_Now = new System.Windows.Forms.Label();
             this.button_Left = new MetroFramework.Controls.MetroButton();
             this.button_Right = new MetroFramework.Controls.MetroButton();
-            this.notifyIconinfo = new System.Windows.Forms.NotifyIcon(this.components);
             this.SuspendLayout();
             // 
             // panel_CM
@@ -77,12 +75,6 @@
             this.button_Right.UseSelectable = true;
             this.button_Right.Click += new System.EventHandler(this.button_Right_Click);
             // 
-            // notifyIconinfo
-            // 
-            this.notifyIconinfo.Text = "notifyIcon_Info";
-            this.notifyIconinfo.Visible = true;
-            this.notifyIconinfo.Click += new System.EventHandler(this.notifyIconinfo_Click);
-            // 
             // SchedulingCalendar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -107,6 +99,5 @@
         private System.Windows.Forms.Label label_Now;
         private MetroFramework.Controls.MetroButton button_Left;
         private MetroFramework.Controls.MetroButton button_Right;
-        private System.Windows.Forms.NotifyIcon notifyIconinfo;
     }
 }
