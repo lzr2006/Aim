@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class Settings : Form
+    public partial class Settings : MetroForm
     {
         internal List<string> packedSettings = new List<string>();
         public Settings()

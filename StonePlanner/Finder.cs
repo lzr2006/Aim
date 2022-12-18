@@ -1,17 +1,11 @@
 ﻿using StonePlanner;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace MDI
 {
-    public partial class Finder : Form
+    public partial class Finder : MetroForm
     {
         //实现对form1的关联
         InnerIDE mainfrom1;

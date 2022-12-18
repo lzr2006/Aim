@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MetroFramework.Forms;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    public partial class BugReporter : Form
+    public partial class BugReporter : MetroForm
     {
         string info;
         public BugReporter(string pInfo)
@@ -22,7 +16,8 @@ namespace StonePlanner
 
         private void BugReporter_Load(object sender, EventArgs e)
         {
-            richTextBox1.Text = info;
+            metroTextBox1.Multiline = true;
+            metroTextBox1.Text = info;
         }
     }
 }

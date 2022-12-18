@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Data.OleDb;
+using MetroFramework.Forms;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    public partial class GoodAdder : Form
+    public partial class GoodAdder : MetroForm
     {
         public GoodAdder()
         {
@@ -47,6 +48,25 @@ namespace StonePlanner
         private void label_Function_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void GoodAdder_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Buton_Cospic_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";//注意这里写路径时要用c:\\而不是c:\
+            openFileDialog.Filter = "便携式网络图形|*.png|联合图像专家组|*.jpg|所有文件|*.*";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string fName = openFileDialog.FileName;
+                textBox_GoodPicture.Text = fName;
+            }
         }
     }
 }

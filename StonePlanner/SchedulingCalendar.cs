@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Threading;
+using MetroFramework.Forms;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
     //没有Bug的程序不是好程序
     //                     ——MethodBox
-    public partial class SchedulingCalendar : Form
+    public partial class SchedulingCalendar : MetroForm
     {
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
@@ -121,8 +121,8 @@ namespace StonePlanner
             {
                 d = true;
             }
-            if (month is not null) month = month; else month = DateTime.Now.Month;
-            if (year is not null) year = year; else year = DateTime.Now.Year;
+            if (month is null)month = DateTime.Now.Month;
+            if (year is null)year = DateTime.Now.Year;
             var mday = GetDay((Enums.MonthInt) month);
             if (month == 2 && (year) % 4 == 0)
             {

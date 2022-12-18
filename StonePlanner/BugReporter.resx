@@ -118,10 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label_B.Text" xml:space="preserve">
-    <value>如果能复现，请使用Windows自带的步骤记录器记录下您的操作，并将Bug反馈表、步骤记录文件以及mdb文件
+    <value>很抱歉，应用程序发生了内部错误，原因如上面文本框所示。
+如果能复现，请使用Windows自带的步骤记录器记录下您的操作，并将Bug反馈表、步骤记录文件以及mdb文件
 一并打包发送给MethodBox，同时附上上边框内的所有信息，不胜感谢！
 反馈群：97257459。
 您将获得命名该Bug以及登上感谢名单的机会，再次表示感谢！
-                                                                            MethodBox Std.</value>
+                                                                                                                                                              MethodBox Std.</value>
   </data>
 </root>
