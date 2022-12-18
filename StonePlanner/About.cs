@@ -26,5 +26,11 @@ namespace StonePlanner
         {
 
         }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            Thanks t = new Thanks();
+            t.Show();
+        }
     }
 }

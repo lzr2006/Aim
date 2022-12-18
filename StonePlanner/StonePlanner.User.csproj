@@ -26,7 +26,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>2022.4.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -501,9 +501,51 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="hicon\exit.png" />
-    <Content Include="hicon\ipho.png" />
-    <Content Include="hicon\三横线.png" />
+    <Content Include="icon\Alert.wav" />
+    <Content Include="icon\box.png" />
+    <Content Include="icon\Capper.jpg" />
+    <Content Include="icon\Click.wav" />
+    <Content Include="icon\console.png" />
+    <Content Include="icon\debug.png" />
+    <Content Include="icon\exit.png" />
+    <Content Include="icon\export.png" />
+    <Content Include="icon\good\box.png" />
+    <Content Include="icon\hlwav.mp3" />
+    <Content Include="icon\info.png" />
+    <Content Include="icon\ipho.png" />
+    <Content Include="icon\lock.png" />
+    <Content Include="icon\maim.png" />
+    <Content Include="icon\names.png" />
+    <Content Include="icon\new.png" />
+    <Content Include="icon\password.png" />
+    <Content Include="icon\program.png" />
+    <Content Include="icon\recycle.png" />
+    <Content Include="icon\schedule.png" />
+    <Content Include="icon\server.png" />
+    <Content Include="icon\settings.png" />
+    <Content Include="icon\shop.png" />
+    <Content Include="icon\skin\LineA.png" />
+    <Content Include="icon\skin\LineB.png" />
+    <Content Include="icon\skin\LineC.png" />
+    <Content Include="icon\skin\Login.png" />
+    <Content Include="icon\skin\Shadow.png" />
+    <Content Include="icon\stone.png" />
+    <Content Include="icon\stoneicon.png" />
+    <Content Include="icon\Tip.wav" />
+    <Content Include="icon\tips.jpg" />
+    <Content Include="icon\t_errorcenter.png" />
+    <Content Include="icon\t_signqueue.png" />
+    <Content Include="icon\t_variable.png" />
+    <Content Include="icon\user.png" />
+    <Content Include="icon\wea\m_cloudy.png" />
+    <Content Include="icon\wea\m_rainy.png" />
+    <Content Include="icon\wea\m_sunny.png" />
+    <Content Include="icon\wea\n_rainy.png" />
+    <Content Include="icon\wea\n_sunny.png" />
+    <Content Include="icon\welcome.png" />
+    <Content Include="runtimes\win-arm\native\e_sqlite3.dll" />
+    <Content Include="runtimes\win-x64\native\e_sqlite3.dll" />
+    <Content Include="runtimes\win-x86\native\e_sqlite3.dll" />
     <None Include="Properties\OpenTXT.exe" />
   </ItemGroup>
   <ItemGroup>
@@ -519,6 +561,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="coding\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
