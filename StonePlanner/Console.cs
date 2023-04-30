@@ -1,23 +1,17 @@
-﻿using Microsoft.AppCenter.Crashes;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
+using Microsoft.AppCenter.Crashes;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class Console : Form
+    public partial class Console : MetroForm
     {
         //INT类型存储器 多步执行布尔存储器
         internal int EPH,KDP = 0;

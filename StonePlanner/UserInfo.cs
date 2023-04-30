@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using MetroFramework.Forms;
 
 namespace StonePlanner
 {
-    public partial class UserInfo : Form
+    public partial class UserInfo : MetroForm
     {
         public UserInfo()
         {
@@ -62,7 +57,9 @@ namespace StonePlanner
             {
                 point_User = 6d;
             }
+#pragma warning disable CS0618 // 'Legacy.Main_Calc()' is obsolete: '该代码存在逻辑问题，应该尽早重构'
             double point_Plan = Legacy.Main_Calc();
+#pragma warning restore CS0618 // 'Legacy.Main_Calc()' is obsolete: '该代码存在逻辑问题，应该尽早重构'
             label_Point.Text = $"评 分 值（pp）：{point_User + point_Plan}";
         }
 

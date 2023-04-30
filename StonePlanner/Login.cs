@@ -1,82 +1,41 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
-using System.Drawing;
-using System.Runtime.InteropServices;
+using MetroFramework.Forms;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    public partial class Login : Form
+    public partial class Login : MetroForm
     {
         public static string UserName;
         public static int UserType;
-        int h = 65;
         public Login()
         {
             InitializeComponent();
         }
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+
         private void Login_Load(object sender, EventArgs e)
         {
+            dataGridView1.Visible = false;  
             textBox_M_Pwd.UseSystemPasswordChar = true;
-            label_Login.Parent = pictureBox_Bg;
-            label_Login.Location = new Point(78, h);
-            textBox_M_Name.Parent = pictureBox_Bg;
-            textBox_M_Name.Location = new Point(55, h + 40);
-            PictureBox pbox_User = new PictureBox();
-            pictureBox_Bg.Controls.Add(pbox_User);
-            pbox_User.BackgroundImageLayout = ImageLayout.Stretch;
-            pbox_User.BackgroundImage = Image.FromFile(Application.StartupPath + @"\icon\user.png");
-            pbox_User.BackColor = Color.Transparent;
-            pbox_User.Width = 25;
-            pbox_User.Height = 25;
-            pbox_User.Location = new Point(25, h + 40);
-            PictureBox pbox_Password = new PictureBox();
-            pictureBox_Bg.Controls.Add(pbox_Password);
-            pbox_Password.BackgroundImageLayout = ImageLayout.Stretch;
-            pbox_Password.BackgroundImage = Image.FromFile(Application.StartupPath + @"\icon\password.png");
-            pbox_Password.BackColor = Color.Transparent;
-            pbox_Password.Width = 25;
-            pbox_Password.Height = 25;
-            pbox_Password.Location = new Point(25, h + 80);
-            textBox_M_Pwd.Parent = pictureBox_Bg;
-            textBox_M_Pwd.Location = new Point(55, h + 80);
-            textBox_M_Pwd.Width = textBox_M_Name.Width;
-            Label label_Logon = new Label();
-            label_Logon.Text = "Log On →";
-            label_Logon.ForeColor = Color.Black;
-            label_Logon.Font = new Font(new FontFamily("SimHei"), 12,FontStyle.Regular);
-            label_Logon.Location = new Point(170, 38);
-            label_Logon.BackColor = Color.Transparent;
-            label_Logon.Click += (object sender, EventArgs e) => { new Register().Show(); };
-            pictureBox_Bg.Controls.Add(label_Logon);
-            PictureBox pbox_Login = new PictureBox();
-            pictureBox_Bg.Controls.Add(pbox_Login);
-            pbox_Login.BackgroundImageLayout = ImageLayout.Stretch;
-            pbox_Login.BackgroundImage = Image.FromFile(Application.StartupPath + @"\icon\skin\Login.png");
-            pbox_Login.BackColor = Color.Transparent;
-            pbox_Login.Width = 240;
-            pbox_Login.Height = 50;
-            pbox_Login.Location = new Point(10, h + 115);
-            pbox_Login.Click += button_Submit_Click;
+           // MessageBox.Show("This program is protected by unregistered ASProtect.","ASProtect",MessageBoxButtons.OK,MessageBoxIcon.Information);
         }
-
+        
         private void button_Submit_Click(object sender, EventArgs e)
         {
             try
             {
                 var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");
                 DataTable dt = new DataTable();
-                if (result.HasRows)
-                {
+                 if (result.HasRows)
+                 {
                     for (int i = 0; i < result.FieldCount; i++)
                     {
                         dt.Columns.Add(result.GetName(i));
                     }
-                    dt.Rows.Clear();
-                }
+                     dt.Rows.Clear();
+                 }
                 while (result.Read())
                 {
                     DataRow row = dt.NewRow();
@@ -92,7 +51,8 @@ namespace StonePlanner
                     MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (AESEncrypt.Encrypt(dataGridView1.Rows[0].Cells[0].Value.ToString(), Main.password) == AESEncrypt.Encrypt(textBox_M_Pwd.Text, Main.password))
+
+                if (dataGridView1.Rows[0].Cells[0].Value.ToString() == textBox_M_Pwd.Text)
                 {
                     result = SQLConnect.SQLCommandQuery($"SELECT Type FROM Users where Username='{textBox_M_Name.Text}';");
                     dt = new DataTable();
@@ -114,6 +74,7 @@ namespace StonePlanner
                         dt.Rows.Add(row);
                     }
                     dataGridView1.DataSource = dt;
+                    //特殊用户
                     try
                     {
                         UserType = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);

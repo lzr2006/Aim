@@ -70,7 +70,14 @@ namespace StonePlanner
             internal int UDID;
             internal string lpParent;
         }
-        
-        public class PlanClassD : PlanBase{}
+
+        public class PlanClassD : PlanBase { }
+
+        [Serializable]
+        public class ChatStruct
+        {
+            internal string req_Head;
+            internal string Text;
+        }
     }
 }

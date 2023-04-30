@@ -41,9 +41,9 @@
             // panel_Output
             // 
             this.panel_Output.Controls.Add(this.richTextBox_Output);
-            this.panel_Output.Location = new System.Drawing.Point(11, 30);
+            this.panel_Output.Location = new System.Drawing.Point(16, 81);
             this.panel_Output.Name = "panel_Output";
-            this.panel_Output.Size = new System.Drawing.Size(355, 191);
+            this.panel_Output.Size = new System.Drawing.Size(382, 191);
             this.panel_Output.TabIndex = 0;
             // 
             // richTextBox_Output
@@ -53,7 +53,7 @@
             this.richTextBox_Output.ForeColor = System.Drawing.Color.Green;
             this.richTextBox_Output.Location = new System.Drawing.Point(4, 3);
             this.richTextBox_Output.Name = "richTextBox_Output";
-            this.richTextBox_Output.Size = new System.Drawing.Size(348, 185);
+            this.richTextBox_Output.Size = new System.Drawing.Size(375, 185);
             this.richTextBox_Output.TabIndex = 1;
             this.richTextBox_Output.Text = "Console@Main>已启动";
             this.richTextBox_Output.TextChanged += new System.EventHandler(this.richTextBox_Output_TextChanged);
@@ -61,8 +61,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("黑体", 10.4F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Font = new System.Drawing.Font("SimHei", 10.4F);
+            this.label1.Location = new System.Drawing.Point(17, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 14);
             this.label1.TabIndex = 2;
@@ -71,8 +71,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("黑体", 10.4F);
-            this.label2.Location = new System.Drawing.Point(12, 229);
+            this.label2.Font = new System.Drawing.Font("SimHei", 10.4F);
+            this.label2.Location = new System.Drawing.Point(17, 280);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 14);
             this.label2.TabIndex = 3;
@@ -81,10 +81,10 @@
             // richTextBox_Input
             // 
             this.richTextBox_Input.Font = new System.Drawing.Font("Cascadia Mono", 10.5F);
-            this.richTextBox_Input.Location = new System.Drawing.Point(15, 248);
+            this.richTextBox_Input.Location = new System.Drawing.Point(20, 299);
             this.richTextBox_Input.Multiline = false;
             this.richTextBox_Input.Name = "richTextBox_Input";
-            this.richTextBox_Input.Size = new System.Drawing.Size(348, 22);
+            this.richTextBox_Input.Size = new System.Drawing.Size(375, 22);
             this.richTextBox_Input.TabIndex = 4;
             this.richTextBox_Input.Text = "";
             this.richTextBox_Input.Click += new System.EventHandler(this.richTextBox_Input_Click);
@@ -93,7 +93,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(186, 229);
+            this.checkBox1.Location = new System.Drawing.Point(191, 280);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(126, 16);
             this.checkBox1.TabIndex = 5;
@@ -102,17 +102,17 @@
             // 
             // textBox_Pars
             // 
-            this.textBox_Pars.Location = new System.Drawing.Point(302, 10);
+            this.textBox_Pars.Location = new System.Drawing.Point(307, 61);
             this.textBox_Pars.Multiline = true;
             this.textBox_Pars.Name = "textBox_Pars";
-            this.textBox_Pars.Size = new System.Drawing.Size(10, 13);
+            this.textBox_Pars.Size = new System.Drawing.Size(10, 10);
             this.textBox_Pars.TabIndex = 2;
             // 
             // Console
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 282);
+            this.ClientSize = new System.Drawing.Size(415, 338);
             this.Controls.Add(this.textBox_Pars);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.richTextBox_Input);
@@ -120,7 +120,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel_Output);
             this.Name = "Console";
-            this.Text = "Console";
+            this.Text = "控制台";
             this.Load += new System.EventHandler(this.Console_Load);
             this.panel_Output.ResumeLayout(false);
             this.ResumeLayout(false);

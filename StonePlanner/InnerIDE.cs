@@ -832,6 +832,10 @@ namespace StonePlanner
         {
             try
             {
+                if (main is null)
+                {
+                    return;
+                }
                 main.Hide();
                 main = null;
             }
@@ -943,10 +947,11 @@ namespace StonePlanner
             tabControl_Buttom.Focus();
             tabPage_Jh.Focus();
             richTextBox_Input.Focus();
-            richTextBox_Input.Text = $">COMPILE {iFileName}";
-            richTextBox_Input.Select(richTextBox_Input.TextLength,0);
-            //SendMessage
-            SendKeys.SendWait("{Enter}");
+            SyntaxParser($"COMPILE {iFileName}");
+            //richTextBox_Input.Text = $">COMPILE {iFileName}";
+            //richTextBox_Input.Select(richTextBox_Input.TextLength,0);
+            ////SendMessage
+            //SendKeys.SendWait("{Enter}");
             tabControl_Buttom.SelectedIndex = 2;
             //开始分析
             (hh, mm, ss, sc) = (0, 0, 0, 0);
@@ -961,6 +966,8 @@ namespace StonePlanner
             label_Any_RuntimeResult.Text = "xx:xx:xx";
             label_Any_cValue.Text = "xxxxx";
             label_Any_mValue.Text = "xxxxx";
+
+            Compile(richTextBox_Main.Text);
         }
 
         private void 开始调试SToolStripMenuItem_Click(object sender, EventArgs e)

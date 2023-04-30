@@ -78,9 +78,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label_Day;
         private System.Windows.Forms.Panel panel_Down;
-        private System.Windows.Forms.Label label_D;
+        internal System.Windows.Forms.Label label_Day;
+        internal System.Windows.Forms.Label label_D;
     }
 }

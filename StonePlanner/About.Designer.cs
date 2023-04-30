@@ -75,7 +75,7 @@
             // 
             this.pictureBox_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Logo.BackgroundImage")));
             this.pictureBox_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox_Logo.Location = new System.Drawing.Point(109, 16);
+            this.pictureBox_Logo.Location = new System.Drawing.Point(123, 90);
             this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox_Logo.Name = "pictureBox_Logo";
             this.pictureBox_Logo.Size = new System.Drawing.Size(93, 82);
@@ -86,7 +86,7 @@
             // 
             this.label_TT.AutoSize = true;
             this.label_TT.Font = new System.Drawing.Font("Lucida Sans", 23F, System.Drawing.FontStyle.Bold);
-            this.label_TT.Location = new System.Drawing.Point(218, 20);
+            this.label_TT.Location = new System.Drawing.Point(232, 94);
             this.label_TT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_TT.Name = "label_TT";
             this.label_TT.Size = new System.Drawing.Size(489, 44);
@@ -97,7 +97,7 @@
             // 
             this.label_T.AutoSize = true;
             this.label_T.Font = new System.Drawing.Font("Lucida Sans", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_T.Location = new System.Drawing.Point(314, 75);
+            this.label_T.Location = new System.Drawing.Point(328, 149);
             this.label_T.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_T.Name = "label_T";
             this.label_T.Size = new System.Drawing.Size(250, 23);
@@ -106,11 +106,12 @@
             // 
             // pictureBox_Line
             // 
-            this.pictureBox_Line.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox_Line.Image")));
-            this.pictureBox_Line.Location = new System.Drawing.Point(0, 119);
+            this.pictureBox_Line.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Line.BackgroundImage")));
+            this.pictureBox_Line.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox_Line.Location = new System.Drawing.Point(-61, 186);
             this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox_Line.Name = "pictureBox_Line";
-            this.pictureBox_Line.Size = new System.Drawing.Size(727, 12);
+            this.pictureBox_Line.Size = new System.Drawing.Size(837, 12);
             this.pictureBox_Line.TabIndex = 3;
             this.pictureBox_Line.TabStop = false;
             // 
@@ -118,51 +119,51 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label1.Location = new System.Drawing.Point(15, 145);
+            this.label1.Location = new System.Drawing.Point(28, 210);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(478, 21);
+            this.label1.Size = new System.Drawing.Size(481, 21);
             this.label1.TabIndex = 4;
-            this.label1.Text = "开发者：Zongzi（MethodBox a.k.a. ZongZi COOP. I）";
+            this.label1.Text = "开发者：BoxSlide（Zongzi Feat MethodBox as \"Arq\"）";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label2.Location = new System.Drawing.Point(15, 172);
+            this.label2.Location = new System.Drawing.Point(28, 238);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(330, 21);
+            this.label2.Size = new System.Drawing.Size(293, 21);
             this.label2.TabIndex = 5;
-            this.label2.Text = "联系方式：methodbox@outlook.com";
+            this.label2.Text = "联系方式：MethodBox@163.com";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label3.Location = new System.Drawing.Point(16, 212);
+            this.label3.Location = new System.Drawing.Point(29, 278);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(522, 21);
+            this.label3.Size = new System.Drawing.Size(541, 21);
             this.label3.TabIndex = 6;
-            this.label3.Text = "MethodBox Stone TO-DO（Insider Version && TEST BETA）";
+            this.label3.Text = "MethodBox AimPlanner（Insider Version && TEST EPSILON）";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label4.Location = new System.Drawing.Point(16, 236);
+            this.label4.Location = new System.Drawing.Point(29, 301);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(481, 21);
+            this.label4.Size = new System.Drawing.Size(458, 21);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 B.2022.3.Insider.1（内部版本M007171311FJHY）";
+            this.label4.Text = "版本 Epsilon V2.2.X（内部版本M012180822WKTD）";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label5.Location = new System.Drawing.Point(16, 274);
+            this.label5.Location = new System.Drawing.Point(29, 339);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(604, 63);
@@ -174,7 +175,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label6.Location = new System.Drawing.Point(16, 350);
+            this.label6.Location = new System.Drawing.Point(29, 415);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(406, 21);
@@ -185,7 +186,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Lucida Sans", 10.5F);
-            this.label7.Location = new System.Drawing.Point(17, 376);
+            this.label7.Location = new System.Drawing.Point(31, 441);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(118, 21);
@@ -195,12 +196,12 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(7, 406);
+            this.label8.Location = new System.Drawing.Point(20, 480);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(606, 15);
+            this.label8.Size = new System.Drawing.Size(700, 15);
             this.label8.TabIndex = 11;
-            this.label8.Text = "反盗版检测：OFF  反修改检测：OFF  使用时间：2022.7.17 14:00 - 2022.7.27 05:00";
+            this.label8.Text = "哦，上帝啊，我都不敢相信这他妈是个自由版本！ 使用时间：2022.11.05 18:00 - 2022.11.18 05:00";
             // 
             // panel1
             // 
@@ -225,10 +226,10 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(0, 139);
+            this.panel1.Location = new System.Drawing.Point(749, 480);
             this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(736, 406);
+            this.panel1.Size = new System.Drawing.Size(13, 406);
             this.panel1.TabIndex = 12;
             // 
             // button1
@@ -290,12 +291,12 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Courier New", 10.75F);
-            this.label27.Location = new System.Drawing.Point(376, 291);
+            this.label27.Location = new System.Drawing.Point(381, 292);
             this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(273, 20);
+            this.label27.Size = new System.Drawing.Size(218, 20);
             this.label27.TabIndex = 20;
-            this.label27.Text = "版本：B.2022.6.Insider.0\r\n";
+            this.label27.Text = "版本：Epsilon 1.0.0\r\n";
             // 
             // label26
             // 
@@ -454,7 +455,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("宋体", 11F);
-            this.label9.Location = new System.Drawing.Point(9, 1);
+            this.label9.Location = new System.Drawing.Point(4, 1);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(333, 323);
@@ -465,18 +466,19 @@
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox2.Location = new System.Drawing.Point(11, 16);
+            this.pictureBox2.Location = new System.Drawing.Point(24, 90);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(93, 82);
             this.pictureBox2.TabIndex = 13;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
             // 
             // About
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(723, 472);
+            this.ClientSize = new System.Drawing.Size(768, 504);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.label8);
@@ -493,6 +495,8 @@
             this.Controls.Add(this.pictureBox_Logo);
             this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "About";
+            this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
+            this.Text = "关于AimPlanner内部版本";
             this.Load += new System.EventHandler(this.About_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Line)).EndInit();

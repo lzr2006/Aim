@@ -117,7 +117,7 @@ namespace StonePlanner
         //全局展示
         TaskDetails td;
         //天气预报
-        internal static WeatherForecast wf = new WeatherForecast();
+        //internal static WeatherForecast wf = new WeatherForecast();
         //数据库查询
         internal static OleDbConnection odcConnection = new OleDbConnection();
         #endregion
@@ -175,7 +175,6 @@ namespace StonePlanner
         {
             const int WM_NCLBUTTONDOWN = 0x00A1;
             const int HTCAPTION = 0x0002;
-
             if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
             {
                 ReleaseCapture();
@@ -188,10 +187,18 @@ namespace StonePlanner
         /// </summary>
         protected void InitializeSettings()
         {
-            if (packedSetting[0] == "True") { timer_Ponv.Enabled = true; } else { timer_Ponv.Enabled = false; }
-            timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
-            if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
-            timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+            try
+            {
+                if (packedSetting[0] == "True") { timer_Ponv.Enabled = true; } else { timer_Ponv.Enabled = false; }
+                timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
+                if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
+                timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+            }
+            catch 
+            {
+                timer_Ponv.Enabled = true;
+                timer_Conv.Enabled = true;
+            }
         }
         /// <summary>
         /// 覆写窗体的消息处理函数
@@ -254,6 +261,16 @@ namespace StonePlanner
                 {
                     //先判断是否存在
                     //Users可还行 表都他妈不分了吗你
+
+                    /*
+                     * 此处的Bug：
+                     * 关闭的时候，检查是否已经存在了相应任务
+                     * 如果存在就不在添加
+                     * 但是，如果已经更新了数据
+                     * 也无法存储，导致了任务还原的Bug
+                     * 做法：
+                     * 仅对状态为待办的剩余时间和是否完成进行更新
+                    */
                     var sqlResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE UDID = {plan.Value.UDID}",ref Main.odcConnection);
                     if (sqlResult.HasRows) continue;
                     //脑子是个好东西 下次带上
@@ -325,17 +342,21 @@ namespace StonePlanner
             //分配
             for (int i = 0; i < 100; i++)
             {
-                PlanClassA psa = new PlanClassA();
-                psa.lpCapital = "NULL";
-                psa.lpParent = null;
-                psa.dwStart = 0;
-                psa.iWisdom = 0;
-                psa.iLasting = 0;
-                psa.iExplosive = 0;
-                psa.dwIntro = "NULL";
-                psa.iSeconds = 0;
-                Plan p = new Plan(psa);
-                p.Lnumber = -1;
+                PlanClassA psa = new()
+                {
+                    lpCapital = "NULL",
+                    lpParent = null,
+                    dwStart = 0,
+                    iWisdom = 0,
+                    iLasting = 0,
+                    iExplosive = 0,
+                    dwIntro = "NULL",
+                    iSeconds = 0
+                };
+                Plan p = new(psa)
+                {
+                    Lnumber = -1
+                };
                 TasksDict.Add(i, null);
             }
             //加载日期时间
@@ -378,8 +399,10 @@ namespace StonePlanner
                 {
                     try
                     {
-                        WebClient MyWebClient = new WebClient();
-                        MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                        WebClient MyWebClient = new()
+                        {
+                            Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                        };
                         Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/language.txt"); //下载
                         //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
                         string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
@@ -429,16 +452,18 @@ namespace StonePlanner
                     continue;
                 }
                 //完了，他妈的，重载全几把乱了
-                PlanClassB psb = new PlanClassB();
-                psb.lpCapital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString();
-                psb.dwIntro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString();
-                psb.iSeconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value);
-                psb.dwDifficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value);
-                psb.UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[9].Value);
-                psb.iLasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value);
-                psb.iExplosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value);
-                psb.iWisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value);
-                psb.dwStart = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[11].Value);
+                PlanClassB psb = new()
+                {
+                    lpCapital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
+                    dwIntro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                    iSeconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
+                    dwDifficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
+                    UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[9].Value),
+                    iLasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
+                    iExplosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
+                    iWisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
+                    dwStart = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[11].Value)
+                };
                 //Plan plan = new Plan
                 //    (
                 //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
@@ -457,14 +482,6 @@ namespace StonePlanner
             #endregion
             //Thread testThread = new Thread(new ThreadStart(Test.Add10Plan));
             //testThread.Start();
-            #region 天气预报
-            //狗狗
-            pictureBox_Tip.Parent = pictureBox_Main;
-            wf.Top = 218;
-            wf.Left = 600;
-            panel_TaskDetail.Controls.Add(wf);
-            wf.BringToFront();
-            #endregion
             #region 热点爬取器
             //https://v.api.aa1.cn/api/topbaidu/index.php
             //请求新闻API
@@ -506,6 +523,7 @@ namespace StonePlanner
             #endregion
             Thread scanner = new Thread(new ThreadStart(TaskTimeScan));
             scanner.Start();
+            GetSchedule(true);
         }
 
         internal static void AddSign(int sign)
@@ -520,6 +538,7 @@ namespace StonePlanner
         #region 功能加载器
         protected void FunctionLoader()
         {
+            int i = 34;
             //加载功能 34高
             if (main.InvokeRequired)
             {
@@ -527,47 +546,73 @@ namespace StonePlanner
             }
             else
             {
-                Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png", $"{langInfo[2]}", "__New__");
-                newTodo.Top = 0;
+                Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png", $"{langInfo[2]}", "__New__")
+                {
+                    Top = 0
+                };
                 panel_L.Controls.Add(newTodo);
                 //Function export = new Function($"{Application.StartupPath}\\icon\\export.png", $"{langInfo[49]}", "__Export__");
                 //export.Top = 34;
                 //panel_L.Controls.Add(export);
-                Function recycle = new Function($"{Application.StartupPath}\\icon\\recycle.png", $"{langInfo[13]}", "__Recycle__");
-                recycle.Top = 34;
+                Function recycle = new($"{Application.StartupPath}\\icon\\recycle.png", $"{langInfo[13]}", "__Recycle__")
+                {
+                    Top = i
+                };
                 panel_L.Controls.Add(recycle);
-                Function debugger = new Function($"{Application.StartupPath}\\icon\\debug.png", $"调试工具", "__Debugger__");
-                debugger.Top = 238;
+                Function debugger = new($"{Application.StartupPath}\\icon\\debug.png", $"调试工具", "__Debugger__")
+                {
+                    Top = 7 * i
+                };
                 panel_L.Controls.Add(debugger);
-                Function info = new Function($"{Application.StartupPath}\\icon\\info.png", $"{langInfo[14]}", "__Infomation__");
-                info.Top = 238 + 34;
+                Function info = new($"{Application.StartupPath}\\icon\\info.png", $"{langInfo[14]}", "__Infomation__")
+                {
+                    Top = 9 * i
+                };
                 panel_L.Controls.Add(info);
-                Function console = new Function($"{Application.StartupPath}\\icon\\console.png", $"{langInfo[15]}", "__Console__");
-                console.Top = 102;
+                Function console = new($"{Application.StartupPath}\\icon\\console.png", $"{langInfo[15]}", "__Console__")
+                {
+                    Top = 3 * i
+                };
                 panel_L.Controls.Add(console);
-                Function IDE = new Function($"{Application.StartupPath}\\icon\\program.png", $"{langInfo[16]}", "__IDE__");
-                IDE.Top = 136;
+                Function IDE = new($"{Application.StartupPath}\\icon\\program.png", $"{langInfo[16]}", "__IDE__")
+                {
+                    Top = 4 * i
+                };
                 panel_L.Controls.Add(IDE);
-                Function Online = new Function($"{Application.StartupPath}\\icon\\server.png", $"在线协作", "__Online__");
-                Online.Top = 170;
+                Function Online = new($"{Application.StartupPath}\\icon\\server.png", $"在线协作", "__Online__")
+                {
+                    Top = 5 * i
+                };
                 panel_L.Controls.Add(Online);
-                Function Settings = new Function($"{Application.StartupPath}\\icon\\settings.png", $"{langInfo[17]}", "__Settings__");
-                Settings.Top = 204;
+                Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"{langInfo[17]}", "__Settings__")
+                {
+                    Top = 6 * i
+                };
                 panel_L.Controls.Add(Settings);
-                Function Shop = new Function($"{Application.StartupPath}\\icon\\shop.png", $"{langInfo[18]}", "__Shop__");
-                Shop.Top = 68;
+                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"{langInfo[18]}", "__Shop__") 
+                {
+                    Top = 2 * i
+                };
                 panel_L.Controls.Add(Shop);
-
+                Function Schedule = new($"{Application.StartupPath}\\icon\\schedule.png", $"排班日历", "__Schedule__")
+                {
+                    Top = 8 * i
+                };
+                panel_L.Controls.Add(Schedule);
                 //你猜猜点击函数在哪里？没想到吧，在这里！
-                Bottom Function = new Bottom("功能");
-                Function.Top = 374;
-                Function.Left = 1;
+                Bottom Function = new("功能")
+                {
+                    Top = 374,
+                    Left = 1
+                };
                 Function.Click += label_L_Function_Click;
                 Function.label_B.Click += label_L_Function_Click;
                 panel_L.Controls.Add(Function);
-                Bottom Type = new Bottom("分类");
-                Type.Top = 374;
-                Type.Left = 60;
+                Bottom Type = new("分类")
+                {
+                    Top = 374,
+                    Left = 60
+                };
                 Type.Click += label_L_Type_Click;
                 Type.label_B.Click += label_L_Type_Click;
                 panel_L.Controls.Add(Type);
@@ -648,21 +693,22 @@ namespace StonePlanner
                 //1 5 2 4 9 6 7 8
                 while (sResult.Read())
                 {
-                    PlanClassB psb = new PlanClassB();
-                    psb.lpCapital = sResult[1].ToString();
-                    psb.dwIntro = sResult[2].ToString();
-                    psb.iSeconds = Convert.ToInt32(sResult[5]);
-                    psb.dwDifficulty = Convert.ToInt64(sResult[4]);
-                    psb.UDID = Convert.ToInt32(sResult[9]);
-                    psb.iLasting = Convert.ToInt32(sResult[6]);
-                    psb.iExplosive = Convert.ToInt32(sResult[7]);
-                    psb.iWisdom = Convert.ToInt32(sResult[8]);
-                    using (Plan plan = new Plan
+                    PlanClassB psb = new()
+                    {
+                        lpCapital = sResult[1].ToString(),
+                        dwIntro = sResult[2].ToString(),
+                        iSeconds = Convert.ToInt32(sResult[5]),
+                        dwDifficulty = Convert.ToInt64(sResult[4]),
+                        UDID = Convert.ToInt32(sResult[9]),
+                        iLasting = Convert.ToInt32(sResult[6]),
+                        iExplosive = Convert.ToInt32(sResult[7]),
+                        iWisdom = Convert.ToInt32(sResult[8])
+                    };
+                    using Plan plan = new Plan
                     (
                           psb
-                    )
-                          )
-                    { Function sonMain = new Function(sResult[1].ToString(), item, 0); panel_L.Controls.Add(sonMain); }
+                    );
+                    Function sonMain = new Function(sResult[1].ToString(), item, 0); panel_L.Controls.Add(sonMain);
                 }
             }
             panel_L.ControlAdded -= Another_OnControlAdded;
@@ -688,8 +734,10 @@ namespace StonePlanner
                         File.Delete(Application.StartupPath + "\\");
                         Environment.Exit(1);
                     }
-                    WebClient MyWebClient = new WebClient();
-                    MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                    WebClient MyWebClient = new()
+                    {
+                        Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                    };
                     Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/language.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
                     string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                     StreamReader sr = new StreamReader($"{Application.StartupPath}\\language.mlu");
@@ -710,13 +758,10 @@ namespace StonePlanner
                             Environment.Exit(1);
                             ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
                         }
-                        using (StreamWriter sw = new StreamWriter($"{Application.StartupPath}\\language.mlu"))//将获取的内容写入文本
-                        {
-                            sw.Write(pageHtml);
-                            sw.Flush();
-                            sw.Close();
-                        }
-
+                        using StreamWriter sw = new StreamWriter($"{Application.StartupPath}\\language.mlu");//将获取的内容写入文本
+                        sw.Write(pageHtml);
+                        sw.Flush();
+                        sw.Close();
                     }
                     Thread.Sleep(10000);
                 }
@@ -747,7 +792,7 @@ namespace StonePlanner
             //回调基类原函数 添加控件
             base.OnControlAdded(e);
         }
-        internal void GetSchedule() 
+        internal void GetSchedule(bool @out = false) 
         {
             Dictionary<DateTime, string> returns = new Dictionary<DateTime, string>();
             //内置
@@ -763,16 +808,18 @@ namespace StonePlanner
                     }
                     else
                     {
-                        string sch = ((item as Plan).dtStartTime.Hour) switch
+                        Plan plan1 = (item as Plan);
+                        string sch = plan1.dtStartTime.Hour switch
                         {
-                            >6 and <15 => "白班",
-                            _ => "夜班",
+                            >6 and <15 => " 白班",
+                            _ => " 夜班",
                         };
                         returns.Add(d, sch);
                     }
                 }
-                SchedulingCalendar calendar = new SchedulingCalendar();
             }
+
+            _ = new SchedulingCalendar(returns, @out);
         }
         /// <summary>
         /// 判断是否包含此字串的进程   模糊
@@ -1030,8 +1077,12 @@ namespace StonePlanner
             }
             else if (Sign == 9)
             {
-                timer_Tip.Enabled = false;
                 pictureBox_Tip.Visible = false;
+                signQueue.Dequeue();
+            }
+            else if (Sign == 10)
+            {
+                GetSchedule();
                 signQueue.Dequeue();
             }
         }
@@ -1081,6 +1132,26 @@ namespace StonePlanner
                 et.Show();
                 signQueue.Dequeue();
             }
+            else if (Sign == 12)
+            {
+                signQueue.Dequeue();
+                if (Width >= 256)
+                {
+                    Width -= 2;
+                    pictureBox_T_Exit.Left -= 2;
+                    AddSign(12);
+                }
+            }
+            else if (Sign == 13)
+            {
+                signQueue.Dequeue();
+                if (Width <= 674)
+                {
+                    Width += 2;
+                    pictureBox_T_Exit.Left += 2;
+                    AddSign(13);
+                }
+            }
         }
 
         private void pictureBox_T_More_Click(object sender, EventArgs e)
@@ -1099,8 +1170,10 @@ namespace StonePlanner
         {
             try
             {
-                WebClient MyWebClient = new WebClient();
-                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                WebClient MyWebClient = new WebClient
+                {
+                    Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                };
                 Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/sentence.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
                 string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                 foreach (var item in pageHtml.Split(';'))
@@ -1119,9 +1192,11 @@ namespace StonePlanner
         {
             try
             {
-                WebClient MyWebClient = new WebClient();
-                MyWebClient.Credentials = CredentialCache.DefaultCredentials;//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/picture.txt"); //下载
+                WebClient MyWebClient = new()
+                {
+                    Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
+                };
+                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/Services/StonePlanner/picture.txt"); //下载
                 string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                 foreach (var item in pageHtml.Split('\n'))
                 {
@@ -1166,9 +1241,8 @@ namespace StonePlanner
             { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
         }
         private void User_Piicture_Click(object sender, EventArgs e)
-        {
-            UserInfo UI = new UserInfo();
-            UI.Show();
+        {UserInfo _ = new UserInfo();
+            _.Show();
         }
         /// <summary>
         /// 更新用户金钱
@@ -1221,9 +1295,8 @@ namespace StonePlanner
         }
 
         private void User_Piicture_DoubleClick(object sender, EventArgs e)
-        {
-            ErrorCenter errorCenter = new ErrorCenter();
-            errorCenter.Show();
+        {ErrorCenter _ = new ErrorCenter();
+            _.Show();
         }
 
         private void label_L_Function_Click(object sender, EventArgs e)
@@ -1266,9 +1339,11 @@ namespace StonePlanner
                     Function.Click += label_L_Function_Click;
                     Function.label_B.Click += label_L_Function_Click;
                     panel_L.Controls.Add(Function);
-                    Bottom Type = new Bottom("分类");
-                    Type.Top = 374;
-                    Type.Left = 60;
+                    Bottom Type = new("分类")
+                    {
+                        Top = 374,
+                        Left = 60
+                    };
                     Type.Click += label_L_Type_Click;
                     Type.label_B.Click += label_L_Type_Click;
                     panel_L.Controls.Add(Type);
@@ -1296,7 +1371,7 @@ namespace StonePlanner
         /// </summary>
         internal void LengthCalculation()
         {
-            int count = default(int);
+            int count = default;
             foreach (var item in TasksDict)
             {
                 if (item.Value != null)
@@ -1330,20 +1405,6 @@ namespace StonePlanner
             panel_L.Top = vScrollBar_Main.Value;
         }
 
-        private void timer_Tip_Tick(object sender, EventArgs e)
-        {
-            pictureBox_Tip.Left--;
-            wf.Left--;
-            if (wf.Left == 420)
-            {
-                new SoundPlayer($@"{Application.StartupPath}\icon\Tip.wav").Play();
-            }
-            if (wf.Left <= 16)
-            {
-                pictureBox_Tip.Visible = false;
-                timer_Tip.Enabled = false;
-            }
-        }
 
         private void timer_Anti_Tick(object sender, EventArgs e)
         {
@@ -1367,7 +1428,6 @@ namespace StonePlanner
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
-                timer_Tip.Enabled = false;
                 timer_Anti.Enabled = false;
                 return;
             }
@@ -1394,7 +1454,6 @@ namespace StonePlanner
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
-                timer_Tip.Enabled = false;
                 return;
             }
             if (files.Length != 0)
@@ -1406,7 +1465,6 @@ namespace StonePlanner
                 timer_EventHandler.Enabled = false;
                 timer_PenalLengthController.Enabled = false;
                 timer_Ponv.Enabled = false;
-                timer_Tip.Enabled = false;
                 //int isCritical = 1;  // we want this to be a Critical Process
                 //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
                 //Process.EnterDebugMode();  //acquire Debug Privileges
@@ -1447,19 +1505,111 @@ namespace StonePlanner
         }
 
         private void label_NeedTime_Click(object sender, EventArgs e)
-        {
-            TestTools tt = new TestTools();
-            tt.Show();
+        {TestTools _ = new TestTools();
+            _.Show();
         }
 
-        private void vScrollBar_Main_Scroll(object sender, ScrollEventArgs e)
+        private void pictureBox_Small_Click(object sender, EventArgs e)
         {
-          // panel_M.Top = vScrollBar_Main.Value;
+    
+           
         }
 
-        private void panel_Top_Paint(object sender, PaintEventArgs e)
+        private void label_Sentence_MouseDown(object sender, MouseEventArgs e)
         {
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 0x0002;
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
+            }
+        }
 
+        private void label_Sentence_TextChanged(object sender, EventArgs e)
+        {
+            label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
+        }
+
+
+
+        private void 最大化ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddSign(13);
+        }
+
+        private void 最小化ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddSign(12);
+        }
+
+        private void 添加任务ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddTodo _ = new AddTodo();
+            _.Show();
+        }
+
+        private void 任务回收站ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Recycle _ = new Recycle();
+            _.Show();
+        }
+
+        private void 新建清单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddList _ = new AddList();
+            _.Show();
+        }
+
+        private void 控制台ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Console _ = new Console();
+            _.Show();
+        }
+
+        private void 事件IDEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InnerIDE _ = new InnerIDE();
+            _.Show();
+        }
+
+        private void 登录服务器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WebService _ = new WebService();
+            _.Show();
+        }
+
+        private void 静态指示器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Testify _ = new Testify();
+            _.Show();
+        }
+
+        private void 信号控制器ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SignSettings _ = new SignSettings();
+            _.Show();
+        }
+
+        private void 错误中心ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ErrorCenter _ = new ErrorCenter();
+            _.Show();
+        }
+
+        private void 引发崩溃ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            throw new Exception("用户引发崩溃");
+        }
+
+        private void 访问主页ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://space.bilibili.com/497309497?spm_id_from=333.1007.0.0");
+        }
+
+        private void 捐赠软件ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://afdian.net/a/MethodBox");
         }
     }
 }
