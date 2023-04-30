@@ -28,14 +28,14 @@ namespace StonePlanner
             {
                 var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");
                 DataTable dt = new DataTable();
-                if (result.HasRows)
-                {
+                 if (result.HasRows)
+                 {
                     for (int i = 0; i < result.FieldCount; i++)
                     {
                         dt.Columns.Add(result.GetName(i));
                     }
-                    dt.Rows.Clear();
-                }
+                     dt.Rows.Clear();
+                 }
                 while (result.Read())
                 {
                     DataRow row = dt.NewRow();
@@ -51,7 +51,8 @@ namespace StonePlanner
                     MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (AESEncrypt.Encrypt(dataGridView1.Rows[0].Cells[0].Value.ToString(), Main.password) == AESEncrypt.Encrypt(textBox_M_Pwd.Text, Main.password))
+
+                if (dataGridView1.Rows[0].Cells[0].Value.ToString() == textBox_M_Pwd.Text)
                 {
                     result = SQLConnect.SQLCommandQuery($"SELECT Type FROM Users where Username='{textBox_M_Name.Text}';");
                     dt = new DataTable();
@@ -73,6 +74,7 @@ namespace StonePlanner
                         dt.Rows.Add(row);
                     }
                     dataGridView1.DataSource = dt;
+                    //特殊用户
                     try
                     {
                         UserType = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);

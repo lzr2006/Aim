@@ -76,6 +76,12 @@ dotnet_diagnostic.CS0649.severity = silent
 # CS0169: 从不使用字段“PluginStruct.Plugin.sAuthorName”
 dotnet_diagnostic.CS0169.severity = silent
 
+# CS1591: 缺少对公共可见类型或成员的 XML 注释
+dotnet_diagnostic.CS1591.severity = suggestion
+
+# CS1587: XML 注释没有放在有效语言元素上
+dotnet_diagnostic.CS1587.severity = suggestion
+
 [*.vb]
 #### 命名样式 ####
 

@@ -12,12 +12,20 @@ namespace StonePlanner
 {
     public partial class Activation : Form
     {
+        /// <summary>
+        /// 构造函数，用于加载窗口中的控件。
+        /// </summary>
         public Activation()
         {
             InitializeComponent();
         }
 
-        private void Activation_Load(object sender, EventArgs e)
+        /// <summary>
+        /// 窗口初始化，用于检查用户是否被封禁，若封禁则无法激活软件。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public void Activation_Load(object sender, EventArgs e)
         {
             if (Main.banned)
             {
@@ -26,17 +34,26 @@ namespace StonePlanner
             }
         }
 
-        private void linkLabel_D2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        /// <summary>
+        /// 取消激活，关闭窗口。
+        /// </summary>
+        public void linkLabel_D2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Close();
         }
 
-        private void linkLabel_D1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        /// <summary>
+        /// 用户获取激活码，引导至指定网站。
+        /// </summary>
+        public void linkLabel_D1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("https://afdian.net/item?plan_id=3f0291421c6211edb4b752540025c377");
         }
 
-        private void button_Submit_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 向服务器发送认证请求，确认用户输入的激活码是否正确。
+        /// </summary>
+        public void button_Submit_Click(object sender, EventArgs e)
         {
             if (Main.banned)
             {

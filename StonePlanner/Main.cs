@@ -261,6 +261,16 @@ namespace StonePlanner
                 {
                     //先判断是否存在
                     //Users可还行 表都他妈不分了吗你
+
+                    /*
+                     * 此处的Bug：
+                     * 关闭的时候，检查是否已经存在了相应任务
+                     * 如果存在就不在添加
+                     * 但是，如果已经更新了数据
+                     * 也无法存储，导致了任务还原的Bug
+                     * 做法：
+                     * 仅对状态为待办的剩余时间和是否完成进行更新
+                    */
                     var sqlResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE UDID = {plan.Value.UDID}",ref Main.odcConnection);
                     if (sqlResult.HasRows) continue;
                     //脑子是个好东西 下次带上
@@ -1186,7 +1196,7 @@ namespace StonePlanner
                 {
                     Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
                 };
-                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/picture.txt"); //下载
+                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/Services/StonePlanner/picture.txt"); //下载
                 string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
                 foreach (var item in pageHtml.Split('\n'))
                 {

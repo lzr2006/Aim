@@ -36,6 +36,8 @@
             this.l_Password = new MetroFramework.Controls.MetroLabel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button_Submit = new MetroFramework.Controls.MetroButton();
+            this.linkLabel_Register = new System.Windows.Forms.LinkLabel();
+            this.linkLabel_Restore = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_Main)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -145,7 +147,7 @@
             // 
             // button_Submit
             // 
-            this.button_Submit.Location = new System.Drawing.Point(34, 361);
+            this.button_Submit.Location = new System.Drawing.Point(34, 381);
             this.button_Submit.Name = "button_Submit";
             this.button_Submit.Size = new System.Drawing.Size(270, 31);
             this.button_Submit.TabIndex = 24;
@@ -153,11 +155,35 @@
             this.button_Submit.UseSelectable = true;
             this.button_Submit.Click += new System.EventHandler(this.button_Submit_Click);
             // 
+            // linkLabel_Register
+            // 
+            this.linkLabel_Register.AutoSize = true;
+            this.linkLabel_Register.Location = new System.Drawing.Point(31, 355);
+            this.linkLabel_Register.Name = "linkLabel_Register";
+            this.linkLabel_Register.Size = new System.Drawing.Size(82, 15);
+            this.linkLabel_Register.TabIndex = 25;
+            this.linkLabel_Register.TabStop = true;
+            this.linkLabel_Register.Text = "注册新用户";
+            this.linkLabel_Register.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_Register_LinkClicked);
+            // 
+            // linkLabel_Restore
+            // 
+            this.linkLabel_Restore.AutoSize = true;
+            this.linkLabel_Restore.Location = new System.Drawing.Point(237, 355);
+            this.linkLabel_Restore.Name = "linkLabel_Restore";
+            this.linkLabel_Restore.Size = new System.Drawing.Size(67, 15);
+            this.linkLabel_Restore.TabIndex = 26;
+            this.linkLabel_Restore.TabStop = true;
+            this.linkLabel_Restore.Text = "忘记密码";
+            this.linkLabel_Restore.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel_GetPassword_LinkClicked);
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(337, 403);
+            this.ClientSize = new System.Drawing.Size(337, 427);
+            this.Controls.Add(this.linkLabel_Restore);
+            this.Controls.Add(this.linkLabel_Register);
             this.Controls.Add(this.button_Submit);
             this.Controls.Add(this.textBox_M_Pwd);
             this.Controls.Add(this.l_Password);
@@ -165,7 +191,7 @@
             this.Controls.Add(this.textBox_M_Name);
             this.Controls.Add(this.l_Username);
             this.Controls.Add(this.pictureBox_Main);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Login";
             this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "AimPlanner";
@@ -185,5 +211,7 @@
         private MetroFramework.Controls.MetroLabel l_Password;
         private System.Windows.Forms.DataGridView dataGridView1;
         private MetroFramework.Controls.MetroButton button_Submit;
+        private System.Windows.Forms.LinkLabel linkLabel_Register;
+        private System.Windows.Forms.LinkLabel linkLabel_Restore;
     }
 }
