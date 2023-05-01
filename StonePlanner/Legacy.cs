@@ -4,17 +4,14 @@ using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
 
 namespace StonePlanner
 {
     /// <summary>
     /// 此类内含所有已经被废弃的代码 以供查阅
     /// </summary>
-    
+
     /*
      * 屎山 屎山 屎山
      * 下次写代码 不要用屁股写
@@ -177,5 +174,97 @@ namespace StonePlanner
         }
         #region 编辑器【InnerIDE】废弃代码
         #endregion
+        #region 登录窗口【Login】废弃代码
+        public static void Login()
+        {
+            try
+            {
+                var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='';");
+                DataTable dt = new DataTable();
+                if (result.HasRows)
+                {
+                    for (int i = 0; i < result.FieldCount; i++)
+                    {
+                        dt.Columns.Add(result.GetName(i));
+                    }
+                    dt.Rows.Clear();
+                }
+                while (result.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    for (int i = 0; i < result.FieldCount; i++)
+                    {
+                        row[i] = result[i];
+                    }
+                    dt.Rows.Add(row);
+                }
+                //    dataGridView1.DataSource = dt;
+                //    if (dataGridView1.Rows[0].Cells[0].Value.ToString() == "")
+                //    {
+                //        MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //        return;
+                //    }
+
+                //    if (dataGridView1.Rows[0].Cells[0].Value.ToString() == textBox_M_Pwd.Text)
+                //    {
+                //        result = SQLConnect.SQLCommandQuery($"SELECT Type FROM Users where Username='{textBox_M_Name.Text}';");
+                //        dt = new DataTable();
+                //        if (result.HasRows)
+                //        {
+                //            for (int i = 0; i < result.FieldCount; i++)
+                //            {
+                //                dt.Columns.Add(result.GetName(i));
+                //            }
+                //            dt.Rows.Clear();
+                //        }
+                //        while (result.Read())
+                //        {
+                //            DataRow row = dt.NewRow();
+                //            for (int i = 0; i < result.FieldCount; i++)
+                //            {
+                //                row[i] = result[i];
+                //            }
+                //            dt.Rows.Add(row);
+                //        }
+                //        dataGridView1.DataSource = dt;
+                //        //特殊用户
+                //        try
+                //        {
+                //            UserType = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);
+                //            if (UserType == 2)
+                //            {
+                //                Testify ti = new Testify();
+                //                ti.Show();
+                //                new ErrorCenter().Show();
+                //            }
+                //            MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //            Hide();
+                //            UserName = textBox_M_Name.Text;
+                //            Main m = new Main();
+                //            m.Show();
+                //            //Thread td = new Thread(new ThreadStart(
+                //            //    () => Application.Run(new Main())
+                //            //    )) ;
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            MessageBox.Show("读取用户时出现异常，详情请见错误中心", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+                //            return;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("用户名或密码错误!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    }
+                //}
+                //catch
+                //{
+                //    MessageBox.Show("不存在该用户!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //}
+            }
+            catch { }
+        #endregion
+        }
     }
 }

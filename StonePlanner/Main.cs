@@ -819,7 +819,7 @@ namespace StonePlanner
             //回调基类原函数 添加控件
             base.OnControlAdded(e);
         }
-        internal void GetSchedule(bool @out = false) 
+        internal void GetSchedule(bool @out = false)
         {
             Dictionary<DateTime, string> returns = new Dictionary<DateTime, string>();
             //内置
@@ -838,15 +838,18 @@ namespace StonePlanner
                         Plan plan1 = (item as Plan);
                         string sch = plan1.dtStartTime.Hour switch
                         {
-                            >6 and <15 => " 白班",
+                            > 6 and < 15 => " 白班",
                             _ => " 夜班",
                         };
                         returns.Add(d, sch);
                     }
                 }
             }
-
-            _ = new SchedulingCalendar(returns, @out);
+            try
+            {
+                new SchedulingCalendar(returns, @out);
+            }
+            catch (Exception ex){ ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
         }
         /// <summary>
         /// 判断是否包含此字串的进程   模糊
@@ -1233,6 +1236,8 @@ namespace StonePlanner
         {
             try
             {
+                //暂且禁用
+                throw new Exception();
                 WebClient MyWebClient = new()
                 {
                     Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据

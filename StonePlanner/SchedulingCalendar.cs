@@ -58,6 +58,7 @@ namespace StonePlanner
 
         private void SchedulingCalendar_Load(object sender, EventArgs e)
         {
+            return;
             Add();
             label_Now.Text = $"{DateTime.Now.Year}年{DateTime.Now.Month}月";
             //扫描主窗口内容
@@ -97,6 +98,10 @@ namespace StonePlanner
                 MessageBox.Show(tipContent,tipTitle,MessageBoxButtons.OK,MessageBoxIcon.Information);
                 Close();
                 return;
+            }
+            else
+            {
+                MessageBox.Show("Test");
             }
         }
 

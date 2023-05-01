@@ -76,7 +76,7 @@
             this.pictureBox_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Logo.BackgroundImage")));
             this.pictureBox_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Logo.Location = new System.Drawing.Point(123, 90);
-            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Logo.Name = "pictureBox_Logo";
             this.pictureBox_Logo.Size = new System.Drawing.Size(93, 82);
             this.pictureBox_Logo.TabIndex = 0;
@@ -107,11 +107,10 @@
             // pictureBox_Line
             // 
             this.pictureBox_Line.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Line.BackgroundImage")));
-            this.pictureBox_Line.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox_Line.Location = new System.Drawing.Point(-61, 186);
-            this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Line.Name = "pictureBox_Line";
-            this.pictureBox_Line.Size = new System.Drawing.Size(837, 12);
+            this.pictureBox_Line.Size = new System.Drawing.Size(1035, 10);
             this.pictureBox_Line.TabIndex = 3;
             this.pictureBox_Line.TabStop = false;
             // 
@@ -122,9 +121,9 @@
             this.label1.Location = new System.Drawing.Point(28, 210);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(481, 21);
+            this.label1.Size = new System.Drawing.Size(485, 21);
             this.label1.TabIndex = 4;
-            this.label1.Text = "开发者：BoxSlide（Zongzi Feat MethodBox as \"Arq\"）";
+            this.label1.Text = "开发者：Intromnia（F.Iron Feat MethodBox as \"Arq\"）";
             // 
             // label2
             // 
@@ -168,8 +167,8 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(604, 63);
             this.label5.TabIndex = 8;
-            this.label5.Text = "©MethodBox Studio，保留所有权利。\r\n本软件受中华人民共和国《计算机软件条例》以及其它国家或地区\r\n的相应法律保护。擅自修改或破解该软件将会受到最" +
-    "大范围内的法律追究。";
+            this.label5.Text = "©MethodBoxs Studio，保留所有权利。\r\n本软件受中华人民共和国《计算机软件条例》以及其它国家或地区\r\n的相应法律保护。擅自修改或破解该软件将会受到" +
+    "最大范围内的法律追究。";
             // 
             // label6
             // 
@@ -199,9 +198,10 @@
             this.label8.Location = new System.Drawing.Point(20, 480);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(700, 15);
+            this.label8.Size = new System.Drawing.Size(714, 15);
             this.label8.TabIndex = 11;
-            this.label8.Text = "哦，上帝啊，我都不敢相信这他妈是个自由版本！ 使用时间：2022.11.05 18:00 - 2022.11.18 05:00";
+            this.label8.Text = "Freedom Forever.                            使用时间：2022.11.05 18:00 - 2022.11.18 05" +
+    ":00";
             // 
             // panel1
             // 
@@ -226,16 +226,16 @@
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label9);
-            this.panel1.Location = new System.Drawing.Point(749, 480);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(665, 278);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(13, 406);
+            this.panel1.Size = new System.Drawing.Size(10, 117);
             this.panel1.TabIndex = 12;
             // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(380, 255);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(319, 35);
             this.button1.TabIndex = 25;
@@ -445,7 +445,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(357, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(3, 335);
             this.pictureBox1.TabIndex = 1;
@@ -467,7 +467,7 @@
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(24, 90);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(93, 82);
             this.pictureBox2.TabIndex = 13;
@@ -493,7 +493,7 @@
             this.Controls.Add(this.label_T);
             this.Controls.Add(this.label_TT);
             this.Controls.Add(this.pictureBox_Logo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "About";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
             this.Text = "关于AimPlanner内部版本";
