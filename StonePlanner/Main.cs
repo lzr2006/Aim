@@ -847,9 +847,12 @@ namespace StonePlanner
             }
             try
             {
-                new SchedulingCalendar(returns, @out);
+                new SchedulingCalendar(returns, @out).Show();
             }
-            catch (Exception ex){ ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
+            catch (Exception ex)
+            { 
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+            }
         }
         /// <summary>
         /// 判断是否包含此字串的进程   模糊
@@ -1126,8 +1129,9 @@ namespace StonePlanner
             }
             else if (Sign == 10)
             {
-                GetSchedule();
+                //怀疑出现的问题：重复执行
                 signQueue.Dequeue();
+                GetSchedule();
             }
         }
 
