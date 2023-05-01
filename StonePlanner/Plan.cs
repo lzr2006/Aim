@@ -195,11 +195,15 @@ namespace StonePlanner
         {
             button_Finish.Enabled = false;
             //更新金钱
-            Main.MoneyUpdate(+(int) this.dwDifficulty * 10);
-            //更新属性
-            Main.ValuesUpdate(+dwLasting, +dwExplosive, +dwWisdom);
-            Main.AddSign(1);
-            Main.plan = this;           
+            //添加限制条件：只有任务完成时才可以被删除
+            if (this.dwSeconds == 0)
+            {
+                Main.MoneyUpdate(+(int) this.dwDifficulty * 10);
+                //更新属性
+                Main.ValuesUpdate(+dwLasting, +dwExplosive, +dwWisdom);
+                Main.AddSign(1);
+                Main.plan = this;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)

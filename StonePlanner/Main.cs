@@ -286,7 +286,6 @@ namespace StonePlanner
                         {
                             //更新时间和待办状态
                             //UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-                            //UPDATE Person SET Address = 'Zhongshan 23', City = 'Nanjing' WHERE LastName = 'Wilson'
                             if (plan.Value.dwSeconds > 0)
                             {
                                 string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
@@ -296,13 +295,9 @@ namespace StonePlanner
                             }
                             else
                             {
-                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
-                                    $" , TaskStatus = \"已办完\"" +
-                                    $" WHERE UDID = {plan.Value.UDID}";
-                                SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
-                                continue;
+                                ErrorCenter.AddError(DateTime.Now.ToString(),"Error",
+                                    new Exception("已经被清除的任务再次添加。"));
                             }
-                        
                         }
                     }
                     //脑子是个好东西 下次带上
@@ -1021,7 +1016,21 @@ namespace StonePlanner
                 //先搜一下数据库
                 //SELECT * FROM Persons WHERE City='Beijing'
                 var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE UDID = {plan.UDID}");
-                if (!hResult.HasRows) 
+                if (hResult.HasRows)
+                {
+                    /*
+                     * 此处的Bug：
+                     * 当任务完成后，会从列表中清理
+                     * 向数据库中保存时应该在删除任务时保存
+                     * 做法：
+                     * 更改保存位置
+                    */     
+                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.dwSeconds}" +
+                                $" , TaskStatus = \"已办完\"" +
+                                $" WHERE UDID = {plan.UDID}";
+                    SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
+                }
+                else
                 {
                     string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , UDID , TaskParent) VALUES ( ";
                     strInsert += "'" + plan.capital + "', '";
