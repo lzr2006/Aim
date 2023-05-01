@@ -257,11 +257,10 @@ namespace StonePlanner
             //存入还未完成的任务
             foreach (var plan in TasksDict)
             {
+                //先判断是否存在
+                //Users可还行 表都他妈不分了吗你
                 if (plan.Value != null)
                 {
-                    //先判断是否存在
-                    //Users可还行 表都他妈不分了吗你
-
                     /*
                      * 此处的Bug：
                      * 关闭的时候，检查是否已经存在了相应任务
@@ -271,8 +270,41 @@ namespace StonePlanner
                      * 做法：
                      * 仅对状态为待办的剩余时间和是否完成进行更新
                     */
-                    var sqlResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE UDID = {plan.Value.UDID}",ref Main.odcConnection);
-                    if (sqlResult.HasRows) continue;
+                    string queryString = $"SELECT * FROM Tasks WHERE UDID = {plan.Value.UDID}";
+                    var sqlResult = SQLConnect.SQLCommandQuery(queryString, ref Main.odcConnection);
+                    if (sqlResult.HasRows)
+                    {
+                        //已经存在相应任务，查询是否已完成，否则更新时间
+                        sqlResult.Read();
+                        //查询状态 不为待办
+                        if (sqlResult["TaskStatus"].ToString() != "待办")
+                        {
+                            MessageBox.Show(sqlResult["TaskStatus"].ToString());
+                            continue;
+                        }
+                        else
+                        {
+                            //更新时间和待办状态
+                            //UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
+                            //UPDATE Person SET Address = 'Zhongshan 23', City = 'Nanjing' WHERE LastName = 'Wilson'
+                            if (plan.Value.dwSeconds > 0)
+                            {
+                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
+                                    $" WHERE UDID = {plan.Value.UDID}";
+                                SQLConnect.SQLCommandQuery(updateString,ref Main.odcConnection);
+                                continue;
+                            }
+                            else
+                            {
+                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
+                                    $" , TaskStatus = \"已办完\"" +
+                                    $" WHERE UDID = {plan.Value.UDID}";
+                                SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
+                                continue;
+                            }
+                        
+                        }
+                    }
                     //脑子是个好东西 下次带上
                     string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , UDID , TaskParent , StartTime) VALUES ( ";
                     strInsert += "'" + plan.Value.capital + "', '";

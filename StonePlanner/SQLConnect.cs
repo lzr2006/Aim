@@ -64,7 +64,7 @@ namespace StonePlanner
             odcConnection.Open(); //建立SQL查询   
             OleDbCommand odCommand = odcConnection.CreateCommand();
             odCommand.CommandText = cmd; //建立读取 C#操作Access之按列读取mdb;
-            var result = odCommand.ExecuteReader();
+             var result = odCommand.ExecuteReader();
             return result;
         }
     }
