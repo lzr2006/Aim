@@ -43,7 +43,7 @@ using static StonePlanner.Develop.Sign;
  * **************************************************************************
  * ********************                                  ********************
  * ********************      				             ********************
- * ********************         佛祖保佑 永远无BUG         ********************
+ * ********************         佛祖保佑 永无BUG           ********************
  * ********************                                  ********************
  * **************************************************************************
  */
@@ -120,9 +120,36 @@ namespace StonePlanner
         //internal static WeatherForecast wf = new WeatherForecast();
         //数据库查询
         internal static OleDbConnection odcConnection = new OleDbConnection();
-        #endregion
         public static DateTime tStart;
-
+        #endregion
+        #region 外部引用
+        /// <summary>
+        /// 该函数用来发送Windows消息（WM）处理窗口拖动事件。
+        /// </summary>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        /// <summary>
+        /// 该函数从当前线程中的窗口释放鼠标捕获，并恢复通常的鼠标输入处理。
+        /// </summary>
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool ReleaseCapture();
+        [DllImport("ntdll.dll", SetLastError = true)]
+        private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass, ref int processInformation, int processInformationLength);
+        /// <summary>
+        /// 该函数将拖动事件发送，以用于拖动窗口。
+        /// </summary>
+        private void panel_Top_MouseDown(object sender, MouseEventArgs e)
+        {
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 0x0002;
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
+            }
+        }
+        #endregion
+        #region 主窗口及设置加载/退出
         /// <summary>
         /// 主窗口构造函数，基本用途如下：
         /// 1、加载控件（自动生成）；
@@ -156,31 +183,7 @@ namespace StonePlanner
                 activation = false;
             }
         }
-        /// <summary>
-        /// 该函数用来发送Windows消息（WM）处理窗口拖动事件。
-        /// </summary>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
-        /// <summary>
-        /// 该函数从当前线程中的窗口释放鼠标捕获，并恢复通常的鼠标输入处理。
-        /// </summary>
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        public static extern bool ReleaseCapture();
-        [DllImport("ntdll.dll", SetLastError = true)]
-        private static extern int NtSetInformationProcess(IntPtr hProcess, int processInformationClass, ref int processInformation, int processInformationLength);
-        /// <summary>
-        /// 该函数将拖动事件发送，以用于拖动窗口。
-        /// </summary>
-        private void panel_Top_MouseDown(object sender, MouseEventArgs e)
-        {
-            const int WM_NCLBUTTONDOWN = 0x00A1;
-            const int HTCAPTION = 0x0002;
-            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
-            {
-                ReleaseCapture();
-                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
-            }
-        }
+        
         //string message = string.Format("收到自己消息的参数:{0},{1}", m.WParam, m.LParam);
         /// <summary>
         /// 该函数用于加载基本的设置项。
@@ -200,6 +203,7 @@ namespace StonePlanner
                 timer_Conv.Enabled = true;
             }
         }
+
         /// <summary>
         /// 覆写窗体的消息处理函数
         /// </summary>
@@ -220,35 +224,7 @@ namespace StonePlanner
                     break;
             }
         }
-        protected void TaskTimeScan() 
-        {
-            List<string> _tasks = new List<string>();
-            foreach (var item in panel_M.Controls)
-            {
-                Plan temp;
-                if (item is not Plan)
-                {
-                    continue;
-                }
-                else
-                {
-                    temp = item as Plan;
-                }
-                if (temp.status != "正在办")
-                {
-                    if (DateTime.Now >= temp.dtStartTime)
-                    {
-                        _tasks.Add(temp.capital);
-                    }
-                }
-            }
-            if (_tasks.Count != 0)
-            {
-                new Alert(_tasks).ShowDialog();
-            }
-            _tasks.Clear();
-            Thread.Sleep(60000);
-        }
+
         /// <summary>
         /// 该函数处理用户退出事件，存入新的还未存储的数据。
         /// </summary>
@@ -290,12 +266,12 @@ namespace StonePlanner
                             {
                                 string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
                                     $" WHERE UDID = {plan.Value.UDID}";
-                                SQLConnect.SQLCommandQuery(updateString,ref Main.odcConnection);
+                                SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                                 continue;
                             }
                             else
                             {
-                                ErrorCenter.AddError(DateTime.Now.ToString(),"Error",
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Error",
                                     new Exception("已经被清除的任务再次添加。"));
                             }
                         }
@@ -314,7 +290,7 @@ namespace StonePlanner
                     strInsert += "'" + plan.Value.lpParent + "',";
                     strInsert += "'" + plan.Value.dtStartTime.ToBinary() + "')";
                     //执行插入
-                    SQLConnect.SQLCommandExecution(strInsert,ref Main.odcConnection);
+                    SQLConnect.SQLCommandExecution(strInsert, ref Main.odcConnection);
                     recycle_bin.Add(plan.Value);
                 }
             }
@@ -532,7 +508,7 @@ namespace StonePlanner
             #endregion
             // \Linq is Gooooood!/
             // \We Love Linq!/
-            sentence.FindAll(sentence => sentence.Contains("\n")).ForEach(sentence => sentence.Replace("\n",""));
+            sentence.FindAll(sentence => sentence.Contains("\n")).ForEach(sentence => sentence.Replace("\n", ""));
             #region 功能控制器
             if (!activation)
             {
@@ -552,17 +528,154 @@ namespace StonePlanner
             scanner.Start();
             GetSchedule(true);
         }
-
-        internal static void AddSign(int sign)
+        #endregion
+        #region 任务处理相关
+        internal unsafe void PlanAdder(Plan pValue)
         {
-            if (signQueue.Count >= 36)
+            //分配唯一编号
+            int thisNumber = -1;
+            for (int i = 0; i < 100; i++)
             {
-                return;
+                if (TasksDict[i] == null)
+                {
+                    thisNumber = i;
+                    break;
+                }
             }
-            signQueue.Enqueue(sign);
+            if (thisNumber == -1) { return; }
+            pValue.Top = 36 * thisNumber;
+            //添加到字典
+            TasksDict[thisNumber] = pValue;
+            panel_M.Controls.Add(pValue);
         }
 
-        #region 功能加载器
+
+        protected void TaskTimeScan()
+        {
+            List<string> _tasks = new List<string>();
+            foreach (var item in panel_M.Controls)
+            {
+                Plan temp;
+                if (item is not Plan)
+                {
+                    continue;
+                }
+                else
+                {
+                    temp = item as Plan;
+                }
+                if (temp.status != "正在办")
+                {
+                    if (DateTime.Now >= temp.dtStartTime)
+                    {
+                        _tasks.Add(temp.capital);
+                    }
+                }
+            }
+            if (_tasks.Count != 0)
+            {
+                new Alert(_tasks).ShowDialog();
+            }
+            _tasks.Clear();
+            Thread.Sleep(60000);
+        }
+
+
+        #endregion
+        #region 加载器
+        internal void LanguageHolder()
+        {
+            langInfo = new List<string>();
+            for (int i = 0; i < 30; i++)
+            {
+                langInfo.Add(null);
+                for (int j = 0; j < 4; j++)
+                {
+                    langInfo[i] += Inner.InnerFuncs.GenerateChineseWords(1)[0];
+                    Thread.Sleep(1);
+                }
+            }
+        }
+
+        //列表加载器
+        protected void ListHolder()
+        {
+            //MYUKKE IS GOOOOOOD!
+            //像暂时存储副控件添加新的Controls.Add函数
+            panel_L.ControlAdded += new ControlEventHandler(Another_OnControlAdded);
+            panel_L.Controls.Clear();
+            //这个字段是用来连接用的
+            //string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={Main.password}";
+            //OleDbConnection odcConnection = new OleDbConnection(strConn); //打开连接
+            //odcConnection.Open(); //建立SQL查询   
+            //OleDbCommand odCommand = odcConnection.CreateCommand();
+            //搜索数据库中所有列表
+            List<string> list = new List<string>();
+            //OleDbConnection odcConnectiontemp = new OleDbConnection();
+            //var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists",ref odcConnectiontemp);
+            //odCommand.CommandText = "SELECT * FROM Lists";
+            var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists", ref Main.odcConnection);
+            while (sResult.Read())
+            {
+                list.Add(sResult[1].ToString());
+            }
+            //对所有列表 依次搜索其子值
+            //这里读取次数太多，就不用封装好的查询了
+            //引用关闭原有数据库连接
+            List<Plan> sonTask = new List<Plan>();
+            //猜猜DataReader在哪儿，小子
+            foreach (var item in list)
+            {
+                //添加父节点
+                Function parentMain = new Function(item, item, 1);
+                panel_L.Controls.Add(parentMain);
+                /*
+                 * '已有打开的与此 Command 相关联的 DataReader，必须首先将它关闭。'
+                 * 他妈的 DataReader在哪儿
+                 * 谁来告诉我
+                 * 淦我自己觉得一点问题没有
+                 * 里边关里边不行 用了引用外边关
+                 * 还是不行 怎么也不行
+                 * 百度说用一个连接参数 我直接连接报错
+                 * 奶奶的 真是绝了
+                 *
+                 * 怀疑：读空报错
+                 *
+                 * 果然是读空报错
+                 * 怀疑原因是自动跳出之后再次尝试读取
+                 * 你的报错能不能走点心啊
+                 */
+                try
+                {
+                    sResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE TaskParent = '{item}'");
+                }
+                catch { return; }
+                //建立Plan对象
+                //1 5 2 4 9 6 7 8
+                while (sResult.Read())
+                {
+                    PlanClassB psb = new()
+                    {
+                        lpCapital = sResult[1].ToString(),
+                        dwIntro = sResult[2].ToString(),
+                        iSeconds = Convert.ToInt32(sResult[5]),
+                        dwDifficulty = Convert.ToInt64(sResult[4]),
+                        UDID = Convert.ToInt32(sResult[9]),
+                        iLasting = Convert.ToInt32(sResult[6]),
+                        iExplosive = Convert.ToInt32(sResult[7]),
+                        iWisdom = Convert.ToInt32(sResult[8])
+                    };
+                    using Plan plan = new Plan
+                    (
+                          psb
+                    );
+                    Function sonMain = new Function(sResult[1].ToString(), item, 0); panel_L.Controls.Add(sonMain);
+                }
+            }
+            panel_L.ControlAdded -= Another_OnControlAdded;
+            return;
+        }
+
         protected void FunctionLoader()
         {
             int i = 34;
@@ -649,98 +762,6 @@ namespace StonePlanner
             return;
         }
         #endregion
-        internal void LanguageHolder()
-        {
-            langInfo = new List<string>();
-            for (int i = 0; i < 30; i++)
-            {
-                langInfo.Add(null);
-                for (int j = 0; j < 4; j++)
-                {
-                    langInfo[i] += Inner.InnerFuncs.GenerateChineseWords(1)[0];
-                    Thread.Sleep(1);
-                }
-            }
-        }
-
-        //列表加载器
-        protected void ListHolder()
-        {
-            //MYUKKE IS GOOOOOOD!
-            //像暂时存储副控件添加新的Controls.Add函数
-            panel_L.ControlAdded += new ControlEventHandler(Another_OnControlAdded);
-            panel_L.Controls.Clear();
-            //这个字段是用来连接用的
-            //string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={Main.password}";
-            //OleDbConnection odcConnection = new OleDbConnection(strConn); //打开连接
-            //odcConnection.Open(); //建立SQL查询   
-            //OleDbCommand odCommand = odcConnection.CreateCommand();
-            //搜索数据库中所有列表
-            List<string> list = new List<string>();
-            //OleDbConnection odcConnectiontemp = new OleDbConnection();
-            //var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists",ref odcConnectiontemp);
-            //odCommand.CommandText = "SELECT * FROM Lists";
-            var sResult = SQLConnect.SQLCommandQuery("SELECT * FROM Lists",ref Main.odcConnection);
-            while (sResult.Read())
-            {
-                list.Add(sResult[1].ToString());
-            }
-            //对所有列表 依次搜索其子值
-            //这里读取次数太多，就不用封装好的查询了
-            //引用关闭原有数据库连接
-            List<Plan> sonTask = new List<Plan>();
-            //猜猜DataReader在哪儿，小子
-            foreach (var item in list)
-            {
-                //添加父节点
-                Function parentMain = new Function(item, item, 1);
-                panel_L.Controls.Add(parentMain);
-                /*
-                 * '已有打开的与此 Command 相关联的 DataReader，必须首先将它关闭。'
-                 * 他妈的 DataReader在哪儿
-                 * 谁来告诉我
-                 * 淦我自己觉得一点问题没有
-                 * 里边关里边不行 用了引用外边关
-                 * 还是不行 怎么也不行
-                 * 百度说用一个连接参数 我直接连接报错
-                 * 奶奶的 真是绝了
-                 *
-                 * 怀疑：读空报错
-                 *
-                 * 果然是读空报错
-                 * 怀疑原因是自动跳出之后再次尝试读取
-                 * 你的报错能不能走点心啊
-                 */
-                try
-                {
-                    sResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE TaskParent = '{item}'");
-                }
-                catch { return; }
-                //建立Plan对象
-                //1 5 2 4 9 6 7 8
-                while (sResult.Read())
-                {
-                    PlanClassB psb = new()
-                    {
-                        lpCapital = sResult[1].ToString(),
-                        dwIntro = sResult[2].ToString(),
-                        iSeconds = Convert.ToInt32(sResult[5]),
-                        dwDifficulty = Convert.ToInt64(sResult[4]),
-                        UDID = Convert.ToInt32(sResult[9]),
-                        iLasting = Convert.ToInt32(sResult[6]),
-                        iExplosive = Convert.ToInt32(sResult[7]),
-                        iWisdom = Convert.ToInt32(sResult[8])
-                    };
-                    using Plan plan = new Plan
-                    (
-                          psb
-                    );
-                    Function sonMain = new Function(sResult[1].ToString(), item, 0); panel_L.Controls.Add(sonMain);
-                }
-            }
-            panel_L.ControlAdded -= Another_OnControlAdded;
-            return;
-        }
         #region 反修改检查
         internal void AntiPiracyCheck()
         {
@@ -797,6 +818,119 @@ namespace StonePlanner
 
             catch (Exception e) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", e); throw e; }
         }
+
+        private void timer_Anti_Tick(object sender, EventArgs e)
+        {
+            if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "msvsmon")
+            {
+                string p = "";
+                try
+                {
+                    p = Process.GetCurrentProcess().Parent().ProcessName.Split('.')[0];
+                }
+                catch
+                {
+                    p = Process.GetCurrentProcess().Parent().ProcessName;
+                }
+                if (p == "explorer") return;
+                MessageBox.Show($"您可能试图尝试在其它框架下运行Aim，例如{p}。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
+                //反手关闭各线程
+                label_Sentence.Text = "A Fetal Error Occured";
+                timer_Conv.Enabled = false;
+                timer_EventHandler.Enabled = false;
+                timer_PenalLengthController.Enabled = false;
+                timer_Ponv.Enabled = false;
+                timer_Anti.Enabled = false;
+                return;
+            }
+            nownn.Clear();
+            string[] files;
+            foreach (Control item in panel_M.Controls)
+            {
+                if (item.GetType() == typeof(Plan))
+                {
+                    nownn.Add((item as Plan).capital);
+                }
+            }
+            try
+            {
+                files = Directory.GetFiles(Application.StartupPath, "*.dll");
+            }
+            catch
+            {
+                MessageBox.Show("您可能试图尝试在其它框架下运行Aim，例如BepInEx。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
+                //反手关闭各线程
+                label_Sentence.Text = "A Fetal Error Occured";
+                timer_Conv.Enabled = false;
+                timer_EventHandler.Enabled = false;
+                timer_PenalLengthController.Enabled = false;
+                timer_Ponv.Enabled = false;
+                return;
+            }
+            if (files.Length != 0)
+            {
+                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
+                //反手关闭各线程
+                label_Sentence.Text = "A Fetal Error Occured";
+                timer_Conv.Enabled = false;
+                timer_EventHandler.Enabled = false;
+                timer_PenalLengthController.Enabled = false;
+                timer_Ponv.Enabled = false;
+                //int isCritical = 1;  // we want this to be a Critical Process
+                //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
+                //Process.EnterDebugMode();  //acquire Debug Privileges
+                //// setting the BreakOnTermination = 1 for the current process
+                //NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
+                ////for (int i = 0; ; i++) { System.Console.WriteLine(i); }
+            }
+            try
+            {
+                var result = SQLConnect.SQLCommandQuery($"SELECT * FROM Users where Username='METHODBOX_BAN';");
+                result.Read();
+                if (result[0].ToString() != "" || result[0].ToString() != null)
+                {
+                    Ban ban = new Ban();
+                    Opacity = 0;
+                    int isCritical = 1;  // we want this to be a Critical Process
+                    int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
+                    Process.EnterDebugMode();  //acquire Debug Privileges
+                                               // setting the BreakOnTermination = 1 for the current process
+                    NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
+                    //for (int i = 0; ; i++) { System.Console.WriteLine(i); }
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// 判断是否包含此字串的进程   模糊
+        /// </summary>
+        /// <param name="strProcName">进程字符串</param>
+        /// <returns>是否包含</returns>
+        public bool SearchProcA(string strProcName)
+        {
+            try
+            {
+                //模糊进程名  枚举
+                //Process[] ps = Process.GetProcesses();  //进程集合
+                foreach (Process p in Process.GetProcesses())
+                {
+
+                    if (p.ProcessName.IndexOf(strProcName) > -1)  //第一个字符匹配的话为0，这与VB不同
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         #endregion
         #region 金钱操作
         internal void ChangeMoney(int value)
@@ -805,20 +939,57 @@ namespace StonePlanner
             //向指定用户插入
             SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = {Login.UserName}",ref Main.odcConnection);
         }
-        #endregion
-
-        //覆写添加控件事件，使其按照顺序添加
-        protected void Another_OnControlAdded(object sender, ControlEventArgs e)
+        /// <summary>
+        /// 更新用户金钱
+        /// </summary>
+        internal static void MoneyUpdate(int delta)
         {
-            //底下的菜单不被考虑在内
-            if (e.Control.GetType() == typeof(Bottom))
-                return;
-            //获取已有控件 34高
-            int i = panel_L.Controls.Count;
-            e.Control.Top = (i - 1) * 34;
-            //回调基类原函数 添加控件
-            base.OnControlAdded(e);
+            money += delta;
+            SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
         }
+
+        internal static void ValuesUpdate(uint type, int delta)
+        {
+            if (type == 1)
+            {
+                lasting += delta;
+                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_lasting = {lasting} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
+            }
+            else if (type == 2)
+            {
+                explosive += delta;
+                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_explosive = {explosive} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
+            }
+            else if (type == 3)
+            {
+                wisdom += delta;
+                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_wisdom = {wisdom} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        internal static void ValuesUpdate(int lasting, int explosive, int wisdom)
+        {
+            Main.lasting += lasting;
+            Main.explosive += explosive;
+            Main.wisdom += wisdom;
+
+            SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_lasting = {Main.lasting} , ABT_explosive = {Main.explosive} , ABT_wisdom = {Main.wisdom} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
+        }
+
+        public void ValueGetter()
+        {
+            while (true)
+            {
+                label_GGS.Text = money.ToString();
+                Thread.Sleep(1000);
+            }
+        }
+        #endregion
+        #region 加载排班日历
         internal void GetSchedule(bool @out = false)
         {
             Dictionary<DateTime, string> returns = new Dictionary<DateTime, string>();
@@ -854,96 +1025,15 @@ namespace StonePlanner
                 ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
             }
         }
-        /// <summary>
-        /// 判断是否包含此字串的进程   模糊
-        /// </summary>
-        /// <param name="strProcName">进程字符串</param>
-        /// <returns>是否包含</returns>
-        public bool SearchProcA(string strProcName)
+        #endregion
+        #region 信号系统
+        internal static void AddSign(int sign)
         {
-            try
+            if (signQueue.Count >= 36)
             {
-                //模糊进程名  枚举
-                //Process[] ps = Process.GetProcesses();  //进程集合
-                foreach (Process p in Process.GetProcesses())
-                {
-
-                    if (p.ProcessName.IndexOf(strProcName) > -1)  //第一个字符匹配的话为0，这与VB不同
-                    {
-                        return true;
-                    }
-                }
-                return false;
+                return;
             }
-            catch
-            {
-                return false;
-            }
-        }
-
-        internal unsafe void PlanAdder(Plan pValue, PlanClassD @struct)
-        {
-            /*
-             * 这个奇怪的函数真是令人费解
-             * 已经传入了Plan了 您老是不会自己提提参数吗
-             * 况且有地方有 有地方没有
-             * 总言而之 屁用没有
-             * 个人认为开发者脑子有病
-             * 是的 是指我自己
-             */
-
-            //分配唯一编号
-            int thisNumber = -1;
-            for (int i = 0; i < 100; i++)
-            {
-                if (TasksDict[i] == null)
-                {
-                    thisNumber = i;
-                    break;
-                }
-            }
-            if (thisNumber == -1) { return; }
-            pValue.Top = 36 * thisNumber;
-            //获取结构体
-            //PlanClassD @struct = Pointer.Box((void*)pStruct, typeof(PlanClassD)) as PlanClassD;
-            //设置任务标题
-            pValue.capital = @struct.lpCapital;
-            //内置编号
-            pValue.Lnumber = thisNumber;
-            //添加时间
-            pValue.dwSeconds = @struct.iSeconds;
-            //添加难度
-            pValue.dwDifficulty = @struct.dwDifficulty;
-            //添加耐力值
-            pValue.dwLasting = @struct.iLasting;
-            //添加爆发值
-            pValue.dwExplosive = @struct.iExplosive;
-            //添加智慧值
-            pValue.dwWisdom = @struct.iWisdom;
-            //添加开始时间
-            pValue.dtStartTime = DateTime.FromBinary(@struct.dwStart);
-            //添加到字典
-            TasksDict[thisNumber] = pValue;
-            panel_M.Controls.Add(pValue);
-        }
-
-        internal unsafe void PlanAdder(Plan pValue)
-        {
-            //分配唯一编号
-            int thisNumber = -1;
-            for (int i = 0; i < 100; i++)
-            {
-                if (TasksDict[i] == null)
-                {
-                    thisNumber = i;
-                    break;
-                }
-            }
-            if (thisNumber == -1) { return; }
-            pValue.Top = 36 * thisNumber;
-            //添加到字典
-            TasksDict[thisNumber] = pValue;
-            panel_M.Controls.Add(pValue);
+            signQueue.Enqueue(sign);
         }
 
         private unsafe void timer_EventHandler_Tick(object sender, EventArgs e)
@@ -1213,6 +1303,7 @@ namespace StonePlanner
                 AddSign(3);
             }
         }
+        #endregion
         #region 每日一句/一图加载器
         public void SentenceGetter()
         {
@@ -1236,6 +1327,7 @@ namespace StonePlanner
             }
             return;
         }
+
         public void PictureUriGetter()
         {
             try
@@ -1259,7 +1351,12 @@ namespace StonePlanner
                 pictures.Add("https://s1.328888.xyz/2022/05/15/qmuyT.jpg");
             }
             return;
-            #endregion
+        }
+        #endregion
+        #region 每日一句/一图执行器
+        private void label_Sentence_TextChanged(object sender, EventArgs e)
+        {
+            label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
         }
 
         private void timer_Conv_Tick(object sender, EventArgs e)
@@ -1291,61 +1388,26 @@ namespace StonePlanner
             { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
         }
         private void User_Piicture_Click(object sender, EventArgs e)
-        {UserInfo _ = new UserInfo();
+        {
+            UserInfo _ = new UserInfo();
             _.Show();
         }
-        /// <summary>
-        /// 更新用户金钱
-        /// </summary>
-        internal static void MoneyUpdate(int delta)
+        #endregion
+        #region 外观控制
+        private void label_Sentence_MouseDown(object sender, MouseEventArgs e)
         {
-            money += delta;
-            SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = '{Login.UserName}';",ref Main.odcConnection);
-        }
-
-        internal static void ValuesUpdate(uint type, int delta)
-        {
-            if (type == 1)
+            const int WM_NCLBUTTONDOWN = 0x00A1;
+            const int HTCAPTION = 0x0002;
+            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
             {
-                lasting += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_lasting = {lasting} WHERE Username = '{Login.UserName}';",ref Main.odcConnection);
-            }
-            else if (type == 2)
-            {
-                explosive += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_explosive = {explosive} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-            }
-            else if (type == 3)
-            {
-                wisdom += delta;
-                SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_wisdom = {wisdom} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        internal static void ValuesUpdate(int lasting, int explosive, int wisdom)
-        {
-            Main.lasting += lasting;
-            Main.explosive += explosive;
-            Main.wisdom += wisdom;
-
-            SQLConnect.SQLCommandExecution($"UPDATE Users SET ABT_lasting = {Main.lasting} , ABT_explosive = {Main.explosive} , ABT_wisdom = {Main.wisdom} WHERE Username = '{Login.UserName}';", ref Main.odcConnection);
-        }
-
-        public void ValueGetter()
-        {
-            while (true)
-            {
-                label_GGS.Text = money.ToString();
-                Thread.Sleep(1000);
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
             }
         }
 
         private void User_Piicture_DoubleClick(object sender, EventArgs e)
-        {ErrorCenter _ = new ErrorCenter();
+        {
+            ErrorCenter _ = new ErrorCenter();
             _.Show();
         }
 
@@ -1455,134 +1517,20 @@ namespace StonePlanner
             panel_L.Top = vScrollBar_Main.Value;
         }
 
-
-        private void timer_Anti_Tick(object sender, EventArgs e)
+        //覆写添加控件事件，使其按照顺序添加
+        protected void Another_OnControlAdded(object sender, ControlEventArgs e)
         {
-            if (Process.GetCurrentProcess().Parent().ProcessName != "explorer.exe" && Process.GetCurrentProcess().Parent().ProcessName != "msvsmon")
-            {
-                string p = "";
-                try
-                {
-                   p =  Process.GetCurrentProcess().Parent().ProcessName.Split('.')[0];
-                }
-                catch 
-                {
-                    p = Process.GetCurrentProcess().Parent().ProcessName;
-                }
-                if (p == "explorer") return;
-                MessageBox.Show($"您可能试图尝试在其它框架下运行Aim，例如{p}。请注意，这样的做法不是正确的。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
-                //反手关闭各线程
-                label_Sentence.Text = "A Fetal Error Occured";
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
-                timer_PenalLengthController.Enabled = false;
-                timer_Ponv.Enabled = false;
-                timer_Anti.Enabled = false;
+            //底下的菜单不被考虑在内
+            if (e.Control.GetType() == typeof(Bottom))
                 return;
-            }
-            nownn.Clear();
-            string[] files;
-            foreach (Control item in panel_M.Controls)
-            {
-                if (item.GetType() == typeof(Plan))
-                {
-                    nownn.Add((item as Plan).capital);
-                }
-            }
-            try
-            {
-                 files = Directory.GetFiles(Application.StartupPath, "*.dll");
-            }
-            catch 
-            {
-                MessageBox.Show("您可能试图尝试在其它框架下运行Aim，例如BepInEx。请注意，这样的做法不是正确的。","Error",MessageBoxButtons.OK,MessageBoxIcon.Warning);
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
-                //反手关闭各线程
-                label_Sentence.Text = "A Fetal Error Occured";
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
-                timer_PenalLengthController.Enabled = false;
-                timer_Ponv.Enabled = false;
-                return;
-            }
-            if (files.Length != 0)
-            {
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
-                //反手关闭各线程
-                label_Sentence.Text = "A Fetal Error Occured";
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
-                timer_PenalLengthController.Enabled = false;
-                timer_Ponv.Enabled = false;
-                //int isCritical = 1;  // we want this to be a Critical Process
-                //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
-                //Process.EnterDebugMode();  //acquire Debug Privileges
-                //// setting the BreakOnTermination = 1 for the current process
-                //NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-                ////for (int i = 0; ; i++) { System.Console.WriteLine(i); }
-            }
-            try
-            {
-                var result = SQLConnect.SQLCommandQuery($"SELECT * FROM Users where Username='METHODBOX_BAN';");
-                result.Read();
-                if (result[0].ToString() != "" || result[0].ToString() != null)
-                {
-                    Ban ban = new Ban();
-                    Opacity = 0;
-                    int isCritical = 1;  // we want this to be a Critical Process
-                    int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
-                    Process.EnterDebugMode();  //acquire Debug Privileges
-                                               // setting the BreakOnTermination = 1 for the current process
-                    NtSetInformationProcess(Process.GetCurrentProcess().Handle, BreakOnTermination, ref isCritical, sizeof(int));
-                    //for (int i = 0; ; i++) { System.Console.WriteLine(i); }
-                }
-            }
-            catch { }
+            //获取已有控件 34高
+            int i = panel_L.Controls.Count;
+            e.Control.Top = (i - 1) * 34;
+            //回调基类原函数 添加控件
+            base.OnControlAdded(e);
         }
-
-        /// <summary>
-        /// 释放resx里面的普通类型文件
-        /// </summary>
-        /// <param name="resource">resx里面的资源</param>
-        /// <param name="path">释放到的路径</param>
-        private void ExtractNormalFileInResx(byte[] resource, String path)
-        {
-            FileStream file = new FileStream(path, FileMode.Create);
-            file.Write(resource, 0, resource.Length);
-            file.Flush();
-            file.Close();
-        }
-
-        private void label_NeedTime_Click(object sender, EventArgs e)
-        {TestTools _ = new TestTools();
-            _.Show();
-        }
-
-        private void pictureBox_Small_Click(object sender, EventArgs e)
-        {
-    
-           
-        }
-
-        private void label_Sentence_MouseDown(object sender, MouseEventArgs e)
-        {
-            const int WM_NCLBUTTONDOWN = 0x00A1;
-            const int HTCAPTION = 0x0002;
-            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
-            {
-                ReleaseCapture();
-                SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  
-            }
-        }
-
-        private void label_Sentence_TextChanged(object sender, EventArgs e)
-        {
-            label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
-        }
-
-
-
+        #endregion
+        #region 右键菜单事件
         private void 最大化ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddSign(13);
@@ -1661,5 +1609,6 @@ namespace StonePlanner
         {
             Process.Start("https://afdian.net/a/MethodBox");
         }
+        #endregion
     }
 }

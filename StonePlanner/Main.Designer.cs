@@ -145,7 +145,6 @@
             this.label_NeedTime.Size = new System.Drawing.Size(119, 16);
             this.label_NeedTime.TabIndex = 7;
             this.label_NeedTime.Text = "剩余xx时xx分xx秒";
-            this.label_NeedTime.Click += new System.EventHandler(this.label_NeedTime_Click);
             // 
             // pictureBox_T_Exit
             // 

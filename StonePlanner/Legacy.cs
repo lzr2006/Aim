@@ -172,6 +172,53 @@ namespace StonePlanner
                 // plan = null;
             }
         }
+
+        //internal unsafe void PlanAdder(Plan pValue, PlanClassD @struct)
+        //{
+        //    /*
+        //     * 这个奇怪的函数真是令人费解
+        //     * 已经传入了Plan了 您老是不会自己提提参数吗
+        //     * 况且有地方有 有地方没有
+        //     * 总言而之 屁用没有
+        //     * 个人认为开发者脑子有病
+        //     * 是的 是指我自己
+        //     */
+
+        //    //分配唯一编号
+        //    int thisNumber = -1;
+        //    for (int i = 0; i < 100; i++)
+        //    {
+        //        if (TasksDict[i] == null)
+        //        {
+        //            thisNumber = i;
+        //            break;
+        //        }
+        //    }
+        //    if (thisNumber == -1) { return; }
+        //    pValue.Top = 36 * thisNumber;
+        //    //获取结构体
+        //    //PlanClassD @struct = Pointer.Box((void*)pStruct, typeof(PlanClassD)) as PlanClassD;
+        //    //设置任务标题
+        //    pValue.capital = @struct.lpCapital;
+        //    //内置编号
+        //    pValue.Lnumber = thisNumber;
+        //    //添加时间
+        //    pValue.dwSeconds = @struct.iSeconds;
+        //    //添加难度
+        //    pValue.dwDifficulty = @struct.dwDifficulty;
+        //    //添加耐力值
+        //    pValue.dwLasting = @struct.iLasting;
+        //    //添加爆发值
+        //    pValue.dwExplosive = @struct.iExplosive;
+        //    //添加智慧值
+        //    pValue.dwWisdom = @struct.iWisdom;
+        //    //添加开始时间
+        //    pValue.dtStartTime = DateTime.FromBinary(@struct.dwStart);
+        //    //添加到字典
+        //    TasksDict[thisNumber] = pValue;
+        //    panel_M.Controls.Add(pValue);
+        //}
+
         #region 编辑器【InnerIDE】废弃代码
         #endregion
         #region 登录窗口【Login】废弃代码
