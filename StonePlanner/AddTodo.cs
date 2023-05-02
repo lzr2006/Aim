@@ -177,8 +177,7 @@ namespace StonePlanner
             catch (Exception ex)
             {
                 ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
-                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -212,6 +211,12 @@ namespace StonePlanner
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void metroButton_Add_Click(object sender, EventArgs e)
+        {
+            AddList al = new AddList();
+            al.Show();
         }
     }
 }

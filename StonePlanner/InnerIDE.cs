@@ -1,5 +1,4 @@
 ﻿using MDI;
-using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -358,18 +357,7 @@ namespace StonePlanner
                             {
                                 ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
-                                //发送错误报告
-                                var properties = new Dictionary<string, string>
-                            {
-                                {"Display" , $"SyntaxError：{ex.Message}" }
-                            };
-                                string code = "";
-                                foreach (var item in nInput)
-                                {
-                                    code += item + " ";
-                                }
-                                properties.Add("Code", code);
-                                Crashes.TrackError(ex, properties);
+
                             }
                         }
                     }
@@ -402,15 +390,6 @@ namespace StonePlanner
                             {
                                 ErrorCenter.AddError(DateTime.Now.ToString(), "Information", ex);
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
-
-                                //发送错误报告
-                                var properties = new Dictionary<string, string>
-                            {
-                                {"code" , $"{richTextBox_Output.Text}" },
-                                {"display" , $"SyntaxError：{ex.Message}" }
-                            };
-                                Crashes.TrackError(ex, properties);
-                                richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
                             }
                         }
                         richTextBox_Output.Text += $"\nConsole@Memory>EPH：{EPH.ToString()}";
@@ -475,14 +454,6 @@ namespace StonePlanner
                             catch (Exception ex)
                             {
                                 ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
-                                //发送错误报告
-                                var properties = new Dictionary<string, string>
-                            {
-                                {"code" , $"{richTextBox_Output.Text}" },
-                                {"display" , $"SyntaxError：{ex.Message}" }
-                            };
-                                Crashes.TrackError(ex, properties);
-                                richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
                             }
                         }
                     }
@@ -564,33 +535,12 @@ namespace StonePlanner
                 catch (Exception ex)
                 {
                     ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
-                    //发送错误报告
-                    var properties = new Dictionary<string, string>
-                {
-                    {"code" , $"{richTextBox_Output.Text}" },
-                    {"display" , $"SyntaxError：{ex.Message}" }
-                };
-                    Crashes.TrackError(ex, properties);
-                    richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
                 }
 
             }
             catch (Exception ex)
             {
                 ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
-                //发送错误报告
-                var properties = new Dictionary<string, string>
-                {
-                    {"code" , $"{richTextBox_Output.Text}" },
-                    {"display" , $"SyntaxError：{ex.Message}" }
-                };
-                Crashes.TrackError(ex, properties);
-                string rew = "";
-                foreach (var item in nInput)
-                {
-                    rew += item + " ";
-                }
-                richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}，In：{rew}.";
             }
         }
         #endregion

@@ -138,16 +138,23 @@ namespace StonePlanner
         internal unsafe Plan(PlanClassC @struct)
         {
             InitializeComponent();
-            this.capital = @struct.lpCapital;
-            this.dwSeconds = @struct.iSeconds;
-            this.dwIntro = @struct.dwIntro;
-            this.dwDifficulty = @struct.dwDifficulty;
-            this.dwLasting = @struct.iLasting;
-            this.dwExplosive = @struct.iExplosive;
-            this.dwWisdom = @struct.iWisdom;
-            this.lpParent = @struct.lpParent;
-            this.dtStartTime = DateTime.FromBinary(@struct.dwStart);
-            this.UDID = @struct.UDID;
+            try
+            {
+                this.capital = @struct.lpCapital;
+                this.dwSeconds = @struct.iSeconds;
+                this.dwIntro = @struct.dwIntro;
+                this.dwDifficulty = @struct.dwDifficulty;
+                this.dwLasting = @struct.iLasting;
+                this.dwExplosive = @struct.iExplosive;
+                this.dwWisdom = @struct.iWisdom;
+                this.lpParent = @struct.lpParent;
+                this.dtStartTime = DateTime.FromBinary(@struct.dwStart);
+                this.UDID = @struct.UDID;
+            }
+            catch (NullReferenceException e) 
+            {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", e);
+            }
         }
 
 

@@ -6,7 +6,6 @@ using System.Drawing;
 using System.IO;
 using System.Media;
 using System.Net;
-using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -311,7 +310,7 @@ namespace StonePlanner
         /// 9、读取未完成任务
         /// 10、加载功能。
         /// </summary>
-        private async void Main_Load(object sender, EventArgs e)
+        private void Main_Load(object sender, EventArgs e)
         {
             #region 窗口加载
             InitializeSettings();
@@ -446,7 +445,6 @@ namespace StonePlanner
             }
             #endregion
             CheckForIllegalCrossThreadCalls = false;
-            //PlanAdder(new Plan(string.Empty, 0, "TEST 0", 0.0D, "Test"), "Extent Test", 0, 0D);
             #region 未完成任务读取
             for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
             {
@@ -483,29 +481,6 @@ namespace StonePlanner
                 plan = null;
             }
             #endregion
-            //Thread testThread = new Thread(new ThreadStart(Test.Add10Plan));
-            //testThread.Start();
-            #region 热点爬取器
-            //https://v.api.aa1.cn/api/topbaidu/index.php
-            //请求新闻API
-            HttpClient client = new HttpClient();
-            //发送Get请求
-            var resultjson = await client.GetStringAsync("https://v.api.aa1.cn/api/topbaidu/index.php");
-            int tmp = resultjson.Length - 2;
-            resultjson = resultjson.Replace(" ", "").Substring(0, tmp - 5);
-            //接下来暴力解析
-            JavaScriptSerializer js = new JavaScriptSerializer();//实例化一个能够序列化数据的类
-            try
-            {
-                NewsJsonStructure.Root list = js.Deserialize<NewsJsonStructure.Root>(resultjson); //将json数据转化为对象类型并赋值给list
-                var x = list.newslist;
-                foreach (var item in x)
-                {
-                    sentence.Add(item.title);
-                }
-            }
-            catch (Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "warning", ex); }
-            #endregion
             // \Linq is Gooooood!/
             // \We Love Linq!/
             sentence.FindAll(sentence => sentence.Contains("\n")).ForEach(sentence => sentence.Replace("\n", ""));
@@ -524,9 +499,9 @@ namespace StonePlanner
                 label_Sentence.Text = "MethodBox Aim（限制副本）";
             }
             #endregion
-           
             string alert = GetSchedule(true);
             TaskTimeScan(alert);
+            contextMenuStrip.Enabled = false;
         }
         #endregion
         #region 任务处理相关
@@ -1563,7 +1538,7 @@ namespace StonePlanner
             Recycle _ = new Recycle();
             _.Show();
         }
-
+        
         private void 新建清单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddList _ = new AddList();
@@ -1620,6 +1595,38 @@ namespace StonePlanner
         {
             Process.Start("https://afdian.net/a/MethodBox");
         }
+        private void 堵塞执行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            signQueue.Enqueue(-1);
+        }
+
+        private void 恢复执行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            signQueue.Dequeue();
+        }
+
+        private void 停用商城ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Shop _ = new Shop();
+            _.Show();
+        }
+
+        private void 停用导入包ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Importer _ = new Importer();
+            _.Show();
+        }
+
+        private void 停用导出待办ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportTodo _ = new ExportTodo(panel_M.Controls);
+            _.Show();
+        }
         #endregion
+
+        private void pictureBox_T_Float_DoubleClick(object sender, EventArgs e)
+        {
+            contextMenuStrip.Enabled = !contextMenuStrip.Enabled;
+        }
     }
 }

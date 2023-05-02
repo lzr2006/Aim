@@ -1,7 +1,4 @@
-﻿using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using System;
+﻿using System;
 using System.Data.OleDb;
 using System.Windows.Forms;
 
@@ -26,8 +23,6 @@ namespace StonePlanner
             } 
             catch { }
             Application.EnableVisualStyles();
-            AppCenter.Start("f60d699f-aa39-4089-aae5-5c3c76218ebb",
-            typeof(Analytics), typeof(Crashes));
 
             try
             {

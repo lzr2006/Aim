@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StonePlanner.exe" size="2232336">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StonePlanner.exe" size="1676816">
       <assemblyIdentity name="StonePlanner" version="2022.2.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>y8V9y7pQpqiLF59kxIwjjNvgkTKO9JzFYggvfEohMgg=</dsig:DigestValue>
+        <dsig:DigestValue>nn08q3nvd8w3fbHuwVUce9J/D0ZTTVz2ZHMr2+NwJ/A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -431,31 +431,31 @@
       <dsig:DigestValue>mPfbZolt9nPnG5c1YVS9KrCVugj2sitmJx2JSpHqZZk=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="runtimes\win-arm\native\e_sqlite3.dll" size="870400">
+  <file name="runtimes\win-arm\native\e_sqlite3.dll" size="1149440">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>sV74v2DUGQZhRsbUaG2YBztGLuMrc1OkivWFNUOsWuE=</dsig:DigestValue>
+      <dsig:DigestValue>IOv7E+p1q5G8fAZVekZHTEWakysHS248W6T5AiluT84=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="runtimes\win-x64\native\e_sqlite3.dll" size="1265664">
+  <file name="runtimes\win-x64\native\e_sqlite3.dll" size="1646080">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>O3NmFEHgp6Q51bKhGQ0sm7Mm5UvNsYCq2fA2a9vUfgc=</dsig:DigestValue>
+      <dsig:DigestValue>AV3lzRBx7LV8arJfOGNwWst1YXI4SEr+t3ULR5QrB6Q=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="runtimes\win-x86\native\e_sqlite3.dll" size="989184">
+  <file name="runtimes\win-x86\native\e_sqlite3.dll" size="1243648">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>mHf3A84/uWadZW0kcmFZthay3yVSIiW/Qb+v6JlUxYo=</dsig:DigestValue>
+      <dsig:DigestValue>0lR1hxvF4NcYJnHx57jqnPhYzHt1RGEDc55/Ma/Kkf8=</dsig:DigestValue>
     </hash>
   </file>
   <file name="StonePlanner.exe.config" size="189">

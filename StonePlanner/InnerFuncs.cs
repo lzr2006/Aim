@@ -53,6 +53,18 @@ namespace StonePlanner.Inner
             return chineseWords;
         }
 
+        public static string MultipleStrings(int multiple) 
+        {
+            string once = "";
+            while (true)
+            {
+                once += " ";
+                multiple--;
+                if (multiple == 0) break;
+            }
+            return once;
+        }
+
         /// <summary>
         /// 获取指定文件的MD5值 
         /// </summary>

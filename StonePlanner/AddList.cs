@@ -27,7 +27,7 @@ namespace StonePlanner
 
         private void AddList_Load(object sender, EventArgs e)
         {
-
+            TopMost = true;
         }
     }
 }

@@ -6,7 +6,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
-using Microsoft.AppCenter.Crashes;
 using MetroFramework.Forms;
 
 namespace StonePlanner
@@ -149,18 +148,7 @@ namespace StonePlanner
                             catch (Exception ex)
                             {
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
-                                //发送错误报告
-                                var properties = new Dictionary<string, string>
-                            {
-                                {"Display" , $"SyntaxError：{ex.Message}" }
-                            };
-                                string code = "";
-                                foreach (var item in nInput)
-                                {
-                                    code += item + " ";
-                                }
-                                properties.Add("Code", code);
-                                Crashes.TrackError(ex, properties);
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                             }
                         }
                     }
@@ -192,15 +180,6 @@ namespace StonePlanner
                             catch (Exception ex)
                             {
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
-
-                                //发送错误报告
-                                var properties = new Dictionary<string, string>
-                            {
-                                {"code" , $"{richTextBox_Output.Text}" },
-                                {"display" , $"SyntaxError：{ex.Message}" }
-                            };
-                                Crashes.TrackError(ex, properties);
-                                richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
                             }
                         }
                         richTextBox_Output.Text += $"\nConsole@Memory>EPH：{EPH.ToString()}";
@@ -265,14 +244,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
-                                //发送错误报告
-                                var properties = new Dictionary<string, string>
-                            {
-                                {"code" , $"{richTextBox_Output.Text}" },
-                                {"display" , $"SyntaxError：{ex.Message}" }
-                            };
-                                Crashes.TrackError(ex, properties);
-                                richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                             }
                         }
                     }
@@ -285,14 +257,7 @@ namespace StonePlanner
                 }
                 catch (Exception ex)
                 {
-                    //发送错误报告
-                    var properties = new Dictionary<string, string>
-                {
-                    {"code" , $"{richTextBox_Output.Text}" },
-                    {"display" , $"SyntaxError：{ex.Message}" }
-                };
-                    Crashes.TrackError(ex, properties);
-                    richTextBox_Output.Text += $"\nSyntaxError：{ex.Message}";
+                    ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                 }
             }
             catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }

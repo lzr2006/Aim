@@ -19,7 +19,8 @@ namespace StonePlanner
         bool ed;
         string result;
         SchedulingCalendarDay[,] dayarr;
-        public SchedulingCalendar(Dictionary<DateTime, string> schd, out string alert, bool bed = false)
+        public SchedulingCalendar(Dictionary<DateTime, string> schd, 
+            out string alert, bool bed = false)
         {
             InitializeComponent();
             this.schd = schd;
