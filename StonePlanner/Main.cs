@@ -524,9 +524,9 @@ namespace StonePlanner
                 label_Sentence.Text = "MethodBox Aim（限制副本）";
             }
             #endregion
-            Thread scanner = new Thread(new ThreadStart(TaskTimeScan));
-            scanner.Start();
-            GetSchedule(true);
+           
+            string alert = GetSchedule(true);
+            TaskTimeScan(alert);
         }
         #endregion
         #region 任务处理相关
@@ -550,7 +550,7 @@ namespace StonePlanner
         }
 
 
-        protected void TaskTimeScan()
+        protected void TaskTimeScan(string alert = "")
         {
             List<string> _tasks = new List<string>();
             foreach (var item in panel_M.Controls)
@@ -574,10 +574,9 @@ namespace StonePlanner
             }
             if (_tasks.Count != 0)
             {
-                new Alert(_tasks).ShowDialog();
+                new Alert(_tasks,alert).ShowDialog();
             }
             _tasks.Clear();
-            Thread.Sleep(60000);
         }
 
 
@@ -990,7 +989,7 @@ namespace StonePlanner
         }
         #endregion
         #region 加载排班日历
-        internal void GetSchedule(bool @out = false)
+        internal string GetSchedule(bool @out = false)
         {
             Dictionary<DateTime, string> returns = new Dictionary<DateTime, string>();
             //内置
@@ -1018,11 +1017,23 @@ namespace StonePlanner
             }
             try
             {
-                new SchedulingCalendar(returns, @out).Show();
+                if (@out)
+                {
+                    string tql = "";
+                    new SchedulingCalendar(returns,out tql, @out).Show();
+                    return tql;
+                }
+                else
+                {
+                    string _ = null;
+                    new SchedulingCalendar(returns,out _, @out).Show();
+                    return null;
+                }
             }
             catch (Exception ex)
             { 
                 ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+                return null;
             }
         }
         #endregion

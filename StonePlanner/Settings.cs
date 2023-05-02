@@ -19,7 +19,7 @@ namespace StonePlanner
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            panel_Main.Top = -vScrollBar_Control.Value;
+            panel_Main.Top = -vScrollBar_Control.Value - 10;
         }
 
         private void button_Save_Click(object sender, EventArgs e)
@@ -54,10 +54,6 @@ namespace StonePlanner
             Inner.INIHolder.Write("SwitchSettings", "SentenceSwitch", AutoLoginYesNo, path);
         }
 
-        private void Settings_Load(object sender, EventArgs e)
-        {
-
-        }
 
         protected void InitializeSettings() 
         {
@@ -66,6 +62,11 @@ namespace StonePlanner
             packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "PictureSwitchTime", "False", path));
             packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "SentenceSwitch", "False", path));
             packedSettings.Add(Inner.INIHolder.Read("SwitchSettings", "SentenceSwitchTime", "False", path));
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

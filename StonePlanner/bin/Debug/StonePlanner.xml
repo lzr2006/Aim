@@ -928,15 +928,6 @@
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="M:StonePlanner.Main.#ctor">
-            <summary>
-            主窗口构造函数，基本用途如下：
-            1、加载控件（自动生成）；
-            2、把自己赋值给自身的<code>main</code>变量；
-            3、取消跨线程操作检查；
-            4、提前加载设置窗口，以便于后期读取设置。
-            </summary>
-        </member>
         <member name="M:StonePlanner.Main.SendMessage(System.IntPtr,System.Int32,System.IntPtr,System.IntPtr)">
             <summary>
             该函数用来发送Windows消息（WM）处理窗口拖动事件。
@@ -950,6 +941,15 @@
         <member name="M:StonePlanner.Main.panel_Top_MouseDown(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>
             该函数将拖动事件发送，以用于拖动窗口。
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Main.#ctor">
+            <summary>
+            主窗口构造函数，基本用途如下：
+            1、加载控件（自动生成）；
+            2、把自己赋值给自身的<code>main</code>变量；
+            3、取消跨线程操作检查；
+            4、提前加载设置窗口，以便于后期读取设置。
             </summary>
         </member>
         <member name="M:StonePlanner.Main.InitializeSettings">
@@ -1004,13 +1004,6 @@
             <summary>
             动态计算框长度
             </summary>
-        </member>
-        <member name="M:StonePlanner.Main.ExtractNormalFileInResx(System.Byte[],System.String)">
-            <summary>
-            释放resx里面的普通类型文件
-            </summary>
-            <param name="resource">resx里面的资源</param>
-            <param name="path">释放到的路径</param>
         </member>
         <member name="F:StonePlanner.Main.components">
             <summary>

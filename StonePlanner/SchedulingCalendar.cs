@@ -17,13 +17,22 @@ namespace StonePlanner
         public static extern bool ReleaseCapture();
         Dictionary<DateTime, string> schd;
         bool ed;
+        string result;
         SchedulingCalendarDay[,] dayarr;
-        public SchedulingCalendar(Dictionary<DateTime, string> schd, bool bed = false)
+        public SchedulingCalendar(Dictionary<DateTime, string> schd, out string alert, bool bed = false)
         {
             InitializeComponent();
-
             this.schd = schd;
-            this.ed = bed;
+            ed = bed;
+            if (bed)
+            {
+                alert = GetResult();
+                return;
+            }
+            else
+            {
+                alert = "";
+            }
         }
 
         protected void ReLoad()
@@ -55,6 +64,46 @@ namespace StonePlanner
                 }
             }
         }
+
+        private string GetResult()
+        {
+            Add();
+            label_Now.Text = $"{DateTime.Now.Year}年{DateTime.Now.Month}月";
+            //扫描主窗口内容
+            ReLoad();
+            //判断是否发送排班提示
+            Visible = false;
+            Opacity = 0;
+            //获得今天的排班
+            string status = "";
+            //托盘气泡提示
+            foreach (var item in dayarr)
+            {
+                if (item is null)
+                {
+                    continue;
+                }
+                else
+                {
+                    if (item.label_Day.Text == DateTime.Now.Day.ToString())
+                    {
+                        status = item.label_D.Text;
+                    }
+                }
+            }
+            if (status == "" || status == " 班次")
+            {
+                result = "您今天没有要上的班";
+            }
+            else
+            {
+                result = $"您今天的班次为{status}";
+            }
+            ShadowType = MetroFormShadowType.None;
+            Hide();
+            return result;
+        }
+
 
         private void SchedulingCalendar_Load(object sender, EventArgs e)
         {
@@ -88,13 +137,12 @@ namespace StonePlanner
                 string tipContent;
                 if (status == "" || status == " 班次")
                 {
-                    tipContent = "您今天没有要上的班";
+                    result = "您今天没有要上的班";
                 }
                 else
                 {
-                    tipContent = $"您今天的班次为{status}";
+                    result = $"您今天的班次为{status}";
                 }
-                MessageBox.Show(tipContent,tipTitle,MessageBoxButtons.OK,MessageBoxIcon.Information);
                 ShadowType = MetroFormShadowType.None;
                 Hide();
                 return;
@@ -120,8 +168,8 @@ namespace StonePlanner
             {
                 d = true;
             }
-            if (month is null)month = DateTime.Now.Month;
-            if (year is null)year = DateTime.Now.Year;
+            if (month is null) month = DateTime.Now.Month;
+            if (year is null) year = DateTime.Now.Year;
             var mday = 1;
             try { mday = GetDay((Enums.MonthInt) month); }
             catch (NotImplementedException) { month += 1; }

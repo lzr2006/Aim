@@ -8,7 +8,7 @@ namespace StonePlanner
     public partial class Alert : MetroForm
     {
         List<string> tasks;
-        public Alert(List<string> tasks)
+        public Alert(List<string> tasks,string alert = "")
         {
             InitializeComponent();
             this.tasks = tasks;

@@ -43,16 +43,20 @@
             this.label_PictureSwitchTime_C = new System.Windows.Forms.Label();
             this.checkBox_PictureSwitch = new System.Windows.Forms.CheckBox();
             this.vScrollBar_Control = new System.Windows.Forms.VScrollBar();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel_Main.SuspendLayout();
             this.groupBox_Info.SuspendLayout();
             this.groupBox_switchSwttings.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_Main
             // 
-            this.panel_Main.Controls.Add(this.groupBox_Info);
             this.panel_Main.Controls.Add(this.button_Save);
             this.panel_Main.Controls.Add(this.groupBox_switchSwttings);
+            this.panel_Main.Controls.Add(this.groupBox_Info);
             this.panel_Main.Location = new System.Drawing.Point(7, 67);
             this.panel_Main.Name = "panel_Main";
             this.panel_Main.Size = new System.Drawing.Size(336, 562);
@@ -202,22 +206,52 @@
             this.vScrollBar_Control.TabIndex = 1;
             this.vScrollBar_Control.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Location = new System.Drawing.Point(-28, -3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(480, 74);
+            this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.MediumTurquoise;
+            this.panel2.Location = new System.Drawing.Point(4, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(401, 8);
+            this.panel2.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("STXihei", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(46, 31);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 26);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "软件设置";
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 399);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.vScrollBar_Control);
             this.Controls.Add(this.panel_Main);
             this.Name = "Settings";
-            this.Padding = new System.Windows.Forms.Padding(15, 48, 15, 16);
+            this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
             this.Text = "设置项";
-            this.Load += new System.EventHandler(this.Settings_Load);
             this.panel_Main.ResumeLayout(false);
             this.groupBox_Info.ResumeLayout(false);
             this.groupBox_Info.PerformLayout();
             this.groupBox_switchSwttings.ResumeLayout(false);
             this.groupBox_switchSwttings.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -239,5 +273,8 @@
         private System.Windows.Forms.GroupBox groupBox_Info;
         private System.Windows.Forms.CheckBox checkBox_LoginSwitch;
         private System.Windows.Forms.CheckBox checkBox_StartSwitch;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
     }
 }
