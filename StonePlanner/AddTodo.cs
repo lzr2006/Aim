@@ -12,9 +12,12 @@ namespace StonePlanner
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
-        public AddTodo()
+        public delegate void PlanAddInvoke(Plan plan);
+        PlanAddInvoke PlanAdditionInvoke;
+        public AddTodo(PlanAddInvoke TargetFun)
         {
             InitializeComponent();
+            PlanAdditionInvoke = new PlanAddInvoke(TargetFun);
         }
 
         internal AddTodo(Structs.PlanStruct planStruct)
@@ -169,10 +172,12 @@ namespace StonePlanner
                 }
                 catch { diff = 0D; }
                 psc.dwDifficulty = diff;
+                //对指针传出
+                PlanAdditionInvoke(new Plan(psc));
                 //封送结构体
-                Main.planner = psc;
-                Main.AddSign(4);
-                Close();
+                //Main.planner = psc;
+                //Main.AddSign(4);
+                //Close();
             }
             catch (Exception ex)
             {

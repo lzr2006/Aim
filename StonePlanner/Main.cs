@@ -504,6 +504,7 @@ namespace StonePlanner
             contextMenuStrip.Enabled = false;
         }
         #endregion
+        delegate void PlanAddInvoke(Plan pValue);
         #region 任务处理相关
         internal unsafe void PlanAdder(Plan pValue)
         {
@@ -522,6 +523,8 @@ namespace StonePlanner
             //添加到字典
             TasksDict[thisNumber] = pValue;
             panel_M.Controls.Add(pValue);
+            LengthCalculation();
+            signQueue.Dequeue();
         }
 
 
@@ -1529,7 +1532,7 @@ namespace StonePlanner
 
         private void 添加任务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTodo _ = new AddTodo();
+            AddTodo _ = new AddTodo(PlanAdder);
             _.Show();
         }
 
