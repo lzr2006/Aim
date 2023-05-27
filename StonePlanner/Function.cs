@@ -15,15 +15,21 @@ namespace StonePlanner
         string imageAddress = null;
         string caplital = "";
         string __Name__ = "";
-        public Function(string lpImageAddress,string lpCapital,string szFunctionName)
+        object p = null;
+        public Function(string lpImageAddress,string lpCapital,string szFunctionName,object pVoid = null)
         {
             InitializeComponent();
 
             this.imageAddress = lpImageAddress;
             this.caplital = lpCapital;
             this.__Name__ = szFunctionName;
+
+            if (pVoid != null)
+            {
+                p = pVoid;
+            }
         }
-        public Function(string lpCapital, string szListName,int nLineParents)
+        public Function(string lpCapital, string szListName,int nLineParents, object pVoid = null)
         {
             InitializeComponent();
 
@@ -67,7 +73,7 @@ namespace StonePlanner
             {
                 if (__Name__ == "__New__")
                 {
-                    AddTodo at = new AddTodo();
+                    AddTodo at = new AddTodo((AddTodo.PlanAddInvoke)p);
                     at.Show();
                 }
                 else if (__Name__ == "__Export__")

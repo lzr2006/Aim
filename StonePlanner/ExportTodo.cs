@@ -24,9 +24,9 @@ namespace StonePlanner
         {
             try
             {
-                label_T.Text = Main.langInfo[7];
+                label_T.Text = "导出您的待办";
                 richTextBox_M.Text +=
-                     $"{Main.langInfo[8]}    {Main.langInfo[9]}                {Main.langInfo[10]}\n";
+                     $"序号    标题                状态\n";
                 List<string> planCapital = new List<string>();
                 List<string> planStatus = new List<string>();
                 int i = 0;

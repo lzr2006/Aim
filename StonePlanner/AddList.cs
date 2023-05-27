@@ -20,7 +20,7 @@ namespace StonePlanner
             }
             catch(Exception ex) 
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
                 MessageBox.Show($"添加失败，原因是{ex.Message}。","失败",MessageBoxButtons.OK,MessageBoxIcon.Warning);
             }
         }

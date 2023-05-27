@@ -25,7 +25,7 @@ namespace StonePlanner.StartUp
             panel_Top.BringToFront();
             panel_Main.SendToBack();
             WebClient wc = new WebClient();
-            string res = await wc.DownloadStringTaskAsync(new Uri("https://lzr2006.github.io/wkgd/Aim/source.txt"));
+            string res = await wc.DownloadStringTaskAsync(new Uri("https://lzr2006.github.io/Aim/source.txt"));
             while (res == null) { }
             MainLoader(res);
         }
