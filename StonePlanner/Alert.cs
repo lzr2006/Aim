@@ -14,8 +14,8 @@ namespace StonePlanner
             this.tasks = tasks;
             if (alert == "")
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", new Exception
-                    ("排班日历发生故障，应尽快修复"));
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, 
+                    new Exceptions.UnknownException("排班日历发生故障，应尽快修复"));
             }
             metroLabel_WorkAlert.Text = $"排班日历：{alert}";
         }

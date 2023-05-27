@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StonePlanner
 {
@@ -38,26 +34,26 @@ namespace StonePlanner
         [StructLayout(LayoutKind.Auto)]
         public abstract partial class PlanBase
         {
-            internal string lpCapital;
-            internal int iSeconds;
-            internal double dwDifficulty;
-            internal int iLasting;
-            internal int iExplosive;
-            internal int iWisdom;
-            internal long dwStart;
+            internal string capital;
+            internal int seconds;
+            internal double difficulty;
+            internal int lasting;
+            internal int explosive;
+            internal int wisdom;
+            internal long startTime;
         }
 
         [Serializable]
         public class PlanClassA : PlanBase
         {
-            internal string dwIntro;
-            internal string lpParent;
+            internal string intro;
+            internal string parent;
         }
 
         [Serializable]
         public class PlanClassB : PlanBase
         {
-            internal string dwIntro;
+            internal string intro;
             internal int UDID;
         }
 
@@ -66,9 +62,9 @@ namespace StonePlanner
         [StructLayout(LayoutKind.Auto)]
         public class PlanClassC : PlanBase
         {
-            internal string dwIntro;
+            internal string intro;
             internal int UDID;
-            internal string lpParent;
+            internal string parent;
         }
 
         public class PlanClassD : PlanBase { }

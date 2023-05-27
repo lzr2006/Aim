@@ -13,6 +13,7 @@ using System.Web.Script.Serialization;
 using System.Windows.Forms;
 using static StonePlanner.Structs;
 using static StonePlanner.Develop.Sign;
+using static StonePlanner.Exceptions;
 
 /*
  * **************************************************************************
@@ -245,7 +246,7 @@ namespace StonePlanner
                      * 做法：
                      * 仅对状态为待办的剩余时间和是否完成进行更新
                     */
-                    string queryString = $"SELECT * FROM Tasks WHERE UDID = {plan.Value.UDID}";
+                    string queryString = $"SELECT * FROM Tasks WHERE ID = {plan.Value.UDID}";
                     var sqlResult = SQLConnect.SQLCommandQuery(queryString, ref Main.odcConnection);
                     if (sqlResult.HasRows)
                     {
@@ -264,19 +265,19 @@ namespace StonePlanner
                             if (plan.Value.dwSeconds > 0)
                             {
                                 string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
-                                    $" WHERE UDID = {plan.Value.UDID}";
+                                    $" WHERE ID = {plan.Value.UDID}";
                                 SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                                 continue;
                             }
                             else
                             {
-                                ErrorCenter.AddError(DateTime.Now.ToString(), "Error",
-                                    new Exception("已经被清除的任务再次添加。"));
+                                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning
+                                    ,new ObjectFreedException("已经被清除的任务再次添加。"));
                             }
                         }
                     }
                     //脑子是个好东西 下次带上
-                    string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , UDID , TaskParent , StartTime) VALUES ( ";
+                    string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent , StartTime) VALUES ( ";
                     strInsert += "'" + plan.Value.capital + "', '";
                     strInsert += plan.Value.dwIntro + "', '";
                     strInsert += plan.Value.status + "', ";
@@ -285,7 +286,6 @@ namespace StonePlanner
                     strInsert += plan.Value.dwLasting + ",";
                     strInsert += plan.Value.dwExplosive + ",";
                     strInsert += plan.Value.dwWisdom + ",";
-                    strInsert += plan.Value.UDID + ",";
                     strInsert += "'" + plan.Value.lpParent + "',";
                     strInsert += "'" + plan.Value.dtStartTime.ToBinary() + "')";
                     //执行插入
@@ -346,14 +346,14 @@ namespace StonePlanner
             {
                 PlanClassA psa = new()
                 {
-                    lpCapital = "NULL",
-                    lpParent = null,
-                    dwStart = 0,
-                    iWisdom = 0,
-                    iLasting = 0,
-                    iExplosive = 0,
-                    dwIntro = "NULL",
-                    iSeconds = 0
+                    capital = "NULL",
+                    parent = null,
+                    startTime = 0,
+                    wisdom = 0,
+                    lasting = 0,
+                    explosive = 0,
+                    intro = "NULL",
+                    seconds = 0
                 };
                 Plan p = new(psa)
                 {
@@ -365,85 +365,8 @@ namespace StonePlanner
             label_Date.Text = DateTime.Now.ToString("dd");
             label_Month.Text = DateTime.Now.ToString("MM");
             #endregion
-            #region 语言加载器
-            //加载语言信息
-            try
-            {
-                //langReader = new StreamReader($"{Application.StartupPath}\\language.mlu");
-                //langInfo = new List<string>(langReader.ReadToEnd().Split(';'));
-
-                string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={Main.password}";
-                OleDbConnection odcConnection = new OleDbConnection(strConn); //2、打开连接 C#操作Access之按列读取mdb   
-                odcConnection.Open(); //建立SQL查询   
-                OleDbCommand odCommand = odcConnection.CreateCommand();
-                odCommand.CommandText = "SELECT IN_TEXT FROM [Language]"; //建立读取 C#操作Access之按列读取mdb   
-                OleDbDataReader odrReader = odCommand.ExecuteReader();
-                langInfo = new List<string>();
-                while (odrReader.Read())
-                {
-                    langInfo.Add(odrReader["IN_TEXT"].ToString());
-                }
-                odrReader.Close();
-                odcConnection.Close();
-
-                label_YoursTasks.Text = langInfo[0];
-                Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
-                loaderThread.Start();
-            }
-            catch (Exception ex)
-            {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
-                antiPiracyCheckThread.Abort();
-                DialogResult dialogResult = MessageBox.Show("未寻找到语言信息！\n是否下载由MethodBox(官方)提供的zh-cn语言包？取消将使用内置字符集。",
-                    "无语言", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                //下载语言包
-                if (dialogResult == DialogResult.Yes)
-                {
-                    try
-                    {
-                        WebClient MyWebClient = new()
-                        {
-                            Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                        };
-                        Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/language.txt"); //下载
-                        //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
-                        string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
-                        using (StreamWriter sw = new StreamWriter($"{Application.StartupPath}\\language.mlu"))//将获取的内容写入文本
-                        {
-                            sw.Write(pageHtml);
-                            sw.Close();
-                        }
-                        MessageBox.Show("语言包下载完成，请重启软件。", "成功的下载了语言包", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        System.Diagnostics.Process.Start($"{Application.StartupPath}\\StonePlanner.exe");
-                        System.Console.WriteLine("Program Finished With Code 0.");
-                        Environment.Exit(0);
-                    }
-                    catch (Exception webEx)
-                    {
-                        ErrorCenter.AddError(DateTime.Now.ToString(), "Error", webEx);
-                        DialogResult errorResult = MessageBox.Show($"出现了一个错误，使得我们无法下载语言包。\n错误为：{webEx.Message}。" +
-                            $"\n请联系i@imethodbox.onmicrosoft.com解决此问题。\n" +
-                            $"如想了解详细信息，请按\"确认\"按钮。\n如想直接终止程序，请按\"取消\"按钮。", "无法下载语言包", MessageBoxButtons.OKCancel,
-                            MessageBoxIcon.Stop);
-                        if (errorResult == DialogResult.Cancel) { Environment.Exit(0); }
-                        else { MessageBox.Show($"{webEx.ToString()}"); return; }
-                    }
-                    Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
-                    loaderThread.Start();
-                }
-                else
-                {
-                    //不下载语言包
-                    //生成一堆乱码应付一下，以免程序报废
-                    Thread tdHolder = new Thread(() => LanguageHolder());
-                    tdHolder.Start();
-                    Thread.Sleep(1000);
-                    Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
-                    tdHolder.Join();
-                    loaderThread.Start();
-                }
-            }
-            #endregion
+            Thread loaderThread = new Thread(new ThreadStart(FunctionLoader));
+            loaderThread.Start();
             CheckForIllegalCrossThreadCalls = false;
             #region 未完成任务读取
             for (int i = 0; i < recy_bin.dataGridView1.Rows.Count - 1; i++)
@@ -455,15 +378,15 @@ namespace StonePlanner
                 //完了，他妈的，重载全几把乱了
                 PlanClassB psb = new()
                 {
-                    lpCapital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                    dwIntro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                    iSeconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
-                    dwDifficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                    UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[9].Value),
-                    iLasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
-                    iExplosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
-                    iWisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
-                    dwStart = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[11].Value)
+                    capital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
+                    intro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
+                    seconds = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
+                    difficulty = Convert.ToDouble(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
+                    UDID = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[0].Value),
+                    lasting = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
+                    explosive = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
+                    wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
+                    startTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value)
                 };
                 //Plan plan = new Plan
                 //    (
@@ -476,7 +399,7 @@ namespace StonePlanner
                 //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
                 //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value)
                 //    );
-                PlanAdder(new Plan(psb));
+                AddPlan(new Plan(psb));
                 LengthCalculation();
                 plan = null;
             }
@@ -500,13 +423,13 @@ namespace StonePlanner
             }
             #endregion
             string alert = GetSchedule(true);
-            TaskTimeScan(alert);
+            ScanTaskTime(alert);
             contextMenuStrip.Enabled = false;
         }
         #endregion
         delegate void PlanAddInvoke(Plan pValue);
         #region 任务处理相关
-        internal unsafe void PlanAdder(Plan pValue)
+        internal unsafe void AddPlan(Plan pValue)
         {
             //分配唯一编号
             int thisNumber = -1;
@@ -524,11 +447,10 @@ namespace StonePlanner
             TasksDict[thisNumber] = pValue;
             panel_M.Controls.Add(pValue);
             LengthCalculation();
-            signQueue.Dequeue();
+            if (signQueue.Count != 0) signQueue.Dequeue();
         }
 
-
-        protected void TaskTimeScan(string alert = "")
+        protected void ScanTaskTime(string alert = "")
         {
             List<string> _tasks = new List<string>();
             foreach (var item in panel_M.Controls)
@@ -560,7 +482,7 @@ namespace StonePlanner
 
         #endregion
         #region 加载器
-        internal void LanguageHolder()
+        internal void HoldLanguage()
         {
             langInfo = new List<string>();
             for (int i = 0; i < 30; i++)
@@ -575,7 +497,7 @@ namespace StonePlanner
         }
 
         //列表加载器
-        protected void ListHolder()
+        protected void HoldList()
         {
             //MYUKKE IS GOOOOOOD!
             //像暂时存储副控件添加新的Controls.Add函数
@@ -633,14 +555,14 @@ namespace StonePlanner
                 {
                     PlanClassB psb = new()
                     {
-                        lpCapital = sResult[1].ToString(),
-                        dwIntro = sResult[2].ToString(),
-                        iSeconds = Convert.ToInt32(sResult[5]),
-                        dwDifficulty = Convert.ToInt64(sResult[4]),
-                        UDID = Convert.ToInt32(sResult[9]),
-                        iLasting = Convert.ToInt32(sResult[6]),
-                        iExplosive = Convert.ToInt32(sResult[7]),
-                        iWisdom = Convert.ToInt32(sResult[8])
+                        capital = sResult[1].ToString(),
+                        intro = sResult[2].ToString(),
+                        seconds = Convert.ToInt32(sResult[5]),
+                        difficulty = Convert.ToInt64(sResult[4]),
+                        UDID = Convert.ToInt32(sResult[0]),
+                        lasting = Convert.ToInt32(sResult[6]),
+                        explosive = Convert.ToInt32(sResult[7]),
+                        wisdom = Convert.ToInt32(sResult[8])
                     };
                     using Plan plan = new Plan
                     (
@@ -663,7 +585,9 @@ namespace StonePlanner
             }
             else
             {
-                Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png", $"{langInfo[2]}", "__New__")
+                AddTodo.PlanAddInvoke officalInvoke = new AddTodo.PlanAddInvoke(AddPlan);
+                Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png", 
+                    $"新建任务", "__New__",officalInvoke)
                 {
                     Top = 0
                 };
@@ -671,7 +595,7 @@ namespace StonePlanner
                 //Function export = new Function($"{Application.StartupPath}\\icon\\export.png", $"{langInfo[49]}", "__Export__");
                 //export.Top = 34;
                 //panel_L.Controls.Add(export);
-                Function recycle = new($"{Application.StartupPath}\\icon\\recycle.png", $"{langInfo[13]}", "__Recycle__")
+                Function recycle = new($"{Application.StartupPath}\\icon\\recycle.png", "任务回收", "__Recycle__")
                 {
                     Top = i
                 };
@@ -681,17 +605,17 @@ namespace StonePlanner
                     Top = 7 * i
                 };
                 panel_L.Controls.Add(debugger);
-                Function info = new($"{Application.StartupPath}\\icon\\info.png", $"{langInfo[14]}", "__Infomation__")
+                Function info = new($"{Application.StartupPath}\\icon\\info.png", "关于软件", "__Infomation__")
                 {
                     Top = 9 * i
                 };
                 panel_L.Controls.Add(info);
-                Function console = new($"{Application.StartupPath}\\icon\\console.png", $"{langInfo[15]}", "__Console__")
+                Function console = new($"{Application.StartupPath}\\icon\\console.png", "主控制台", "__Console__")
                 {
                     Top = 3 * i
                 };
                 panel_L.Controls.Add(console);
-                Function IDE = new($"{Application.StartupPath}\\icon\\program.png", $"{langInfo[16]}", "__IDE__")
+                Function IDE = new($"{Application.StartupPath}\\icon\\program.png", "事件编写", "__IDE__")
                 {
                     Top = 4 * i
                 };
@@ -701,12 +625,12 @@ namespace StonePlanner
                     Top = 5 * i
                 };
                 panel_L.Controls.Add(Online);
-                Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"{langInfo[17]}", "__Settings__")
+                Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"软件设置", "__Settings__")
                 {
                     Top = 6 * i
                 };
                 panel_L.Controls.Add(Settings);
-                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"{langInfo[18]}", "__Shop__") 
+                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__") 
                 {
                     Top = 2 * i
                 };
@@ -734,7 +658,7 @@ namespace StonePlanner
                 Type.label_B.Click += label_L_Type_Click;
                 panel_L.Controls.Add(Type);
                 //正在休息状态
-                label_Status.Text = langInfo[11];
+                label_Status.Text = "正在休息";
             }
             return;
         }
@@ -781,7 +705,7 @@ namespace StonePlanner
                         catch (Exception ex)
                         {
                             Environment.Exit(1);
-                            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+                            ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
                         }
                         using StreamWriter sw = new StreamWriter($"{Application.StartupPath}\\language.mlu");//将获取的内容写入文本
                         sw.Write(pageHtml);
@@ -793,7 +717,10 @@ namespace StonePlanner
                 //检查语言包
             }
 
-            catch (Exception e) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", e); throw e; }
+            catch (Exception e) 
+            {
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, e);
+            }
         }
 
         private void timer_Anti_Tick(object sender, EventArgs e)
@@ -1009,8 +936,8 @@ namespace StonePlanner
                 }
             }
             catch (Exception ex)
-            { 
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+            {
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Error, ex);
                 return null;
             }
         }
@@ -1041,25 +968,6 @@ namespace StonePlanner
                 MessageBox.Show("A debugger has been found running in your system.\n " +
                 "Please, unload it from memory and restart your program.", "MethodBox's Inner Protector", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(0);
-            }
-            //监测工作状态
-            if (true)
-            {
-                foreach (var item in TasksDict)
-                {
-                    if (item.Value == null) { continue; }
-                    if (item.Value.status == "正在办")
-                    {
-                        label_Status.BackColor = Color.OrangeRed;
-                        label_Status.Text = langInfo[12];
-                        break;
-                    }
-                    else
-                    {
-                        label_Status.BackColor = Color.Lime;
-                        label_Status.Text = langInfo[12];
-                    }
-                }
             }
             //获取并回显时间
             nTime = 0;
@@ -1100,7 +1008,7 @@ namespace StonePlanner
                 myConn.Open();
                 //先搜一下数据库
                 //SELECT * FROM Persons WHERE City='Beijing'
-                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE UDID = {plan.UDID}");
+                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.UDID}");
                 if (hResult.HasRows)
                 {
                     /*
@@ -1112,12 +1020,12 @@ namespace StonePlanner
                     */     
                     string updateString = $"UPDATE Tasks SET TaskTime = {plan.dwSeconds}" +
                                 $" , TaskStatus = \"已办完\"" +
-                                $" WHERE UDID = {plan.UDID}";
+                                $" WHERE ID = {plan.UDID}";
                     SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                 }
                 else
                 {
-                    string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , UDID , TaskParent) VALUES ( ";
+                    string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent) VALUES ( ";
                     strInsert += "'" + plan.capital + "', '";
                     strInsert += plan.dwIntro + "', '";
                     strInsert += plan.status + "', ";
@@ -1126,7 +1034,6 @@ namespace StonePlanner
                     strInsert += plan.dwLasting + ",";
                     strInsert += plan.dwExplosive + ",";
                     strInsert += plan.dwWisdom + ",";
-                    strInsert += plan.UDID + ",";
                     strInsert += "'" + plan.lpParent + "'" + ")";
                     //执行插入
                     OleDbCommand inst = new OleDbCommand(strInsert, myConn);
@@ -1141,29 +1048,19 @@ namespace StonePlanner
                 LengthCalculation();
                 GC.Collect();
             }
-            else if (Sign == 4)
-            {
-                //PlanAdder(new Plan(tName, tTime, tIntro, tDiff, tParent, tLasting, tExplosive, tWisdom), $"{tName}", tTime, tDiff, tLasting, tExplosive, tWisdom);
-                //tName = string.Empty;
-                PlanAdder(new Plan(planner));
-                //添加并排序
-                //if (InvokeRequired)
-                //{
-                //    this.Invoke(new Action(() => ListHolder()));
-                //}
-                //else
-                //{
-                //    ListHolder();
-                //}
-                LengthCalculation();
-                signQueue.Dequeue();
-            }
+            //else if (Sign == 4)
+            //{
+            //    PlanAdder(new Plan(planner));
+            //    LengthCalculation();
+            //    signQueue.Dequeue();
+            //}
             else if (Sign == 6)
             {
                 panel_TaskDetail.Controls.Remove(td);
                 if (plan == null)
                 {
                     //删除临近的两个错误信号
+                    System.Console.WriteLine("OCCURED!");
                     for (int i = 0; i < 2; i++)
                     {
                         try
@@ -1282,7 +1179,7 @@ namespace StonePlanner
         }
 
         private void pictureBox_T_More_Click(object sender, EventArgs e)
-        {
+        { 
             if (panel_L.Width == 0)
             {
                 AddSign(2);
@@ -1311,7 +1208,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
                 sentence.Add("浪费时间叫虚度，剥用时间叫生活。");
             }
             return;
@@ -1336,7 +1233,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
                 pictures.Add("https://s1.328888.xyz/2022/05/15/qmuyT.jpg");
             }
             return;
@@ -1357,7 +1254,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
                 try
                 {
                     label_Sentence.Text = sentence[rdx.Next(0, sentence.Count - 1)];
@@ -1374,7 +1271,7 @@ namespace StonePlanner
                 pictureBox_Main.ImageLocation = pictures[rdx.Next(0, pictures.Count - 1)]/*.Split('\n')[1]*/;
             }
             catch (Exception ex)
-            { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
+            { ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex); }
         }
         private void User_Piicture_Click(object sender, EventArgs e)
         {
@@ -1415,7 +1312,7 @@ namespace StonePlanner
             MouseWheel += panel_L_MouseWheel;
             panel_L.Controls.Clear();
             //将做好的数据加入
-            ListHolder();
+            HoldList();
         }
 
         /// <summary>
@@ -1532,7 +1429,7 @@ namespace StonePlanner
 
         private void 添加任务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTodo _ = new AddTodo(PlanAdder);
+            AddTodo _ = new AddTodo(AddPlan);
             _.Show();
         }
 

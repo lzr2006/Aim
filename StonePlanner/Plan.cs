@@ -108,15 +108,15 @@ namespace StonePlanner
         internal Plan(PlanClassA @struct)
         {
             InitializeComponent();
-            this.capital = @struct.lpCapital;
-            this.dwSeconds = @struct.iSeconds;
-            this.dwIntro = @struct.dwIntro;
-            this.dwDifficulty = @struct.dwDifficulty;
-            this.dwLasting = @struct.iLasting;
-            this.dwExplosive = @struct.iExplosive;
-            this.dwWisdom = @struct.iWisdom;
-            this.lpParent = @struct.lpParent;
-            this.dtStartTime = DateTime.FromBinary(@struct.dwStart);
+            this.capital = @struct.capital;
+            this.dwSeconds = @struct.seconds;
+            this.dwIntro = @struct.intro;
+            this.dwDifficulty = @struct.difficulty;
+            this.dwLasting = @struct.lasting;
+            this.dwExplosive = @struct.explosive;
+            this.dwWisdom = @struct.wisdom;
+            this.lpParent = @struct.parent;
+            this.dtStartTime = DateTime.FromBinary(@struct.startTime);
             //智障代码
             this.UDID = new Random().Next(100000000, 999999999);
         }
@@ -124,14 +124,14 @@ namespace StonePlanner
         internal Plan(PlanClassB @struct)
         {
             InitializeComponent();
-            this.capital = @struct.lpCapital;
-            this.dwSeconds = @struct.iSeconds;
-            this.dwIntro = @struct.dwIntro;
-            this.dwDifficulty = @struct.dwDifficulty;
-            this.dwLasting = @struct.iLasting;
-            this.dwExplosive = @struct.iExplosive;
-            this.dwWisdom = @struct.iWisdom;
-            this.dtStartTime = DateTime.FromBinary(@struct.dwStart);
+            this.capital = @struct.capital;
+            this.dwSeconds = @struct.seconds;
+            this.dwIntro = @struct.intro;
+            this.dwDifficulty = @struct.difficulty;
+            this.dwLasting = @struct.lasting;
+            this.dwExplosive = @struct.explosive;
+            this.dwWisdom = @struct.wisdom;
+            this.dtStartTime = DateTime.FromBinary(@struct.startTime);
             this.UDID = @struct.UDID;
         }
 
@@ -140,20 +140,20 @@ namespace StonePlanner
             InitializeComponent();
             try
             {
-                this.capital = @struct.lpCapital;
-                this.dwSeconds = @struct.iSeconds;
-                this.dwIntro = @struct.dwIntro;
-                this.dwDifficulty = @struct.dwDifficulty;
-                this.dwLasting = @struct.iLasting;
-                this.dwExplosive = @struct.iExplosive;
-                this.dwWisdom = @struct.iWisdom;
-                this.lpParent = @struct.lpParent;
-                this.dtStartTime = DateTime.FromBinary(@struct.dwStart);
+                this.capital = @struct.capital;
+                this.dwSeconds = @struct.seconds;
+                this.dwIntro = @struct.intro;
+                this.dwDifficulty = @struct.difficulty;
+                this.dwLasting = @struct.lasting;
+                this.dwExplosive = @struct.explosive;
+                this.dwWisdom = @struct.wisdom;
+                this.lpParent = @struct.parent;
+                this.dtStartTime = DateTime.FromBinary(@struct.startTime);
                 this.UDID = @struct.UDID;
             }
             catch (NullReferenceException e) 
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", e);
+                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, e);
             }
         }
 
@@ -161,7 +161,7 @@ namespace StonePlanner
         private void Plan_Load(object sender, EventArgs e)
         {
             label_TaskDes.Text = capital;
-            button_Finish.Text = Main.langInfo[1];
+            button_Finish.Text = "完成";
             label_Time.Text = dwSeconds.ToString();
             this.timer1.Enabled = true;
         }
@@ -188,7 +188,7 @@ namespace StonePlanner
                 {
                     base.CreateHandle();
                 }
-                catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
+                catch(Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Error, ex); }
                 finally
                 {
                     if (!IsHandleCreated)
