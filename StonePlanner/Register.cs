@@ -20,7 +20,9 @@ namespace StonePlanner
         {
             if (textBox_M_Name.Text.Length == 0 || textBox_M_Pwd.Text.Length == 0)
             {
-                MessageBox.Show("请输入用户名或密码！","注册失败",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("请输入用户名或密码！","注册失败",
+                    MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                return;
             }
             int i = comboBox_M_Type.Text == "Administrator" ? 0 : 1;
             //创建一个恢复用KEY

@@ -78,7 +78,15 @@ namespace StonePlanner
                 i++;
                 if (i == 10) break;
             }
-            double point_Plan = sum / i;
+            double point_Plan;
+            if (i == 0) 
+            { 
+                 point_Plan = 0;
+            }
+            else
+            {
+                point_Plan = sum / i;
+            }
             label_Point.Text = $"评 分 值（pp）：{point_User + point_Plan:F2}";
         }
 
