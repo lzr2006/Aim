@@ -94,6 +94,7 @@
             this.Controls.Add(this.textBox_Listname);
             this.Controls.Add(this.metroLabel_Name);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "AddList";
             this.Text = "新建清单";
             this.Load += new System.EventHandler(this.AddList_Load);

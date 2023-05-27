@@ -61,10 +61,10 @@
             // 
             // 
             this.metroTextBox1.CustomButton.Image = null;
-            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(875, 1);
-            this.metroTextBox1.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroTextBox1.CustomButton.Location = new System.Drawing.Point(656, 1);
+            this.metroTextBox1.CustomButton.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox1.CustomButton.Name = "";
-            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(409, 384);
+            this.metroTextBox1.CustomButton.Size = new System.Drawing.Size(307, 307);
             this.metroTextBox1.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.metroTextBox1.CustomButton.TabIndex = 1;
             this.metroTextBox1.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -74,7 +74,7 @@
             this.metroTextBox1.Lines = new string[] {
         "metroTextBox1"};
             this.metroTextBox1.Location = new System.Drawing.Point(31, 84);
-            this.metroTextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.metroTextBox1.Margin = new System.Windows.Forms.Padding(4);
             this.metroTextBox1.MaxLength = 32767;
             this.metroTextBox1.Name = "metroTextBox1";
             this.metroTextBox1.PasswordChar = '\0';
@@ -98,10 +98,12 @@
             this.Controls.Add(this.metroTextBox1);
             this.Controls.Add(this.label_B);
             this.Controls.Add(this.label_C);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "BugReporter";
             this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "应用程序内部错误";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.BugReporter_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

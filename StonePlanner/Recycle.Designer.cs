@@ -35,19 +35,24 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 63);
+            this.dataGridView1.Location = new System.Drawing.Point(31, 79);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(565, 326);
+            this.dataGridView1.Size = new System.Drawing.Size(753, 408);
             this.dataGridView1.TabIndex = 0;
             // 
             // Recycle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(611, 412);
+            this.ClientSize = new System.Drawing.Size(815, 515);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
             this.Name = "Recycle";
+            this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "任务回收站";
             this.Load += new System.EventHandler(this.Recycle_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

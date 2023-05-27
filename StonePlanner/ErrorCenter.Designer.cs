@@ -51,6 +51,7 @@
             this.ClientSize = new System.Drawing.Size(1067, 562);
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "ErrorCenter";
             this.Text = "错误中心";
             this.Load += new System.EventHandler(this.ErrorCenter_Load);

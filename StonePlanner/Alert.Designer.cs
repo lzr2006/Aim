@@ -60,7 +60,7 @@
             // 
             this.panel_Sp.BackColor = System.Drawing.Color.Silver;
             this.panel_Sp.Location = new System.Drawing.Point(28, 155);
-            this.panel_Sp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel_Sp.Margin = new System.Windows.Forms.Padding(4);
             this.panel_Sp.Name = "panel_Sp";
             this.panel_Sp.Size = new System.Drawing.Size(483, 6);
             this.panel_Sp.TabIndex = 3;
@@ -86,9 +86,11 @@
             this.Controls.Add(this.metroButton_Close);
             this.Controls.Add(this.listBox_Task);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "Alert";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
             this.Text = "逾期任务";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.Alert_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

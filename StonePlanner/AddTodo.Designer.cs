@@ -56,8 +56,8 @@ namespace StonePlanner
             this.groupBox_Area2 = new System.Windows.Forms.GroupBox();
             this.label_T = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.metroButton_Submit = new MetroFramework.Controls.MetroButton();
             this.metroButton_Add = new MetroFramework.Controls.MetroButton();
+            this.metroButton_Submit = new MetroFramework.Controls.MetroButton();
             this.groupBox_Area1.SuspendLayout();
             this.groupBox_Area2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -123,7 +123,7 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Numbered.CustomButton.Image = null;
-            this.textBox_Numbered.CustomButton.Location = new System.Drawing.Point(157, 2);
+            this.textBox_Numbered.CustomButton.Location = new System.Drawing.Point(155, 2);
             this.textBox_Numbered.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox_Numbered.CustomButton.Name = "";
             this.textBox_Numbered.CustomButton.Size = new System.Drawing.Size(19, 19);
@@ -573,6 +573,16 @@ namespace StonePlanner
             this.groupBox1.Text = "其它信息";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // metroButton_Add
+            // 
+            this.metroButton_Add.Location = new System.Drawing.Point(213, 116);
+            this.metroButton_Add.Name = "metroButton_Add";
+            this.metroButton_Add.Size = new System.Drawing.Size(43, 33);
+            this.metroButton_Add.TabIndex = 20;
+            this.metroButton_Add.Text = "...";
+            this.metroButton_Add.UseSelectable = true;
+            this.metroButton_Add.Click += new System.EventHandler(this.metroButton_Add_Click);
+            // 
             // metroButton_Submit
             // 
             this.metroButton_Submit.Location = new System.Drawing.Point(52, 301);
@@ -583,16 +593,6 @@ namespace StonePlanner
             this.metroButton_Submit.Text = "新建任务";
             this.metroButton_Submit.UseSelectable = true;
             this.metroButton_Submit.Click += new System.EventHandler(this.button_New_Click);
-            // 
-            // metroButton_Add
-            // 
-            this.metroButton_Add.Location = new System.Drawing.Point(213, 116);
-            this.metroButton_Add.Name = "metroButton_Add";
-            this.metroButton_Add.Size = new System.Drawing.Size(43, 33);
-            this.metroButton_Add.TabIndex = 20;
-            this.metroButton_Add.Text = "...";
-            this.metroButton_Add.UseSelectable = true;
-            this.metroButton_Add.Click += new System.EventHandler(this.metroButton_Add_Click);
             // 
             // AddTodo
             // 
@@ -605,6 +605,7 @@ namespace StonePlanner
             this.Controls.Add(this.groupBox_Area2);
             this.Controls.Add(this.groupBox_Area1);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "AddTodo";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
             this.Text = "新建一个任务";

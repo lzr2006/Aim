@@ -192,6 +192,7 @@
             this.Controls.Add(this.l_Username);
             this.Controls.Add(this.pictureBox_Main);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "AimPlanner";

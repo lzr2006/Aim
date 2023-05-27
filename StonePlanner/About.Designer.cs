@@ -76,7 +76,7 @@
             this.pictureBox_Logo.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Logo.BackgroundImage")));
             this.pictureBox_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox_Logo.Location = new System.Drawing.Point(123, 90);
-            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Logo.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Logo.Name = "pictureBox_Logo";
             this.pictureBox_Logo.Size = new System.Drawing.Size(93, 82);
             this.pictureBox_Logo.TabIndex = 0;
@@ -108,7 +108,7 @@
             // 
             this.pictureBox_Line.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox_Line.BackgroundImage")));
             this.pictureBox_Line.Location = new System.Drawing.Point(-61, 186);
-            this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox_Line.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox_Line.Name = "pictureBox_Line";
             this.pictureBox_Line.Size = new System.Drawing.Size(1035, 10);
             this.pictureBox_Line.TabIndex = 3;
@@ -156,7 +156,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(466, 21);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 Release 1（内部版本Aim Dev.23050204_1034）";
+            this.label4.Text = "版本 Release 1（内部版本Aim Dev.23052702_1045）";
             // 
             // label5
             // 
@@ -195,12 +195,12 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 480);
+            this.label8.Location = new System.Drawing.Point(24, 480);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(714, 15);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Freedom Forever.                            使用时间：2022.05.02 14:00 - 2022.05.18 05" +
+            this.label8.Text = "Freedom Forever.                            使用时间：2022.05.27 14:00 - 2022.06.05 05" +
     ":00";
             // 
             // panel1
@@ -227,7 +227,7 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label9);
             this.panel1.Location = new System.Drawing.Point(755, 238);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(11, 118);
             this.panel1.TabIndex = 12;
@@ -235,7 +235,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(380, 255);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(319, 35);
             this.button1.TabIndex = 25;
@@ -445,7 +445,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(357, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(3, 335);
             this.pictureBox1.TabIndex = 1;
@@ -461,13 +461,14 @@
             this.label9.Size = new System.Drawing.Size(333, 323);
             this.label9.TabIndex = 0;
             this.label9.Text = resources.GetString("label9.Text");
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // pictureBox2
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox2.Location = new System.Drawing.Point(24, 90);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(93, 82);
             this.pictureBox2.TabIndex = 13;
@@ -493,7 +494,8 @@
             this.Controls.Add(this.label_T);
             this.Controls.Add(this.label_TT);
             this.Controls.Add(this.pictureBox_Logo);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "About";
             this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
             this.Text = "关于AimPlanner内部版本";

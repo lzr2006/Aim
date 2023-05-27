@@ -153,6 +153,7 @@
             this.Controls.Add(this.button_Choose);
             this.Controls.Add(this.textBox_Address);
             this.Controls.Add(this.label_Address);
+            this.MaximizeBox = false;
             this.Name = "Importer";
             this.Text = "预设导入器";
             this.Load += new System.EventHandler(this.Importer_Load);

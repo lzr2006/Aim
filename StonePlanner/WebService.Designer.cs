@@ -46,9 +46,10 @@
             // linkLabel_GetPassword
             // 
             this.linkLabel_GetPassword.AutoSize = true;
-            this.linkLabel_GetPassword.Location = new System.Drawing.Point(206, 203);
+            this.linkLabel_GetPassword.Location = new System.Drawing.Point(275, 254);
+            this.linkLabel_GetPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.linkLabel_GetPassword.Name = "linkLabel_GetPassword";
-            this.linkLabel_GetPassword.Size = new System.Drawing.Size(63, 22);
+            this.linkLabel_GetPassword.Size = new System.Drawing.Size(84, 28);
             this.linkLabel_GetPassword.TabIndex = 26;
             this.linkLabel_GetPassword.Text = "找回密码";
             this.linkLabel_GetPassword.UseSelectable = true;
@@ -56,9 +57,10 @@
             // linkLabel_Register
             // 
             this.linkLabel_Register.AutoSize = true;
-            this.linkLabel_Register.Location = new System.Drawing.Point(4, 203);
+            this.linkLabel_Register.Location = new System.Drawing.Point(5, 254);
+            this.linkLabel_Register.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.linkLabel_Register.Name = "linkLabel_Register";
-            this.linkLabel_Register.Size = new System.Drawing.Size(77, 22);
+            this.linkLabel_Register.Size = new System.Drawing.Size(103, 28);
             this.linkLabel_Register.TabIndex = 25;
             this.linkLabel_Register.Text = "注册新用户";
             this.linkLabel_Register.UseSelectable = true;
@@ -67,18 +69,20 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(283, 252);
+            this.dataGridView1.Location = new System.Drawing.Point(377, 315);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(10, 10);
+            this.dataGridView1.Size = new System.Drawing.Size(13, 12);
             this.dataGridView1.TabIndex = 18;
             // 
             // button_Submit
             // 
-            this.button_Submit.Location = new System.Drawing.Point(-19, 225);
+            this.button_Submit.Location = new System.Drawing.Point(-25, 281);
+            this.button_Submit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button_Submit.Name = "button_Submit";
-            this.button_Submit.Size = new System.Drawing.Size(311, 33);
+            this.button_Submit.Size = new System.Drawing.Size(415, 41);
             this.button_Submit.TabIndex = 24;
             this.button_Submit.Text = "登录";
             this.button_Submit.UseSelectable = true;
@@ -90,9 +94,10 @@
             // 
             // 
             this.textBox_M_Pwd.CustomButton.Image = null;
-            this.textBox_M_Pwd.CustomButton.Location = new System.Drawing.Point(177, 1);
+            this.textBox_M_Pwd.CustomButton.Location = new System.Drawing.Point(317, 1);
+            this.textBox_M_Pwd.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Pwd.CustomButton.Name = "";
-            this.textBox_M_Pwd.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_M_Pwd.CustomButton.Size = new System.Drawing.Size(39, 36);
             this.textBox_M_Pwd.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_M_Pwd.CustomButton.TabIndex = 1;
             this.textBox_M_Pwd.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -100,7 +105,8 @@
             this.textBox_M_Pwd.CustomButton.Visible = false;
             this.textBox_M_Pwd.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.textBox_M_Pwd.Lines = new string[0];
-            this.textBox_M_Pwd.Location = new System.Drawing.Point(67, 103);
+            this.textBox_M_Pwd.Location = new System.Drawing.Point(89, 129);
+            this.textBox_M_Pwd.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Pwd.MaxLength = 32767;
             this.textBox_M_Pwd.Name = "textBox_M_Pwd";
             this.textBox_M_Pwd.PasswordChar = '\0';
@@ -109,7 +115,7 @@
             this.textBox_M_Pwd.SelectionLength = 0;
             this.textBox_M_Pwd.SelectionStart = 0;
             this.textBox_M_Pwd.ShortcutsEnabled = true;
-            this.textBox_M_Pwd.Size = new System.Drawing.Size(201, 25);
+            this.textBox_M_Pwd.Size = new System.Drawing.Size(268, 31);
             this.textBox_M_Pwd.TabIndex = 23;
             this.textBox_M_Pwd.UseSelectable = true;
             this.textBox_M_Pwd.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -118,10 +124,11 @@
             // label_M_Pwd
             // 
             this.label_M_Pwd.AutoSize = true;
-            this.label_M_Pwd.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_M_Pwd.Location = new System.Drawing.Point(4, 109);
+            this.label_M_Pwd.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_M_Pwd.Location = new System.Drawing.Point(5, 136);
+            this.label_M_Pwd.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_M_Pwd.Name = "label_M_Pwd";
-            this.label_M_Pwd.Size = new System.Drawing.Size(68, 15);
+            this.label_M_Pwd.Size = new System.Drawing.Size(86, 19);
             this.label_M_Pwd.TabIndex = 22;
             this.label_M_Pwd.Text = "密  码：";
             // 
@@ -131,9 +138,10 @@
             // 
             // 
             this.textBox_M_Name.CustomButton.Image = null;
-            this.textBox_M_Name.CustomButton.Location = new System.Drawing.Point(177, 1);
+            this.textBox_M_Name.CustomButton.Location = new System.Drawing.Point(317, 1);
+            this.textBox_M_Name.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Name.CustomButton.Name = "";
-            this.textBox_M_Name.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_M_Name.CustomButton.Size = new System.Drawing.Size(39, 36);
             this.textBox_M_Name.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_M_Name.CustomButton.TabIndex = 1;
             this.textBox_M_Name.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -141,7 +149,8 @@
             this.textBox_M_Name.CustomButton.Visible = false;
             this.textBox_M_Name.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.textBox_M_Name.Lines = new string[0];
-            this.textBox_M_Name.Location = new System.Drawing.Point(66, 69);
+            this.textBox_M_Name.Location = new System.Drawing.Point(88, 86);
+            this.textBox_M_Name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Name.MaxLength = 32767;
             this.textBox_M_Name.Name = "textBox_M_Name";
             this.textBox_M_Name.PasswordChar = '\0';
@@ -150,7 +159,7 @@
             this.textBox_M_Name.SelectionLength = 0;
             this.textBox_M_Name.SelectionStart = 0;
             this.textBox_M_Name.ShortcutsEnabled = true;
-            this.textBox_M_Name.Size = new System.Drawing.Size(201, 25);
+            this.textBox_M_Name.Size = new System.Drawing.Size(268, 31);
             this.textBox_M_Name.TabIndex = 21;
             this.textBox_M_Name.UseSelectable = true;
             this.textBox_M_Name.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -159,20 +168,22 @@
             // label_M_Name
             // 
             this.label_M_Name.AutoSize = true;
-            this.label_M_Name.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_M_Name.Location = new System.Drawing.Point(4, 74);
+            this.label_M_Name.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_M_Name.Location = new System.Drawing.Point(5, 92);
+            this.label_M_Name.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_M_Name.Name = "label_M_Name";
-            this.label_M_Name.Size = new System.Drawing.Size(67, 15);
+            this.label_M_Name.Size = new System.Drawing.Size(85, 19);
             this.label_M_Name.TabIndex = 20;
             this.label_M_Name.Text = "用户名：";
             // 
             // label_M_Address
             // 
             this.label_M_Address.AutoSize = true;
-            this.label_M_Address.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_M_Address.Location = new System.Drawing.Point(4, 142);
+            this.label_M_Address.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_M_Address.Location = new System.Drawing.Point(5, 178);
+            this.label_M_Address.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_M_Address.Name = "label_M_Address";
-            this.label_M_Address.Size = new System.Drawing.Size(68, 15);
+            this.label_M_Address.Size = new System.Drawing.Size(86, 19);
             this.label_M_Address.TabIndex = 27;
             this.label_M_Address.Text = "地  址：";
             // 
@@ -182,9 +193,10 @@
             // 
             // 
             this.textBox_M_Address.CustomButton.Image = null;
-            this.textBox_M_Address.CustomButton.Location = new System.Drawing.Point(177, 1);
+            this.textBox_M_Address.CustomButton.Location = new System.Drawing.Point(317, 1);
+            this.textBox_M_Address.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Address.CustomButton.Name = "";
-            this.textBox_M_Address.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_M_Address.CustomButton.Size = new System.Drawing.Size(39, 36);
             this.textBox_M_Address.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_M_Address.CustomButton.TabIndex = 1;
             this.textBox_M_Address.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -192,7 +204,8 @@
             this.textBox_M_Address.CustomButton.Visible = false;
             this.textBox_M_Address.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.textBox_M_Address.Lines = new string[0];
-            this.textBox_M_Address.Location = new System.Drawing.Point(67, 138);
+            this.textBox_M_Address.Location = new System.Drawing.Point(89, 172);
+            this.textBox_M_Address.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Address.MaxLength = 32767;
             this.textBox_M_Address.Name = "textBox_M_Address";
             this.textBox_M_Address.PasswordChar = '\0';
@@ -201,7 +214,7 @@
             this.textBox_M_Address.SelectionLength = 0;
             this.textBox_M_Address.SelectionStart = 0;
             this.textBox_M_Address.ShortcutsEnabled = true;
-            this.textBox_M_Address.Size = new System.Drawing.Size(201, 25);
+            this.textBox_M_Address.Size = new System.Drawing.Size(268, 31);
             this.textBox_M_Address.TabIndex = 28;
             this.textBox_M_Address.UseSelectable = true;
             this.textBox_M_Address.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -210,10 +223,11 @@
             // label_M_Port
             // 
             this.label_M_Port.AutoSize = true;
-            this.label_M_Port.Font = new System.Drawing.Font("SimSun", 11F);
-            this.label_M_Port.Location = new System.Drawing.Point(4, 175);
+            this.label_M_Port.Font = new System.Drawing.Font("宋体", 11F);
+            this.label_M_Port.Location = new System.Drawing.Point(5, 219);
+            this.label_M_Port.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_M_Port.Name = "label_M_Port";
-            this.label_M_Port.Size = new System.Drawing.Size(68, 15);
+            this.label_M_Port.Size = new System.Drawing.Size(86, 19);
             this.label_M_Port.TabIndex = 29;
             this.label_M_Port.Text = "端  口：";
             // 
@@ -223,9 +237,10 @@
             // 
             // 
             this.textBox_M_Port.CustomButton.Image = null;
-            this.textBox_M_Port.CustomButton.Location = new System.Drawing.Point(177, 1);
+            this.textBox_M_Port.CustomButton.Location = new System.Drawing.Point(317, 1);
+            this.textBox_M_Port.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Port.CustomButton.Name = "";
-            this.textBox_M_Port.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_M_Port.CustomButton.Size = new System.Drawing.Size(39, 36);
             this.textBox_M_Port.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_M_Port.CustomButton.TabIndex = 1;
             this.textBox_M_Port.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -233,7 +248,8 @@
             this.textBox_M_Port.CustomButton.Visible = false;
             this.textBox_M_Port.FontSize = MetroFramework.MetroTextBoxSize.Medium;
             this.textBox_M_Port.Lines = new string[0];
-            this.textBox_M_Port.Location = new System.Drawing.Point(67, 172);
+            this.textBox_M_Port.Location = new System.Drawing.Point(89, 215);
+            this.textBox_M_Port.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_M_Port.MaxLength = 32767;
             this.textBox_M_Port.Name = "textBox_M_Port";
             this.textBox_M_Port.PasswordChar = '\0';
@@ -242,7 +258,7 @@
             this.textBox_M_Port.SelectionLength = 0;
             this.textBox_M_Port.SelectionStart = 0;
             this.textBox_M_Port.ShortcutsEnabled = true;
-            this.textBox_M_Port.Size = new System.Drawing.Size(201, 25);
+            this.textBox_M_Port.Size = new System.Drawing.Size(268, 31);
             this.textBox_M_Port.TabIndex = 30;
             this.textBox_M_Port.UseSelectable = true;
             this.textBox_M_Port.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -250,9 +266,9 @@
             // 
             // WebService
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(273, 258);
+            this.ClientSize = new System.Drawing.Size(364, 322);
             this.Controls.Add(this.textBox_M_Port);
             this.Controls.Add(this.label_M_Port);
             this.Controls.Add(this.textBox_M_Address);
@@ -265,9 +281,10 @@
             this.Controls.Add(this.label_M_Pwd);
             this.Controls.Add(this.textBox_M_Name);
             this.Controls.Add(this.label_M_Name);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
             this.Name = "WebService";
-            this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
+            this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
             this.Text = "登录到网络服务器";
             this.Load += new System.EventHandler(this.WebService_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
