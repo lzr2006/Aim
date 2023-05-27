@@ -148,6 +148,7 @@ namespace StonePlanner
                             catch (Exception ex)
                             {
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                             }
                         }
                     }
@@ -197,8 +198,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         } 
-                        Main.planner.capital = nInput[1];
-                        Main.planner.seconds = Convert.ToInt32(nInput[2]);
+                        Main.planner.lpCapital = nInput[1];
+                        Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
                         Main.AddSign(4);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
@@ -243,7 +244,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
-                                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                             }
                         }
                     }
@@ -256,10 +257,10 @@ namespace StonePlanner
                 }
                 catch (Exception ex)
                 {
-                    ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
+                    ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                 }
             }
-            catch(Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex); }
+            catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
         }
         #endregion
         protected void Compile() 

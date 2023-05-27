@@ -84,8 +84,8 @@ namespace StonePlanner
         private void AddTodo_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-            label_T.Text = "新建一个待办";
-            metroButton_Submit.Text = "新建待办(&D)";
+            label_T.Text = Main.langInfo[3];
+            metroButton_Submit.Text = Main.langInfo[6];
             textBox_Numbered.ReadOnly = true;
             //Default HH and mm
             //Default MotherFucker
@@ -148,13 +148,13 @@ namespace StonePlanner
             {
                 //封装类送走
                 PlanClassC psc = new PlanClassC();
-                psc.capital = textBox_Capital.Text;
-                psc.seconds = Convert.ToInt32(textBox_Time.Text);
-                psc.intro = textBox_Intro.Text;
-                psc.lasting = Convert.ToInt32(textBox_Lasting.Text);
-                psc.explosive = Convert.ToInt32(textBox_Explosive.Text);
-                psc.wisdom = Convert.ToInt32(textBox_Wisdom.Text);
-                psc.parent = comboBox_List.SelectedItem.ToString();
+                psc.lpCapital = textBox_Capital.Text;
+                psc.iSeconds = Convert.ToInt32(textBox_Time.Text);
+                psc.dwIntro = textBox_Intro.Text;
+                psc.iLasting = Convert.ToInt32(textBox_Lasting.Text);
+                psc.iExplosive = Convert.ToInt32(textBox_Explosive.Text);
+                psc.iWisdom = Convert.ToInt32(textBox_Wisdom.Text);
+                psc.lpParent = comboBox_List.SelectedItem.ToString();
                 DateTime _ = new DateTime(
                     dateTimePicker_Now.Value.Year,
                     dateTimePicker_Now.Value.Month,
@@ -164,14 +164,14 @@ namespace StonePlanner
                     0
                     );
                 psc.UDID = new Random().Next(100000000, 999999999);
-                psc.startTime = _.ToBinary();
+                psc.dwStart = _.ToBinary();
                 double diff = 0D;
                 try
                 {
                     diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]), 1);
                 }
                 catch { diff = 0D; }
-                psc.difficulty = diff;
+                psc.dwDifficulty = diff;
                 //对指针传出
                 PlanAdditionInvoke(new Plan(psc));
                 //封送结构体
@@ -181,6 +181,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                 MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

@@ -7,7 +7,6 @@ namespace StonePlanner
     internal static class Program
     {
         public static bool HIDEBUG = false;
-        public static bool EnableErrorCenter = false;
         static bool EnableProgramTrusteeship = true;
         /// <summary>
         /// The main entry point for the application.
@@ -54,13 +53,13 @@ namespace StonePlanner
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            ErrorCenter.AddError(DataType.ExceptionsLevel.Error, (Exception) e.ExceptionObject);
+           ErrorCenter.AddError(DateTime.Now.ToString(), "Error", (Exception) e.ExceptionObject);
            new BugReporter(e.ExceptionObject.ToString()).Show();
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
-            ErrorCenter.AddError(DataType.ExceptionsLevel.Error, e.Exception);
+            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", e.Exception);
             new BugReporter(e.Exception.ToString()).Show();
         }
     }

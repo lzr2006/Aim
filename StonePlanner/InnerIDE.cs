@@ -63,7 +63,7 @@ namespace StonePlanner
                 {
                     base.CreateHandle();
                 }
-                catch (Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Error, ex); }
+                catch (Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
                 finally
                 {
                     if (!IsHandleCreated)
@@ -174,7 +174,7 @@ namespace StonePlanner
                 tb.SelectionFont = new Font(" Courier New ", 10.5f, (FontStyle.Regular));
                 tb.SelectionColor = Color.Black;
             }
-            catch {}
+            catch (Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex); }
         }
 
         //返回搜索字符
@@ -355,6 +355,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
 
                             }
@@ -387,6 +388,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Information", ex);
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
                             }
                         }
@@ -407,8 +409,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         }
-                        Main.planner.capital = nInput[1];
-                        Main.planner.seconds = Convert.ToInt32(nInput[2]);
+                        Main.planner.lpCapital = nInput[1];
+                        Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "COMPILE")
@@ -425,10 +427,8 @@ namespace StonePlanner
                             Thread threadCompile = new Thread(new ThreadStart(Compile));
                             threadCompile.Start();
                         }
-                        catch(Exception ex) 
-                        { 
-                            richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; 
-                        }
+                        catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
+                            richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; }
 
                     }
                     else if (nInput[0] == "SIGN")
@@ -453,7 +453,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
-                                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
                             }
                         }
                     }
@@ -534,13 +534,13 @@ namespace StonePlanner
                 }
                 catch (Exception ex)
                 {
-                    ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
+                    ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                 }
 
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Caution, ex);
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
             }
         }
         #endregion
@@ -667,7 +667,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
                 DialogResult dr =
                 MessageBox.Show($"保存失败，原因是{ex.Message}。\n是否向MethodBox报告该错误（自动报告）？", "失败",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Error);
@@ -789,7 +789,7 @@ namespace StonePlanner
                 main.Hide();
                 main = null;
             }
-            catch(Exception ex) { ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex); }
+            catch(Exception ex) { ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex); }
         }
 
         private void richTextBox1_KeyPress(object sender, KeyPressEventArgs e)
@@ -884,7 +884,7 @@ namespace StonePlanner
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Infomation", ex);
                 string tempFileName = $"Save_Test_{hh}{mm}{ss}.mtd";
                 iFileName = tempFileName;
 
@@ -1074,6 +1074,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Information", ex);
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
                                 return $"\nSyntaxError：{ex.Message}";
                             }
@@ -1095,8 +1096,8 @@ namespace StonePlanner
                                 nInput[2] = nInput[2].Replace("[EPH]", EPH.ToString());
                             }
                         }
-                        Main.planner.capital = nInput[1];
-                        Main.planner.seconds = Convert.ToInt32(nInput[2]);
+                        Main.planner.lpCapital = nInput[1];
+                        Main.planner.iSeconds = Convert.ToInt32(nInput[2]);
                         return $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "WRITE")
@@ -1127,6 +1128,7 @@ namespace StonePlanner
                         }
                         catch (Exception ex)
                         {
+                            ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                             return $"\nFileNotExistError：指定文件不存在。";
                         }
 
@@ -1153,7 +1155,7 @@ namespace StonePlanner
                             }
                             catch (Exception ex)
                             {
-                                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
+                                ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
                                 return $"\nSyntaxError：{ex.Message}";
                             }
                         }
@@ -1213,12 +1215,14 @@ namespace StonePlanner
                 }
                 catch (Exception ex)
                 {
+                    ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                     return $"\nSyntaxError：{ex.Message}";
                 }
 
             }
             catch (Exception ex)
             {
+                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
                 string rew = "";
                 foreach (var item in nInput)
                 {

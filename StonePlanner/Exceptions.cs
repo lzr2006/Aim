@@ -17,25 +17,25 @@ namespace StonePlanner
             internal MemoryNotFoundError(string message) : base(message) { } //指定错误消息
         }
 
-
         [Serializable]
-        public class ObjectFreedException : Exception
+        public class WeatherNotExistException : Exception
         {
-            public ObjectFreedException() { }
-            public ObjectFreedException(string message) : base(message) { }
-            public ObjectFreedException(string message, Exception inner) : base(message, inner) { }
-            protected ObjectFreedException(
+            public WeatherNotExistException() { }
+            public WeatherNotExistException(string message) : base(message) { message = "不存在此天气"; }
+            public WeatherNotExistException(string message, Exception inner) : base(message, inner) { }
+            protected WeatherNotExistException(
               System.Runtime.Serialization.SerializationInfo info,
               System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
         }
 
+
         [Serializable]
-        public class UnknownException : Exception
+        public class PressureShouldNotExistException : Exception
         {
-            public UnknownException() { }
-            public UnknownException(string message) : base(message) { }
-            public UnknownException(string message, Exception inner) : base(message, inner) { }
-            protected UnknownException(
+            public PressureShouldNotExistException() { }
+            public PressureShouldNotExistException(string message) : base(message) { message = "气压值错误"; }
+            public PressureShouldNotExistException(string message, Exception inner) : base(message, inner) { }
+            protected PressureShouldNotExistException(
               System.Runtime.Serialization.SerializationInfo info,
               System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
         }
