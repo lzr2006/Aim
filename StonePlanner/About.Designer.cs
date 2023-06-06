@@ -146,9 +146,9 @@
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11F);
             this.label4.Location = new System.Drawing.Point(22, 241);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(347, 17);
+            this.label4.Size = new System.Drawing.Size(124, 17);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 Release 1（内部版本Aim Dev.23060603_1064）";
+            this.label4.Text = "版本 Release 1.0.0";
             // 
             // label5
             // 
@@ -188,8 +188,8 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(539, 12);
             this.label8.TabIndex = 11;
-            this.label8.Text = "Freedom Forever.                            使用时间：2022.05.27 14:00 - 2022.06.05 05" +
-    ":00";
+            this.label8.Text = "Freedom Forever.                            使用时间：2023.06.06 18:10 - 2024.01.01 02" +
+    ":30";
             // 
             // panel1
             // 

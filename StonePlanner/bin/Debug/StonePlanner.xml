@@ -808,47 +808,47 @@
             任务状态
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dwSeconds">
+        <member name="F:StonePlanner.Plan.seconds">
             <summary>
             完成任务所需时间
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dwIntro">
+        <member name="F:StonePlanner.Plan.intro">
             <summary>
             任务具体介绍
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dwDifficulty">
+        <member name="F:StonePlanner.Plan.difficulty">
             <summary>
             任务难度
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dwLasting">
+        <member name="F:StonePlanner.Plan.lasting">
             <summary>
             任务持久力<code>MA_LASTING值</code>
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dwExplosive">
+        <member name="F:StonePlanner.Plan.explosive">
             <summary>
             任务爆发力<code>MA_EXPLOSIVE值</code>
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dwWisdom">
+        <member name="F:StonePlanner.Plan.wisdom">
             <summary>
             任务智慧值<code>MA_WISDOM值</code>
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.UDID">
+        <member name="F:StonePlanner.Plan.ID">
             <summary>
             任务唯一标识符 
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.lpParent">
+        <member name="F:StonePlanner.Plan.parent">
             <summary>
             所属类别
             </summary>
         </member>
-        <member name="F:StonePlanner.Plan.dtStartTime">
+        <member name="F:StonePlanner.Plan.startTime">
             <summary>
             开始时间
             </summary>

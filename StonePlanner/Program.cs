@@ -6,7 +6,7 @@ namespace StonePlanner
 {
     internal static class Program
     {
-        public static bool HIDEBUG = false;
+        public static bool HIDEBUG = true;
         public static bool EnableErrorCenter = false;
         static bool EnableProgramTrusteeship = true;
         /// <summary>

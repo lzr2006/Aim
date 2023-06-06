@@ -43,7 +43,7 @@ namespace StonePlanner
             this.lpText = IBS.lpText;
             this.SetNameInvoke = SetNameInvoke;
         }
-        private void InputBox_Load(object sender, EventArgs e,object CallBack)
+        private void InputBox_Load(object sender, EventArgs e)
         {
             this.textBox1.Text = lpText;
             this.Text = lpCaption;
