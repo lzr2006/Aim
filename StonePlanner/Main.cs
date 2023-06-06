@@ -934,11 +934,6 @@ namespace StonePlanner
         {
             //傻逼东西 开发者倒拔几把插在代码里
             //查找进程
-            label_XHDL.Text = "";
-            foreach (var item in signQueue)
-            {
-                label_XHDL.Text += item;
-            }
             if (SearchProcA("Sword"))
             {
                 timer_EventHandler.Enabled = false;
@@ -1046,8 +1041,11 @@ namespace StonePlanner
             }
             else
             {
-                //防止信号队列阻塞
-                signQueue.Dequeue();
+                if (Sign > 13)
+                {
+                    //防止信号队列阻塞
+                    signQueue.Dequeue();
+                }
             }
         }
 
