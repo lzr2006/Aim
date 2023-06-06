@@ -38,7 +38,8 @@ namespace StonePlanner
             //确认用户名密码是否符合规则
             Regex regex = new Regex("^[\u4E00-\u9FA5A-Za-z0-9]+$");
             Match result = regex.Match(textBox_M_Name.Text);
-            if (!(regex.Match(textBox_M_Name.Text).Success) && (regex.Match(textBox_M_Pwd.Text).Success))
+            bool add = (!regex.Match(textBox_M_Name.Text).Success) && (!regex.Match(textBox_M_Pwd.Text).Success);
+            if (add)
             {
                 MessageBox.Show("您输入的用户名或密码含有特殊字符", "注册失败",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

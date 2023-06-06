@@ -981,50 +981,7 @@ namespace StonePlanner
                     }
                     catch { break; }
                 }
-                string strConn = $" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password}";
-                OleDbConnection myConn = new OleDbConnection(strConn);
-                myConn.Open();
-                //先搜一下数据库
-                //SELECT * FROM Persons WHERE City='Beijing'
-                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.ID}");
-                if (hResult.HasRows)
-                {
-                    /*
-                     * 此处的Bug：
-                     * 当任务完成后，会从列表中清理
-                     * 向数据库中保存时应该在删除任务时保存
-                     * 做法：
-                     * 更改保存位置
-                    */     
-                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.seconds}" +
-                                $" , TaskStatus = \"已办完\"" +
-                                $" WHERE ID = {plan.ID}";
-                    SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
-                }
-                else
-                {
-                    string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent) VALUES ( ";
-                    strInsert += "'" + plan.capital + "', '";
-                    strInsert += plan.intro + "', '";
-                    strInsert += plan.status + "', ";
-                    strInsert += plan.seconds + ", ";
-                    strInsert += plan.difficulty + ",";
-                    strInsert += plan.lasting + ",";
-                    strInsert += plan.explosive + ",";
-                    strInsert += plan.wisdom + ",";
-                    strInsert += "'" + plan.parent + "'" + ")";
-                    //执行插入
-                    OleDbCommand inst = new OleDbCommand(strInsert, myConn);
-                    inst.ExecuteNonQuery();
-                }
-                //删除
-                int hNumber = plan.Lnumber;
-                recycle_bin.Add(plan);
-                panel_M.Controls.Remove(plan);
-                TasksDict[hNumber] = null;
-                plan = null;
-                LengthCalculation();
-                GC.Collect();
+                return;
             }
             //else if (Sign == 4)
             //{
@@ -1086,6 +1043,11 @@ namespace StonePlanner
                 //怀疑出现的问题：重复执行
                 signQueue.Dequeue();
                 GetSchedule();
+            }
+            else
+            {
+                //防止信号队列阻塞
+                signQueue.Dequeue();
             }
         }
 

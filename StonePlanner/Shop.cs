@@ -70,11 +70,9 @@ namespace StonePlanner
                         );
                     goodList.Add(good);
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show("在商品中出现了一个错误，导致读取终止，具体信息请详见错误中心。","错误",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
-                    return;
+                    continue;
                 }
             }
             maxPage = goodList.Count / 6 + 1;
