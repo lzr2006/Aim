@@ -84,6 +84,7 @@ namespace StonePlanner
         private void AddTodo_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
+            domainUpDown_Difficulty.ReadOnly = true;
             label_T.Text = "新建一个待办";
             metroButton_Submit.Text = "新建待办(&D)";
             textBox_Numbered.ReadOnly = true;
@@ -94,23 +95,23 @@ namespace StonePlanner
             //难度添加
             for (double i = 0.1; i < 2.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"EASY {i}");
+                domainUpDown_Difficulty.Items.Add($"EASY {i:F1}");
             }
-            for (double i = 2.1; i < 4.0; i += 0.1)
+            for (double i = 2.0; i < 4.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"MIDDLE {i}");
+                domainUpDown_Difficulty.Items.Add($"MIDDLE {i:F1}");
             }
-            for (double i = 4.1; i < 6.0; i += 0.1)
+            for (double i = 4.0; i < 6.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"HARD {i}");
+                domainUpDown_Difficulty.Items.Add($"HARD {i:F1}");
             }
-            for (double i = 6.1; i < 9.0; i += 0.1)
+            for (double i = 6.0; i < 9.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"DESPAIR {i}");
+                domainUpDown_Difficulty.Items.Add($"DESPAIR {i:F1}");
             }
-            for (double i = 9.1; i < 10.0; i += 0.1)
+            for (double i = 9.0; i < 10.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"BEYOND {i}");
+                domainUpDown_Difficulty.Items.Add($"BEYOND {i:F1}");
             }
 
             //读取清单
@@ -174,6 +175,7 @@ namespace StonePlanner
                 psc.difficulty = diff;
                 //对指针传出
                 PlanAdditionInvoke(new Plan(psc));
+                Close();
                 //封送结构体
                 //Main.planner = psc;
                 //Main.AddSign(4);

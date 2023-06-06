@@ -29,6 +29,18 @@ namespace StonePlanner
               System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
         }
 
+
+        [Serializable]
+        public class ValueNotAllowedException : Exception
+        {
+            public ValueNotAllowedException() { }
+            public ValueNotAllowedException(string message) : base(message) { }
+            public ValueNotAllowedException(string message, Exception inner) : base(message, inner) { }
+            protected ValueNotAllowedException(
+              System.Runtime.Serialization.SerializationInfo info,
+              System.Runtime.Serialization.StreamingContext context) : base(info, context) { }
+        }
+
         [Serializable]
         public class UnknownException : Exception
         {

@@ -40,15 +40,15 @@ namespace StonePlanner
                 string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ) VALUES ( ";
                 allTask += item.capital + ";";
                 //allTask += item.dwAim + ";";
-                allTask += item.dwSeconds + ";";
-                allTask += item.dwDifficulty;
+                allTask += item.seconds + ";";
+                allTask += item.difficulty;
                 allTask += "\n";
 
                 strInsert += "'" + item.capital + "', '";
-                strInsert += item.dwIntro + "', '";
+                strInsert += item.intro + "', '";
                 strInsert += item.status + "', ";
-                strInsert += item.dwSeconds + ", ";
-                strInsert += item.dwDifficulty + ")";
+                strInsert += item.seconds + ", ";
+                strInsert += item.difficulty + ")";
                 //清空原有数据
                 inst = new OleDbCommand(strInsert, myConn);
                 int lines = inst.ExecuteNonQuery();

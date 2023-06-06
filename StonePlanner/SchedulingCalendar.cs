@@ -134,8 +134,6 @@ namespace StonePlanner
                         }
                     }
                 }
-                string tipTitle = "排班日历";
-                string tipContent;
                 if (status == "" || status == " 班次")
                 {
                     result = "您今天没有要上的班";
@@ -145,12 +143,9 @@ namespace StonePlanner
                     result = $"您今天的班次为{status}";
                 }
                 ShadowType = MetroFormShadowType.None;
+                ShowInTaskbar = false;
                 Hide();
                 return;
-            }
-            else
-            {
-                MessageBox.Show("Test");
             }
         }
 

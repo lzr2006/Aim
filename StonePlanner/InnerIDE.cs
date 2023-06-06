@@ -353,7 +353,7 @@ namespace StonePlanner
                             {
                                 throw new Exceptions.MethodNotExistException("MemoryNotExistException：未找到该存储器。");
                             }
-                            catch (Exception ex)
+                            catch
                             {
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
 
@@ -385,7 +385,7 @@ namespace StonePlanner
                             {
                                 throw new Exceptions.MethodNotExistException("MethodNotExistError：存储器EPH不存在该操作。");
                             }
-                            catch (Exception ex)
+                            catch
                             {
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
                             }
@@ -425,7 +425,7 @@ namespace StonePlanner
                             Thread threadCompile = new Thread(new ThreadStart(Compile));
                             threadCompile.Start();
                         }
-                        catch(Exception ex) 
+                        catch
                         { 
                             richTextBox_Output.Text += $"\nFileNotExistError：指定文件不存在。"; 
                         }
@@ -1125,7 +1125,7 @@ namespace StonePlanner
                             Thread threadCompile = new Thread(new ThreadStart(Compile_Outer));
                             threadCompile.Start();
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             return $"\nFileNotExistError：指定文件不存在。";
                         }

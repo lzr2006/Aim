@@ -83,17 +83,6 @@ namespace StonePlanner
         internal static List<string> nownn = new List<string>();
         //废弃任务数组
         public static List<Plan> recycle_bin = new List<Plan>();
-        //错误数组
-        public static List<Exception> exceptionsList = new List<Exception>();
-        //TO-DO名称
-        //internal static string tName;
-        //internal static int tTime;
-        //internal static string tIntro;
-        //internal static double tDiff;
-        //internal static int tLasting;
-        //internal static int tExplosive;
-        //internal static int tWisdom;
-        //internal static string tParent;
         //TO-DO
         internal static PlanClassC planner; //It is a void*
         //总时间
@@ -246,7 +235,7 @@ namespace StonePlanner
                      * 做法：
                      * 仅对状态为待办的剩余时间和是否完成进行更新
                     */
-                    string queryString = $"SELECT * FROM Tasks WHERE ID = {plan.Value.UDID}";
+                    string queryString = $"SELECT * FROM Tasks WHERE ID = {plan.Value.ID}";
                     var sqlResult = SQLConnect.SQLCommandQuery(queryString, ref Main.odcConnection);
                     if (sqlResult.HasRows)
                     {
@@ -262,10 +251,10 @@ namespace StonePlanner
                         {
                             //更新时间和待办状态
                             //UPDATE 表名称 SET 列名称 = 新值 WHERE 列名称 = 某值
-                            if (plan.Value.dwSeconds > 0)
+                            if (plan.Value.seconds > 0)
                             {
-                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.dwSeconds}" +
-                                    $" WHERE ID = {plan.Value.UDID}";
+                                string updateString = $"UPDATE Tasks SET TaskTime = {plan.Value.seconds}" +
+                                    $" WHERE ID = {plan.Value.ID}";
                                 SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                                 continue;
                             }
@@ -279,15 +268,15 @@ namespace StonePlanner
                     //脑子是个好东西 下次带上
                     string strInsert = "INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent , StartTime) VALUES ( ";
                     strInsert += "'" + plan.Value.capital + "', '";
-                    strInsert += plan.Value.dwIntro + "', '";
+                    strInsert += plan.Value.intro + "', '";
                     strInsert += plan.Value.status + "', ";
-                    strInsert += plan.Value.dwSeconds + ", ";
-                    strInsert += plan.Value.dwDifficulty + ",";
-                    strInsert += plan.Value.dwLasting + ",";
-                    strInsert += plan.Value.dwExplosive + ",";
-                    strInsert += plan.Value.dwWisdom + ",";
-                    strInsert += "'" + plan.Value.lpParent + "',";
-                    strInsert += "'" + plan.Value.dtStartTime.ToBinary() + "')";
+                    strInsert += plan.Value.seconds + ", ";
+                    strInsert += plan.Value.difficulty + ",";
+                    strInsert += plan.Value.lasting + ",";
+                    strInsert += plan.Value.explosive + ",";
+                    strInsert += plan.Value.wisdom + ",";
+                    strInsert += "'" + plan.Value.parent + "',";
+                    strInsert += "'" + plan.Value.startTime.ToBinary() + "')";
                     //执行插入
                     SQLConnect.SQLCommandExecution(strInsert, ref Main.odcConnection);
                     recycle_bin.Add(plan.Value);
@@ -344,7 +333,7 @@ namespace StonePlanner
             //分配
             for (int i = 0; i < 100; i++)
             {
-                PlanClassA psa = new()
+                PlanClassA plancls = new()
                 {
                     capital = "NULL",
                     parent = null,
@@ -355,7 +344,7 @@ namespace StonePlanner
                     intro = "NULL",
                     seconds = 0
                 };
-                Plan p = new(psa)
+                Plan p = new(plancls)
                 {
                     Lnumber = -1
                 };
@@ -376,7 +365,7 @@ namespace StonePlanner
                     continue;
                 }
                 //完了，他妈的，重载全几把乱了
-                PlanClassB psb = new()
+                PlanClassB plancls = new()
                 {
                     capital = recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
                     intro = recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
@@ -388,18 +377,7 @@ namespace StonePlanner
                     wisdom = Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value),
                     startTime = Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[10].Value)
                 };
-                //Plan plan = new Plan
-                //    (
-                //    recy_bin.dataGridView1.Rows[i].Cells[1].Value.ToString(),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[5].Value),
-                //    recy_bin.dataGridView1.Rows[i].Cells[2].Value.ToString(),
-                //    Convert.ToInt64(recy_bin.dataGridView1.Rows[i].Cells[4].Value),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[9].Value),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[6].Value),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[7].Value),
-                //    Convert.ToInt32(recy_bin.dataGridView1.Rows[i].Cells[8].Value)
-                //    );
-                AddPlan(new Plan(psb));
+                AddPlan(new Plan(plancls));
                 LengthCalculation();
                 plan = null;
             }
@@ -466,7 +444,7 @@ namespace StonePlanner
                 }
                 if (temp.status != "正在办")
                 {
-                    if (DateTime.Now >= temp.dtStartTime)
+                    if (DateTime.Now >= temp.startTime)
                     {
                         _tasks.Add(temp.capital);
                     }
@@ -902,7 +880,7 @@ namespace StonePlanner
             {
                 if (item is Plan)
                 {
-                    DateTime d = (item as Plan).dtStartTime;
+                    DateTime d = (item as Plan).startTime;
                     if (returns.ContainsKey(d))
                     {
                         //频率统计
@@ -911,7 +889,7 @@ namespace StonePlanner
                     else
                     {
                         Plan plan1 = (item as Plan);
-                        string sch = plan1.dtStartTime.Hour switch
+                        string sch = plan1.startTime.Hour switch
                         {
                             > 6 and < 15 => " 白班",
                             _ => " 夜班",
@@ -974,7 +952,7 @@ namespace StonePlanner
             foreach (var item in TasksDict)
             {
                 if (item.Value == null) { continue; }
-                nTime += item.Value.dwSeconds;
+                nTime += item.Value.seconds;
             }
             label_NeedTime.Text = "剩余" + Inner.InnerFuncs.SecToHms(nTime);
 
@@ -1008,7 +986,7 @@ namespace StonePlanner
                 myConn.Open();
                 //先搜一下数据库
                 //SELECT * FROM Persons WHERE City='Beijing'
-                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.UDID}");
+                var hResult = SQLConnect.SQLCommandQuery($"SELECT * FROM Tasks WHERE ID = {plan.ID}");
                 if (hResult.HasRows)
                 {
                     /*
@@ -1018,23 +996,23 @@ namespace StonePlanner
                      * 做法：
                      * 更改保存位置
                     */     
-                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.dwSeconds}" +
+                    string updateString = $"UPDATE Tasks SET TaskTime = {plan.seconds}" +
                                 $" , TaskStatus = \"已办完\"" +
-                                $" WHERE ID = {plan.UDID}";
+                                $" WHERE ID = {plan.ID}";
                     SQLConnect.SQLCommandQuery(updateString, ref Main.odcConnection);
                 }
                 else
                 {
                     string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ,TaskLasting ,TaskExplosive , TaskWisdom , TaskParent) VALUES ( ";
                     strInsert += "'" + plan.capital + "', '";
-                    strInsert += plan.dwIntro + "', '";
+                    strInsert += plan.intro + "', '";
                     strInsert += plan.status + "', ";
-                    strInsert += plan.dwSeconds + ", ";
-                    strInsert += plan.dwDifficulty + ",";
-                    strInsert += plan.dwLasting + ",";
-                    strInsert += plan.dwExplosive + ",";
-                    strInsert += plan.dwWisdom + ",";
-                    strInsert += "'" + plan.lpParent + "'" + ")";
+                    strInsert += plan.seconds + ", ";
+                    strInsert += plan.difficulty + ",";
+                    strInsert += plan.lasting + ",";
+                    strInsert += plan.explosive + ",";
+                    strInsert += plan.wisdom + ",";
+                    strInsert += "'" + plan.parent + "'" + ")";
                     //执行插入
                     OleDbCommand inst = new OleDbCommand(strInsert, myConn);
                     inst.ExecuteNonQuery();
@@ -1078,13 +1056,13 @@ namespace StonePlanner
                 td.Left = 16;
                 td.Top = 15;
                 td.Capital = plan.capital;
-                td.Time = plan.dwSeconds.ToString();
-                td.Intro = plan.dwIntro;
+                td.Time = plan.seconds.ToString();
+                td.Intro = plan.intro;
                 td.StatusResult = plan.status;
-                td.Difficulty = plan.dwDifficulty;
-                td.Lasting = plan.dwLasting.ToString();
-                td.Explosive = plan.dwExplosive.ToString();
-                td.Wisdom = plan.dwWisdom.ToString();
+                td.Difficulty = plan.difficulty;
+                td.Lasting = plan.lasting.ToString();
+                td.Explosive = plan.explosive.ToString();
+                td.Wisdom = plan.wisdom.ToString();
                 SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
                 sp.Play();
                 panel_TaskDetail.Controls.Add(td);
@@ -1284,7 +1262,7 @@ namespace StonePlanner
         {
             const int WM_NCLBUTTONDOWN = 0x00A1;
             const int HTCAPTION = 0x0002;
-            if (e.Button == MouseButtons.Left)  // 按下的是鼠标左键   
+            if (e.Button == MouseButtons.Left)
             {
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, (IntPtr) HTCAPTION, IntPtr.Zero);// 拖动窗体  

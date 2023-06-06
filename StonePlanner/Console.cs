@@ -145,7 +145,7 @@ namespace StonePlanner
                             {
                                 throw new Exceptions.MethodNotExistException("MemoryNotExistException：未找到该存储器。");
                             }
-                            catch (Exception ex)
+                            catch
                             {
                                 System.Console.WriteLine("MemoryNotExistException：未找到该存储器。");
                             }
@@ -176,7 +176,7 @@ namespace StonePlanner
                             {
                                 throw new Exceptions.MethodNotExistException("MethodNotExistError：存储器EPH不存在该操作。");
                             }
-                            catch (Exception ex)
+                            catch
                             {
                                 System.Console.WriteLine("MethodNotExistError：存储器EPH不存在该操作。");
                             }

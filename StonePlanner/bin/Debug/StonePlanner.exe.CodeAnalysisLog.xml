@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio\2022\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio\2022\preview\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="17.0">
  <Localized>
   <String Key="Category">类别</String>
@@ -28,7 +28,7 @@
  <Exceptions>
   <Exception Keyword="CA0064" Kind="Engine" TreatAsWarning="True">
    <Type>Microsoft.FxCop.Sdk.FxCopException</Type>
-   <ExceptionMessage>未能执行任何分析，因为指定的规则集未能加载或不包含任何托管代码分析规则。</ExceptionMessage>
+   <ExceptionMessage>未能执行任何分析，因为指定的规则集未能加载或不包含任何托管 Code Analysis 规则。</ExceptionMessage>
   </Exception>
  </Exceptions>
 </FxCopReport>
