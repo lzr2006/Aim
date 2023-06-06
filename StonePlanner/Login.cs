@@ -24,90 +24,31 @@ namespace StonePlanner
         
         private void button_Submit_Click(object sender, EventArgs e)
         {
-            try
+            //该逻辑依赖于DataTable，实际上没什么用，急需重写
+            var account = SQLConnect.SQLCommandQuery(
+                $"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");
+            if (!account.HasRows)
             {
-                var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='{textBox_M_Name.Text}';");
-                DataTable dt = new DataTable();
-                 if (result.HasRows)
-                 {
-                    for (int i = 0; i < result.FieldCount; i++)
-                    {
-                        dt.Columns.Add(result.GetName(i));
-                    }
-                     dt.Rows.Clear();
-                 }
-                while (result.Read())
+                MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                //存在相应账户
+                account.Read();
+                string password = account["Pwd"].ToString();
+                if (textBox_M_Pwd.Text == password)
                 {
-                    DataRow row = dt.NewRow();
-                    for (int i = 0; i < result.FieldCount; i++)
-                    {
-                        row[i] = result[i];
-                    }
-                    dt.Rows.Add(row);
-                }
-                dataGridView1.DataSource = dt;
-                if (dataGridView1.Rows[0].Cells[0].Value.ToString() == "")
-                {
-                    MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                if (dataGridView1.Rows[0].Cells[0].Value.ToString() == textBox_M_Pwd.Text)
-                {
-                    result = SQLConnect.SQLCommandQuery($"SELECT Type FROM Users where Username='{textBox_M_Name.Text}';");
-                    dt = new DataTable();
-                    if (result.HasRows)
-                    {
-                        for (int i = 0; i < result.FieldCount; i++)
-                        {
-                            dt.Columns.Add(result.GetName(i));
-                        }
-                        dt.Rows.Clear();
-                    }
-                    while (result.Read())
-                    {
-                        DataRow row = dt.NewRow();
-                        for (int i = 0; i < result.FieldCount; i++)
-                        {
-                            row[i] = result[i];
-                        }
-                        dt.Rows.Add(row);
-                    }
-                    dataGridView1.DataSource = dt;
-                    //特殊用户
-                    try
-                    {
-                        UserType = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);
-                        if (UserType == 2)
-                        {
-                            Testify ti = new Testify();
-                            ti.Show();
-                            new ErrorCenter().Show();
-                        }
-                        MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Hide();
-                        UserName = textBox_M_Name.Text;
-                        Main m = new Main();
-                        m.Show();
-                        //Thread td = new Thread(new ThreadStart(
-                        //    () => Application.Run(new Main())
-                        //    )) ;
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("读取用户时出现异常，详情请见错误中心", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
-                        return;
-                    }
+                    MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Hide();
+                    UserName = textBox_M_Name.Text;
+                    Main m = new Main();
+                    m.Show();
                 }
                 else
                 {
                     MessageBox.Show("用户名或密码错误!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            catch
-            {
-                MessageBox.Show("不存在该用户!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

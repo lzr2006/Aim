@@ -60,6 +60,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 340);
             this.Controls.Add(this.listView_Main);
+            this.MaximizeBox = false;
             this.Name = "TestTools";
             this.Text = "测试工具";
             this.Load += new System.EventHandler(this.TestTools_Load);

@@ -50,10 +50,11 @@
             // label_GoodName
             // 
             this.label_GoodName.AutoSize = true;
-            this.label_GoodName.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_GoodName.Location = new System.Drawing.Point(24, 69);
+            this.label_GoodName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_GoodName.Location = new System.Drawing.Point(32, 86);
+            this.label_GoodName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_GoodName.Name = "label_GoodName";
-            this.label_GoodName.Size = new System.Drawing.Size(71, 16);
+            this.label_GoodName.Size = new System.Drawing.Size(89, 20);
             this.label_GoodName.TabIndex = 0;
             this.label_GoodName.Text = "商品名：";
             // 
@@ -63,16 +64,18 @@
             // 
             // 
             this.textBox_GoodName.CustomButton.Image = null;
-            this.textBox_GoodName.CustomButton.Location = new System.Drawing.Point(216, 2);
+            this.textBox_GoodName.CustomButton.Location = new System.Drawing.Point(387, 2);
+            this.textBox_GoodName.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodName.CustomButton.Name = "";
-            this.textBox_GoodName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.textBox_GoodName.CustomButton.Size = new System.Drawing.Size(36, 34);
             this.textBox_GoodName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_GoodName.CustomButton.TabIndex = 1;
             this.textBox_GoodName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_GoodName.CustomButton.UseSelectable = true;
             this.textBox_GoodName.CustomButton.Visible = false;
             this.textBox_GoodName.Lines = new string[0];
-            this.textBox_GoodName.Location = new System.Drawing.Point(124, 64);
+            this.textBox_GoodName.Location = new System.Drawing.Point(165, 80);
+            this.textBox_GoodName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodName.MaxLength = 32767;
             this.textBox_GoodName.Name = "textBox_GoodName";
             this.textBox_GoodName.PasswordChar = '\0';
@@ -81,7 +84,7 @@
             this.textBox_GoodName.SelectionLength = 0;
             this.textBox_GoodName.SelectionStart = 0;
             this.textBox_GoodName.ShortcutsEnabled = true;
-            this.textBox_GoodName.Size = new System.Drawing.Size(240, 26);
+            this.textBox_GoodName.Size = new System.Drawing.Size(320, 32);
             this.textBox_GoodName.TabIndex = 1;
             this.textBox_GoodName.UseSelectable = true;
             this.textBox_GoodName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -93,16 +96,18 @@
             // 
             // 
             this.textBox_GoodPrice.CustomButton.Image = null;
-            this.textBox_GoodPrice.CustomButton.Location = new System.Drawing.Point(174, 2);
+            this.textBox_GoodPrice.CustomButton.Location = new System.Drawing.Point(312, 2);
+            this.textBox_GoodPrice.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodPrice.CustomButton.Name = "";
-            this.textBox_GoodPrice.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.textBox_GoodPrice.CustomButton.Size = new System.Drawing.Size(36, 34);
             this.textBox_GoodPrice.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_GoodPrice.CustomButton.TabIndex = 1;
             this.textBox_GoodPrice.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_GoodPrice.CustomButton.UseSelectable = true;
             this.textBox_GoodPrice.CustomButton.Visible = false;
             this.textBox_GoodPrice.Lines = new string[0];
-            this.textBox_GoodPrice.Location = new System.Drawing.Point(124, 96);
+            this.textBox_GoodPrice.Location = new System.Drawing.Point(165, 120);
+            this.textBox_GoodPrice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodPrice.MaxLength = 32767;
             this.textBox_GoodPrice.Name = "textBox_GoodPrice";
             this.textBox_GoodPrice.PasswordChar = '\0';
@@ -111,7 +116,7 @@
             this.textBox_GoodPrice.SelectionLength = 0;
             this.textBox_GoodPrice.SelectionStart = 0;
             this.textBox_GoodPrice.ShortcutsEnabled = true;
-            this.textBox_GoodPrice.Size = new System.Drawing.Size(198, 26);
+            this.textBox_GoodPrice.Size = new System.Drawing.Size(264, 32);
             this.textBox_GoodPrice.TabIndex = 3;
             this.textBox_GoodPrice.UseSelectable = true;
             this.textBox_GoodPrice.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -120,20 +125,22 @@
             // label_GoodPrice
             // 
             this.label_GoodPrice.AutoSize = true;
-            this.label_GoodPrice.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_GoodPrice.Location = new System.Drawing.Point(24, 101);
+            this.label_GoodPrice.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_GoodPrice.Location = new System.Drawing.Point(32, 126);
+            this.label_GoodPrice.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_GoodPrice.Name = "label_GoodPrice";
-            this.label_GoodPrice.Size = new System.Drawing.Size(71, 16);
+            this.label_GoodPrice.Size = new System.Drawing.Size(89, 20);
             this.label_GoodPrice.TabIndex = 2;
             this.label_GoodPrice.Text = "售  价：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(24, 169);
+            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(32, 211);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 16);
+            this.label3.Size = new System.Drawing.Size(89, 20);
             this.label3.TabIndex = 4;
             this.label3.Text = "简  介：";
             // 
@@ -143,16 +150,18 @@
             // 
             // 
             this.textBox3.CustomButton.Image = null;
-            this.textBox3.CustomButton.Location = new System.Drawing.Point(120, 2);
+            this.textBox3.CustomButton.Location = new System.Drawing.Point(227, 2);
+            this.textBox3.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox3.CustomButton.Name = "";
-            this.textBox3.CustomButton.Size = new System.Drawing.Size(117, 117);
+            this.textBox3.CustomButton.Size = new System.Drawing.Size(196, 184);
             this.textBox3.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox3.CustomButton.TabIndex = 1;
             this.textBox3.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox3.CustomButton.UseSelectable = true;
             this.textBox3.CustomButton.Visible = false;
             this.textBox3.Lines = new string[0];
-            this.textBox3.Location = new System.Drawing.Point(124, 166);
+            this.textBox3.Location = new System.Drawing.Point(165, 208);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox3.MaxLength = 32767;
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
@@ -162,7 +171,7 @@
             this.textBox3.SelectionLength = 0;
             this.textBox3.SelectionStart = 0;
             this.textBox3.ShortcutsEnabled = true;
-            this.textBox3.Size = new System.Drawing.Size(240, 122);
+            this.textBox3.Size = new System.Drawing.Size(320, 152);
             this.textBox3.TabIndex = 5;
             this.textBox3.UseSelectable = true;
             this.textBox3.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -174,16 +183,18 @@
             // 
             // 
             this.textBox_GoodIntro.CustomButton.Image = null;
-            this.textBox_GoodIntro.CustomButton.Location = new System.Drawing.Point(120, 2);
+            this.textBox_GoodIntro.CustomButton.Location = new System.Drawing.Point(227, 2);
+            this.textBox_GoodIntro.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodIntro.CustomButton.Name = "";
-            this.textBox_GoodIntro.CustomButton.Size = new System.Drawing.Size(117, 117);
+            this.textBox_GoodIntro.CustomButton.Size = new System.Drawing.Size(196, 184);
             this.textBox_GoodIntro.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_GoodIntro.CustomButton.TabIndex = 1;
             this.textBox_GoodIntro.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_GoodIntro.CustomButton.UseSelectable = true;
             this.textBox_GoodIntro.CustomButton.Visible = false;
             this.textBox_GoodIntro.Lines = new string[0];
-            this.textBox_GoodIntro.Location = new System.Drawing.Point(124, 167);
+            this.textBox_GoodIntro.Location = new System.Drawing.Point(165, 209);
+            this.textBox_GoodIntro.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodIntro.MaxLength = 32767;
             this.textBox_GoodIntro.Multiline = true;
             this.textBox_GoodIntro.Name = "textBox_GoodIntro";
@@ -193,7 +204,7 @@
             this.textBox_GoodIntro.SelectionLength = 0;
             this.textBox_GoodIntro.SelectionStart = 0;
             this.textBox_GoodIntro.ShortcutsEnabled = true;
-            this.textBox_GoodIntro.Size = new System.Drawing.Size(240, 122);
+            this.textBox_GoodIntro.Size = new System.Drawing.Size(320, 152);
             this.textBox_GoodIntro.TabIndex = 7;
             this.textBox_GoodIntro.UseSelectable = true;
             this.textBox_GoodIntro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -202,10 +213,11 @@
             // label_GoodIntro
             // 
             this.label_GoodIntro.AutoSize = true;
-            this.label_GoodIntro.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_GoodIntro.Location = new System.Drawing.Point(24, 170);
+            this.label_GoodIntro.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_GoodIntro.Location = new System.Drawing.Point(32, 212);
+            this.label_GoodIntro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_GoodIntro.Name = "label_GoodIntro";
-            this.label_GoodIntro.Size = new System.Drawing.Size(71, 16);
+            this.label_GoodIntro.Size = new System.Drawing.Size(89, 20);
             this.label_GoodIntro.TabIndex = 6;
             this.label_GoodIntro.Text = "简  介：";
             // 
@@ -215,16 +227,18 @@
             // 
             // 
             this.textBox_Function.CustomButton.Image = null;
-            this.textBox_Function.CustomButton.Location = new System.Drawing.Point(120, 2);
+            this.textBox_Function.CustomButton.Location = new System.Drawing.Point(227, 2);
+            this.textBox_Function.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_Function.CustomButton.Name = "";
-            this.textBox_Function.CustomButton.Size = new System.Drawing.Size(117, 117);
+            this.textBox_Function.CustomButton.Size = new System.Drawing.Size(196, 184);
             this.textBox_Function.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Function.CustomButton.TabIndex = 1;
             this.textBox_Function.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Function.CustomButton.UseSelectable = true;
             this.textBox_Function.CustomButton.Visible = false;
             this.textBox_Function.Lines = new string[0];
-            this.textBox_Function.Location = new System.Drawing.Point(124, 302);
+            this.textBox_Function.Location = new System.Drawing.Point(165, 378);
+            this.textBox_Function.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_Function.MaxLength = 32767;
             this.textBox_Function.Multiline = true;
             this.textBox_Function.Name = "textBox_Function";
@@ -234,7 +248,7 @@
             this.textBox_Function.SelectionLength = 0;
             this.textBox_Function.SelectionStart = 0;
             this.textBox_Function.ShortcutsEnabled = true;
-            this.textBox_Function.Size = new System.Drawing.Size(240, 122);
+            this.textBox_Function.Size = new System.Drawing.Size(320, 152);
             this.textBox_Function.TabIndex = 11;
             this.textBox_Function.UseSelectable = true;
             this.textBox_Function.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -243,10 +257,11 @@
             // label_Function
             // 
             this.label_Function.AutoSize = true;
-            this.label_Function.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_Function.Location = new System.Drawing.Point(24, 305);
+            this.label_Function.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Function.Location = new System.Drawing.Point(32, 381);
+            this.label_Function.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Function.Name = "label_Function";
-            this.label_Function.Size = new System.Drawing.Size(71, 16);
+            this.label_Function.Size = new System.Drawing.Size(89, 20);
             this.label_Function.TabIndex = 10;
             this.label_Function.Text = "功  能：";
             this.label_Function.Click += new System.EventHandler(this.label_Function_Click);
@@ -257,16 +272,18 @@
             // 
             // 
             this.textBox6.CustomButton.Image = null;
-            this.textBox6.CustomButton.Location = new System.Drawing.Point(120, 2);
+            this.textBox6.CustomButton.Location = new System.Drawing.Point(227, 2);
+            this.textBox6.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox6.CustomButton.Name = "";
-            this.textBox6.CustomButton.Size = new System.Drawing.Size(117, 117);
+            this.textBox6.CustomButton.Size = new System.Drawing.Size(196, 184);
             this.textBox6.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox6.CustomButton.TabIndex = 1;
             this.textBox6.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox6.CustomButton.UseSelectable = true;
             this.textBox6.CustomButton.Visible = false;
             this.textBox6.Lines = new string[0];
-            this.textBox6.Location = new System.Drawing.Point(124, 301);
+            this.textBox6.Location = new System.Drawing.Point(165, 376);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox6.MaxLength = 32767;
             this.textBox6.Multiline = true;
             this.textBox6.Name = "textBox6";
@@ -276,7 +293,7 @@
             this.textBox6.SelectionLength = 0;
             this.textBox6.SelectionStart = 0;
             this.textBox6.ShortcutsEnabled = true;
-            this.textBox6.Size = new System.Drawing.Size(240, 122);
+            this.textBox6.Size = new System.Drawing.Size(320, 152);
             this.textBox6.TabIndex = 9;
             this.textBox6.UseSelectable = true;
             this.textBox6.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -285,18 +302,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(24, 304);
+            this.label6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.Location = new System.Drawing.Point(32, 380);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(71, 16);
+            this.label6.Size = new System.Drawing.Size(89, 20);
             this.label6.TabIndex = 8;
             this.label6.Text = "简  介：";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(13, 395);
+            this.button1.Location = new System.Drawing.Point(17, 494);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 28);
+            this.button1.Size = new System.Drawing.Size(140, 35);
             this.button1.TabIndex = 12;
             this.button1.Text = "打开IDE";
             this.button1.UseSelectable = true;
@@ -308,16 +327,18 @@
             // 
             // 
             this.textBox_GoodPicture.CustomButton.Image = null;
-            this.textBox_GoodPicture.CustomButton.Location = new System.Drawing.Point(216, 2);
+            this.textBox_GoodPicture.CustomButton.Location = new System.Drawing.Point(387, 2);
+            this.textBox_GoodPicture.CustomButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodPicture.CustomButton.Name = "";
-            this.textBox_GoodPicture.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.textBox_GoodPicture.CustomButton.Size = new System.Drawing.Size(36, 34);
             this.textBox_GoodPicture.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_GoodPicture.CustomButton.TabIndex = 1;
             this.textBox_GoodPicture.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_GoodPicture.CustomButton.UseSelectable = true;
             this.textBox_GoodPicture.CustomButton.Visible = false;
             this.textBox_GoodPicture.Lines = new string[0];
-            this.textBox_GoodPicture.Location = new System.Drawing.Point(124, 131);
+            this.textBox_GoodPicture.Location = new System.Drawing.Point(165, 164);
+            this.textBox_GoodPicture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.textBox_GoodPicture.MaxLength = 32767;
             this.textBox_GoodPicture.Name = "textBox_GoodPicture";
             this.textBox_GoodPicture.PasswordChar = '\0';
@@ -326,7 +347,7 @@
             this.textBox_GoodPicture.SelectionLength = 0;
             this.textBox_GoodPicture.SelectionStart = 0;
             this.textBox_GoodPicture.ShortcutsEnabled = true;
-            this.textBox_GoodPicture.Size = new System.Drawing.Size(240, 26);
+            this.textBox_GoodPicture.Size = new System.Drawing.Size(320, 32);
             this.textBox_GoodPicture.TabIndex = 14;
             this.textBox_GoodPicture.UseSelectable = true;
             this.textBox_GoodPicture.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -335,18 +356,20 @@
             // label_GoodPicture
             // 
             this.label_GoodPicture.AutoSize = true;
-            this.label_GoodPicture.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_GoodPicture.Location = new System.Drawing.Point(24, 136);
+            this.label_GoodPicture.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_GoodPicture.Location = new System.Drawing.Point(32, 170);
+            this.label_GoodPicture.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_GoodPicture.Name = "label_GoodPicture";
-            this.label_GoodPicture.Size = new System.Drawing.Size(71, 16);
+            this.label_GoodPicture.Size = new System.Drawing.Size(89, 20);
             this.label_GoodPicture.TabIndex = 13;
             this.label_GoodPicture.Text = "图  像：";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(13, 432);
+            this.button2.Location = new System.Drawing.Point(17, 540);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(351, 28);
+            this.button2.Size = new System.Drawing.Size(468, 35);
             this.button2.TabIndex = 15;
             this.button2.Text = "添加商品";
             this.button2.UseSelectable = true;
@@ -354,9 +377,10 @@
             // 
             // Buton_Cospic
             // 
-            this.Buton_Cospic.Location = new System.Drawing.Point(328, 94);
+            this.Buton_Cospic.Location = new System.Drawing.Point(437, 118);
+            this.Buton_Cospic.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Buton_Cospic.Name = "Buton_Cospic";
-            this.Buton_Cospic.Size = new System.Drawing.Size(36, 28);
+            this.Buton_Cospic.Size = new System.Drawing.Size(48, 35);
             this.Buton_Cospic.TabIndex = 16;
             this.Buton_Cospic.Text = "...";
             this.Buton_Cospic.UseSelectable = true;
@@ -364,9 +388,9 @@
             // 
             // GoodAdder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(376, 472);
+            this.ClientSize = new System.Drawing.Size(501, 590);
             this.Controls.Add(this.Buton_Cospic);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox_GoodPicture);
@@ -384,7 +408,10 @@
             this.Controls.Add(this.label_GoodPrice);
             this.Controls.Add(this.textBox_GoodName);
             this.Controls.Add(this.label_GoodName);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
             this.Name = "GoodAdder";
+            this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "新建商品";
             this.Load += new System.EventHandler(this.GoodAdder_Load);
             this.ResumeLayout(false);

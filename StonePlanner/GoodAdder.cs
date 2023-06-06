@@ -39,9 +39,9 @@ namespace StonePlanner
                 GC.Collect();
                 Dispose();
             }
-            catch (Exception ex){ 
+            catch 
+            { 
                 MessageBox.Show("输入信息有误!","添加失败",MessageBoxButtons.OK,MessageBoxIcon.Stop);
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex); 
             }
         }
 

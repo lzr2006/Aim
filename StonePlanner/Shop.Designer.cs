@@ -42,18 +42,21 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(888, 591);
+            this.dataGridView1.Location = new System.Drawing.Point(1184, 739);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(10, 10);
+            this.dataGridView1.Size = new System.Drawing.Size(13, 12);
             this.dataGridView1.TabIndex = 0;
             // 
             // btn_tLeft
             // 
             this.btn_tLeft.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_tLeft.Location = new System.Drawing.Point(15, 10);
+            this.btn_tLeft.Location = new System.Drawing.Point(20, 12);
+            this.btn_tLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_tLeft.Name = "btn_tLeft";
-            this.btn_tLeft.Size = new System.Drawing.Size(51, 29);
+            this.btn_tLeft.Size = new System.Drawing.Size(68, 36);
             this.btn_tLeft.TabIndex = 1;
             this.btn_tLeft.Text = "<";
             this.btn_tLeft.UseVisualStyleBackColor = true;
@@ -62,9 +65,10 @@
             // btn_tRight
             // 
             this.btn_tRight.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_tRight.Location = new System.Drawing.Point(205, 10);
+            this.btn_tRight.Location = new System.Drawing.Point(273, 12);
+            this.btn_tRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_tRight.Name = "btn_tRight";
-            this.btn_tRight.Size = new System.Drawing.Size(51, 29);
+            this.btn_tRight.Size = new System.Drawing.Size(68, 36);
             this.btn_tRight.TabIndex = 2;
             this.btn_tRight.Text = ">";
             this.btn_tRight.UseVisualStyleBackColor = true;
@@ -74,9 +78,10 @@
             // 
             this.label_Main.AutoSize = true;
             this.label_Main.Font = new System.Drawing.Font("宋体", 11.5F);
-            this.label_Main.Location = new System.Drawing.Point(87, 17);
+            this.label_Main.Location = new System.Drawing.Point(116, 21);
+            this.label_Main.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label_Main.Name = "label_Main";
-            this.label_Main.Size = new System.Drawing.Size(135, 16);
+            this.label_Main.Size = new System.Drawing.Size(169, 20);
             this.label_Main.TabIndex = 3;
             this.label_Main.Text = "第 1 页，共 1 页";
             // 
@@ -85,24 +90,27 @@
             this.panel_Controls.Controls.Add(this.btn_tRight);
             this.panel_Controls.Controls.Add(this.label_Main);
             this.panel_Controls.Controls.Add(this.btn_tLeft);
-            this.panel_Controls.Location = new System.Drawing.Point(314, 331);
+            this.panel_Controls.Location = new System.Drawing.Point(419, 414);
+            this.panel_Controls.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel_Controls.Name = "panel_Controls";
-            this.panel_Controls.Size = new System.Drawing.Size(318, 48);
+            this.panel_Controls.Size = new System.Drawing.Size(424, 60);
             this.panel_Controls.TabIndex = 4;
             // 
             // panel_Main
             // 
             this.panel_Main.Location = new System.Drawing.Point(0, 0);
+            this.panel_Main.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel_Main.Name = "panel_Main";
-            this.panel_Main.Size = new System.Drawing.Size(914, 325);
+            this.panel_Main.Size = new System.Drawing.Size(1219, 406);
             this.panel_Main.TabIndex = 5;
             this.panel_Main.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Main_Paint);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 341);
+            this.button1.Location = new System.Drawing.Point(16, 426);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(80, 29);
+            this.button1.Size = new System.Drawing.Size(107, 36);
             this.button1.TabIndex = 6;
             this.button1.Text = "添加";
             this.button1.UseVisualStyleBackColor = true;
@@ -110,13 +118,15 @@
             // 
             // Shop
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 381);
+            this.ClientSize = new System.Drawing.Size(1217, 476);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel_Main);
             this.Controls.Add(this.panel_Controls);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MaximizeBox = false;
             this.Name = "Shop";
             this.Text = "Shop";
             this.Load += new System.EventHandler(this.Shop_Load);

@@ -158,6 +158,7 @@
             // linkLabel_Register
             // 
             this.linkLabel_Register.AutoSize = true;
+            this.linkLabel_Register.LinkColor = System.Drawing.Color.Gray;
             this.linkLabel_Register.Location = new System.Drawing.Point(31, 355);
             this.linkLabel_Register.Name = "linkLabel_Register";
             this.linkLabel_Register.Size = new System.Drawing.Size(82, 15);
@@ -169,6 +170,7 @@
             // linkLabel_Restore
             // 
             this.linkLabel_Restore.AutoSize = true;
+            this.linkLabel_Restore.LinkColor = System.Drawing.Color.Gray;
             this.linkLabel_Restore.Location = new System.Drawing.Point(237, 355);
             this.linkLabel_Restore.Name = "linkLabel_Restore";
             this.linkLabel_Restore.Size = new System.Drawing.Size(67, 15);
@@ -192,6 +194,7 @@
             this.Controls.Add(this.l_Username);
             this.Controls.Add(this.pictureBox_Main);
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "Login";
             this.Padding = new System.Windows.Forms.Padding(27, 75, 27, 25);
             this.Text = "AimPlanner";

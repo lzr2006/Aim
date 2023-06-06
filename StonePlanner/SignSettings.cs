@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    public partial class SignSettings : Form
+    public partial class SignSettings : MetroForm
     {
         public SignSettings()
         {
@@ -32,7 +33,14 @@ namespace StonePlanner
 
         private void button_Remove_Click(object sender, EventArgs e)
         {
-            Main.signQueue.Dequeue();
+            try
+            {
+                Main.signQueue.Dequeue();
+            }
+            catch (InvalidOperationException)
+            {
+                MessageBox.Show("当前没有信号在队列中！","删除失败",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            }
         }
 
         private void button_Clear_Click(object sender, EventArgs e)

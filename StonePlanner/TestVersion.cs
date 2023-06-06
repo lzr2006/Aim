@@ -1,5 +1,4 @@
-﻿using Microsoft.AppCenter;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;

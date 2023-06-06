@@ -1,9 +1,10 @@
-﻿using System;
+﻿using MetroFramework.Forms;
+using System;
 using System.Windows.Forms;
 
 namespace StonePlanner
 {
-    public partial class Testify : Form
+    public partial class Testify : MetroForm
     {
         public Testify()
         {
@@ -27,6 +28,11 @@ namespace StonePlanner
             {
                 label9.Text = $"主信号值：0";
             }
+        }
+
+        private void Testify_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

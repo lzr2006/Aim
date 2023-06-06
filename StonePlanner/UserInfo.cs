@@ -7,6 +7,8 @@ namespace StonePlanner
 {
     public partial class UserInfo : MetroForm
     {
+        //空格数
+        int space = 17;
         public UserInfo()
         {
             InitializeComponent();
@@ -28,25 +30,34 @@ namespace StonePlanner
             label_Username.Text = $"用 户 名：{Login.UserName}";
             label_Money.Text = $"金 币 数 量：{Main.money}";
             //耐力值信息
-            label_LastingC.Text = $"耐力值：{Main.lasting}                 Lv.{LevelGetter(Main.lasting)[0]}";
-            label_Lastingleft.Text = LevelGetter(Main.lasting)[1].ToString();
-            label_Lastingright.Text = LevelGetter(Main.lasting)[2].ToString();
+            var Lasting = LevelGetter(Main.lasting);
+            label_LastingC.Text = $"耐力值：{Main.lasting}"+
+                Inner.InnerFuncs.MultipleStrings(space- Lasting[0].
+                ToString().Length) +$"Lv.{Lasting[0]}";
+            label_Lastingleft.Text = Lasting[1].ToString();
+            label_Lastingright.Text = Lasting[2].ToString();
             //耐力值进度
             int delta = Convert.ToInt32(label_Lastingright.Text) - Convert.ToInt32(label_Lastingleft.Text);
             int lasting = Main.lasting;
             panel_Lasting.Width = (int) (((double) (lasting - Convert.ToInt32(label_Lastingleft.Text)) / (double) delta) * 184);
             //爆发值信息
-            label_ExplosiveC.Text = $"爆发值：{Main.explosive}                 Lv.{LevelGetter(Main.explosive)[0]}";
-            label_Explosiveleft.Text = LevelGetter(Main.explosive)[1].ToString();
-            label_Explosiveright.Text = LevelGetter(Main.explosive)[2].ToString();
+            var Explosive = LevelGetter(Main.explosive);
+            label_ExplosiveC.Text = $"爆发值：{Main.explosive}" +
+                Inner.InnerFuncs.MultipleStrings(space - Explosive[0].
+                ToString().Length) + $"Lv.{Explosive[0]}";
+            label_Explosiveleft.Text = Explosive[1].ToString();
+            label_Explosiveright.Text = Explosive[2].ToString();
             //爆发值进度
             delta = Convert.ToInt32(label_Explosiveright.Text) - Convert.ToInt32(label_Explosiveleft.Text);
             int explosive = Main.explosive;
             panel_Explosive.Width = (int) (((double) (explosive - Convert.ToInt32(label_Explosiveleft.Text)) / (double) delta) * 184);
             //智慧值信息
-            label_WisdomC.Text = $"智慧值：{Main.wisdom}                Lv.{LevelGetter(Main.wisdom)[0]}";
-            label_Wisdomleft.Text = LevelGetter(Main.wisdom)[1].ToString();
-            label_Wisdomright.Text = LevelGetter(Main.wisdom)[2].ToString();
+            var Wisdom = LevelGetter(Main.wisdom);
+            label_WisdomC.Text = $"智慧值：{Main.wisdom}" +
+               Inner.InnerFuncs.MultipleStrings(space - Wisdom[0].
+               ToString().Length) + $"Lv.{Wisdom[0]}";
+            label_Wisdomleft.Text = Wisdom[1].ToString();
+            label_Wisdomright.Text = Wisdom[2].ToString();
             //智慧值进度
             delta = Convert.ToInt32(label_Wisdomright.Text) - Convert.ToInt32(label_Wisdomleft.Text);
             int wisdom = Main.wisdom;
@@ -57,10 +68,26 @@ namespace StonePlanner
             {
                 point_User = 6d;
             }
-#pragma warning disable CS0618 // 'Legacy.Main_Calc()' is obsolete: '该代码存在逻辑问题，应该尽早重构'
-            double point_Plan = Legacy.Main_Calc();
-#pragma warning restore CS0618 // 'Legacy.Main_Calc()' is obsolete: '该代码存在逻辑问题，应该尽早重构'
-            label_Point.Text = $"评 分 值（pp）：{point_User + point_Plan}";
+            //重构评分读取
+            var tasks = SQLConnect.SQLCommandQuery("SELECT * FROM Tasks",ref Main.odcConnection);
+            //运用“T10”进行评分
+            int i = 0,sum = 0;
+            while (tasks.Read())
+            {
+                sum += Convert.ToInt32(tasks["TaskDiff"]);
+                i++;
+                if (i == 10) break;
+            }
+            double point_Plan;
+            if (i == 0) 
+            { 
+                 point_Plan = 0;
+            }
+            else
+            {
+                point_Plan = sum / i;
+            }
+            label_Point.Text = $"评 分 值（pp）：{point_User + point_Plan:F2}";
         }
 
         /// <summary>
@@ -78,16 +105,11 @@ namespace StonePlanner
                 j += 100 * i;
                 k += 100 * (i - 1);
             }
-            List<int> li = new List<int>();
-            li.Add(i-1);
-            li.Add(k);
-            li.Add(j);
-            return li;
-        }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
+            List<int> l = new List<int>();
+            l.Add(i-1);
+            l.Add(k);
+            l.Add(j);
+            return l;
         }
     }
 }

@@ -12,36 +12,36 @@ using System.Windows.Forms;
 namespace StonePlanner
 {
     #region DEFINE
-    public unsafe class InputBoxDefine
+    public class InputBoxDefine
     {
         public const int MAX_LENGTH_OF_LPCAPTION = 128;
         public const int MAX_LENGTH_OF_LPTEXT = 512;
         public const int MAX_LENGTH_OF_SZVALUEBACK = 256;
     }
     #endregion
-    public unsafe struct InputBoxStruct
+    public struct InputBoxStruct
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = InputBoxDefine.MAX_LENGTH_OF_LPCAPTION)]
         internal string lpCaption;
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = InputBoxDefine.MAX_LENGTH_OF_LPTEXT)]
         internal string lpText;
-        [MarshalAs(UnmanagedType.ByValArray, SizeConst = InputBoxDefine.MAX_LENGTH_OF_SZVALUEBACK)]
-        internal char* szValueBack;
     }
-    public unsafe partial class InputBox : Form
+    public partial class InputBox : Form
     {
         string lpCaption;
         string lpText;
-        internal bool IN = false;
-        char[] szFileNameSize = new char[256];
-        internal char* szValueBack;
+ 
+
+        public delegate void SetNameInvokeBase(string s);
+        SetNameInvokeBase SetNameInvoke;
+
         //使用类全局变量作为控制
-        internal InputBox(InputBoxStruct IBS)
+        internal InputBox(InputBoxStruct IBS, SetNameInvokeBase SetNameInvoke)
         {
             InitializeComponent();
             this.lpCaption = IBS.lpCaption;
             this.lpText = IBS.lpText;
-            this.szValueBack = IBS.szValueBack; //关联指针
+            this.SetNameInvoke = SetNameInvoke;
         }
         private void InputBox_Load(object sender, EventArgs e)
         {
@@ -66,24 +66,13 @@ namespace StonePlanner
 
         private void button1_Click(object sender, EventArgs e)
         {
-            char[] szFileNameSize = new char[256];
-            //在这里szValueBack指向的地址被修改
-
-            char* temp = szValueBack;
-            //提取字符串中每一个字符
-            for (int i = 0; i < textBox1.Text.Length; i++)
-            {
-                *temp++ = (char)textBox1.Text[i];
-            }
-            IN = !IN;
+            SetNameInvoke(this.textBox1.Text);
             Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            char back = '0';
-            szValueBack = &back;
-            IN = !IN;
+            SetNameInvoke("0");
             Close();
         }
 

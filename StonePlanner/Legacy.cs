@@ -4,17 +4,14 @@ using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
 
 namespace StonePlanner
 {
     /// <summary>
     /// 此类内含所有已经被废弃的代码 以供查阅
     /// </summary>
-    
+
     /*
      * 屎山 屎山 屎山
      * 下次写代码 不要用屁股写
@@ -43,15 +40,15 @@ namespace StonePlanner
                 string strInsert = " INSERT INTO Tasks ( TaskName , TaskIntro , TaskStatus , TaskTime , TaskDiff ) VALUES ( ";
                 allTask += item.capital + ";";
                 //allTask += item.dwAim + ";";
-                allTask += item.dwSeconds + ";";
-                allTask += item.dwDifficulty;
+                allTask += item.seconds + ";";
+                allTask += item.difficulty;
                 allTask += "\n";
 
                 strInsert += "'" + item.capital + "', '";
-                strInsert += item.dwIntro + "', '";
+                strInsert += item.intro + "', '";
                 strInsert += item.status + "', ";
-                strInsert += item.dwSeconds + ", ";
-                strInsert += item.dwDifficulty + ")";
+                strInsert += item.seconds + ", ";
+                strInsert += item.difficulty + ")";
                 //清空原有数据
                 inst = new OleDbCommand(strInsert, myConn);
                 int lines = inst.ExecuteNonQuery();
@@ -175,7 +172,146 @@ namespace StonePlanner
                 // plan = null;
             }
         }
+
+        //internal unsafe void PlanAdder(Plan pValue, PlanClassD @struct)
+        //{
+        //    /*
+        //     * 这个奇怪的函数真是令人费解
+        //     * 已经传入了Plan了 您老是不会自己提提参数吗
+        //     * 况且有地方有 有地方没有
+        //     * 总言而之 屁用没有
+        //     * 个人认为开发者脑子有病
+        //     * 是的 是指我自己
+        //     */
+
+        //    //分配唯一编号
+        //    int thisNumber = -1;
+        //    for (int i = 0; i < 100; i++)
+        //    {
+        //        if (TasksDict[i] == null)
+        //        {
+        //            thisNumber = i;
+        //            break;
+        //        }
+        //    }
+        //    if (thisNumber == -1) { return; }
+        //    pValue.Top = 36 * thisNumber;
+        //    //获取结构体
+        //    //PlanClassD @struct = Pointer.Box((void*)pStruct, typeof(PlanClassD)) as PlanClassD;
+        //    //设置任务标题
+        //    pValue.capital = @struct.lpCapital;
+        //    //内置编号
+        //    pValue.Lnumber = thisNumber;
+        //    //添加时间
+        //    pValue.dwSeconds = @struct.iSeconds;
+        //    //添加难度
+        //    pValue.dwDifficulty = @struct.dwDifficulty;
+        //    //添加耐力值
+        //    pValue.dwLasting = @struct.iLasting;
+        //    //添加爆发值
+        //    pValue.dwExplosive = @struct.iExplosive;
+        //    //添加智慧值
+        //    pValue.dwWisdom = @struct.iWisdom;
+        //    //添加开始时间
+        //    pValue.dtStartTime = DateTime.FromBinary(@struct.dwStart);
+        //    //添加到字典
+        //    TasksDict[thisNumber] = pValue;
+        //    panel_M.Controls.Add(pValue);
+        //}
+
         #region 编辑器【InnerIDE】废弃代码
         #endregion
+        #region 登录窗口【Login】废弃代码
+        public static void Login()
+        {
+            try
+            {
+                var result = SQLConnect.SQLCommandQuery($"SELECT Pwd FROM Users where Username='';");
+                DataTable dt = new DataTable();
+                if (result.HasRows)
+                {
+                    for (int i = 0; i < result.FieldCount; i++)
+                    {
+                        dt.Columns.Add(result.GetName(i));
+                    }
+                    dt.Rows.Clear();
+                }
+                while (result.Read())
+                {
+                    DataRow row = dt.NewRow();
+                    for (int i = 0; i < result.FieldCount; i++)
+                    {
+                        row[i] = result[i];
+                    }
+                    dt.Rows.Add(row);
+                }
+                //    dataGridView1.DataSource = dt;
+                //    if (dataGridView1.Rows[0].Cells[0].Value.ToString() == "")
+                //    {
+                //        MessageBox.Show("账号不存在！", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //        return;
+                //    }
+
+                //    if (dataGridView1.Rows[0].Cells[0].Value.ToString() == textBox_M_Pwd.Text)
+                //    {
+                //        result = SQLConnect.SQLCommandQuery($"SELECT Type FROM Users where Username='{textBox_M_Name.Text}';");
+                //        dt = new DataTable();
+                //        if (result.HasRows)
+                //        {
+                //            for (int i = 0; i < result.FieldCount; i++)
+                //            {
+                //                dt.Columns.Add(result.GetName(i));
+                //            }
+                //            dt.Rows.Clear();
+                //        }
+                //        while (result.Read())
+                //        {
+                //            DataRow row = dt.NewRow();
+                //            for (int i = 0; i < result.FieldCount; i++)
+                //            {
+                //                row[i] = result[i];
+                //            }
+                //            dt.Rows.Add(row);
+                //        }
+                //        dataGridView1.DataSource = dt;
+                //        //特殊用户
+                //        try
+                //        {
+                //            UserType = Convert.ToInt32(dataGridView1.Rows[0].Cells[0].Value);
+                //            if (UserType == 2)
+                //            {
+                //                Testify ti = new Testify();
+                //                ti.Show();
+                //                new ErrorCenter().Show();
+                //            }
+                //            MessageBox.Show("登录成功", "登录成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //            Hide();
+                //            UserName = textBox_M_Name.Text;
+                //            Main m = new Main();
+                //            m.Show();
+                //            //Thread td = new Thread(new ThreadStart(
+                //            //    () => Application.Run(new Main())
+                //            //    )) ;
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            MessageBox.Show("读取用户时出现异常，详情请见错误中心", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", ex);
+                //            return;
+                //        }
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show("用户名或密码错误!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //    }
+                //}
+                //catch
+                //{
+                //    MessageBox.Show("不存在该用户!", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //}
+            }
+            catch { }
+        #endregion
+        }
     }
 }

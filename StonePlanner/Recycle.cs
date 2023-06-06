@@ -21,7 +21,7 @@ namespace StonePlanner
                 $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password};"
                 ); //Jet OLEDB:Database Password=
             OleDbCommand cmd = conn.CreateCommand();
-            cmd.CommandText = "select * from Tasks";
+            cmd.CommandText = "select top 10 * from Tasks";
             conn.Open();
             OleDbDataReader dr = cmd.ExecuteReader();
             DataTable dt = new DataTable();

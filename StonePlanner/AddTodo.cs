@@ -12,9 +12,12 @@ namespace StonePlanner
         public static extern IntPtr SendMessage(IntPtr hwnd, int wMsg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
-        public AddTodo()
+        public delegate void PlanAddInvoke(Plan plan);
+        PlanAddInvoke PlanAdditionInvoke;
+        public AddTodo(PlanAddInvoke TargetFun)
         {
             InitializeComponent();
+            PlanAdditionInvoke = new PlanAddInvoke(TargetFun);
         }
 
         internal AddTodo(Structs.PlanStruct planStruct)
@@ -81,8 +84,9 @@ namespace StonePlanner
         private void AddTodo_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
-            label_T.Text = Main.langInfo[3];
-            metroButton_Submit.Text = Main.langInfo[6];
+            domainUpDown_Difficulty.ReadOnly = true;
+            label_T.Text = "新建一个待办";
+            metroButton_Submit.Text = "新建待办(&D)";
             textBox_Numbered.ReadOnly = true;
             //Default HH and mm
             //Default MotherFucker
@@ -91,23 +95,23 @@ namespace StonePlanner
             //难度添加
             for (double i = 0.1; i < 2.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"EASY {i}");
+                domainUpDown_Difficulty.Items.Add($"EASY {i:F1}");
             }
-            for (double i = 2.1; i < 4.0; i += 0.1)
+            for (double i = 2.0; i < 4.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"MIDDLE {i}");
+                domainUpDown_Difficulty.Items.Add($"MIDDLE {i:F1}");
             }
-            for (double i = 4.1; i < 6.0; i += 0.1)
+            for (double i = 4.0; i < 6.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"HARD {i}");
+                domainUpDown_Difficulty.Items.Add($"HARD {i:F1}");
             }
-            for (double i = 6.1; i < 9.0; i += 0.1)
+            for (double i = 6.0; i < 9.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"DESPAIR {i}");
+                domainUpDown_Difficulty.Items.Add($"DESPAIR {i:F1}");
             }
-            for (double i = 9.1; i < 10.0; i += 0.1)
+            for (double i = 9.0; i < 10.0; i += 0.1)
             {
-                domainUpDown_Difficulty.Items.Add($"BEYOND {i}");
+                domainUpDown_Difficulty.Items.Add($"BEYOND {i:F1}");
             }
 
             //读取清单
@@ -139,19 +143,19 @@ namespace StonePlanner
             }
         }
 
-        private unsafe void button_New_Click(object sender, EventArgs e)
+        private void button_New_Click(object sender, EventArgs e)
         {
             try
             {
                 //封装类送走
                 PlanClassC psc = new PlanClassC();
-                psc.lpCapital = textBox_Capital.Text;
-                psc.iSeconds = Convert.ToInt32(textBox_Time.Text);
-                psc.dwIntro = textBox_Intro.Text;
-                psc.iLasting = Convert.ToInt32(textBox_Lasting.Text);
-                psc.iExplosive = Convert.ToInt32(textBox_Explosive.Text);
-                psc.iWisdom = Convert.ToInt32(textBox_Wisdom.Text);
-                psc.lpParent = comboBox_List.SelectedItem.ToString();
+                psc.capital = textBox_Capital.Text;
+                psc.seconds = Convert.ToInt32(textBox_Time.Text);
+                psc.intro = textBox_Intro.Text;
+                psc.lasting = Convert.ToInt32(textBox_Lasting.Text);
+                psc.explosive = Convert.ToInt32(textBox_Explosive.Text);
+                psc.wisdom = Convert.ToInt32(textBox_Wisdom.Text);
+                psc.parent = comboBox_List.SelectedItem.ToString();
                 DateTime _ = new DateTime(
                     dateTimePicker_Now.Value.Year,
                     dateTimePicker_Now.Value.Month,
@@ -161,24 +165,25 @@ namespace StonePlanner
                     0
                     );
                 psc.UDID = new Random().Next(100000000, 999999999);
-                psc.dwStart = _.ToBinary();
+                psc.startTime = _.ToBinary();
                 double diff = 0D;
                 try
                 {
                     diff = Math.Round(Convert.ToDouble(domainUpDown_Difficulty.SelectedItem.ToString().Split(' ')[1]), 1);
                 }
                 catch { diff = 0D; }
-                psc.dwDifficulty = diff;
-                //封送结构体
-                Main.planner = psc;
-                Main.AddSign(4);
+                psc.difficulty = diff;
+                //对指针传出
+                PlanAdditionInvoke(new Plan(psc));
                 Close();
+                //封送结构体
+                //Main.planner = psc;
+                //Main.AddSign(4);
+                //Close();
             }
             catch (Exception ex)
             {
-                ErrorCenter.AddError(DateTime.Now.ToString(), "Warning", ex);
-                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
+                MessageBox.Show(ex.Message + "\n这通常是您错误的键入了某个值，或没有输入某个值导致。", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -212,6 +217,12 @@ namespace StonePlanner
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void metroButton_Add_Click(object sender, EventArgs e)
+        {
+            AddList al = new AddList();
+            al.Show();
         }
     }
 }

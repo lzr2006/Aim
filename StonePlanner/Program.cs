@@ -1,7 +1,4 @@
-﻿using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
-using System;
+﻿using System;
 using System.Data.OleDb;
 using System.Windows.Forms;
 
@@ -9,7 +6,8 @@ namespace StonePlanner
 {
     internal static class Program
     {
-        public static bool HIDEBUG = false;
+        public static bool HIDEBUG = true;
+        public static bool EnableErrorCenter = false;
         static bool EnableProgramTrusteeship = true;
         /// <summary>
         /// The main entry point for the application.
@@ -26,8 +24,6 @@ namespace StonePlanner
             } 
             catch { }
             Application.EnableVisualStyles();
-            AppCenter.Start("f60d699f-aa39-4089-aae5-5c3c76218ebb",
-            typeof(Analytics), typeof(Crashes));
 
             try
             {
@@ -58,13 +54,13 @@ namespace StonePlanner
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-           ErrorCenter.AddError(DateTime.Now.ToString(), "Error", (Exception) e.ExceptionObject);
+            ErrorCenter.AddError(DataType.ExceptionsLevel.Error, (Exception) e.ExceptionObject);
            new BugReporter(e.ExceptionObject.ToString()).Show();
         }
 
         static void Application_ThreadException(object sender, System.Threading.ThreadExceptionEventArgs e)
         {
-            ErrorCenter.AddError(DateTime.Now.ToString(), "Error", e.Exception);
+            ErrorCenter.AddError(DataType.ExceptionsLevel.Error, e.Exception);
             new BugReporter(e.Exception.ToString()).Show();
         }
     }

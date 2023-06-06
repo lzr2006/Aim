@@ -11,6 +11,11 @@ namespace StonePlanner
         public ErrorCenter()
         {
             InitializeComponent();
+
+            if (!Program.EnableErrorCenter)
+            {
+                Text = "错误中心（未启用记录）";
+            }
         }
 
         private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -18,16 +23,26 @@ namespace StonePlanner
 
         }
 
-        internal static void AddError(string time,string errLevel,Exception err) 
+        internal static void AddError(DataType.ExceptionsLevel errLevel,Exception err) 
         {
-            //链接数据库
-            string strConn = $" Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {Application.StartupPath}\\data.mdb;Jet OLEDB:Database Password={Main.password}";
-            OleDbConnection myConn = new OleDbConnection(strConn);
-            myConn.Open();
-            //插入错误
-            string ErrInst = $"INSERT INTO Errors (ErrTime,ErrLevel,ErrMessage) VALUES ('{time}','{errLevel}','{err.Message}')";
-            OleDbCommand inst = new OleDbCommand(ErrInst, myConn);
-            inst.ExecuteNonQuery();
+            if (!Program.EnableErrorCenter)
+            {
+                return;
+            }
+            string levelString = errLevel switch
+            {
+                DataType.ExceptionsLevel.Infomation => "Infomation",
+                DataType.ExceptionsLevel.Caution => "Caution",
+                DataType.ExceptionsLevel.Warning => "Warning",
+                DataType.ExceptionsLevel.Error => "Error",
+                _ => throw new Exception("不存在这样的类型")
+            };
+            string trace = err.StackTrace;
+            string[] kb = trace.Split(' ');
+
+            string sourceString = $"Aim";
+            SQLConnect.SQLCommandExecution($"INSERT INTO Errors (ErrTime,ErrLevel,ErrMessage,Source)" +
+                $" VALUES ('{DateTime.Now}','{levelString}','{err.Message}','{sourceString}')",ref Main.odcConnection);
         }
         private void ErrorCenter_Load(object sender, EventArgs e)
         {
