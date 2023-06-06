@@ -51,7 +51,7 @@ namespace StonePlanner
         }
         protected List<List<string>> rx = new List<List<string>>(); int rw = 0;
         #region 语法解析器
-        protected unsafe void SyntaxParser(string row,int dwStatus = 0)
+        protected void SyntaxParser(string row,int dwStatus = 0)
         {
             try
             {

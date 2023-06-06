@@ -407,7 +407,7 @@ namespace StonePlanner
         #endregion
         delegate void PlanAddInvoke(Plan pValue);
         #region 任务处理相关
-        internal unsafe void AddPlan(Plan pValue)
+        internal void AddPlan(Plan pValue)
         {
             //分配唯一编号
             int thisNumber = -1;
@@ -930,7 +930,7 @@ namespace StonePlanner
             signQueue.Enqueue(sign);
         }
 
-        private unsafe void timer_EventHandler_Tick(object sender, EventArgs e)
+        private void timer_EventHandler_Tick(object sender, EventArgs e)
         {
             //傻逼东西 开发者倒拔几把插在代码里
             //查找进程

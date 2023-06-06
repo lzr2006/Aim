@@ -261,7 +261,7 @@ namespace StonePlanner
         #region 语法解析器
         protected int KDP = 0, rw = 0;
         protected List<List<string>> rx = new List<List<string>>();
-        internal unsafe void SyntaxParser(string row, int dwStatus = 0)
+        internal void SyntaxParser(string row, int dwStatus = 0)
         {
             try {
                 nInput = new List<string>();
@@ -577,7 +577,7 @@ namespace StonePlanner
             stOpenRem = !stOpenRem;
         }
 
-        private unsafe void 中文插入CToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 中文插入CToolStripMenuItem_Click(object sender, EventArgs e)
         {            //char szBufferSize;
             //char* chineseText = &szBufferSize;
             //InputBoxStruct IBS = new InputBoxStruct();
@@ -590,40 +590,20 @@ namespace StonePlanner
             //nameGetThread.StartNew(() => FileAddition(chineseText, IB));
             Inner.InnerFuncs.CmdExecuter.RunCmd("notepad");
         }
-        private unsafe void 新建NToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 新建NToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            char[] szFileNameSize = new char[256];
-            fixed (char* fileName = szFileNameSize)
-            {
-                InputBoxStruct IBS = new InputBoxStruct();
-                IBS.lpText = "输入文件名";
-                IBS.lpCaption = "请输入文件名";
-                IBS.szValueBack = fileName;
-                InputBox input = new InputBox(IBS);
-                input.Show();
-                TaskFactory nameGetThread = new TaskFactory();
-                char* temp = fileName;
-                nameGetThread.StartNew(() => FileAddition(temp, input));
-            }
+            InputBoxStruct IBS = new InputBoxStruct();
+            IBS.lpText = "输入文件名";
+            IBS.lpCaption = "请输入文件名";
+            InputBox input = new InputBox(IBS, new InputBox.SetNameInvokeBase(AddFile));
+            input.Show();
         }
-        public unsafe void FileAddition(char* fileName, InputBox input)
+
+        public void AddFile(string fileName) 
         {
-            //FIXED FILENAME AS CONST
-            while (true)
-            {
-                if (input.IN)
-                {
-                    char* temp = fileName;
-                    for (int i = 0; i < 256; i++)
-                    {
-                        fileNameString += *temp++;
-                    }
-                    richTextBox_Main.Text += $"//Filename：{fileNameString}\n";
-                    iFileName = $"{Application.StartupPath}\\coding\\{fileNameString.Trim(new char[] { '\0'})}.mtd";
-                    iFileName.Replace('\0', ' ');
-                    input.IN = !input.IN;
-                }
-            }
+            richTextBox_Main.Text += $"//Filename：{fileName}\n";
+            iFileName = $"{Application.StartupPath}\\coding\\{fileName.Trim(new char[] { '\0' })}.mtd";
+            iFileName.Replace('\0', ' ');
         }
 
         //        foreach (var item in fileName)
@@ -669,14 +649,8 @@ namespace StonePlanner
             {
                 ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
                 DialogResult dr =
-                MessageBox.Show($"保存失败，原因是{ex.Message}。\n是否向MethodBox报告该错误（自动报告）？", "失败",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                if (dr == DialogResult.Yes)
-                {
-                    throw ex;
-                }
-                else
-                { }
+                MessageBox.Show($"保存失败，原因是{ex.Message}。", "失败",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -957,7 +931,7 @@ namespace StonePlanner
         }
         #endregion
         #region 外部语法解析接口
-        internal unsafe static string SyntaxParser_Outer(string row, int dwStatus = 0)
+        internal static string SyntaxParser_Outer(string row, int dwStatus = 0)
         {
             List<List<string>> rx = new List<List<string>>();
             List<string> nInput = new List<string>();

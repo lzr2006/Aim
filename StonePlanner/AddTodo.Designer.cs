@@ -67,10 +67,9 @@ namespace StonePlanner
             // 
             this.label_TodoName.AutoSize = true;
             this.label_TodoName.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_TodoName.Location = new System.Drawing.Point(7, 45);
-            this.label_TodoName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_TodoName.Location = new System.Drawing.Point(5, 36);
             this.label_TodoName.Name = "label_TodoName";
-            this.label_TodoName.Size = new System.Drawing.Size(74, 25);
+            this.label_TodoName.Size = new System.Drawing.Size(61, 20);
             this.label_TodoName.TabIndex = 2;
             this.label_TodoName.Text = "标 题：";
             // 
@@ -80,19 +79,18 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Capital.CustomButton.Image = null;
-            this.textBox_Capital.CustomButton.Location = new System.Drawing.Point(161, 2);
-            this.textBox_Capital.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Capital.CustomButton.Location = new System.Drawing.Point(90, 2);
+            this.textBox_Capital.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Capital.CustomButton.Name = "";
-            this.textBox_Capital.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_Capital.CustomButton.Size = new System.Drawing.Size(14, 15);
             this.textBox_Capital.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Capital.CustomButton.TabIndex = 1;
             this.textBox_Capital.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Capital.CustomButton.UseSelectable = true;
             this.textBox_Capital.CustomButton.Visible = false;
             this.textBox_Capital.Lines = new string[0];
-            this.textBox_Capital.Location = new System.Drawing.Point(84, 42);
-            this.textBox_Capital.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_Capital.MaxLength = 32767;
+            this.textBox_Capital.Location = new System.Drawing.Point(63, 34);
+            this.textBox_Capital.MaxLength = 20;
             this.textBox_Capital.Name = "textBox_Capital";
             this.textBox_Capital.PasswordChar = '\0';
             this.textBox_Capital.ScrollBars = System.Windows.Forms.ScrollBars.None;
@@ -100,7 +98,7 @@ namespace StonePlanner
             this.textBox_Capital.SelectionLength = 0;
             this.textBox_Capital.SelectionStart = 0;
             this.textBox_Capital.ShortcutsEnabled = true;
-            this.textBox_Capital.Size = new System.Drawing.Size(189, 30);
+            this.textBox_Capital.Size = new System.Drawing.Size(142, 24);
             this.textBox_Capital.TabIndex = 1;
             this.textBox_Capital.UseSelectable = true;
             this.textBox_Capital.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -110,10 +108,9 @@ namespace StonePlanner
             // 
             this.label_Numbered.AutoSize = true;
             this.label_Numbered.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Numbered.Location = new System.Drawing.Point(4, 162);
-            this.label_Numbered.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_Numbered.Location = new System.Drawing.Point(3, 130);
             this.label_Numbered.Name = "label_Numbered";
-            this.label_Numbered.Size = new System.Drawing.Size(74, 25);
+            this.label_Numbered.Size = new System.Drawing.Size(61, 20);
             this.label_Numbered.TabIndex = 4;
             this.label_Numbered.Text = "编 号：";
             // 
@@ -123,10 +120,10 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Numbered.CustomButton.Image = null;
-            this.textBox_Numbered.CustomButton.Location = new System.Drawing.Point(155, 2);
-            this.textBox_Numbered.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Numbered.CustomButton.Location = new System.Drawing.Point(86, 1);
+            this.textBox_Numbered.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Numbered.CustomButton.Name = "";
-            this.textBox_Numbered.CustomButton.Size = new System.Drawing.Size(19, 19);
+            this.textBox_Numbered.CustomButton.Size = new System.Drawing.Size(13, 14);
             this.textBox_Numbered.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Numbered.CustomButton.TabIndex = 1;
             this.textBox_Numbered.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -134,8 +131,7 @@ namespace StonePlanner
             this.textBox_Numbered.CustomButton.Visible = false;
             this.textBox_Numbered.Lines = new string[] {
         "MANIS自动分配编号"};
-            this.textBox_Numbered.Location = new System.Drawing.Point(79, 164);
-            this.textBox_Numbered.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_Numbered.Location = new System.Drawing.Point(59, 131);
             this.textBox_Numbered.MaxLength = 32767;
             this.textBox_Numbered.Name = "textBox_Numbered";
             this.textBox_Numbered.PasswordChar = '\0';
@@ -144,7 +140,7 @@ namespace StonePlanner
             this.textBox_Numbered.SelectionLength = 0;
             this.textBox_Numbered.SelectionStart = 0;
             this.textBox_Numbered.ShortcutsEnabled = true;
-            this.textBox_Numbered.Size = new System.Drawing.Size(177, 24);
+            this.textBox_Numbered.Size = new System.Drawing.Size(133, 19);
             this.textBox_Numbered.TabIndex = 3;
             this.textBox_Numbered.Text = "MANIS自动分配编号";
             this.textBox_Numbered.UseSelectable = true;
@@ -157,18 +153,17 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Time.CustomButton.Image = null;
-            this.textBox_Time.CustomButton.Location = new System.Drawing.Point(161, 2);
-            this.textBox_Time.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Time.CustomButton.Location = new System.Drawing.Point(90, 2);
+            this.textBox_Time.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Time.CustomButton.Name = "";
-            this.textBox_Time.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_Time.CustomButton.Size = new System.Drawing.Size(14, 15);
             this.textBox_Time.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Time.CustomButton.TabIndex = 1;
             this.textBox_Time.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Time.CustomButton.UseSelectable = true;
             this.textBox_Time.CustomButton.Visible = false;
             this.textBox_Time.Lines = new string[0];
-            this.textBox_Time.Location = new System.Drawing.Point(84, 164);
-            this.textBox_Time.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_Time.Location = new System.Drawing.Point(63, 131);
             this.textBox_Time.MaxLength = 32767;
             this.textBox_Time.Name = "textBox_Time";
             this.textBox_Time.PasswordChar = '\0';
@@ -177,7 +172,7 @@ namespace StonePlanner
             this.textBox_Time.SelectionLength = 0;
             this.textBox_Time.SelectionStart = 0;
             this.textBox_Time.ShortcutsEnabled = true;
-            this.textBox_Time.Size = new System.Drawing.Size(189, 30);
+            this.textBox_Time.Size = new System.Drawing.Size(142, 24);
             this.textBox_Time.TabIndex = 2;
             this.textBox_Time.UseSelectable = true;
             this.textBox_Time.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -187,10 +182,9 @@ namespace StonePlanner
             // 
             this.label_ToDoTime.AutoSize = true;
             this.label_ToDoTime.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ToDoTime.Location = new System.Drawing.Point(9, 166);
-            this.label_ToDoTime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_ToDoTime.Location = new System.Drawing.Point(7, 133);
             this.label_ToDoTime.Name = "label_ToDoTime";
-            this.label_ToDoTime.Size = new System.Drawing.Size(74, 25);
+            this.label_ToDoTime.Size = new System.Drawing.Size(61, 20);
             this.label_ToDoTime.TabIndex = 7;
             this.label_ToDoTime.Text = "时 间：";
             // 
@@ -198,10 +192,9 @@ namespace StonePlanner
             // 
             this.label_ToDoIntro.AutoSize = true;
             this.label_ToDoIntro.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ToDoIntro.Location = new System.Drawing.Point(4, 35);
-            this.label_ToDoIntro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_ToDoIntro.Location = new System.Drawing.Point(3, 28);
             this.label_ToDoIntro.Name = "label_ToDoIntro";
-            this.label_ToDoIntro.Size = new System.Drawing.Size(74, 25);
+            this.label_ToDoIntro.Size = new System.Drawing.Size(61, 20);
             this.label_ToDoIntro.TabIndex = 8;
             this.label_ToDoIntro.Text = "介 绍：";
             // 
@@ -211,19 +204,18 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Intro.CustomButton.Image = null;
-            this.textBox_Intro.CustomButton.Location = new System.Drawing.Point(109, 2);
-            this.textBox_Intro.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Intro.CustomButton.Location = new System.Drawing.Point(58, 2);
+            this.textBox_Intro.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Intro.CustomButton.Name = "";
-            this.textBox_Intro.CustomButton.Size = new System.Drawing.Size(67, 67);
+            this.textBox_Intro.CustomButton.Size = new System.Drawing.Size(40, 42);
             this.textBox_Intro.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Intro.CustomButton.TabIndex = 1;
             this.textBox_Intro.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Intro.CustomButton.UseSelectable = true;
             this.textBox_Intro.CustomButton.Visible = false;
             this.textBox_Intro.Lines = new string[0];
-            this.textBox_Intro.Location = new System.Drawing.Point(77, 31);
-            this.textBox_Intro.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox_Intro.MaxLength = 32767;
+            this.textBox_Intro.Location = new System.Drawing.Point(58, 25);
+            this.textBox_Intro.MaxLength = 300;
             this.textBox_Intro.Multiline = true;
             this.textBox_Intro.Name = "textBox_Intro";
             this.textBox_Intro.PasswordChar = '\0';
@@ -232,7 +224,7 @@ namespace StonePlanner
             this.textBox_Intro.SelectionLength = 0;
             this.textBox_Intro.SelectionStart = 0;
             this.textBox_Intro.ShortcutsEnabled = true;
-            this.textBox_Intro.Size = new System.Drawing.Size(179, 72);
+            this.textBox_Intro.Size = new System.Drawing.Size(134, 58);
             this.textBox_Intro.TabIndex = 9;
             this.textBox_Intro.UseSelectable = true;
             this.textBox_Intro.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -242,19 +234,17 @@ namespace StonePlanner
             // 
             this.label_Difficulty.AutoSize = true;
             this.label_Difficulty.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Difficulty.Location = new System.Drawing.Point(7, 42);
-            this.label_Difficulty.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_Difficulty.Location = new System.Drawing.Point(5, 34);
             this.label_Difficulty.Name = "label_Difficulty";
-            this.label_Difficulty.Size = new System.Drawing.Size(74, 25);
+            this.label_Difficulty.Size = new System.Drawing.Size(61, 20);
             this.label_Difficulty.TabIndex = 10;
             this.label_Difficulty.Text = "难 度：";
             // 
             // domainUpDown_Difficulty
             // 
-            this.domainUpDown_Difficulty.Location = new System.Drawing.Point(85, 40);
-            this.domainUpDown_Difficulty.Margin = new System.Windows.Forms.Padding(4);
+            this.domainUpDown_Difficulty.Location = new System.Drawing.Point(64, 32);
             this.domainUpDown_Difficulty.Name = "domainUpDown_Difficulty";
-            this.domainUpDown_Difficulty.Size = new System.Drawing.Size(179, 31);
+            this.domainUpDown_Difficulty.Size = new System.Drawing.Size(134, 27);
             this.domainUpDown_Difficulty.TabIndex = 11;
             this.domainUpDown_Difficulty.Text = "UNKNOWN 0.0";
             // 
@@ -262,10 +252,9 @@ namespace StonePlanner
             // 
             this.label_Lasting.AutoSize = true;
             this.label_Lasting.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Lasting.Location = new System.Drawing.Point(7, 82);
-            this.label_Lasting.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_Lasting.Location = new System.Drawing.Point(5, 66);
             this.label_Lasting.Name = "label_Lasting";
-            this.label_Lasting.Size = new System.Drawing.Size(74, 25);
+            this.label_Lasting.Size = new System.Drawing.Size(61, 20);
             this.label_Lasting.TabIndex = 12;
             this.label_Lasting.Text = "耐 力：";
             // 
@@ -275,18 +264,18 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Lasting.CustomButton.Image = null;
-            this.textBox_Lasting.CustomButton.Location = new System.Drawing.Point(155, 1);
-            this.textBox_Lasting.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Lasting.CustomButton.Location = new System.Drawing.Point(87, 2);
+            this.textBox_Lasting.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Lasting.CustomButton.Name = "";
-            this.textBox_Lasting.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_Lasting.CustomButton.Size = new System.Drawing.Size(11, 12);
             this.textBox_Lasting.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Lasting.CustomButton.TabIndex = 1;
             this.textBox_Lasting.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Lasting.CustomButton.UseSelectable = true;
             this.textBox_Lasting.CustomButton.Visible = false;
             this.textBox_Lasting.Lines = new string[0];
-            this.textBox_Lasting.Location = new System.Drawing.Point(85, 82);
-            this.textBox_Lasting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Lasting.Location = new System.Drawing.Point(64, 66);
+            this.textBox_Lasting.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Lasting.MaxLength = 32767;
             this.textBox_Lasting.Name = "textBox_Lasting";
             this.textBox_Lasting.PasswordChar = '\0';
@@ -295,7 +284,7 @@ namespace StonePlanner
             this.textBox_Lasting.SelectionLength = 0;
             this.textBox_Lasting.SelectionStart = 0;
             this.textBox_Lasting.ShortcutsEnabled = true;
-            this.textBox_Lasting.Size = new System.Drawing.Size(179, 25);
+            this.textBox_Lasting.Size = new System.Drawing.Size(134, 20);
             this.textBox_Lasting.TabIndex = 13;
             this.textBox_Lasting.UseSelectable = true;
             this.textBox_Lasting.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -307,18 +296,18 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Explosive.CustomButton.Image = null;
-            this.textBox_Explosive.CustomButton.Location = new System.Drawing.Point(155, 1);
-            this.textBox_Explosive.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Explosive.CustomButton.Location = new System.Drawing.Point(87, 2);
+            this.textBox_Explosive.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Explosive.CustomButton.Name = "";
-            this.textBox_Explosive.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_Explosive.CustomButton.Size = new System.Drawing.Size(11, 12);
             this.textBox_Explosive.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Explosive.CustomButton.TabIndex = 1;
             this.textBox_Explosive.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Explosive.CustomButton.UseSelectable = true;
             this.textBox_Explosive.CustomButton.Visible = false;
             this.textBox_Explosive.Lines = new string[0];
-            this.textBox_Explosive.Location = new System.Drawing.Point(85, 121);
-            this.textBox_Explosive.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Explosive.Location = new System.Drawing.Point(64, 97);
+            this.textBox_Explosive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Explosive.MaxLength = 32767;
             this.textBox_Explosive.Name = "textBox_Explosive";
             this.textBox_Explosive.PasswordChar = '\0';
@@ -327,7 +316,7 @@ namespace StonePlanner
             this.textBox_Explosive.SelectionLength = 0;
             this.textBox_Explosive.SelectionStart = 0;
             this.textBox_Explosive.ShortcutsEnabled = true;
-            this.textBox_Explosive.Size = new System.Drawing.Size(179, 25);
+            this.textBox_Explosive.Size = new System.Drawing.Size(134, 20);
             this.textBox_Explosive.TabIndex = 15;
             this.textBox_Explosive.UseSelectable = true;
             this.textBox_Explosive.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -337,10 +326,9 @@ namespace StonePlanner
             // 
             this.label_Explosive.AutoSize = true;
             this.label_Explosive.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Explosive.Location = new System.Drawing.Point(7, 121);
-            this.label_Explosive.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_Explosive.Location = new System.Drawing.Point(5, 97);
             this.label_Explosive.Name = "label_Explosive";
-            this.label_Explosive.Size = new System.Drawing.Size(74, 25);
+            this.label_Explosive.Size = new System.Drawing.Size(61, 20);
             this.label_Explosive.TabIndex = 14;
             this.label_Explosive.Text = "爆 发：";
             // 
@@ -350,18 +338,18 @@ namespace StonePlanner
             // 
             // 
             this.textBox_Wisdom.CustomButton.Image = null;
-            this.textBox_Wisdom.CustomButton.Location = new System.Drawing.Point(155, 1);
-            this.textBox_Wisdom.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Wisdom.CustomButton.Location = new System.Drawing.Point(87, 2);
+            this.textBox_Wisdom.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Wisdom.CustomButton.Name = "";
-            this.textBox_Wisdom.CustomButton.Size = new System.Drawing.Size(23, 23);
+            this.textBox_Wisdom.CustomButton.Size = new System.Drawing.Size(11, 12);
             this.textBox_Wisdom.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_Wisdom.CustomButton.TabIndex = 1;
             this.textBox_Wisdom.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_Wisdom.CustomButton.UseSelectable = true;
             this.textBox_Wisdom.CustomButton.Visible = false;
             this.textBox_Wisdom.Lines = new string[0];
-            this.textBox_Wisdom.Location = new System.Drawing.Point(85, 161);
-            this.textBox_Wisdom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_Wisdom.Location = new System.Drawing.Point(64, 129);
+            this.textBox_Wisdom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_Wisdom.MaxLength = 32767;
             this.textBox_Wisdom.Name = "textBox_Wisdom";
             this.textBox_Wisdom.PasswordChar = '\0';
@@ -370,7 +358,7 @@ namespace StonePlanner
             this.textBox_Wisdom.SelectionLength = 0;
             this.textBox_Wisdom.SelectionStart = 0;
             this.textBox_Wisdom.ShortcutsEnabled = true;
-            this.textBox_Wisdom.Size = new System.Drawing.Size(179, 25);
+            this.textBox_Wisdom.Size = new System.Drawing.Size(134, 20);
             this.textBox_Wisdom.TabIndex = 17;
             this.textBox_Wisdom.UseSelectable = true;
             this.textBox_Wisdom.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -380,10 +368,9 @@ namespace StonePlanner
             // 
             this.label_Wisdom.AutoSize = true;
             this.label_Wisdom.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Wisdom.Location = new System.Drawing.Point(7, 161);
-            this.label_Wisdom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_Wisdom.Location = new System.Drawing.Point(5, 129);
             this.label_Wisdom.Name = "label_Wisdom";
-            this.label_Wisdom.Size = new System.Drawing.Size(74, 25);
+            this.label_Wisdom.Size = new System.Drawing.Size(61, 20);
             this.label_Wisdom.TabIndex = 16;
             this.label_Wisdom.Text = "智 慧：";
             // 
@@ -391,40 +378,36 @@ namespace StonePlanner
             // 
             this.label_List.AutoSize = true;
             this.label_List.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_List.Location = new System.Drawing.Point(4, 119);
-            this.label_List.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_List.Location = new System.Drawing.Point(3, 95);
             this.label_List.Name = "label_List";
-            this.label_List.Size = new System.Drawing.Size(74, 25);
+            this.label_List.Size = new System.Drawing.Size(61, 20);
             this.label_List.TabIndex = 18;
             this.label_List.Text = "清 单：";
             // 
             // comboBox_List
             // 
             this.comboBox_List.FormattingEnabled = true;
-            this.comboBox_List.Location = new System.Drawing.Point(77, 116);
-            this.comboBox_List.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox_List.Location = new System.Drawing.Point(58, 93);
             this.comboBox_List.Name = "comboBox_List";
-            this.comboBox_List.Size = new System.Drawing.Size(131, 33);
+            this.comboBox_List.Size = new System.Drawing.Size(99, 27);
             this.comboBox_List.TabIndex = 19;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(9, 88);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(7, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 25);
+            this.label1.Size = new System.Drawing.Size(61, 20);
             this.label1.TabIndex = 22;
             this.label1.Text = "开 始：";
             // 
             // dateTimePicker_Now
             // 
             this.dateTimePicker_Now.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.dateTimePicker_Now.Location = new System.Drawing.Point(84, 82);
-            this.dateTimePicker_Now.Margin = new System.Windows.Forms.Padding(4);
+            this.dateTimePicker_Now.Location = new System.Drawing.Point(63, 66);
             this.dateTimePicker_Now.Name = "dateTimePicker_Now";
-            this.dateTimePicker_Now.Size = new System.Drawing.Size(191, 30);
+            this.dateTimePicker_Now.Size = new System.Drawing.Size(144, 25);
             this.dateTimePicker_Now.TabIndex = 23;
             // 
             // textBox_hh
@@ -433,18 +416,17 @@ namespace StonePlanner
             // 
             // 
             this.textBox_hh.CustomButton.Image = null;
-            this.textBox_hh.CustomButton.Location = new System.Drawing.Point(56, 2);
-            this.textBox_hh.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_hh.CustomButton.Location = new System.Drawing.Point(31, 2);
+            this.textBox_hh.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_hh.CustomButton.Name = "";
-            this.textBox_hh.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_hh.CustomButton.Size = new System.Drawing.Size(14, 15);
             this.textBox_hh.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_hh.CustomButton.TabIndex = 1;
             this.textBox_hh.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_hh.CustomButton.UseSelectable = true;
             this.textBox_hh.CustomButton.Visible = false;
             this.textBox_hh.Lines = new string[0];
-            this.textBox_hh.Location = new System.Drawing.Point(85, 122);
-            this.textBox_hh.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_hh.Location = new System.Drawing.Point(64, 98);
             this.textBox_hh.MaxLength = 32767;
             this.textBox_hh.Name = "textBox_hh";
             this.textBox_hh.PasswordChar = '\0';
@@ -453,7 +435,7 @@ namespace StonePlanner
             this.textBox_hh.SelectionLength = 0;
             this.textBox_hh.SelectionStart = 0;
             this.textBox_hh.ShortcutsEnabled = true;
-            this.textBox_hh.Size = new System.Drawing.Size(84, 30);
+            this.textBox_hh.Size = new System.Drawing.Size(63, 24);
             this.textBox_hh.TabIndex = 24;
             this.textBox_hh.UseSelectable = true;
             this.textBox_hh.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -462,9 +444,10 @@ namespace StonePlanner
             // label_Spliter
             // 
             this.label_Spliter.AutoSize = true;
-            this.label_Spliter.Location = new System.Drawing.Point(168, 124);
+            this.label_Spliter.Location = new System.Drawing.Point(126, 99);
+            this.label_Spliter.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_Spliter.Name = "label_Spliter";
-            this.label_Spliter.Size = new System.Drawing.Size(31, 25);
+            this.label_Spliter.Size = new System.Drawing.Size(25, 20);
             this.label_Spliter.TabIndex = 25;
             this.label_Spliter.Text = "：";
             // 
@@ -474,18 +457,17 @@ namespace StonePlanner
             // 
             // 
             this.textBox_mm.CustomButton.Image = null;
-            this.textBox_mm.CustomButton.Location = new System.Drawing.Point(56, 2);
-            this.textBox_mm.CustomButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBox_mm.CustomButton.Location = new System.Drawing.Point(31, 2);
+            this.textBox_mm.CustomButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox_mm.CustomButton.Name = "";
-            this.textBox_mm.CustomButton.Size = new System.Drawing.Size(25, 25);
+            this.textBox_mm.CustomButton.Size = new System.Drawing.Size(14, 15);
             this.textBox_mm.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.textBox_mm.CustomButton.TabIndex = 1;
             this.textBox_mm.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.textBox_mm.CustomButton.UseSelectable = true;
             this.textBox_mm.CustomButton.Visible = false;
             this.textBox_mm.Lines = new string[0];
-            this.textBox_mm.Location = new System.Drawing.Point(189, 122);
-            this.textBox_mm.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox_mm.Location = new System.Drawing.Point(142, 98);
             this.textBox_mm.MaxLength = 32767;
             this.textBox_mm.Name = "textBox_mm";
             this.textBox_mm.PasswordChar = '\0';
@@ -494,7 +476,7 @@ namespace StonePlanner
             this.textBox_mm.SelectionLength = 0;
             this.textBox_mm.SelectionStart = 0;
             this.textBox_mm.ShortcutsEnabled = true;
-            this.textBox_mm.Size = new System.Drawing.Size(84, 30);
+            this.textBox_mm.Size = new System.Drawing.Size(63, 24);
             this.textBox_mm.TabIndex = 26;
             this.textBox_mm.UseSelectable = true;
             this.textBox_mm.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -512,11 +494,11 @@ namespace StonePlanner
             this.groupBox_Area1.Controls.Add(this.textBox_Time);
             this.groupBox_Area1.Controls.Add(this.label1);
             this.groupBox_Area1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_Area1.Location = new System.Drawing.Point(52, 81);
-            this.groupBox_Area1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox_Area1.Location = new System.Drawing.Point(39, 65);
+            this.groupBox_Area1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox_Area1.Name = "groupBox_Area1";
-            this.groupBox_Area1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Area1.Size = new System.Drawing.Size(288, 211);
+            this.groupBox_Area1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Area1.Size = new System.Drawing.Size(216, 169);
             this.groupBox_Area1.TabIndex = 28;
             this.groupBox_Area1.TabStop = false;
             this.groupBox_Area1.Text = "基本信息";
@@ -533,11 +515,11 @@ namespace StonePlanner
             this.groupBox_Area2.Controls.Add(this.textBox_Lasting);
             this.groupBox_Area2.Controls.Add(this.label_Explosive);
             this.groupBox_Area2.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox_Area2.Location = new System.Drawing.Point(387, 81);
-            this.groupBox_Area2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox_Area2.Location = new System.Drawing.Point(290, 65);
+            this.groupBox_Area2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox_Area2.Name = "groupBox_Area2";
-            this.groupBox_Area2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox_Area2.Size = new System.Drawing.Size(288, 211);
+            this.groupBox_Area2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_Area2.Size = new System.Drawing.Size(216, 169);
             this.groupBox_Area2.TabIndex = 29;
             this.groupBox_Area2.TabStop = false;
             this.groupBox_Area2.Text = "养成信息";
@@ -546,10 +528,9 @@ namespace StonePlanner
             // 
             this.label_T.AutoSize = true;
             this.label_T.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_T.Location = new System.Drawing.Point(813, 401);
-            this.label_T.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label_T.Location = new System.Drawing.Point(610, 321);
             this.label_T.Name = "label_T";
-            this.label_T.Size = new System.Drawing.Size(74, 25);
+            this.label_T.Size = new System.Drawing.Size(61, 20);
             this.label_T.TabIndex = 30;
             this.label_T.Text = "介 绍：";
             // 
@@ -563,11 +544,11 @@ namespace StonePlanner
             this.groupBox1.Controls.Add(this.label_Numbered);
             this.groupBox1.Controls.Add(this.textBox_Numbered);
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(720, 81);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(540, 65);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(288, 211);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(216, 169);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "其它信息";
@@ -575,9 +556,10 @@ namespace StonePlanner
             // 
             // metroButton_Add
             // 
-            this.metroButton_Add.Location = new System.Drawing.Point(213, 116);
+            this.metroButton_Add.Location = new System.Drawing.Point(160, 93);
+            this.metroButton_Add.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.metroButton_Add.Name = "metroButton_Add";
-            this.metroButton_Add.Size = new System.Drawing.Size(43, 33);
+            this.metroButton_Add.Size = new System.Drawing.Size(32, 26);
             this.metroButton_Add.TabIndex = 20;
             this.metroButton_Add.Text = "...";
             this.metroButton_Add.UseSelectable = true;
@@ -585,10 +567,10 @@ namespace StonePlanner
             // 
             // metroButton_Submit
             // 
-            this.metroButton_Submit.Location = new System.Drawing.Point(52, 301);
-            this.metroButton_Submit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.metroButton_Submit.Location = new System.Drawing.Point(39, 241);
+            this.metroButton_Submit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.metroButton_Submit.Name = "metroButton_Submit";
-            this.metroButton_Submit.Size = new System.Drawing.Size(956, 28);
+            this.metroButton_Submit.Size = new System.Drawing.Size(717, 22);
             this.metroButton_Submit.TabIndex = 31;
             this.metroButton_Submit.Text = "新建任务";
             this.metroButton_Submit.UseSelectable = true;
@@ -596,18 +578,17 @@ namespace StonePlanner
             // 
             // AddTodo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1055, 354);
+            this.ClientSize = new System.Drawing.Size(791, 283);
             this.Controls.Add(this.metroButton_Submit);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_T);
             this.Controls.Add(this.groupBox_Area2);
             this.Controls.Add(this.groupBox_Area1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "AddTodo";
-            this.Padding = new System.Windows.Forms.Padding(20, 75, 20, 20);
+            this.Padding = new System.Windows.Forms.Padding(15, 60, 15, 16);
             this.Text = "新建一个任务";
             this.Load += new System.EventHandler(this.AddTodo_Load);
             this.groupBox_Area1.ResumeLayout(false);

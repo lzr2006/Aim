@@ -143,7 +143,7 @@ namespace StonePlanner
             }
         }
 
-        private unsafe void button_New_Click(object sender, EventArgs e)
+        private void button_New_Click(object sender, EventArgs e)
         {
             try
             {

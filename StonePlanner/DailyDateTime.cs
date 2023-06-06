@@ -185,17 +185,9 @@ namespace StonePlanner
             return dt;
         }
 
-        public DailyDateTime DeepCopy(DailyDateTime dt)
+        public DailyDateTime Copy(DailyDateTime dt)
         {
             return new DailyDateTime(hh, mm, ss);
-        }
-
-        public unsafe int* ShallowCopy(DailyDateTime dt)
-        {
-            IntPtr ptr = new IntPtr(0);
-            Marshal.StructureToPtr(dt, ptr, false);
-            int* address = (int*) ptr;
-            return address;
         }
 
         [Serializable]

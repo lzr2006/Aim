@@ -148,7 +148,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(347, 17);
             this.label4.TabIndex = 7;
-            this.label4.Text = "版本 Release 1（内部版本Aim Dev.23060602_1059）";
+            this.label4.Text = "版本 Release 1（内部版本Aim Dev.23060603_1064）";
             // 
             // label5
             // 

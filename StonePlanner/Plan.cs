@@ -137,7 +137,7 @@ namespace StonePlanner
             this.ID = @struct.UDID;
         }
 
-        internal unsafe Plan(PlanClassC @struct)
+        internal Plan(PlanClassC @struct)
         {
             InitializeComponent();
             try
