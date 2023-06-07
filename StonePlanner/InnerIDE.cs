@@ -395,7 +395,7 @@ namespace StonePlanner
                     else if (nInput[0] == "ADD")
                     {
                         //打开信号接口
-                        Main.AddSign(4);
+                        //Main.AddSign(4);
                         if (dwStatus != 1)
                         {
                             if (nInput[1].Contains("[EPH]"))
@@ -448,7 +448,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                Main.AddSign(signal);
+                                //Main.AddSign(signal);
                                 richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)
@@ -1057,7 +1057,7 @@ namespace StonePlanner
                     else if (nInput[0] == "ADD")
                     {
                         //打开信号接口
-                        Main.AddSign(4);
+                        //Main.AddSign(4);
                         if (dwStatus != 1)
                         {
                             if (nInput[1].Contains("[EPH]"))
@@ -1122,7 +1122,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                Main.AddSign(signal);
+                                //Main.AddSign(signal);
                                 return $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)

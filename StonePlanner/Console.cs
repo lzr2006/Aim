@@ -199,7 +199,7 @@ namespace StonePlanner
                         } 
                         Main.planner.capital = nInput[1];
                         Main.planner.seconds = Convert.ToInt32(nInput[2]);
-                        Main.AddSign(4);
+                        //Main.AddSign(4);
                         richTextBox_Output.Text += $"\nConsole@Main>Main：添加任务{nInput[1]}，时长{nInput[2]}。";
                     }
                     else if (nInput[0] == "COMPILE")
@@ -238,7 +238,7 @@ namespace StonePlanner
                             try
                             {
                                 int signal = Convert.ToInt32(nInput[1]);
-                                Main.AddSign(signal);
+                                //Main.AddSign(signal);
                                 richTextBox_Output.Text += $"\nConsole@Poster>成功：将{signal}信号发送到主窗口。";
                             }
                             catch (Exception ex)

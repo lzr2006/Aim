@@ -13,7 +13,6 @@ namespace StonePlanner
         {
             //还是将读取设置在这里
             InitializeSettings();
-            Main.packedSetting = this.packedSettings;
             InitializeComponent();
         }
 

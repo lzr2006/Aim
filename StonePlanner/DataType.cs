@@ -15,5 +15,10 @@ namespace StonePlanner
             Warning,
             Error
         }
+
+        internal class SignChangedEventArgs:EventArgs
+        {
+            public int Sign { get; set; }
+        }
     }
 }

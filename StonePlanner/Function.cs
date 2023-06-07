@@ -15,8 +15,9 @@ namespace StonePlanner
         string imageAddress = null;
         string caplital = "";
         string __Name__ = "";
-        object p = null;
-        public Function(string lpImageAddress,string lpCapital,string szFunctionName,object pVoid = null)
+        object Callback = null;
+        object sder = null;
+        public Function(string lpImageAddress,string lpCapital,string szFunctionName,object Callback = null,object sender = null)
         {
             InitializeComponent();
 
@@ -24,12 +25,16 @@ namespace StonePlanner
             this.caplital = lpCapital;
             this.__Name__ = szFunctionName;
 
-            if (pVoid != null)
+            if (Callback != null)
             {
-                p = pVoid;
+                this.Callback = Callback;
+            }
+            if (sender != null)
+            {
+                this.sder = sender;
             }
         }
-        public Function(string lpCapital, string szListName,int nLineParents, object pVoid = null)
+        public Function(string lpCapital, string szListName,int nLineParents, object Callback = null)
         {
             InitializeComponent();
 
@@ -73,12 +78,12 @@ namespace StonePlanner
             {
                 if (__Name__ == "__New__")
                 {
-                    AddTodo at = new AddTodo((AddTodo.PlanAddInvoke)p);
+                    AddTodo at = new AddTodo((AddTodo.PlanAddInvoke)Callback,(Action<int>)sder);
                     at.Show();
                 }
                 else if (__Name__ == "__Export__")
                 {
-                    Main.AddSign(5);
+                    //Main.AddSign(5);
                 }
                 else if (__Name__ == "__Recycle__")
                 {
@@ -120,12 +125,12 @@ namespace StonePlanner
                 }
                 else if (__Name__ == "__Debugger__")
                 {
-                    TestTools tt = new TestTools();
+                    TestTools tt = new TestTools((Action<int>)Callback);
                     tt.Show();
                 }
                 else if (__Name__ == "__Schedule__")
                 {
-                    Main.AddSign(10);
+                    ((Action<int>) Callback)?.Invoke(10);
                 }
             }
             else

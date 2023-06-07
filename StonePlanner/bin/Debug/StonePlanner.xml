@@ -705,11 +705,6 @@
             4、提前加载设置窗口，以便于后期读取设置。
             </summary>
         </member>
-        <member name="M:StonePlanner.Main.InitializeSettings">
-            <summary>
-            该函数用于加载基本的设置项。
-            </summary>
-        </member>
         <member name="M:StonePlanner.Main.DefWndProc(System.Windows.Forms.Message@)">
             <summary>
             覆写窗体的消息处理函数

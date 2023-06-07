@@ -42,14 +42,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StonePlanner.exe" size="1674240">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="StonePlanner.exe" size="1671680">
       <assemblyIdentity name="StonePlanner" version="2022.2.0.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>5mAw9KbP2jZek1QBjNYdXV/uoRI25ip/EAUiJgBMMk0=</dsig:DigestValue>
+        <dsig:DigestValue>fAq5r2GXZvFYoZkVVQuRgVQlq1BXJ9bQWMchWHAi86c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

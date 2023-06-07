@@ -226,6 +226,7 @@
     <Compile Include="InputBox.Designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces.cs" />
     <Compile Include="PluginStruct.cs" />
     <Compile Include="ProcessExtends.cs" />
     <Compile Include="SchedulingCalendar.cs">
@@ -240,12 +241,7 @@
     <Compile Include="SchedulingCalendarDay.Designer.cs">
       <DependentUpon>SchedulingCalendarDay.cs</DependentUpon>
     </Compile>
-    <Compile Include="SignSettings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SignSettings.Designer.cs">
-      <DependentUpon>SignSettings.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Signal.cs" />
     <Compile Include="Structs.cs" />
     <Compile Include="TestTools.cs">
       <SubType>Form</SubType>
@@ -432,9 +428,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Shop.resx">
       <DependentUpon>Shop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SignSettings.resx">
-      <DependentUpon>SignSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TaskDetails.resx">
       <DependentUpon>TaskDetails.cs</DependentUpon>

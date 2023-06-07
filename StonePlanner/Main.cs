@@ -9,11 +9,10 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
-using static StonePlanner.Structs;
 using static StonePlanner.Develop.Sign;
 using static StonePlanner.Exceptions;
+using static StonePlanner.Structs;
 
 /*
  * **************************************************************************
@@ -56,30 +55,13 @@ namespace StonePlanner
         //常量
         const int DC_PLANHEIGHT = 36;
         const int DC_LRESULT = 0;
-
-        //变量
+        //任务列表
         public Dictionary<int, Plan> TasksDict = new Dictionary<int, Plan>();
         //信号
-        /*
-         * SIGN具体解释
-         * SIGN = 1 => 删除任务
-         * SIGN = 2 => 伸长菜单栏
-         * SIGN = 3 => 缩短菜单栏
-         * SIGN = 4 => 新建待办
-         * SIGN = 5 => 传出自身对象集合
-         * SIGN = 6 => 查看待办信息
-         * SIGN = 7 => 关闭待办详情
-         */
-        internal static Queue<int> signQueue = new Queue<int>();
+        internal Signal signal = new Signal();
         //传出请求删除的请求体对象本身
         internal static Plan plan = null;
-        //自己
-        Main main;
-        //语言数组
-        internal static List<string> langInfo;
         internal static List<string> sentence = new List<string>();
-        internal static List<string> pictures = new List<string>();
-        internal static List<string> packedSetting = new List<string>();
         internal static List<string> nownn = new List<string>();
         //废弃任务数组
         public static List<Plan> recycle_bin = new List<Plan>();
@@ -95,18 +77,10 @@ namespace StonePlanner
         //密码
         internal static string password = "methodbox5";
         //检查语言包
-        bool oncheck = false;
         internal static bool activation = false;
         internal static bool banned = false;
-        //检查线程
-        Thread antiPiracyCheckThread;
-        //控件添加委托
-        delegate void addDelegate();
-        addDelegate controlsAdd;
         //全局展示
         TaskDetails td;
-        //天气预报
-        //internal static WeatherForecast wf = new WeatherForecast();
         //数据库查询
         internal static OleDbConnection odcConnection = new OleDbConnection();
         public static DateTime tStart;
@@ -150,8 +124,8 @@ namespace StonePlanner
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
+            //控件添加委托
             controlsAdd = new addDelegate(FunctionLoader);
-            this.main = this;
             Settings settings = new Settings();
             label_XHDL.Parent = pictureBox_Main;
             settings.Dispose();
@@ -171,25 +145,92 @@ namespace StonePlanner
             {
                 activation = false;
             }
+            //绑定消息队列处理事件
+
+            signal.SignChanged += HandleSign;
         }
-        
-        //string message = string.Format("收到自己消息的参数:{0},{1}", m.WParam, m.LParam);
-        /// <summary>
-        /// 该函数用于加载基本的设置项。
-        /// </summary>
-        protected void InitializeSettings()
+        delegate void addDelegate();
+        addDelegate controlsAdd;
+        internal void HandleSign(object sender, DataType.SignChangedEventArgs e)
         {
-            try
+            //已废弃：Sign == 1，添加任务
+            if (e.Sign == 2)
             {
-                if (packedSetting[0] == "True") { timer_Ponv.Enabled = true; } else { timer_Ponv.Enabled = false; }
-                timer_Ponv.Interval = Convert.ToInt32(packedSetting[1]);
-                if (packedSetting[2] == "True") { timer_Conv.Enabled = true; } else { timer_Conv.Enabled = false; }
-                timer_Conv.Interval = Convert.ToInt32(packedSetting[3]);
+                if (panel_L.Width <= 120)
+                {
+                    panel_L.Width += 2;
+                    AddSignal(2);
+                }
             }
-            catch 
+            else if (e.Sign == 3)
             {
-                timer_Ponv.Enabled = true;
-                timer_Conv.Enabled = true;
+                if (panel_L.Width > 0)
+                {
+                    panel_L.Width -= 2;
+                    AddSignal(3);
+                }
+            }
+            //已废弃：Sign == 4，添加任务
+            else if (e.Sign == 5)
+            {
+                ExportTodo et = new ExportTodo(panel_M.Controls);
+                et.Show();
+            }
+            else if (e.Sign == 6)
+            {
+                panel_TaskDetail.Controls.Remove(td);
+                if (plan == null)
+                    return;
+                td = new TaskDetails((Action<int>) AddSignal);
+                td.Left = 16;
+                td.Top = 15;
+                td.Capital = plan.capital;
+                td.Time = plan.seconds.ToString();
+                td.Intro = plan.intro;
+                td.StatusResult = plan.status;
+                td.Difficulty = plan.difficulty;
+                td.Lasting = plan.lasting.ToString();
+                td.Explosive = plan.explosive.ToString();
+                td.Wisdom = plan.wisdom.ToString();
+                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
+                sp.Play();
+                panel_TaskDetail.Controls.Add(td);
+                td.BringToFront();
+            }
+            else if (e.Sign == 7)
+            {
+                panel_TaskDetail.Controls.Remove(td);
+                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
+                sp.Play();
+            }
+            //不存在：Sign == 8
+            else if (e.Sign == 9)
+            {
+                pictureBox_Tip.Visible = false;
+            }
+            else if (e.Sign == 10)
+            {
+                //怀疑出现的问题：重复执行
+                GetSchedule();
+            }
+            //不存在：Sign == 11
+            else if (e.Sign == 12)
+            {
+                if (Width >= 256)
+                {
+                    Width -= 2;
+                    pictureBox_T_Exit.Left -= 2;
+                    AddSignal(12);
+                }
+            }
+            else if (e.Sign == 13)
+            {
+                if (Width <= 674)
+                {
+                    Width += 2;
+                    pictureBox_T_Exit.Left += 2;
+                    AddSignal(13);
+                }
             }
         }
 
@@ -261,7 +302,7 @@ namespace StonePlanner
                             else
                             {
                                 ErrorCenter.AddError(DataType.ExceptionsLevel.Warning
-                                    ,new ObjectFreedException("已经被清除的任务再次添加。"));
+                                    , new ObjectFreedException("已经被清除的任务再次添加。"));
                             }
                         }
                     }
@@ -302,7 +343,6 @@ namespace StonePlanner
         private void Main_Load(object sender, EventArgs e)
         {
             #region 窗口加载
-            InitializeSettings();
             this.TopMost = false;
             //难度评价
             //先初始化回收站
@@ -321,12 +361,6 @@ namespace StonePlanner
             Thread valueThread = new Thread(new ThreadStart(ValueGetter));
             valueThread.Start();
             //pictureBox_Main.ImageLocation = "https://tse1-mm.cn.bing.net/th/id/R-C.2fd0dadf9d13c716cf0494d17875cf3b?rik=mf3ZQjupoBDr2A&riu=http%3a%2f%2fup.36992.com%2fpic%2f07%2fd3%2fe8%2f07d3e81f37f5922b5b0021a1c0b2d3da.jpg&ehk=P8hpii3cUJykmCt97WX0kATyROzUNRuexj8faXE7q6c%3d&risl=&pid=ImgRaw&r=0";
-            PictureUriGetter();
-            if (oncheck)
-            {
-                antiPiracyCheckThread = new Thread(() => AntiPiracyCheck());
-                antiPiracyCheckThread.Start();
-            }
             //获取格言
             Thread sentenceGetter = new Thread(() => SentenceGetter());
             sentenceGetter.Start();
@@ -342,7 +376,8 @@ namespace StonePlanner
                     lasting = 0,
                     explosive = 0,
                     intro = "NULL",
-                    seconds = 0
+                    seconds = 0,
+                    Addsignal = (Action<int>) AddSignal
                 };
                 Plan p = new(plancls)
                 {
@@ -388,15 +423,10 @@ namespace StonePlanner
             #region 功能控制器
             if (!activation)
             {
-                timer_Ponv.Enabled = false;
-                timer_Conv.Enabled = false;
                 label_Sentence.Text = "MethodBox Aim（评估副本）";
             }
             if (banned)
             {
-                timer_Ponv.Enabled = false;
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
                 label_Sentence.Text = "MethodBox Aim（限制副本）";
             }
             #endregion
@@ -425,7 +455,6 @@ namespace StonePlanner
             TasksDict[thisNumber] = pValue;
             panel_M.Controls.Add(pValue);
             LengthCalculation();
-            if (signQueue.Count != 0) signQueue.Dequeue();
         }
 
         protected void ScanTaskTime(string alert = "")
@@ -452,7 +481,7 @@ namespace StonePlanner
             }
             if (_tasks.Count != 0)
             {
-                new Alert(_tasks,alert).ShowDialog();
+                new Alert(_tasks, alert).ShowDialog();
             }
             _tasks.Clear();
         }
@@ -460,20 +489,6 @@ namespace StonePlanner
 
         #endregion
         #region 加载器
-        internal void HoldLanguage()
-        {
-            langInfo = new List<string>();
-            for (int i = 0; i < 30; i++)
-            {
-                langInfo.Add(null);
-                for (int j = 0; j < 4; j++)
-                {
-                    langInfo[i] += Inner.InnerFuncs.GenerateChineseWords(1)[0];
-                    Thread.Sleep(1);
-                }
-            }
-        }
-
         //列表加载器
         protected void HoldList()
         {
@@ -557,15 +572,15 @@ namespace StonePlanner
         {
             int i = 34;
             //加载功能 34高
-            if (main.InvokeRequired)
+            if (this.InvokeRequired)
             {
-                main.Invoke(controlsAdd);
+                this.Invoke(controlsAdd);
             }
             else
             {
                 AddTodo.PlanAddInvoke officalInvoke = new AddTodo.PlanAddInvoke(AddPlan);
-                Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png", 
-                    $"新建任务", "__New__",officalInvoke)
+                Function newTodo = new Function($"{Application.StartupPath}\\icon\\new.png",
+                    $"新建任务", "__New__", officalInvoke, (Action<int>) AddSignal)
                 {
                     Top = 0
                 };
@@ -578,7 +593,8 @@ namespace StonePlanner
                     Top = i
                 };
                 panel_L.Controls.Add(recycle);
-                Function debugger = new($"{Application.StartupPath}\\icon\\debug.png", $"调试工具", "__Debugger__")
+                Function debugger = new($"{Application.StartupPath}\\icon\\debug.png",
+                    $"调试工具", "__Debugger__", (Action<int>) AddSignal)
                 {
                     Top = 7 * i
                 };
@@ -608,12 +624,13 @@ namespace StonePlanner
                     Top = 6 * i
                 };
                 panel_L.Controls.Add(Settings);
-                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__") 
+                Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__")
                 {
                     Top = 2 * i
                 };
                 panel_L.Controls.Add(Shop);
-                Function Schedule = new($"{Application.StartupPath}\\icon\\schedule.png", $"排班日历", "__Schedule__")
+                Function Schedule = new($"{Application.StartupPath}\\icon\\schedule.png",
+                    $"排班日历", "__Schedule__", (Action<int>) AddSignal)
                 {
                     Top = 8 * i
                 };
@@ -641,65 +658,6 @@ namespace StonePlanner
             return;
         }
         #endregion
-        #region 反修改检查
-        internal void AntiPiracyCheck()
-        {
-            try
-            {
-                while (true)
-                {
-                    //OVERTHERER
-                    if (!(
-                        DateTime.Now.ToString("yyyy") == "2022" &&
-                        (DateTime.Now.ToString("MM") == "05" && Convert.ToInt32(DateTime.Now.ToString("dd")) >= 15) ||
-                        (DateTime.Now.ToString("MM") == "06" && Convert.ToInt32(DateTime.Now.ToString("dd")) <= 06)
-                        ))//DateTime.Now.ToString("yyyy-MM-dd") != "2022-03-26" && DateTime.Now.ToString("yyyy-MM-dd") != "2022-03-27" && !File.Exists(Application.StartupPath + "\\dev.txt")
-                    {
-                        //System.Console.WriteLine($"del {Application.StartupPath} -f -q -s");
-                        MessageBox.Show("该软件的版本不能被使用，使用时间应为2022-5-15至2022-6-06，请悉知。", "TIME DINIED", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        //  Inner.InnerFuncs.CmdExecuter.RunCmd($"del {Application.StartupPath} -f -q -s");
-                        File.Delete(Application.StartupPath + "\\");
-                        Environment.Exit(1);
-                    }
-                    WebClient MyWebClient = new()
-                    {
-                        Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                    };
-                    Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/wkgd/Services/StonePlanner/language.txt"); //下载                                                                                            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
-                    string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
-                    StreamReader sr = new StreamReader($"{Application.StartupPath}\\language.mlu");
-                    string localLanguage = sr.ReadToEnd();
-                    sr.Close();
-                    if (localLanguage != pageHtml)
-                    {
-                        try
-                        {
-                            string fileName = $"{Application.StartupPath}\\language.mlu";//要检查被那个进程占用的文件 
-                            File.Delete(fileName);
-                            System.Diagnostics.Process.Start($"{Application.StartupPath}\\StonePlanner.exe");
-                            System.Console.WriteLine("Program Finished With Code 0.");
-                            Environment.Exit(0);
-                        }
-                        catch (Exception ex)
-                        {
-                            Environment.Exit(1);
-                            ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex);
-                        }
-                        using StreamWriter sw = new StreamWriter($"{Application.StartupPath}\\language.mlu");//将获取的内容写入文本
-                        sw.Write(pageHtml);
-                        sw.Flush();
-                        sw.Close();
-                    }
-                    Thread.Sleep(10000);
-                }
-                //检查语言包
-            }
-
-            catch (Exception e) 
-            {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, e);
-            }
-        }
 
         private void timer_Anti_Tick(object sender, EventArgs e)
         {
@@ -719,10 +677,6 @@ namespace StonePlanner
                 SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
                 //反手关闭各线程
                 label_Sentence.Text = "A Fetal Error Occured";
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
-                timer_PenalLengthController.Enabled = false;
-                timer_Ponv.Enabled = false;
                 timer_Anti.Enabled = false;
                 return;
             }
@@ -745,10 +699,6 @@ namespace StonePlanner
                 SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
                 //反手关闭各线程
                 label_Sentence.Text = "A Fetal Error Occured";
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
-                timer_PenalLengthController.Enabled = false;
-                timer_Ponv.Enabled = false;
                 return;
             }
             if (files.Length != 0)
@@ -756,10 +706,6 @@ namespace StonePlanner
                 SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')", ref Main.odcConnection);
                 //反手关闭各线程
                 label_Sentence.Text = "A Fetal Error Occured";
-                timer_Conv.Enabled = false;
-                timer_EventHandler.Enabled = false;
-                timer_PenalLengthController.Enabled = false;
-                timer_Ponv.Enabled = false;
                 //int isCritical = 1;  // we want this to be a Critical Process
                 //int BreakOnTermination = 0x1D;  // value for BreakOnTermination (flag)
                 //Process.EnterDebugMode();  //acquire Debug Privileges
@@ -813,13 +759,12 @@ namespace StonePlanner
             }
         }
 
-        #endregion
         #region 金钱操作
         internal void ChangeMoney(int value)
         {
             money += value;
             //向指定用户插入
-            SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = {Login.UserName}",ref Main.odcConnection);
+            SQLConnect.SQLCommandExecution($"UPDATE Users SET Cmoney = {money} WHERE Username = {Login.UserName}", ref Main.odcConnection);
         }
         /// <summary>
         /// 更新用户金钱
@@ -903,13 +848,13 @@ namespace StonePlanner
                 if (@out)
                 {
                     string tql = "";
-                    new SchedulingCalendar(returns,out tql, @out).Show();
+                    new SchedulingCalendar(returns, out tql, @out).Show();
                     return tql;
                 }
                 else
                 {
                     string _ = null;
-                    new SchedulingCalendar(returns,out _, @out).Show();
+                    new SchedulingCalendar(returns, out _, @out).Show();
                     return null;
                 }
             }
@@ -921,210 +866,20 @@ namespace StonePlanner
         }
         #endregion
         #region 信号系统
-        internal static void AddSign(int sign)
+        internal void AddSignal(int sign)
         {
-            if (signQueue.Count >= 36)
-            {
-                return;
-            }
-            signQueue.Enqueue(sign);
-        }
-
-        private void timer_EventHandler_Tick(object sender, EventArgs e)
-        {
-            //傻逼东西 开发者倒拔几把插在代码里
-            //查找进程
-            if (SearchProcA("Sword"))
-            {
-                timer_EventHandler.Enabled = false;
-                SQLConnect.SQLCommandExecution("INSERT INTO Users(UserName) Values('METHODBOX_BAN')",ref Main.odcConnection);
-                MessageBox.Show("A debugger has been found running in your system.\n " +
-                "Please, unload it from memory and restart your program.", "MethodBox's Inner Protector", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Environment.Exit(0);
-            }
-            //获取并回显时间
-            nTime = 0;
-            foreach (var item in TasksDict)
-            {
-                if (item.Value == null) { continue; }
-                nTime += item.Value.seconds;
-            }
-            label_NeedTime.Text = "剩余" + Inner.InnerFuncs.SecToHms(nTime);
-
-            //事件处理集（EHS）
-            int Sign = 0;
-            try
-            {
-                Sign = signQueue.Peek();
-            }
-            catch 
-            {
-                return; 
-            }
-            if (Sign == 1)
-            {
-                //链接数据库
-                //有没有连续信号，让我看看！
-                for (int i = 0; i < 2; i++)
-                {
-                    try
-                    {
-                        if (signQueue.Peek() == 1)
-                        {
-                            signQueue.Dequeue();
-                        }
-                    }
-                    catch { break; }
-                }
-                return;
-            }
-            //else if (Sign == 4)
-            //{
-            //    PlanAdder(new Plan(planner));
-            //    LengthCalculation();
-            //    signQueue.Dequeue();
-            //}
-            else if (Sign == 6)
-            {
-                panel_TaskDetail.Controls.Remove(td);
-                if (plan == null)
-                {
-                    //删除临近的两个错误信号
-                    System.Console.WriteLine("OCCURED!");
-                    for (int i = 0; i < 2; i++)
-                    {
-                        try
-                        {
-                            if (signQueue.Peek() == 6)
-                            {
-                                signQueue.Dequeue();
-                            }
-                        }
-                        catch { break; }
-                    }
-                    return;
-                }
-                td = new TaskDetails();
-                td.Left = 16;
-                td.Top = 15;
-                td.Capital = plan.capital;
-                td.Time = plan.seconds.ToString();
-                td.Intro = plan.intro;
-                td.StatusResult = plan.status;
-                td.Difficulty = plan.difficulty;
-                td.Lasting = plan.lasting.ToString();
-                td.Explosive = plan.explosive.ToString();
-                td.Wisdom = plan.wisdom.ToString();
-                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
-                sp.Play();
-                panel_TaskDetail.Controls.Add(td);
-                td.BringToFront();
-                signQueue.Dequeue();
-            }
-            else if (Sign == 7)
-            {
-                panel_TaskDetail.Controls.Remove(td);
-                signQueue.Dequeue();
-                SoundPlayer sp = new SoundPlayer($@"{Application.StartupPath}\icon\Click.wav");
-                sp.Play();
-            }
-            else if (Sign == 9)
-            {
-                pictureBox_Tip.Visible = false;
-                signQueue.Dequeue();
-            }
-            else if (Sign == 10)
-            {
-                //怀疑出现的问题：重复执行
-                signQueue.Dequeue();
-                GetSchedule();
-            }
-            else
-            {
-                if (Sign > 13)
-                {
-                    //防止信号队列阻塞
-                    signQueue.Dequeue();
-                }
-            }
-        }
-
-
-        private void timer_PenalLengthController_Tick(object sender, EventArgs e)
-        {
-            int Sign;
-            try
-            {
-                Sign = signQueue.Peek();
-            }
-            catch 
-            { 
-                return;
-            }
-            if (Sign == 2)
-            {
-                if (panel_L.Width >= 122)
-                {
-                    AddSign(3);
-                    signQueue.Dequeue();
-                }
-                if (panel_L.Width <= 120)
-                {
-                    panel_L.Width += 2;
-                }
-                else
-                {
-                    signQueue.Dequeue();
-                }
-            }
-            else if (Sign == 3)
-            {
-                if (panel_L.Width > 0)
-                {
-                    panel_L.Width -= 2;
-                }
-                else
-                {
-                    signQueue.Dequeue();
-                }
-            }
-            else if (Sign == 5)
-            {
-                ExportTodo et = new ExportTodo(panel_M.Controls);
-                et.Show();
-                signQueue.Dequeue();
-            }
-            else if (Sign == 12)
-            {
-                signQueue.Dequeue();
-                if (Width >= 256)
-                {
-                    Width -= 2;
-                    pictureBox_T_Exit.Left -= 2;
-                    AddSign(12);
-                }
-            }
-            else if (Sign == 13)
-            {
-                signQueue.Dequeue();
-                if (Width <= 674)
-                {
-                    Width += 2;
-                    pictureBox_T_Exit.Left += 2;
-                    AddSign(13);
-                }
-            }
+            signal.AddSignal(sign);
         }
 
         private void pictureBox_T_More_Click(object sender, EventArgs e)
-        { 
+        {
             if (panel_L.Width == 0)
             {
-                AddSign(2);
+                AddSignal(2);
             }
             else
             {
-                AddSign(3);
+                AddSignal(3);
             }
         }
         #endregion
@@ -1151,70 +906,11 @@ namespace StonePlanner
             }
             return;
         }
-
-        public void PictureUriGetter()
-        {
-            try
-            {
-                //暂且禁用
-                throw new Exception();
-                WebClient MyWebClient = new()
-                {
-                    Credentials = CredentialCache.DefaultCredentials//获取或设置用于向Internet资源的请求进行身份验证的网络凭据
-                };
-                Byte[] pageData = MyWebClient.DownloadData("https://lzr2006.github.io/Services/StonePlanner/picture.txt"); //下载
-                string pageHtml = Encoding.UTF8.GetString(pageData); //如果获取网站页面采用的是UTF-8，则使用这句
-                foreach (var item in pageHtml.Split('\n'))
-                {
-                    pictures.Add(item.Replace('\r', ' ').Replace('\n', ' ').Replace('\t', ' '));
-                }
-            }
-            catch (Exception ex)
-            {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
-                pictures.Add("https://s1.328888.xyz/2022/05/15/qmuyT.jpg");
-            }
-            return;
-        }
         #endregion
         #region 每日一句/一图执行器
         private void label_Sentence_TextChanged(object sender, EventArgs e)
         {
             label_Sentence.Text = label_Sentence.Text.Replace("\n", "");
-        }
-
-        private void timer_Conv_Tick(object sender, EventArgs e)
-        {
-            Random rdx = new Random();
-            try
-            {
-                label_Sentence.Text = sentence[rdx.Next(0, sentence.Count - 1)].Split('\n')[1];
-            }
-            catch (Exception ex)
-            {
-                ErrorCenter.AddError(DataType.ExceptionsLevel.Infomation, ex);
-                try
-                {
-                    label_Sentence.Text = sentence[rdx.Next(0, sentence.Count - 1)];
-                }
-                catch { }
-            }
-        }
-        private void timer_Ponv_Tick(object sender, EventArgs e)
-        {
-            Random rdx = new Random();
-            try
-            {
-                //pictureBox_Main.BackgroundImage = System.Drawing.Image.FromFile(pictures[rdx.Next(0, pictures.Count - 1)]/*.Split('\n')[1]*/);
-                pictureBox_Main.ImageLocation = pictures[rdx.Next(0, pictures.Count - 1)]/*.Split('\n')[1]*/;
-            }
-            catch (Exception ex)
-            { ErrorCenter.AddError(DataType.ExceptionsLevel.Warning, ex); }
-        }
-        private void User_Piicture_Click(object sender, EventArgs e)
-        {
-            UserInfo _ = new UserInfo();
-            _.Show();
         }
         #endregion
         #region 外观控制
@@ -1357,17 +1053,17 @@ namespace StonePlanner
         #region 右键菜单事件
         private void 最大化ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddSign(13);
+            AddSignal(13);
         }
 
         private void 最小化ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddSign(12);
+            AddSignal(12);
         }
 
         private void 添加任务ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddTodo _ = new AddTodo(AddPlan);
+            AddTodo _ = new AddTodo(AddPlan, (Action<int>) AddSignal);
             _.Show();
         }
 
@@ -1376,7 +1072,7 @@ namespace StonePlanner
             Recycle _ = new Recycle();
             _.Show();
         }
-        
+
         private void 新建清单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddList _ = new AddList();
@@ -1409,8 +1105,7 @@ namespace StonePlanner
 
         private void 信号控制器ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SignSettings _ = new SignSettings();
-            _.Show();
+            MessageBox.Show("信号控制功能已从AimPlanner中被移除","被移除的功能",MessageBoxButtons.OK,MessageBoxIcon.Warning);
         }
 
         private void 错误中心ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1435,12 +1130,12 @@ namespace StonePlanner
         }
         private void 堵塞执行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            signQueue.Enqueue(-1);
+            AddSignal(114514);
         }
 
         private void 恢复执行ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            signQueue.Dequeue();
+            AddSignal(2);
         }
 
         private void 停用商城ToolStripMenuItem_Click(object sender, EventArgs e)

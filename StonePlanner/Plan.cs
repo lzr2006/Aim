@@ -101,6 +101,7 @@ namespace StonePlanner
         /// 开始时间
         /// </summary>
         public DateTime startTime;
+        public Action<int> AddSign;
         /*
          * 第五次重构
          * 我们修复了遍地都是的重载和乱七八糟的类
@@ -119,6 +120,7 @@ namespace StonePlanner
             this.wisdom = @struct.wisdom;
             this.parent = @struct.parent;
             this.startTime = DateTime.FromBinary(@struct.startTime);
+            this.AddSign = @struct.Addsignal;
             //智障代码
             this.ID = new Random().Next(100000000, 999999999);
         }
@@ -152,6 +154,7 @@ namespace StonePlanner
                 this.parent = @struct.parent;
                 this.startTime = DateTime.FromBinary(@struct.startTime);
                 this.ID = @struct.UDID;
+                this.AddSign = @struct.Addsignal;
             }
             catch (NullReferenceException e) 
             {
@@ -211,7 +214,6 @@ namespace StonePlanner
                 Main.MoneyUpdate(+(int) this.difficulty * 10);
                 //更新属性
                 Main.ValuesUpdate(+lasting, +explosive, +wisdom);
-                Main.AddSign(1);
                 Main.plan = this;
             }
         }
@@ -248,7 +250,7 @@ namespace StonePlanner
 
         private void label_TaskDes_Click_1(object sender, EventArgs e)
         {
-            Main.AddSign(6);
+            AddSign?.Invoke(6);
             Main.plan = this;
         }
     }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 
 namespace StonePlanner
 {
@@ -49,6 +48,7 @@ namespace StonePlanner
         {
             internal string intro;
             internal string parent;
+            internal Action<int> Addsignal;
         }
 
         [Serializable]
@@ -66,11 +66,12 @@ namespace StonePlanner
             internal string intro;
             internal int UDID;
             internal string parent;
+            internal Action<int> Addsignal;
         }
 
         public class PlanClassD : PlanBase { }
 
- 
+
 
         [Serializable]
         public class ChatStruct

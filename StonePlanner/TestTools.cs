@@ -7,9 +7,11 @@ namespace StonePlanner
 {
     public partial class TestTools : MetroForm
     {
-        public TestTools()
+        Action<int> SignalCallback;
+        public TestTools(Action<int> SignalCallback)
         {
             InitializeComponent();
+            this.SignalCallback = SignalCallback;
         }
 
         private void TestTools_Load(object sender, EventArgs e)
@@ -43,7 +45,7 @@ namespace StonePlanner
                 }
                 else if (listView_Main.SelectedItems[0].SubItems[0].Text == "信号队列")
                 {
-                    new SignSettings().Show();
+                    MessageBox.Show("信号控制功能已从AimPlanner中被移除", "被移除的功能", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch { }

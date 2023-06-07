@@ -13,11 +13,13 @@ namespace StonePlanner
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern bool ReleaseCapture();
         public delegate void PlanAddInvoke(Plan plan);
+        public Action<int> Addsignal;
         PlanAddInvoke PlanAdditionInvoke;
-        public AddTodo(PlanAddInvoke TargetFun)
+        public AddTodo(PlanAddInvoke TargetFun,Action<int> Addsignal)
         {
             InitializeComponent();
             PlanAdditionInvoke = new PlanAddInvoke(TargetFun);
+            this.Addsignal = Addsignal;
         }
 
         internal AddTodo(Structs.PlanStruct planStruct)
@@ -166,6 +168,7 @@ namespace StonePlanner
                     );
                 psc.UDID = new Random().Next(100000000, 999999999);
                 psc.startTime = _.ToBinary();
+                psc.Addsignal = Addsignal;
                 double diff = 0D;
                 try
                 {

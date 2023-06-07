@@ -13,10 +13,11 @@ namespace StonePlanner
 {
     public partial class TaskDetails : UserControl
     {
-
-        public TaskDetails()
+        Action<int> AddSign;
+        public TaskDetails(Action<int> AddSign)
         {
             InitializeComponent();
+            this.AddSign = AddSign;
         }
 
         private void TaskDetails_Load(object sender, EventArgs e)
@@ -75,7 +76,7 @@ namespace StonePlanner
 
         private void pictureBox_T_Exit_Click(object sender, EventArgs e)
         {
-            Main.AddSign(7);
+            AddSign?.Invoke(7);
         }
 
         //private void label_DifficultyR_TextChanged(object sender, EventArgs e)
