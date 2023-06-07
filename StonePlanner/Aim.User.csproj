@@ -249,6 +249,12 @@
     <Compile Include="TestTools.Designer.cs">
       <DependentUpon>TestTools.cs</DependentUpon>
     </Compile>
+    <Compile Include="Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Update.Designer.cs">
+      <DependentUpon>Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="WebService.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -445,6 +451,9 @@
     <EmbeddedResource Include="Thanks.resx">
       <DependentUpon>Thanks.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Update.resx">
+      <DependentUpon>Update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserInfo.resx">
       <DependentUpon>UserInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -538,6 +547,9 @@
       <Version>5.7.0</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="MetroFramework">
+      <Version>1.2.0.3</Version>
     </PackageReference>
     <PackageReference Include="MetroModernUI">
       <Version>1.4.0</Version>

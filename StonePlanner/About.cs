@@ -34,7 +34,7 @@ namespace StonePlanner
 
         private void About_Load(object sender, EventArgs e)
         {
-
+            label4.Text += $" (内部版本{BASE_DATA.VERSION_NAME})";
         }
 
         private void label9_Click(object sender, EventArgs e)

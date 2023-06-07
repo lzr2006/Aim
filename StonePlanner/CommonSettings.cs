@@ -25,4 +25,9 @@ namespace StonePlanner
         /// </summary>
         internal static int SwitchSentenceTime = 5;
     }
+    internal static class BASE_DATA
+    {
+        internal const string VERSION_NAME = "Aim Dev.23060702_1105";
+        internal const int VRESION_COUNT = 85;
+    }
 }

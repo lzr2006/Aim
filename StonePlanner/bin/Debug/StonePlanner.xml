@@ -603,23 +603,6 @@
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="F:StonePlanner.SignSettings.components">
-            <summary>
-            Required designer variable.
-            </summary>
-        </member>
-        <member name="M:StonePlanner.SignSettings.Dispose(System.Boolean)">
-            <summary>
-            Clean up any resources being used.
-            </summary>
-            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        </member>
-        <member name="M:StonePlanner.SignSettings.InitializeComponent">
-            <summary>
-            Required method for Designer support - do not modify
-            the contents of this method with the code editor.
-            </summary>
-        </member>
         <member name="F:StonePlanner.TestTools.components">
             <summary>
             Required designer variable.
@@ -632,6 +615,23 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:StonePlanner.TestTools.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:StonePlanner.Update.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:StonePlanner.Update.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:StonePlanner.Update.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.

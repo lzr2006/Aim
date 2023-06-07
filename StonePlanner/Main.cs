@@ -619,11 +619,11 @@ namespace StonePlanner
                     Top = 5 * i
                 };
                 panel_L.Controls.Add(Online);
-                Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"软件设置", "__Settings__")
-                {
-                    Top = 6 * i
-                };
-                panel_L.Controls.Add(Settings);
+                //Function Settings = new($"{Application.StartupPath}\\icon\\settings.png", $"软件设置", "__Settings__")
+                //{
+                //    Top = 6 * i
+                //};
+                //panel_L.Controls.Add(Settings);
                 Function Shop = new($"{Application.StartupPath}\\icon\\shop.png", $"我的商城", "__Shop__")
                 {
                     Top = 2 * i
@@ -635,6 +635,11 @@ namespace StonePlanner
                     Top = 8 * i
                 };
                 panel_L.Controls.Add(Schedule);
+                Function Update = new($"{Application.StartupPath}\\icon\\update.png",$"软件升级", "__Update__")
+                {
+                    Top = 6 * i
+                };
+                panel_L.Controls.Add(Update);
                 //你猜猜点击函数在哪里？没想到吧，在这里！
                 Bottom Function = new("功能")
                 {

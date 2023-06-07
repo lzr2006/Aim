@@ -45,7 +45,7 @@ namespace StonePlanner
             }
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             /*!!!!!*/
-            Application.Run(new Login());//!!!!!!
+            Application.Run(new Update());//!!!!!!
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             string strConn = $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Application.StartupPath}\data.mdb;Jet OLEDB:Database Password={StonePlanner.Main.password}";
             StonePlanner.Main.odcConnection = new OleDbConnection(strConn); //2、打开连接 C#操作Access之按列读取mdb   
