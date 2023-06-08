@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Handlers;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using MetroFramework.Forms;
@@ -17,6 +20,7 @@ namespace StonePlanner
         public Update()
         {
             InitializeComponent();
+            CheckForIllegalCrossThreadCalls = false;
         }
 
         private void Update_Load(object sender, EventArgs e)
@@ -84,7 +88,7 @@ namespace StonePlanner
             }
         }
 
-        private void Button_Submit_Click(object sender, EventArgs e)
+        private async void Button_Submit_Click(object sender, EventArgs e)
         {
             //Download newest version
             Uri DownloadUri;
@@ -106,7 +110,6 @@ namespace StonePlanner
                 return;
             }
 
-            WebClient client = new WebClient();
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "压缩文件|*.zip";
             saveFileDialog.Title = "选择新版本保存位置";
@@ -115,9 +118,18 @@ namespace StonePlanner
             if (saveFileDialog.ShowDialog() == DialogResult.OK) 
             {
                 saveFileName = saveFileDialog.FileName;
-                client.DownloadFileAsync(DownloadUri, saveFileName);
-                client.DownloadFileCompleted += 
-                    new AsyncCompletedEventHandler(FileSaved);
+
+                var progressMessageHandler = new ProgressMessageHandler(new HttpClientHandler());
+                progressMessageHandler.HttpReceiveProgress += (_, e) =>
+                {
+                    metroLabel_Info.Text = $"下载中：{e.ProgressPercentage}%";//下载进度百分比
+                };
+                using (var client = new HttpClient(progressMessageHandler))
+                using (var fileStream = new FileStream(saveFileName, FileMode.Create))
+                {
+                    var netStream = await client.GetStreamAsync(DownloadUri);
+                    await netStream.CopyToAsync(fileStream);//写入文件
+                }
             }
         }
 
