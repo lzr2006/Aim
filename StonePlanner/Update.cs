@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Windows.Forms;
@@ -86,10 +87,43 @@ namespace StonePlanner
         private void Button_Submit_Click(object sender, EventArgs e)
         {
             //Download newest version
-            if (true)
+            Uri DownloadUri;
+            if (metroRadioButton_Release.Checked)
             {
-
+                DownloadUri = versions[0].GetUri();
             }
+            else if (metroRadioButton_Beta.Checked)
+            {
+                DownloadUri = versions[1].GetUri();
+            }
+            else if (metroRadioButton_Dev.Checked)
+            {
+                DownloadUri = versions[2].GetUri();
+            }
+            else
+            {
+                MessageBox.Show("请选择一个升级通道");
+                return;
+            }
+
+            WebClient client = new WebClient();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "压缩文件|*.zip";
+            saveFileDialog.Title = "选择新版本保存位置";
+            saveFileDialog.ValidateNames = true;
+            string saveFileName;
+            if (saveFileDialog.ShowDialog() == DialogResult.OK) 
+            {
+                saveFileName = saveFileDialog.FileName;
+                client.DownloadFileAsync(DownloadUri, saveFileName);
+                client.DownloadFileCompleted += 
+                    new AsyncCompletedEventHandler(FileSaved);
+            }
+        }
+
+        private void FileSaved(object sender, AsyncCompletedEventArgs e) 
+        {
+            MessageBox.Show("下载完成！");
         }
     }
 }
